@@ -326,3 +326,81 @@ class LiaraClient:
             )
         except ProviderError as exc:
             return self._failure(target, kind, exc)
+
+    def _write(self, spec, path, **kwargs):
+        from .approvals import OperationSpec, AmbiguousWrite, RejectedWrite
+
+        spec = OperationSpec.model_validate(spec.model_dump())
+        if spec.team_id != self.team_id:
+            raise ValueError("Wrong team")
+        try:
+            with self.http.stream("POST", path, params={"teamID": self.team_id}, **kwargs) as response:
+                if response.status_code in (400, 401, 403, 404, 409, 422, 429):
+                    raise RejectedWrite("provider_rejected")
+                if not 200 <= response.status_code < 300:
+                    raise AmbiguousWrite("provider_outcome_unknown")
+                raw = bytearray()
+                deadline = time.monotonic() + 10
+                for chunk in response.iter_bytes():
+                    raw.extend(chunk)
+                    if len(raw) > 524288 or time.monotonic() > deadline:
+                        raise AmbiguousWrite("response_unavailable")
+                if not raw:
+                    return {}
+                try:
+                    value = json.loads(
+                        raw, parse_constant=lambda value: (_ for _ in ()).throw(ValueError(value))
+                    )
+                except (ValueError, UnicodeError) as exc:
+                    raise AmbiguousWrite("invalid_response") from exc
+                if not isinstance(value, dict):
+                    raise AmbiguousWrite("invalid_response")
+                return value
+        except httpx.TransportError as exc:
+            raise AmbiguousWrite("transport_outcome_unknown") from exc
+
+    def upload_source(self, spec, content):
+        from .approvals import AmbiguousWrite
+
+        if not isinstance(content, bytes) or not 0 < len(content) <= 5 * 1024 * 1024:
+            raise ValueError("Bounded approved source bytes required")
+        data = self._write(
+            spec,
+            f"/v2/projects/{spec.app_name}/sources",
+            files={"file": ("source.tar.gz", content, "application/gzip")},
+        )
+        if not isinstance(data.get("sourceID"), str) or not data["sourceID"]:
+            raise AmbiguousWrite("source_identity_unknown")
+        return data["sourceID"]
+
+    def create_release(self, spec, source_id):
+        from .approvals import AmbiguousWrite
+
+        if not isinstance(source_id, str) or not source_id or len(source_id) > 200:
+            raise ValueError("Known source identity required")
+        data = self._write(
+            spec,
+            f"/v2/projects/{spec.app_name}/releases",
+            json={"sourceID": source_id, "port": spec.port, "type": spec.platform},
+        )
+        if not isinstance(data.get("releaseID"), str) or not data["releaseID"]:
+            raise AmbiguousWrite("release_identity_unknown")
+        return data["releaseID"]
+
+    def create_project(self, spec):
+        from .approvals import AmbiguousWrite
+
+        if spec.kind != "create_app":
+            raise ValueError("Bootstrap create spec required")
+        self._write(
+            spec,
+            "/v1/projects",
+            json={"name": spec.app_name, "planID": spec.plan_id, "platform": spec.platform},
+        )
+        try:
+            target = self._project(self._read(f"/v1/projects/{spec.app_name}")["project"])
+            if target.app_name != spec.app_name:
+                raise ValueError("Identity mismatch")
+        except (ProviderError, KeyError, ValueError) as exc:
+            raise AmbiguousWrite("created_identity_unknown") from exc
+        return target.app_id

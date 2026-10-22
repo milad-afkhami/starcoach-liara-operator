@@ -133,14 +133,19 @@ class MonitorStore:
             db.execute("UPDATE incidents SET data=? WHERE id=?", (encode(value), value["id"]))
         return value
 
-    def add_evidence(self, owner, incident_id, evidence):
+    def add_evidence(self, owner, incident_id, evidence, *, related_targets=()):
         incident = self.incident(owner, incident_id)
+        allowed_ids = {
+            incident["target"]["app_id"],
+            *(target.app_id for target in related_targets if target.team_id == incident["target"]["team_id"]),
+        }
         if (
-            evidence.target.app_id != incident["target"]["app_id"]
+            evidence.target.app_id not in allowed_ids
             or evidence.target.team_id != incident["target"]["team_id"]
         ):
             raise ValueError("Evidence target mismatch")
-        payload = encode(evidence.model_dump())
+        safe_evidence = evidence.model_copy(update={"redacted_payload": redact(evidence.redacted_payload)})
+        payload = encode(safe_evidence.model_dump())
         with self.connect() as db:
             db.execute("BEGIN IMMEDIATE")
             old = db.execute("SELECT owner,data FROM evidence WHERE id=?", (evidence.id,)).fetchone()

@@ -1,0 +1,147 @@
+"""Provider acceptance, serving identity and fresh symptom recovery are separate proofs."""
+
+import hashlib
+import json
+import time
+from pydantic import Field, model_validator
+from .types import Record
+from .contracts import RegisteredHttpCheck
+
+
+class VerificationPolicy(Record):
+    id: str
+    checks: list[RegisteredHttpCheck] = Field(min_length=1, max_length=3)
+    expected_build_fields: dict[str, dict[str, str]]
+    expected_release_ids: dict[str, str]
+    changed_target_id: str
+
+    @model_validator(mode="after")
+    def bound(self):
+        if self.expected_release_ids.get(self.changed_target_id) != "$submitted":
+            raise ValueError("Changed target must bind submitted release")
+        if any(
+            not c.require_request_echo
+            or c.id not in self.expected_build_fields
+            or "build_id" not in self.expected_build_fields[c.id]
+            for c in self.checks
+        ):
+            raise ValueError("Fresh serving build proof required for every check")
+        if len({c.id for c in self.checks}) != len(self.checks):
+            raise ValueError("Duplicate check id")
+        return self
+
+    def digest(self):
+        return hashlib.sha256(
+            json.dumps(self.model_dump(), sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+
+
+def verify_recovery(
+    policy,
+    release_id,
+    provider_status,
+    probe,
+    *,
+    clock=time.time,
+    sleep=time.sleep,
+    current_policy_hash=None,
+    cancel=None,
+):
+    start = clock()
+    deadline = start + 60
+    seen = set()
+    probe_ids = []
+    success_ids = []
+    round_times = []
+    streak = 0
+    count = 0
+    last_round = None
+    had_symptom_failure = False
+    current_policy_hash = current_policy_hash or policy.digest
+
+    def finish(state, reason):
+        return {
+            "state": state,
+            "reason": reason,
+            "probe_ids": probe_ids,
+            "success_probe_ids": success_ids,
+            "round_times": round_times,
+            "observed_window": [start, clock()],
+            "policy_hash": policy.digest(),
+            "submitted_release_id": release_id,
+        }
+
+    while clock() <= deadline and count + len(policy.checks) <= 12:
+        if cancel is not None and cancel.is_set():
+            return finish("inconclusive", "canceled")
+        if current_policy_hash() != policy.digest():
+            return finish("inconclusive", "policy_changed")
+        if last_round is not None:
+            delay = max(0, 5 - (clock() - last_round))
+            if clock() + delay > deadline:
+                break
+            sleep(delay)
+        if clock() > deadline:
+            break
+        last_round = clock()
+        round_times.append(last_round)
+        provider_ok = True
+        for target, expected in policy.expected_release_ids.items():
+            required = release_id if expected == "$submitted" else expected
+            try:
+                state = provider_status(target)
+            except Exception:
+                provider_ok = False
+                break
+            serving = state.get("serving_release_ids", [])
+            if (
+                state.get("state") != "READY"
+                or state.get("current_release_id") != required
+                or not serving
+                or set(serving) != {required}
+            ):
+                provider_ok = False
+                break
+        round_ok = provider_ok
+        # Bound attempts even when provider/serving identity never becomes trustworthy.
+        if not provider_ok:
+            count += len(policy.checks)
+        else:
+            for check in policy.checks:
+                if clock() > deadline:
+                    return finish("inconclusive", "verification_deadline")
+                try:
+                    result = probe(check)
+                except Exception:
+                    round_ok = False
+                    count += 1
+                    continue
+                count += 1
+                probe_ids.append(result.id)
+                fresh = (
+                    result.request_id not in seen
+                    and result.observed_at >= start
+                    and result.available_at >= result.observed_at
+                    and result.available_at <= clock() + 1
+                    and result.target_id == check.target_id
+                    and result.check_id == check.id
+                    and result.payload.get("request_id") == result.request_id
+                )
+                seen.add(result.request_id)
+                matching = all(
+                    result.payload.get(field) == value
+                    for field, value in policy.expected_build_fields[check.id].items()
+                )
+                if result.check_pass is False:
+                    had_symptom_failure = True
+                if not fresh or result.check_pass is not True or not matching:
+                    round_ok = False
+                else:
+                    success_ids.append(result.id)
+        streak = streak + 1 if round_ok else 0
+        if streak == 3:
+            return finish("recovered", "original_checks_and_serving_build_verified")
+    return finish(
+        "failed" if had_symptom_failure else "inconclusive",
+        "original_symptom_persists" if had_symptom_failure else "insufficient_fresh_identity_proof",
+    )

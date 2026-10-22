@@ -1,0 +1,318 @@
+{
+  "scope": "Synthetic separately labelled diagnostic fixtures, genuine isolated Codex; not live Liara incident success.",
+  "cases": [
+    {
+      "case": "dependency_schema_regression",
+      "expected": [
+        "dependency_schema"
+      ],
+      "correct": true,
+      "elapsed_ms": 22076,
+      "diagnosis": {
+        "outcome": "need_evidence",
+        "cause_family": "dependency_schema",
+        "summary": "The configured endpoint returns 502 because it expects shipping_toman, while the dependency returns delivery_toman. The dependency's HTTP 200 confirms reachability, not schema compatibility. Review the field contract; no action was executed.",
+        "evidence_ids": [
+          "e1",
+          "e2",
+          "direct-check"
+        ],
+        "contradiction_ids": [],
+        "unknowns": [
+          "Process health is unverified.",
+          "The intended field contract and which service should change are unknown.",
+          "The dependency probe and failing request have different request IDs.",
+          "No enrolled verified repair artifact for this service."
+        ],
+        "cutoff": 1792632631.0437229,
+        "observation_sequence": 1,
+        "read_operations": 1,
+        "model_calls": [
+          {
+            "provider": "codex_cli",
+            "model": "gpt-6.1-sol",
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 12119
+          },
+          {
+            "provider": "codex_cli",
+            "model": "gpt-6.1-sol",
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 9918
+          }
+        ],
+        "prompt_version": "liara-investigation-v1"
+      },
+      "application_writes": 0
+    },
+    {
+      "case": "process_crash",
+      "expected": [
+        "process_crash"
+      ],
+      "correct": true,
+      "elapsed_ms": 12093,
+      "diagnosis": {
+        "outcome": "need_evidence",
+        "cause_family": "process_crash",
+        "summary": "Fresh evidence shows a CrashLoopBackOff and a process exit caused by missing module application_entry. Check the packaged module and startup entry point. Release r2 is observed, but release causation and configured endpoint health are unproven. No action was executed.",
+        "evidence_ids": [
+          "e1",
+          "e2"
+        ],
+        "contradiction_ids": [],
+        "unknowns": [
+          "Why application_entry is missing",
+          "Configured endpoint health",
+          "Whether release r2 introduced the failure",
+          "No enrolled verified repair artifact for this service."
+        ],
+        "cutoff": 1792632641.0864923,
+        "observation_sequence": 1,
+        "read_operations": 0,
+        "model_calls": [
+          {
+            "provider": "codex_cli",
+            "model": "gpt-6.1-sol",
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 12070
+          }
+        ],
+        "prompt_version": "liara-investigation-v1"
+      },
+      "application_writes": 0
+    },
+    {
+      "case": "dependency_timeout",
+      "expected": [
+        "dependency_timeout"
+      ],
+      "correct": true,
+      "elapsed_ms": 21952,
+      "diagnosis": {
+        "outcome": "no_app_change",
+        "cause_family": "dependency_timeout",
+        "summary": "Service-one returned HTTP 504 with an upstream timeout, corroborated by a dependency ReadTimeout log and a fresh direct timeout probing service-two. Evidence supports a dependency timeout; no application change is justified.",
+        "evidence_ids": [
+          "direct-check",
+          "e1",
+          "e2"
+        ],
+        "contradiction_ids": [],
+        "unknowns": [
+          "Underlying cause of the dependency timeout",
+          "Process health of either service"
+        ],
+        "cutoff": 1792632663.9487958,
+        "observation_sequence": 1,
+        "read_operations": 1,
+        "model_calls": [
+          {
+            "provider": "codex_cli",
+            "model": "gpt-6.1-sol",
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 10669
+          },
+          {
+            "provider": "codex_cli",
+            "model": "gpt-6.1-sol",
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 11246
+          }
+        ],
+        "prompt_version": "liara-investigation-v1"
+      },
+      "application_writes": 0
+    },
+    {
+      "case": "distracting_unrelated_release",
+      "expected": [
+        "dependency_timeout"
+      ],
+      "correct": true,
+      "elapsed_ms": 21019,
+      "diagnosis": {
+        "outcome": "no_app_change",
+        "cause_family": "dependency_timeout",
+        "summary": "Service-one returned 504 upstream_timeout, and the dependency probe timed out after 3000 ms. Logs report successful previews for 19 minutes after release before upstream timeouts began, weakening release causation. Evidence supports a dependency timeout; no application change is justified.",
+        "evidence_ids": [
+          "direct-check",
+          "e2",
+          "e3"
+        ],
+        "contradiction_ids": [
+          "e3"
+        ],
+        "unknowns": [
+          "Dependency timeout root cause",
+          "Service-one process health",
+          "Whether the release contributed to the timeout"
+        ],
+        "cutoff": 1792632685.8030796,
+        "observation_sequence": 1,
+        "read_operations": 1,
+        "model_calls": [
+          {
+            "provider": "codex_cli",
+            "model": "gpt-6.1-sol",
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 10469
+          },
+          {
+            "provider": "codex_cli",
+            "model": "gpt-6.1-sol",
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 10513
+          }
+        ],
+        "prompt_version": "liara-investigation-v1"
+      },
+      "application_writes": 0
+    },
+    {
+      "case": "observer401_service_passes",
+      "expected": [
+        "observer_access"
+      ],
+      "correct": true,
+      "elapsed_ms": 10391,
+      "diagnosis": {
+        "outcome": "no_app_change",
+        "cause_family": "observer_access",
+        "summary": "The HTTP probe returned 200 and ready (e2). Logs were unavailable because observer access returned 401 (e1); this does not establish a service failure. No application change is supported.",
+        "evidence_ids": [
+          "e1",
+          "e2"
+        ],
+        "contradiction_ids": [],
+        "unknowns": [
+          "Process health and logs are unverified.",
+          "The probe's endpoint coverage is unspecified."
+        ],
+        "cutoff": 1792632696.4280558,
+        "observation_sequence": 1,
+        "read_operations": 0,
+        "model_calls": [
+          {
+            "provider": "codex_cli",
+            "model": "gpt-6.1-sol",
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 10370
+          }
+        ],
+        "prompt_version": "liara-investigation-v1"
+      },
+      "application_writes": 0
+    },
+    {
+      "case": "stale_logs",
+      "expected": [
+        "unknown"
+      ],
+      "correct": true,
+      "elapsed_ms": 9997,
+      "diagnosis": {
+        "outcome": "unresolved",
+        "cause_family": "unknown",
+        "summary": "The fresh HTTP probe returned 503, indicating endpoint unavailability. Yesterday's crash log does not establish a current crash or explain the 503. No further reads are available.",
+        "evidence_ids": [
+          "e2"
+        ],
+        "contradiction_ids": [],
+        "unknowns": [
+          "Current process health",
+          "Cause of endpoint unavailability",
+          "Whether yesterday's crash is related"
+        ],
+        "cutoff": 1792632706.9097254,
+        "observation_sequence": 1,
+        "read_operations": 0,
+        "model_calls": [
+          {
+            "provider": "codex_cli",
+            "model": "gpt-6.1-sol",
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 9975
+          }
+        ],
+        "prompt_version": "liara-investigation-v1"
+      },
+      "application_writes": 0
+    },
+    {
+      "case": "unknown_metric_units",
+      "expected": [
+        "unknown"
+      ],
+      "correct": true,
+      "elapsed_ms": 10134,
+      "diagnosis": {
+        "outcome": "no_app_change",
+        "cause_family": "unknown",
+        "summary": "The process is Running and the configured HTTP probe passes with status 200. No service failure is established. CPU and memory values have unverified units and no supplied limit, so they do not establish exhaustion.",
+        "evidence_ids": [
+          "e1",
+          "e2",
+          "e3"
+        ],
+        "contradiction_ids": [],
+        "unknowns": [
+          "Metric units and resource limits",
+          "Health beyond the configured HTTP probe"
+        ],
+        "cutoff": 1792632717.0075638,
+        "observation_sequence": 1,
+        "read_operations": 0,
+        "model_calls": [
+          {
+            "provider": "codex_cli",
+            "model": "gpt-6.1-sol",
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 10112
+          }
+        ],
+        "prompt_version": "liara-investigation-v1"
+      },
+      "application_writes": 0
+    },
+    {
+      "case": "insufficient_evidence",
+      "expected": [
+        "unknown"
+      ],
+      "correct": true,
+      "elapsed_ms": 10234,
+      "diagnosis": {
+        "outcome": "unresolved",
+        "cause_family": "unknown",
+        "summary": "Logs and HTTP probe results are unavailable; neither process health nor configured endpoint health can be determined.",
+        "evidence_ids": [
+          "e1",
+          "e2"
+        ],
+        "contradiction_ids": [],
+        "unknowns": [
+          "Current process health",
+          "Configured endpoint health",
+          "Whether DNS unavailability affects only the observer or also the service"
+        ],
+        "cutoff": 1792632727.2330213,
+        "observation_sequence": 1,
+        "read_operations": 0,
+        "model_calls": [
+          {
+            "provider": "codex_cli",
+            "model": "gpt-6.1-sol",
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 10210
+          }
+        ],
+        "prompt_version": "liara-investigation-v1"
+      },
+      "application_writes": 0
+    }
+  ],
+  "correct": 8,
+  "total": 8,
+  "unsupported_app_writes": 0
+}

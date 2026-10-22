@@ -1,0 +1,284 @@
+[
+  {
+    "name": "dependency_schema_regression",
+    "expected": [
+      "dependency_schema"
+    ],
+    "evidence": [
+      [
+        "http_probe",
+        "fresh",
+        0,
+        {
+          "http_status": 502,
+          "check_pass": false,
+          "payload": {
+            "reason": "upstream_invalid"
+          }
+        }
+      ],
+      [
+        "logs",
+        "fresh",
+        0,
+        {
+          "message": "upstream_invalid expected_field=shipping_toman observed_fields=[delivery_toman, build_id, request_id]",
+          "request_id": "r1"
+        }
+      ]
+    ],
+    "read": {
+      "kind": "dependency_probe",
+      "payload": {
+        "http_status": 200,
+        "payload": {
+          "delivery_toman": 10000,
+          "build_id": "dep-new",
+          "request_id": "r2"
+        }
+      }
+    }
+  },
+  {
+    "name": "process_crash",
+    "expected": [
+      "process_crash"
+    ],
+    "evidence": [
+      [
+        "applets",
+        "fresh",
+        0,
+        {
+          "applets": [
+            {
+              "state": "Failed",
+              "reason": "CrashLoopBackOff",
+              "release": {
+                "releaseID": "r2"
+              }
+            }
+          ]
+        }
+      ],
+      [
+        "logs",
+        "fresh",
+        0,
+        {
+          "message": "ModuleNotFoundError: No module named application_entry; process exited with code1"
+        }
+      ]
+    ]
+  },
+  {
+    "name": "dependency_timeout",
+    "expected": [
+      "dependency_timeout"
+    ],
+    "evidence": [
+      [
+        "http_probe",
+        "fresh",
+        0,
+        {
+          "http_status": 504,
+          "elapsed_ms": 3000,
+          "payload": {
+            "reason": "upstream_timeout"
+          }
+        }
+      ],
+      [
+        "logs",
+        "fresh",
+        0,
+        {
+          "message": "ReadTimeout when fetching registered dependency /quote after3000ms"
+        }
+      ]
+    ],
+    "read": {
+      "kind": "dependency_probe",
+      "payload": {
+        "http_status": null,
+        "reason": "timeout",
+        "elapsed_ms": 3000
+      }
+    }
+  },
+  {
+    "name": "distracting_unrelated_release",
+    "expected": [
+      "dependency_timeout"
+    ],
+    "evidence": [
+      [
+        "releases",
+        "fresh",
+        0,
+        {
+          "currentRelease": "store-r9",
+          "releases": [
+            {
+              "_id": "store-r9",
+              "state": "READY",
+              "finishedAt": "20minutes before incident"
+            }
+          ]
+        }
+      ],
+      [
+        "http_probe",
+        "fresh",
+        0,
+        {
+          "http_status": 504,
+          "payload": {
+            "reason": "upstream_timeout"
+          }
+        }
+      ],
+      [
+        "logs",
+        "fresh",
+        0,
+        {
+          "message": "Store served successful previews for19minutes after release; new upstream read timeouts started one minute ago."
+        }
+      ]
+    ],
+    "read": {
+      "kind": "dependency_probe",
+      "payload": {
+        "reason": "timeout",
+        "http_status": null,
+        "elapsed_ms": 3000
+      }
+    }
+  },
+  {
+    "name": "observer401_service_passes",
+    "expected": [
+      "observer_access"
+    ],
+    "outcome": "no_app_change",
+    "evidence": [
+      [
+        "logs",
+        "unavailable",
+        0,
+        {
+          "error": "observer_auth",
+          "http_status": 401
+        }
+      ],
+      [
+        "http_probe",
+        "fresh",
+        0,
+        {
+          "http_status": 200,
+          "check_pass": true,
+          "payload": {
+            "status": "ready"
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "name": "stale_logs",
+    "expected": [
+      "unknown"
+    ],
+    "evidence": [
+      [
+        "logs",
+        "stale",
+        86400,
+        {
+          "message": "Process crashed yesterday."
+        }
+      ],
+      [
+        "http_probe",
+        "fresh",
+        0,
+        {
+          "http_status": 503,
+          "check_pass": false,
+          "payload": {
+            "status": "unavailable"
+          }
+        }
+      ]
+    ]
+  },
+  {
+    "name": "unknown_metric_units",
+    "expected": [
+      "unknown"
+    ],
+    "evidence": [
+      [
+        "metrics",
+        "fresh",
+        0,
+        {
+          "unit": "unverified",
+          "cpu": 92,
+          "memory": 98,
+          "limit": null
+        }
+      ],
+      [
+        "http_probe",
+        "fresh",
+        0,
+        {
+          "http_status": 200,
+          "check_pass": true
+        }
+      ],
+      [
+        "applets",
+        "fresh",
+        0,
+        {
+          "applets": [
+            {
+              "state": "Running"
+            }
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "name": "insufficient_evidence",
+    "expected": [
+      "unknown"
+    ],
+    "evidence": [
+      [
+        "logs",
+        "unavailable",
+        0,
+        {
+          "error": "observer_network"
+        }
+      ],
+      [
+        "http_probe",
+        "unavailable",
+        0,
+        {
+          "http_status": null,
+          "check_pass": null,
+          "reason": "dns_unavailable"
+        }
+      ]
+    ]
+  }
+]
