@@ -1,0 +1,58 @@
+{
+  "scope": "Real local HTTP, deliberately controlled dependency source change; not Liara deployment.",
+  "healthy": {
+    "id": "29680439c90e4618b7ae9cc1141fa381",
+    "target_id": "local-app",
+    "check_id": "preview",
+    "request_id": "911db0bfd303492cbe74967ad8442b51",
+    "observed_at": 1792631090.087167,
+    "available_at": 1792631090.109695,
+    "http_status": 200,
+    "elapsed_ms": 22.528868983499706,
+    "check_pass": true,
+    "contract_pass": null,
+    "reason": "pass",
+    "body_digest": "eacc9590a6068d20a44094cfa57d0b0bb0526b68466e4630825fc70fbf1c5a7d",
+    "payload": {
+      "status": "ready",
+      "shipping_toman": 10000,
+      "build_id": "d0044915ac9f4d89975f7f73d951eb59",
+      "dependency_build_id": "c1c38e5fae13469ea427b4d43b4cd9d6",
+      "request_id": "911db0bfd303492cbe74967ad8442b51"
+    }
+  },
+  "broken": {
+    "id": "c99efe34aedf49ed99d41f2ba1292b5d",
+    "target_id": "local-app",
+    "check_id": "preview",
+    "request_id": "affcd593d2454a1e8cbfc5663785e238",
+    "observed_at": 1792631090.6658485,
+    "available_at": 1792631090.6911612,
+    "http_status": 502,
+    "elapsed_ms": 25.313003978226334,
+    "check_pass": false,
+    "contract_pass": null,
+    "reason": "unexpected_status",
+    "body_digest": "0af9bdb582bc6eefff3f1140184b0add5b6256fbb62225dfd1672b3a5416dd0f",
+    "payload": {
+      "status": "unavailable",
+      "reason": "upstream_invalid",
+      "build_id": "d0044915ac9f4d89975f7f73d951eb59",
+      "dependency_build_id": "0aee3848f8c84db39f531de66cc3bc5b",
+      "request_id": "affcd593d2454a1e8cbfc5663785e238"
+    }
+  },
+  "liveness": {
+    "status": "ok",
+    "build_id": "d0044915ac9f4d89975f7f73d951eb59",
+    "request_id": "59715864eae5452fb9b91299e6df4f25"
+  },
+  "dependency_observation": {
+    "delivery_toman": 10000,
+    "build_id": "0aee3848f8c84db39f531de66cc3bc5b",
+    "request_id": "46f1d979df4e45d0b379d67f405c24bd"
+  },
+  "structured_log_contains_evidence": true,
+  "ground_truth_not_supplied_to_model": true,
+  "model_called": false
+}
