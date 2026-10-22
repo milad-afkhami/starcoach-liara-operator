@@ -1,0 +1,1251 @@
+{
+  "started_utc": "2026-10-22T02:17:00.286Z",
+  "origin": "http://127.0.0.1:8661",
+  "mode": "fixture provider metadata; real local HTTP checks and Codex",
+  "rows": {
+    "LUI26": {
+      "status": "pass",
+      "elapsed_ms": 24438,
+      "details": {
+        "watch_id": "edc742870c6b43c7b497c8beaef5623b",
+        "normal_scope_seconds": 900,
+        "injection": "Only own local watch ends/ends_at shortened to six seconds ahead; production clock/scheduler/API unchanged",
+        "canonical_state": "expired",
+        "probe_count": 4,
+        "probe_count_after_full_interval": 4,
+        "start_control_enabled": true,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI26-expiry-fixed.png"
+      }
+    },
+    "LUI11": {
+      "status": "pass",
+      "elapsed_ms": 380,
+      "details": {
+        "origin": "http://127.0.0.1:54949",
+        "provider_metadata": "explicit unauthorized/401 fixture replay",
+        "real_http_status": 200,
+        "check_pass": true,
+        "no_repair_cta": true,
+        "no_operations": true,
+        "quality": [
+          {
+            "kind": "project",
+            "quality": "unavailable"
+          },
+          {
+            "kind": "applets",
+            "quality": "unavailable"
+          },
+          {
+            "kind": "releases",
+            "quality": "unavailable"
+          },
+          {
+            "kind": "metrics",
+            "quality": "unavailable"
+          },
+          {
+            "kind": "http_probe",
+            "quality": "fresh"
+          }
+        ],
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI11-access-gap.png"
+      }
+    },
+    "LUI12": {
+      "status": "pass",
+      "elapsed_ms": 252,
+      "details": {
+        "origin": "http://127.0.0.1:35483",
+        "fixture": "delivery registry intentionally has no HTTP check",
+        "http_observations": 0,
+        "no_down_claim": true,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI12-no-http.png"
+      }
+    },
+    "LUI14": {
+      "status": "pass",
+      "elapsed_ms": 1408,
+      "details": {
+        "origin": "http://127.0.0.1:40915",
+        "configuration": "production UnavailableModel; no model credential configured for this isolated instance",
+        "ai_disabled": true,
+        "real_http": [
+          200,
+          502
+        ],
+        "monitoring_probes": 2,
+        "watch_stopped": true,
+        "no_diagnosis_fabricated": true,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI14-model-unavailable.png"
+      }
+    },
+    "LUI21": {
+      "status": "pass",
+      "elapsed_ms": 271,
+      "details": {
+        "origin": "http://127.0.0.1:58829",
+        "provider_fixture": "empty inventory then restored; explicit unauthorized inventory replay then restored",
+        "initial_services": 0,
+        "recovered_services": 2,
+        "connection_error": "The request could not be completed. Refresh the evidence and try again.",
+        "empty_screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI21-empty-team.png",
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI21-restored-team.png"
+      }
+    },
+    "LUI1": {
+      "status": "pass",
+      "elapsed_ms": 523,
+      "details": {
+        "fresh_login_alert_count": 0,
+        "wrong_password_rejected": true,
+        "error": "That password did not match. Try again.",
+        "correct_login": true,
+        "password_field_masked": true,
+        "response_credential_echo": false,
+        "http_only_cookie": true,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI1-login-success.png"
+      }
+    },
+    "LUI3": {
+      "status": "pass",
+      "elapsed_ms": 64,
+      "details": {
+        "visible_services": [
+          "storefront",
+          "delivery"
+        ],
+        "team": "Team local-fixture",
+        "fixture_banner": "Local demo. Provider metadata is simulated; endpoint checks use real local services. No Liara resource is changed.",
+        "implicit_watches": 0,
+        "no_artifact_or_baseline_upload_needed": true,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI3-overview.png"
+      }
+    },
+    "LUI4": {
+      "status": "pass",
+      "elapsed_ms": 290,
+      "details": {
+        "http": [
+          {
+            "id": "741fee505a28461eb927ad162ded2a99",
+            "check": "store-preview",
+            "status": 502,
+            "check_pass": false,
+            "observed_at": 1792636237.5085945
+          },
+          {
+            "id": "ca5368a5f7ca47bcb25fac853d0f44ae",
+            "check": "store-health",
+            "status": 200,
+            "check_pass": true,
+            "observed_at": 1792636237.5321324
+          }
+        ],
+        "repair_enrolled": false,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI4-real-failure.png"
+      }
+    },
+    "LUI6": {
+      "status": "pass",
+      "elapsed_ms": 33030,
+      "details": {
+        "question": "The process health check passes but the customer preview fails. Establish the likely cause and a useful discriminating check from configured evidence, without changing any service.",
+        "incident_id": "54bc60bc7e104791a02dda7e541f01a1",
+        "investigation_state": "done",
+        "diagnosis": {
+          "cause_family": "dependency_schema",
+          "contradiction_ids": [],
+          "cutoff": 1792636383.3546724,
+          "evidence_ids": [
+            "36a8128706a9481cbc71ae9605212821",
+            "80f9c84a1fe04c23b52868ae915ff7ee",
+            "bfa4a777f67e468086854716051ca4fc",
+            "85011d620774464487a52d3dea8cd291",
+            "56d68bd023cb406ab1148f3277db5449"
+          ],
+          "model_calls": [
+            {
+              "cli_version": "codex-cli 0.163.0",
+              "elapsed_ms": 13779,
+              "model": "gpt-6.1-sol",
+              "provider": "codex_cli"
+            },
+            {
+              "cli_version": "codex-cli 0.163.0",
+              "elapsed_ms": 18049,
+              "model": "gpt-6.1-sol",
+              "provider": "codex_cli"
+            }
+          ],
+          "observation_sequence": 1,
+          "outcome": "need_evidence",
+          "prompt_version": "liara-investigation-v1",
+          "read_operations": 8,
+          "summary": "Likely dependency schema mismatch: the failing preview and matching request log report upstream_invalid because storefront expects shipping_toman. The discriminating configured dep-quote read returned HTTP 200 with delivery_toman instead, confirming the field mismatch. Passing process health and a Running process do not establish preview health. Reconcile the dependency contract; no service change was executed.",
+          "unknowns": [
+            "Which field the authoritative contract requires, and therefore which service needs correction.",
+            "Whether a release introduced the mismatch.",
+            "No enrolled verified repair artifact for this service."
+          ]
+        },
+        "independence": {
+          "torob_server_pid": 3032397,
+          "torob_server_stopped_at": "2026-10-22T02:31:17Z",
+          "parent_confirmed_worker_stopped": true,
+          "server_pid_exists": false
+        },
+        "application_operations": 0,
+        "source_evidence_count": 8,
+        "progress_screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI6-progress.png",
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI6-real-diagnosis.png"
+      }
+    },
+    "LUI7": {
+      "status": "pass",
+      "elapsed_ms": 558,
+      "details": {
+        "citation_count": 5,
+        "opened_sources": [
+          {
+            "id": "36a8128706a9481cbc71ae9605212821",
+            "kind": "http_probe",
+            "target": "local-store",
+            "quality": "fresh",
+            "coverage": {
+              "configured_endpoint": true,
+              "local_fixture_target": true
+            }
+          },
+          {
+            "id": "80f9c84a1fe04c23b52868ae915ff7ee",
+            "kind": "logs",
+            "target": "local-store",
+            "quality": "fresh",
+            "coverage": {
+              "actual_local_stdout": true,
+              "empty": false,
+              "provider_fixture": true,
+              "truncated": false
+            }
+          },
+          {
+            "id": "bfa4a777f67e468086854716051ca4fc",
+            "kind": "http_probe",
+            "target": "local-dep",
+            "quality": "fresh",
+            "coverage": {
+              "configured_endpoint": true,
+              "local_fixture_target": true
+            }
+          },
+          {
+            "id": "85011d620774464487a52d3dea8cd291",
+            "kind": "http_probe",
+            "target": "local-store",
+            "quality": "fresh",
+            "coverage": {
+              "configured_endpoint": true,
+              "local_fixture_target": true
+            }
+          },
+          {
+            "id": "56d68bd023cb406ab1148f3277db5449",
+            "kind": "applets",
+            "target": "local-store",
+            "quality": "fresh",
+            "coverage": {
+              "provider_fixture": true
+            }
+          }
+        ],
+        "scenario_answer_key_exposed": false,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI7-dependency-source.png"
+      }
+    },
+    "LUI5": {
+      "status": "pass",
+      "elapsed_ms": 301,
+      "details": {
+        "metrics": {
+          "error": "fixture_has_no_provider_metrics",
+          "unit": "unverified"
+        },
+        "release_id": "local-b8ea2620ccde420a896d7a7813a7d70e",
+        "logs_source": {
+          "id": "80f9c84a1fe04c23b52868ae915ff7ee",
+          "quality": "fresh",
+          "observed_at": 1792636369.463596,
+          "available_at": 1792636369.5115733,
+          "coverage": {
+            "actual_local_stdout": true,
+            "empty": false,
+            "provider_fixture": true,
+            "truncated": false
+          }
+        },
+        "fixture_label_retained": true,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI5-unverified-metrics.png"
+      }
+    },
+    "LUI25": {
+      "status": "pass",
+      "elapsed_ms": 313,
+      "details": {
+        "copied_matches_rendered_payload": true,
+        "denial_injected": true,
+        "feedback_inside_dialog": true,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI25-copy-fallback.png"
+      }
+    },
+    "LUI18": {
+      "status": "pass",
+      "elapsed_ms": 152,
+      "details": {
+        "repair_enrolled": false,
+        "executable_cta": false,
+        "crafted_proposal_http": 409,
+        "rejection": {
+          "detail": "repair_not_enrolled_or_supported"
+        },
+        "operations": 0,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI18-read-only-diagnosis.png"
+      }
+    },
+    "LUI24": {
+      "status": "pass",
+      "elapsed_ms": 406,
+      "details": {
+        "typed_filter": true,
+        "no_match_recoverable": true,
+        "recent_restored_target": "local-store",
+        "watch_id": "fad91490a98f4d1392496df95181a2e5",
+        "watch_scope_retained": [
+          "local-store"
+        ],
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI24-filter-recent.png"
+      }
+    },
+    "LUI10": {
+      "status": "pass",
+      "elapsed_ms": 26815,
+      "details": {
+        "incident_id": "4ed55b8a00b54f178355e267b08f3a35",
+        "endpoint": "/api/incidents/4ed55b8a00b54f178355e267b08f3a35/investigate",
+        "watch_id": "fad91490a98f4d1392496df95181a2e5",
+        "generation": 2,
+        "sequence_at_start": 12,
+        "sequence_during_model": 13,
+        "sequence_at_end": 14,
+        "diagnosis": {
+          "cause_family": "dependency_schema",
+          "contradiction_ids": [
+            "f32fc6df48794134bdddb3150309897e",
+            "cb568078de0644bc8dc0f93b85051101"
+          ],
+          "cutoff": 1792637320.5838742,
+          "evidence_ids": [
+            "2508f7bf88c14772be8cb6c3a990ef5d",
+            "21b9d6801e6b43bc9ee6fcf45c9fe844",
+            "413e9a6e74a14e18992a2d18eb248d3e",
+            "12bd64fef8ff4e0093afb31172a7c62b"
+          ],
+          "model_calls": [
+            {
+              "cli_version": "codex-cli 0.163.0",
+              "elapsed_ms": 12501,
+              "model": "gpt-6.1-sol",
+              "provider": "codex_cli"
+            },
+            {
+              "cli_version": "codex-cli 0.163.0",
+              "elapsed_ms": 13557,
+              "model": "gpt-6.1-sol",
+              "provider": "codex_cli"
+            }
+          ],
+          "observation_sequence": 14,
+          "outcome": "need_evidence",
+          "prompt_version": "liara-investigation-v1",
+          "read_operations": 8,
+          "summary": "Fresh preview probes return 502 upstream_invalid. Correlated logs show storefront expects shipping_toman, while the configured dependency returns delivery_toman with HTTP 200. This supports a dependency contract mismatch. Store health returns 200 and its process is Running; these do not establish preview health. Contract alignment is a repair candidate; no service was changed.",
+          "unknowns": [
+            "The authoritative dependency schema is not supplied; which service should change is unknown.",
+            "Contract validation was not performed by the dependency probe.",
+            "Release causation and resource utilization are not established.",
+            "No enrolled verified repair artifact for this service."
+          ]
+        },
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI10-same-record-observation.png",
+        "material_change": {
+          "source": "simulated provider release metadata only; actual service code/processes unchanged",
+          "before_release": "local-b8ea2620ccde420a896d7a7813a7d70e",
+          "temporary_release": "local-0351af27b2804f9ab62f71a31c5edcd8",
+          "before_generation": 4,
+          "after_generation": 5,
+          "terminal_state": "failed",
+          "error": "stale_generation",
+          "stale_diagnosis_absent": true
+        },
+        "material_screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI10-material-invalidated.png",
+        "fixture_bytes_restored": true
+      }
+    },
+    "LUI8": {
+      "status": "pass",
+      "elapsed_ms": 2306,
+      "details": {
+        "incident_id": "81f8ae3761f24698aeec0c018a8d218c",
+        "observed_real_container_ids": [
+          "b12168127f07"
+        ],
+        "final_state": "canceled",
+        "error_code": "canceled",
+        "no_late_diagnosis": true,
+        "containers_remaining": 0,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI8-canceled.png"
+      }
+    },
+    "LUI13": {
+      "status": "pass",
+      "elapsed_ms": 170,
+      "details": {
+        "main_watch": "fad91490a98f4d1392496df95181a2e5",
+        "other_watch": "f4a86b1a49f14a4b8697c22cf261ecb3",
+        "foreign_incident_read": 404,
+        "foreign_cancel": 404,
+        "foreign_watch_stop": 404,
+        "one_owner_stop_leaves_other_active": true,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI13-other-owner.png"
+      }
+    },
+    "LUI9": {
+      "status": "pass",
+      "elapsed_ms": 16209,
+      "details": {
+        "watch_id": "fad91490a98f4d1392496df95181a2e5",
+        "normal_scope_seconds": 900,
+        "actual_probe_count": 26,
+        "failing_check_incidents": [
+          {
+            "id": "4ed55b8a00b54f178355e267b08f3a35",
+            "kind": "http_availability",
+            "generation": 1,
+            "observation_sequence": 12
+          }
+        ],
+        "same_failure_deduplicated": true,
+        "post_stop_probe_count": 26,
+        "post_stop_wait_seconds": 16,
+        "other_owned_watch_also_stopped": true,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI9-stopped-watch.png"
+      }
+    },
+    "LUI23": {
+      "status": "pass",
+      "elapsed_ms": 46,
+      "details": {
+        "service_races": {
+          "same_target_reselection": true,
+          "real_response_delayed": true,
+          "loaded_real_http": 502,
+          "refresh_enabled": true,
+          "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI23-same-target-fixed.png"
+        },
+        "late_other_target": {
+          "late_storefront_response_discarded": true,
+          "new_target": "delivery"
+        },
+        "initial_request_cancel": {
+          "incident_id": "21b329886e5c4cb680d36da359defc54",
+          "real_initial_response_delayed": true,
+          "late_id_canceled": true,
+          "controls_recovered": true
+        },
+        "late_detail_after_logout_discarded": true,
+        "private_api_after_logout": 401,
+        "new_login_has_no_old_incidents": true,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI23-fresh-owner.png"
+      }
+    },
+    "LUI15": {
+      "status": "pass",
+      "elapsed_ms": 320,
+      "details": {
+        "injected": "one configured-detail fetch aborted",
+        "truthful_message": "Configured HTTP checks have no observations available. Refresh to try again.",
+        "refresh_released": true,
+        "retry_real_http": [
+          502,
+          200
+        ],
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI15-observation-unavailable-fixed.png"
+      }
+    },
+    "LUI19": {
+      "status": "pass",
+      "elapsed_ms": 190,
+      "details": {
+        "focus_sequence": [
+          {
+            "inside": true,
+            "document_focus": true,
+            "outline": "solid"
+          },
+          {
+            "inside": false,
+            "document_focus": false,
+            "outline": "none"
+          },
+          {
+            "inside": true,
+            "document_focus": true,
+            "outline": "solid"
+          },
+          {
+            "inside": true,
+            "document_focus": true,
+            "outline": "solid"
+          },
+          {
+            "inside": false,
+            "document_focus": false,
+            "outline": "none"
+          },
+          {
+            "inside": true,
+            "document_focus": true,
+            "outline": "solid"
+          },
+          {
+            "inside": true,
+            "document_focus": true,
+            "outline": "solid"
+          },
+          {
+            "inside": false,
+            "document_focus": false,
+            "outline": "none"
+          }
+        ],
+        "background_controls_inert": true,
+        "escape_closes": true,
+        "focus_returns": true,
+        "native_browser_chrome_allowed": true,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI19-keyboard-dialog.png"
+      }
+    },
+    "LUI16": {
+      "status": "pass",
+      "elapsed_ms": 1303,
+      "details": {
+        "blank_disabled": true,
+        "rendered_limit": 1500,
+        "oversized_api_http": 422,
+        "duplicate_owner_http": 409,
+        "global_fourth_http": 429,
+        "global_capacity_error": "The investigation queue is full. Monitoring still works; try again shortly.",
+        "queued_incidents": [
+          "81f8ae3761f24698aeec0c018a8d218c",
+          "21b329886e5c4cb680d36da359defc54"
+        ],
+        "queued_canceled_without_execution": true,
+        "active_model_canceled_after_check": true,
+        "no_rejected_request_record": true,
+        "harness_note": "Initial duplicate probe arrived after earlier model completed; corrected by observing a real running container before boundary assertions.",
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI16-queue-full.png"
+      }
+    },
+    "LUI20": {
+      "status": "pass",
+      "elapsed_ms": 314,
+      "details": {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "rendered_login_service_investigate_evidence_watch": true,
+        "actual_diagnosis": {
+          "cause_family": "dependency_schema",
+          "contradiction_ids": [
+            "cf3ae9da56b94b2b8829584f4bed7d1b",
+            "74ecddcd0bb248e3977ff4b25df68dea"
+          ],
+          "cutoff": 1792637761.1930757,
+          "evidence_ids": [
+            "d08f6522da8741c9aea70854a85d6ca4",
+            "3ce4eb4d36ab43b0a9255e0d3b797910",
+            "7c1455d6f50041b1ad74e99450765a9e"
+          ],
+          "model_calls": [
+            {
+              "cli_version": "codex-cli 0.163.0",
+              "elapsed_ms": 13615,
+              "model": "gpt-6.1-sol",
+              "provider": "codex_cli"
+            },
+            {
+              "cli_version": "codex-cli 0.163.0",
+              "elapsed_ms": 15674,
+              "model": "gpt-6.1-sol",
+              "provider": "codex_cli"
+            }
+          ],
+          "observation_sequence": 1,
+          "outcome": "need_evidence",
+          "prompt_version": "liara-investigation-v1",
+          "read_operations": 8,
+          "summary": "Preview returns 502 upstream_invalid because storefront expects shipping_toman while delivery returns delivery_toman. Process Running and health HTTP 200 establish process health, not preview health. Delivery HTTP 200 confirms availability but not schema compatibility. Aligning the dependency contract is a repair candidate; no action was executed.",
+          "unknowns": [
+            "Which field the intended dependency contract requires.",
+            "Which change introduced the mismatch; release metadata alone cannot establish causation.",
+            "Provider metrics are unavailable; no repair is enrolled or validated.",
+            "No enrolled verified repair artifact for this service."
+          ]
+        },
+        "dimensions": {
+          "width": 390,
+          "document": 390
+        },
+        "dialog_screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI20-mobile-evidence.png",
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI20-mobile-diagnosis.png"
+      }
+    },
+    "LUI17": {
+      "status": "pass",
+      "elapsed_ms": 6845,
+      "details": {
+        "before": {
+          "watch_id": "3bd3fe3031ba4cfc910fcea445a0a979",
+          "incident_id": "81f8ae3761f24698aeec0c018a8d218c",
+          "container_ids": [
+            "2f54c9e9d6ff"
+          ],
+          "at_utc": "2026-10-22T10:35:21.889Z",
+          "ledger_count": 62,
+          "persisted_good_incident": "54bc60bc7e104791a02dda7e541f01a1",
+          "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI17-before-restart.png"
+        },
+        "watch_after": {
+          "state": "stopped",
+          "stop_reason": "server_restarted",
+          "probe_count": 4
+        },
+        "incident_after": {
+          "id": "81f8ae3761f24698aeec0c018a8d218c",
+          "state": "failed",
+          "error": "server_restarted",
+          "diagnosis": null
+        },
+        "old_incident_readable": true,
+        "old_evidence_count": 8,
+        "model_containers_remaining": 0,
+        "ledger_unchanged_after_restart": 62,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI17-after-restart.png"
+      }
+    },
+    "LUI2": {
+      "status": "pass",
+      "elapsed_ms": 327,
+      "details": {
+        "session_survived_reload": true,
+        "persisted_incident": "b26118d24a52441987865ee47b0b07ff",
+        "logout_private_view_removed": true,
+        "private_api_after_logout": 401,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI2-logged-out.png"
+      }
+    },
+    "LUI22": {
+      "status": "pass",
+      "elapsed_ms": 19,
+      "details": {
+        "private_routes": [
+          {
+            "path": "/.env",
+            "status": 404
+          },
+          {
+            "path": "/data/operator.sqlite",
+            "status": 404
+          },
+          {
+            "path": "/data/local-services/releases.json",
+            "status": 404
+          },
+          {
+            "path": "/backend/liara_guard/api.py",
+            "status": 404
+          }
+        ],
+        "private_response_cache": "no-store",
+        "content_type_protection": "nosniff",
+        "known_password_echo": false,
+        "uncaught_application_errors": 0,
+        "browser_resource_origins": [
+          "http://127.0.0.1:8661"
+        ],
+        "server_sources": "Registered8771/8772 probes, explicitly simulated provider metadata, genuine isolated Codex; no live Liara connector configured",
+        "console_note": "Expected401/409/422/429 and explicitly injected transport failures are retained separately; they are not uncaught application exceptions."
+      }
+    },
+    "LUI27": {
+      "status": "pass",
+      "elapsed_ms": 2954,
+      "details": {
+        "setup": "Only own auth-session expiry forced in SQLite; own watch stopped as test cleanup in same transaction; actual polling received401",
+        "private_modal_removed": true,
+        "modal_not_remounted_after_fresh_login": true,
+        "private_question_and_filter_reset": true,
+        "new_owner_old_incidents": 0,
+        "expired_screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI27-expired-private-modal.png",
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI27-fresh-private-state.png"
+      }
+    },
+    "LUI28": {
+      "status": "pass",
+      "elapsed_ms": 267,
+      "details": {
+        "normal_runtime": {
+          "state": "pass",
+          "incident_id": "7233de5c5a6241cc92a1a1d7fb63c9d7",
+          "image": "public.ecr.aws/docker/library/python:3.12-slim-bookworm@sha256:6a0e06f5ba0b373d051aabd3fffb9b873f27f9a2a3a14bcbe37dee6f0e3bbc70",
+          "observed_container": "2bedceb91bca",
+          "model_calls": [
+            {
+              "cli_version": "codex-cli 0.163.0",
+              "elapsed_ms": 22433,
+              "model": "gpt-6.1-sol",
+              "provider": "codex_cli"
+            },
+            {
+              "cli_version": "codex-cli 0.163.0",
+              "elapsed_ms": 18664,
+              "model": "gpt-6.1-sol",
+              "provider": "codex_cli"
+            }
+          ],
+          "diagnosis": "dependency_schema",
+          "containers_remaining": 0,
+          "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-runtime-normal-call-fixed.png"
+        },
+        "setup": "Temporary simulated local-store release identity change; no service code/process/provider write",
+        "before_release": "local-b8ea2620ccde420a896d7a7813a7d70e",
+        "before_generation": 2,
+        "after_generation": 3,
+        "prior_conclusion_hidden": true,
+        "superseded_conclusion_preserved_as_history": true,
+        "evidence_still_readable": 15,
+        "fixture_restored": true,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI28-completed-result-invalidated.png"
+      }
+    },
+    "LUI29": {
+      "status": "pass",
+      "elapsed_ms": 20257,
+      "details": {
+        "setup": "Owned SQLite operation state fixture in explicit fixture mode; no provider write, approval, deployment or live gate exercised",
+        "operation_id": "420841db8cb54679b4608b4d9251b319",
+        "reconcile_until": 1792669320.5429533,
+        "actual_state_poll_times": [
+          1792669308.611,
+          1792669308.65,
+          1792669308.722,
+          1792669310.693,
+          1792669312.701,
+          1792669314.712,
+          1792669316.722,
+          1792669318.736,
+          1792669320.747
+        ],
+        "final_canonical_read_after_deadline": true,
+        "polls_after_settle_window": 0,
+        "unknown_has_no_execute_action": true,
+        "expired_proposal_approval_disabled": true,
+        "expired_replacement_cta": "Not applicable: fixture target is unenrolled. Expiry explanation verified; live approval/replacement remains separately gated.",
+        "provider_writes": 0,
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI29-unknown-bounded.png",
+        "expired_screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI29-expired-proposal.png",
+        "owned_fixture_removed": true
+      }
+    }
+  },
+  "network": [
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/services",
+      "status": 401
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/state",
+      "status": 401
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/services",
+      "status": 401,
+      "origin": "http://127.0.0.1:54949"
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/state",
+      "status": 401,
+      "origin": "http://127.0.0.1:54949"
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/services",
+      "status": 401,
+      "origin": "http://127.0.0.1:35483"
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/state",
+      "status": 401,
+      "origin": "http://127.0.0.1:35483"
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/services",
+      "status": 401,
+      "origin": "http://127.0.0.1:40915"
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/state",
+      "status": 401,
+      "origin": "http://127.0.0.1:40915"
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/services",
+      "status": 401,
+      "origin": "http://127.0.0.1:58829"
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/state",
+      "status": 401,
+      "origin": "http://127.0.0.1:58829"
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/services",
+      "status": 503,
+      "origin": "http://127.0.0.1:58829"
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/services",
+      "status": 401
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/state",
+      "status": 401
+    },
+    {
+      "type": "http-error",
+      "method": "POST",
+      "path": "/api/login",
+      "status": 401
+    },
+    {
+      "type": "failed",
+      "method": "GET",
+      "path": "/api/services/local-store",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/services",
+      "status": 401
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/state",
+      "status": 401
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/state",
+      "status": 401
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/services",
+      "status": 401
+    },
+    {
+      "type": "http-error",
+      "method": "POST",
+      "path": "/api/services/local-store/investigate",
+      "status": 429
+    },
+    {
+      "type": "failed",
+      "method": "GET",
+      "path": "/api/services/local-store",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "type": "failed",
+      "method": "GET",
+      "path": "/api/services/local-store",
+      "error": "net::ERR_FAILED"
+    },
+    {
+      "type": "failed",
+      "method": "GET",
+      "path": "/api/state",
+      "error": "net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "type": "failed",
+      "method": "GET",
+      "path": "/api/state",
+      "error": "net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "type": "http-error",
+      "method": "GET",
+      "path": "/api/state",
+      "status": 401
+    }
+  ],
+  "console": [
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "context": 0
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "context": 0
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "context": 0
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "context": 5
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "context": 5
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "context": 5
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "context": 5
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "context": 6
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "context": 6
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "context": 7
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "context": 7
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+      "context": 7
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "context": 5
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "context": 5
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+      "context": 5
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+      "context": 5
+    },
+    {
+      "type": "console",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "context": 7
+    }
+  ],
+  "credential_echo": false,
+  "live_gates": "LIVE1–LIVE5 remain pending; no local row closes them",
+  "variant_cleanup": {
+    "browser_contexts_closed": 4,
+    "cloud_writes": 0,
+    "model_calls": 0,
+    "servers_stopped": 4,
+    "ports_closed": [
+      54949,
+      35483,
+      40915,
+      58829
+    ]
+  },
+  "model_starts_before": 50,
+  "prior_attempts": {
+    "LUI26": [
+      {
+        "status": "fail",
+        "elapsed_ms": 17009,
+        "error": "\u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('button', { name: 'Start 15-minute watch' })\nExpected: visible\nTimeout: 1000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('button', { name: 'Start 15-minute watch' }) with timeout 1000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('button', { name: 'Start 15-minute watch' })\u001b[22m\n",
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI26-failure.png",
+        "details": {
+          "watch_id": "85e1e7d325b54cb89b790d4f482b3e23",
+          "normal_scope_seconds": 900,
+          "injection": "Only this own local watch stored ends/ends_at moved to eight seconds ahead; real app clock, scheduler and HTTP unchanged.",
+          "stored_state": "expired",
+          "stored_probe_count": 10,
+          "stored_ends_at": 1792635501.2238827,
+          "ui_text": "Watching this service\n\nactive · 10 recorded probes\n\n00:00\nStop watch\nStopping watch does not discard verification of an already submitted deployment.",
+          "start_button_count": 0,
+          "stop_button_count": 1,
+          "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI26-expiry.png",
+          "probe_count_after_full_interval": 10,
+          "backend_probe_admission_stopped": true
+        }
+      }
+    ],
+    "LUI10": [
+      {
+        "status": "fail",
+        "details": {
+          "selected_watch_incident": "4ed55b8a00b54f178355e267b08f3a35",
+          "selected_generation": 1,
+          "selected_observation_sequence": 6,
+          "rendered_action": "Recent idle watch incident → Investigate",
+          "actual_post_path": "/api/services/local-store/investigate",
+          "returned_incident_id": "81f8ae3761f24698aeec0c018a8d218c",
+          "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI10-wrong-investigation-record.png"
+        },
+        "error": "Rendered Investigate created a different manual incident instead of investigating the selected watch incident."
+      },
+      {
+        "status": "fail",
+        "elapsed_ms": 60503,
+        "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Refresh observations' })\u001b[22m\n\u001b[2m    - locator resolved to <button disabled class=\"button secondary\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    56 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI10-failure.png"
+      }
+    ],
+    "LUI16": [
+      {
+        "status": "fail",
+        "elapsed_ms": 31,
+        "error": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m409\u001b[39m\nReceived: \u001b[31m202\u001b[39m",
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI16-failure.png"
+      }
+    ],
+    "LUI15": [
+      {
+        "status": "fail",
+        "error": "A failed observation fetch falsely says no HTTP check is configured, despite two configured checks.",
+        "details": {
+          "injection": "One real detail request aborted at browser transport",
+          "error": "Connection failed. Your current view is retained; try again.",
+          "loading_released": true,
+          "retry_real_http": [
+            502,
+            200
+          ],
+          "false_not_configured_claim": true,
+          "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI15-network-failure.png"
+        }
+      },
+      {
+        "status": "fail",
+        "elapsed_ms": 109,
+        "error": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoMatch\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected pattern: \u001b[32m/unavailable/i\u001b[39m\nReceived string:  \u001b[31m\"Configured HTTP checks have no observations available. Refresh to try again.\"\u001b[39m",
+        "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI15-failure.png"
+      }
+    ],
+    "LUI23": [
+      {
+        "status": "fail",
+        "error": "Reselecting same target during real detail response leaves loading state stuck and Refresh disabled.",
+        "details": {
+          "injection": "Held delivery of real local-store HTTP response; no API response fabricated",
+          "same_target_clicked_twice": true,
+          "refresh_disabled": true,
+          "loading_notice_visible": true,
+          "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-LUI23-reselection-repro.png"
+        }
+      }
+    ]
+  },
+  "independence": {
+    "torob_server_pid": 3032397,
+    "torob_server_stopped_at": "2026-10-22T02:31:17Z",
+    "parent_confirmed_worker_stopped": true,
+    "server_pid_exists": false
+  },
+  "cleanup_findings": [
+    {
+      "status": "fixed_and_retested",
+      "container_id": "27860c7b9a51",
+      "name": "/starcoach-model-6d81562b916d482d9b4df225b54cdaf7",
+      "label": "starcoach.model=liara",
+      "created": "2026-10-22T10:44:47.900696328Z",
+      "state": {
+        "Status": "created",
+        "Running": false,
+        "Pid": 0,
+        "StartedAt": "0001-01-01T00:00:00Z",
+        "FinishedAt": "0001-01-01T00:00:00Z",
+        "Error": ""
+      },
+      "last_charged_start_utc": "2026-10-22T10:44:47.869093+00:00",
+      "runtime_fault_latch_present": false,
+      "lifecycle_events": [
+        {
+          "action": "create",
+          "time_nano": 1792665887993323800
+        }
+      ],
+      "ownership": "Parent confirmed no other actual Liara model calls; this matches canceled QA launch",
+      "manual_removal": "Only identified owned orphan removed after lifecycle capture; verified absent",
+      "resolution": "Acknowledged create path: real charged early cancellation produced create→destroy without survivor; subsequent genuine normal call on pinned public image completed and cleaned."
+    }
+  ],
+  "acceptance_status": "local_ui_and_runtime_retests_passed; live_liara_gates_pending",
+  "runtime_retest": {
+    "adapter": "acknowledged docker create before cancellable start",
+    "image_reference": "docs/qa-evidence/public-runtime-image.json",
+    "early_cancel": {
+      "state": "pass",
+      "incident_id": "7233de5c5a6241cc92a1a1d7fb63c9d7",
+      "charged_starts": 1,
+      "canceled_after_charge_before_initial_response_delivery": true,
+      "lifecycle": [
+        {
+          "id": "33956520a4a7",
+          "action": "create",
+          "time_nano": 1792667907968252000
+        },
+        {
+          "id": "33956520a4a7",
+          "action": "destroy",
+          "time_nano": 1792667908023167500
+        }
+      ],
+      "containers_after_settle": 0,
+      "fault_latch": false,
+      "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-runtime-early-cancel-fixed.png"
+    },
+    "normal_call": {
+      "state": "pass",
+      "incident_id": "7233de5c5a6241cc92a1a1d7fb63c9d7",
+      "image": "public.ecr.aws/docker/library/python:3.12-slim-bookworm@sha256:6a0e06f5ba0b373d051aabd3fffb9b873f27f9a2a3a14bcbe37dee6f0e3bbc70",
+      "observed_container": "2bedceb91bca",
+      "model_calls": [
+        {
+          "cli_version": "codex-cli 0.163.0",
+          "elapsed_ms": 22433,
+          "model": "gpt-6.1-sol",
+          "provider": "codex_cli"
+        },
+        {
+          "cli_version": "codex-cli 0.163.0",
+          "elapsed_ms": 18664,
+          "model": "gpt-6.1-sol",
+          "provider": "codex_cli"
+        }
+      ],
+      "diagnosis": "dependency_schema",
+      "containers_remaining": 0,
+      "screenshot": "/home/milad/Desktop/projects/starcoach-liara-operator/docs/qa-evidence/liara-runtime-normal-call-fixed.png"
+    }
+  },
+  "model_starts_after": 68,
+  "external_model_starts_during_qa": [
+    {
+      "count": 1,
+      "source": "Parent generic pinned-public-image schema proof",
+      "artifact": "docs/qa-evidence/public-runtime-image.json"
+    }
+  ],
+  "shared_ledger_increase": 18,
+  "qa_charged_runtime_starts": 17,
+  "final_review": {
+    "local_rows_passed": 29,
+    "total_local_rows": 29,
+    "uncaught_application_errors": 0,
+    "known_password_echo": false,
+    "global_ledger_before": 50,
+    "global_ledger_after": 68,
+    "qa_charged_runtime_starts": 17,
+    "parent_generic_proof_starts": 1,
+    "quota_reset": false,
+    "runtime_counts": {
+      "active_watches": 0,
+      "active_investigations": 0
+    },
+    "model_containers_remaining": 0,
+    "fault_latch": false,
+    "initial_runtime_orphan_preserved": true,
+    "new_early_cancel_and_normal_cleanup_passed": true,
+    "fixture_release_bytes_restored": true,
+    "seeded_operation_removed": true,
+    "live_gates": "LIVE1–LIVE5 remain blocked; no credentials/targets/provisioning/approval supplied; no local fixture closes them.",
+    "expired_replacement_limitation": "Fixture is unenrolled: disabled expired approval and replacement explanation verified; actual supported replacement/approval/deploy remains live-gated."
+  },
+  "finished_utc": "2026-10-22T11:52:10.811Z",
+  "cleanup": {
+    "contexts_closed": 8,
+    "browser_closed": true,
+    "harness_process_stopped": true,
+    "variant_servers_stopped": 4,
+    "active_watches": 0,
+    "active_investigations": 0,
+    "model_containers_remaining": 0,
+    "main_operator_and_local_services_left_running_for_parent": true
+  }
+}

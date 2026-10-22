@@ -26,7 +26,7 @@ For a new actual model evaluation, run `PYTHONPATH=backend uv run --env-file .en
 
 ## Product boundaries
 
-Watches are explicitly started, last15minutes, and observe at most two services/three configured endpoints/180 periodic probes. Provider reads refresh at most once per minute. Investigations allow at most12 registered evidence reads and two model calls within120seconds including queue wait. One model worker and persistent global limits bound use. Cancellation, restart, expiry and material service changes have explicit terminal states.
+Watches are explicitly started, last15 minutes, and observe at most two services/three configured endpoints/180 periodic probes. Provider reads refresh at most once per minute. Investigations allow at most12 registered evidence reads and two model calls within120 seconds including queue wait. One model worker and persistent global limits bound use. Cancellation, restart, expiry and material service changes have explicit terminal states.
 
 Existing services remain read-only unless the owner has independently enrolled the exact target, verified source/build and recovery policy. Repairs use a new known-good source deployment; no provider-native rollback endpoint is invented. An exact single-use five-minute approval binds target, source hash, before release, incident generation and verification policy. Ambiguous writes are reconciled rather than blindly retried. Provider readiness alone does not establish recovery: three fresh original-symptom/build checks and serving-release identity are required.
 
