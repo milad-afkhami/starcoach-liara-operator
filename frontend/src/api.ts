@@ -1,21 +1,21 @@
 export class ApiError extends Error {status:number;code:string;constructor(status:number,code:string){super(messageFor(code));this.status=status;this.code=code}}
 const messages:Record<string,string>={
- invalid_login:'That password did not match. Try again.',rate_limited:'Too many attempts. Wait a minute before trying again.',unauthenticated:'Your session ended. Sign in again.',
- provider_not_configured:'The provider connection is not configured. Your local operator is available; owner setup is still needed.',observer_auth:'Provider access was rejected. This is an observation gap, not proof that the service is down.',
- observer_network:'The provider could not be reached. Existing observations remain available.',runtime_unavailable:'The AI runtime is unavailable. You can still inspect evidence and use monitoring.',
- investigation_in_progress:'An investigation is already running in this session. Finish or cancel it first.',investigation_queue_full:'The investigation queue is full. Monitoring still works; try again shortly.',
- stale_generation:'The service changed while it was being investigated. Run again against the current evidence.',server_restarted:'The operator restarted. The old investigation was stopped; start a new one when ready.',
- canceled:'Investigation canceled.',expired:'The investigation reached its time limit. Inspect the collected evidence or try a narrower question.',
- busy:'The model is busy with another entry. Monitoring remains available.',budget_exhausted:'The configured model budget is exhausted. Monitoring and evidence inspection remain available.',
- repair_not_enrolled_or_supported:'This service has no supported, verified repair enrolled. It remains available for monitoring and investigation.',
- live_provider_required_for_deployment:'Actual deployment requires the authorized live provider connection.',approval_rejected:'The approval is expired, used, or no longer matches the service. Prepare a fresh proposal.',
- watch_scope_or_state_conflict:'A watch is already active, or this selection exceeds the bounded watch scope.',not_found:'That item is not available in this session.',
- evidence_read_failed:'A required evidence read failed. The assistant has not claimed a cause.',invalid_model_output:'The model response could not be validated. No action was taken.',
+ invalid_login:'رمز ورود درست نیست. دوباره تلاش کنید.',rate_limited:'تعداد تلاش\u200cها زیاد است. یک دقیقه صبر کنید و دوباره تلاش کنید.',unauthenticated:'نشست شما پایان یافته است. دوباره وارد شوید.',
+ provider_not_configured:'اتصال لیارا تنظیم نشده است. دستیار محلی آماده است؛ مالک باید حساب را متصل کند.',observer_auth:'دسترسی به لیارا رد شد. این کمبود شواهد است و خرابی سرویس را ثابت نمی\u200cکند.',
+ observer_network:'اتصال به لیارا ممکن نشد. مشاهدات قبلی در دسترس می\u200cمانند.',runtime_unavailable:'دستیار هوشمند در دسترس نیست. پایش و مشاهدهٔ شواهد همچنان قابل استفاده است.',
+ investigation_in_progress:'یک بررسی در همین نشست در حال اجراست. ابتدا آن را تمام یا لغو کنید.',investigation_queue_full:'صف بررسی پر است. پایش ادامه دارد؛ کمی بعد دوباره تلاش کنید.',
+ stale_generation:'سرویس در حین بررسی تغییر کرد. بررسی را با شواهد فعلی تکرار کنید.',server_restarted:'دستیار دوباره راه\u200cاندازی شد و بررسی قبلی متوقف شد. بررسی تازه\u200cای شروع کنید.',
+ canceled:'بررسی لغو شد.',expired:'مهلت بررسی تمام شد. شواهد دریافت\u200cشده را ببینید یا پرسش دقیق\u200cتری بپرسید.',
+ busy:'مدل مشغول بررسی دیگری است. پایش همچنان در دسترس است.',budget_exhausted:'سهمیهٔ تنظیم\u200cشدهٔ مدل تمام شده است. پایش و مشاهدهٔ شواهد همچنان ممکن است.',
+ repair_not_enrolled_or_supported:'برای این سرویس، رفع مشکل پشتیبانی\u200cشده و تأییدشده ثبت نشده است. پایش و بررسی همچنان ممکن است.',
+ live_provider_required_for_deployment:'استقرار واقعی به اتصال مجاز و زندهٔ لیارا نیاز دارد.',approval_rejected:'تأیید منقضی یا استفاده شده، یا دیگر با سرویس تطابق ندارد. پیشنهاد تازه\u200cای آماده کنید.',
+ watch_scope_or_state_conflict:'پایش دیگری فعال است یا انتخاب شما از محدودهٔ پایش فراتر می\u200cرود.',not_found:'این مورد در نشست فعلی در دسترس نیست.',
+ evidence_read_failed:'دریافت یکی از شواهد لازم ناموفق بود. دستیار هنوز علتی اعلام نکرده است.',invalid_model_output:'پاسخ مدل معتبر نبود و هیچ اقدامی انجام نشد.',
 }
-export function messageFor(code:string){return messages[code]||'The request could not be completed. Refresh the evidence and try again.'}
+export function messageFor(code:string){return messages[code]||'درخواست انجام نشد. شواهد را تازه کنید و دوباره تلاش کنید.'}
 async function request<T>(path:string,method:string,body?:unknown):Promise<T>{
  let response:Response
- try{response=await fetch(path,{method,credentials:'same-origin',headers:body===undefined?undefined:{'content-type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)})}catch{throw new Error('Connection failed. Your current view is retained; try again.')}
+ try{response=await fetch(path,{method,credentials:'same-origin',headers:body===undefined?undefined:{'content-type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)})}catch{throw new Error('اتصال برقرار نشد. نمای فعلی حفظ شده است؛ دوباره تلاش کنید.')}
  const data=await response.json().catch(()=>({}))
  if(!response.ok)throw new ApiError(response.status,typeof data.detail==='string'?data.detail:'invalid_request')
  return data as T

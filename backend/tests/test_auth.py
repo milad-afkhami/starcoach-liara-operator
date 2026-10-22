@@ -42,3 +42,22 @@ def test_login_rate_limit_and_configuration_validation(tmp_path):
         AuthStore(tmp_path / "bad.sqlite", "short", value)
     with pytest.raises(ValueError):
         AuthStore(tmp_path / "bad.sqlite", "s" * 32, "plaintext")
+
+
+def test_same_instance_owner_survives_new_sessions_but_logout_revokes_only_that_cookie(tmp_path):
+    value = hash_password("password-long-enough")
+    auth = AuthStore(tmp_path / "state.sqlite", "s" * 32, value, clock=lambda: 100)
+    cookie_a, owner_a = auth.login("password-long-enough", "a")
+    cookie_b, owner_b = auth.login("password-long-enough", "b")
+    assert cookie_a != cookie_b
+    assert owner_a == owner_b
+    assert owner_a not in cookie_a and owner_a not in cookie_b
+    auth.logout(cookie_a)
+    with pytest.raises(ValueError, match="unauthenticated"):
+        auth.resolve(cookie_a)
+    assert auth.resolve(cookie_b) == owner_a
+    restarted = AuthStore(tmp_path / "state.sqlite", "s" * 32, value, clock=lambda: 100)
+    cookie_c, owner_c = restarted.login("password-long-enough", "c")
+    assert owner_c == owner_a and restarted.resolve(cookie_c) == owner_a
+    other = AuthStore(tmp_path / "other.sqlite", "x" * 32, value, clock=lambda: 100)
+    assert other.login("password-long-enough", "a")[1] != owner_a

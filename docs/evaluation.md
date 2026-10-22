@@ -6,13 +6,15 @@
 
 | Layer | Recorded result | Source and qualification |
 |---|---|---|
-| Backend and frontend | 204 backend, 4 frontend behavior and 6 rendered browser regressions passed at the reviewed checkpoint | [Implementation progress](implementation-progress.md); recorded results, not a fresh CI claim |
+| Backend and frontend | 213 backend, 9 frontend behavior and 10 rendered browser regressions passed at the reviewed checkpoint | [Implementation progress](implementation-progress.md); recorded results, not a fresh CI claim |
 | Independent actual UI | 29/29 rendered scenarios | [UI ledger](insured-vibe-coding/test-plans/operator-ui.md), [raw evidence](qa-evidence/operator-ui.json) |
 | Genuine model evaluation | 8/8 expected cause-family or abstention outcomes over 11 model calls | [diagnosis.json](../results/diagnosis.json); synthetic diagnostic inputs, not live incident success |
 | Observation baselines | Same cases inspected using restricted HTTP-only and latest-release-only views | [observation-baselines.json](../results/observation-baselines.json); different output contracts |
 | Packaged services | Healthy → actual dependency failure → restored expected build | [Container evidence](qa-evidence/packaged-containers.json); local constrained containers |
 | Corrected runtime image | Genuine schema/cleanup proof | [Runtime evidence](qa-evidence/public-runtime-image.json); separate from the earlier eight-case run |
 | Actual provider workflow | LIVE1–LIVE5 remain open | [Live ledger](insured-vibe-coding/test-plans/live-liara.md); no fixture closes these gates |
+
+The latest Persian interface, stable-owner history and bounded recent-log excerpt corrections have a separate [blind review record](review-feedback.md); the original diagnostic fixture run remains identified below.
 
 ## Diagnostic outcomes
 

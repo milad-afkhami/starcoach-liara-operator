@@ -37,6 +37,11 @@ class AuthStore:
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.secret = secret.encode()
+        # One configured account owns this operator instance; sessions are revocable credentials.
+        # Keep durable data ownership independent of random browser session tokens.
+        self.owner_id = hmac.new(
+            self.secret, b"liara-service-watch:instance-owner:v1", hashlib.sha256
+        ).hexdigest()
         self.password_hash = password_hash
         self.clock = clock
         with sqlite3.connect(self.path) as db:
@@ -56,10 +61,10 @@ class AuthStore:
                 db.execute("INSERT INTO login_failures VALUES(?,?)", (ip, now))
                 db.commit()
                 raise ValueError("invalid_login")
-            owner = secrets.token_hex(24)
-            db.execute("INSERT INTO owner_sessions VALUES(?,?)", (owner, now + 86400))
-        signature = hmac.new(self.secret, owner.encode(), hashlib.sha256).hexdigest()
-        return owner + "." + signature, owner
+            session = secrets.token_hex(24)
+            db.execute("INSERT INTO owner_sessions VALUES(?,?)", (session, now + 86400))
+        signature = hmac.new(self.secret, session.encode(), hashlib.sha256).hexdigest()
+        return session + "." + signature, self.owner_id
 
     def resolve(self, cookie):
         if not isinstance(cookie, str) or len(cookie) > 200 or cookie.count(".") != 1:
@@ -72,9 +77,10 @@ class AuthStore:
             row = db.execute("SELECT expires FROM owner_sessions WHERE id=?", (owner,)).fetchone()
         if not row or row[0] <= self.clock():
             raise ValueError("unauthenticated")
-        return owner
+        return self.owner_id
 
     def logout(self, cookie):
-        owner = self.resolve(cookie)
+        self.resolve(cookie)
+        session = cookie.split(".", 1)[0]
         with sqlite3.connect(self.path) as db:
-            db.execute("DELETE FROM owner_sessions WHERE id=?", (owner,))
+            db.execute("DELETE FROM owner_sessions WHERE id=?", (session,))

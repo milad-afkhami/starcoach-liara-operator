@@ -68,7 +68,7 @@ In terminal B:
 uv run --env-file .env python scripts/dev_server.py
 ```
 
-Open **http://127.0.0.1:8661**, enter the privately generated owner password and click **Sign in**. Choose storefront in the sidebar. A fresh healthy setup shows passing `/preview` and `/healthz` checks. The running rehearsal environment may already contain an explicitly introduced local fault; inspect its observations rather than assuming a fresh state.
+Open **http://127.0.0.1:8661**, enter the privately generated owner password and click **ورود**. Choose storefront in the sidebar. A fresh healthy setup shows passing `/preview` and `/healthz` checks. The running rehearsal environment may already contain an explicitly introduced local fault; inspect its observations rather than assuming a fresh state.
 
 Without model configuration, observation still works and the interface discloses AI unavailability. With configuration, **AI configured** means the adapter is configured; an actual request can still fail due to credentials, Docker, quota or output validation.
 

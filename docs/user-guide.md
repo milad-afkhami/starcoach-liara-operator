@@ -8,24 +8,24 @@
 
 | Screen or panel | Use it for | Key control |
 |---|---|---|
-| Owner login | Open the private local operator | Sign in |
-| Service sidebar | Choose an existing service or reopen a record | Find a service; Recent investigations |
-| What is observed | Compare endpoint, process/provider and coverage evidence | Refresh observations; Evidence |
-| Investigation panel | Ask a bounded question and inspect citations | Investigate; Cancel investigation |
+| Owner login | Open the private local operator | **ورود** |
+| Service sidebar | Choose an existing service or reopen a record | **جست‌وجوی سرویس**; **بررسی‌های اخیر** |
+| What is observed | Compare endpoint, process/provider and coverage evidence | **تازه‌سازی مشاهدات**; **شواهد** |
+| Investigation panel | Ask a bounded question and inspect citations | **بررسی با دستیار**; **لغو بررسی** |
 | Evidence detail | Read sanitized payload, timestamps and coverage | Copy evidence; close or Escape |
-| Bounded watch | Observe configured checks for a limited period | Start 15-minute watch; Stop watch |
+| Bounded watch | Observe configured checks for a limited period | **شروع پایش ۱۵ دقیقه‌ای**; **توقف پایش** |
 | Recent provider changes | Find chronological leads | Inspect release evidence; do not infer causality from timing alone |
 | Exact operation, when enrolled | Review a proposed source deployment and follow verification | Prepare → Approve → Deploy |
 
 ## 1. Sign in and select a service
 
-Obtain the owner password privately from the access file generated during setup. Sign in before recording and close the password file. The sidebar's **Find a service** filters names; the refresh control reloads inventory. A service can be inspected immediately even if already failing or lacking a healthy baseline/source archive.
+Obtain the owner password privately from the access file generated during setup. Sign in before recording and close the password file. The sidebar's **جست‌وجوی سرویس** filters names; the refresh control reloads inventory. A service can be inspected immediately even if already failing or lacking a healthy baseline/source archive.
 
 The local banner identifies provider metadata as simulated. Local HTTP probes and logs come from real demo processes. This is distinct from an authenticated Liara account connection.
 
 ## 2. Read observations without conflating them
 
-Select **storefront**. In the faulty rehearsal scenario, `/healthz` returns **200** while `/preview` returns **502**. Click **Evidence** on each check to inspect response details and acquisition timestamps. Close evidence with its X or <kbd>Escape</kbd>.
+Select **storefront**. In the faulty rehearsal scenario, `/healthz` returns **200** while `/preview` returns **502**. Click **شواهد** on each check to inspect response details and acquisition timestamps. Close evidence with its X or <kbd>Escape</kbd>.
 
 | Observation | Valid conclusion | Invalid shortcut |
 |---|---|---|
@@ -36,7 +36,9 @@ Select **storefront**. In the faulty rehearsal scenario, `/healthz` returns **20
 | Metrics unavailable or units unknown | Capacity cannot be established from those readings | CPU/memory is healthy or exhausted |
 | A recent release | A change merits investigation | The release caused the symptom |
 
-Open **Project**, **Applets**, **Releases** and **Metrics** to inspect their payloads/coverage. **Refresh observations** takes a new set. Collection time, evidence age and service health are separate facts.
+Open **Project**, **Applets**, **Releases** and **Metrics** to inspect their payloads/coverage. **تازه‌سازی مشاهدات** takes a new set. Collection time, evidence age and service health are separate facts.
+
+The mobile **پرسیدن از دستیار** action jumps directly to the investigation question after observations load. Evidence timestamps now include the Persian-calendar date and explicit Tehran time.
 
 ## 3. Investigate the symptom
 
@@ -44,15 +46,15 @@ Use this question as a starting point:
 
 > The process health endpoint succeeds, but /preview fails. Investigate the configured dependency and cite evidence for the cause. Do not change any service.
 
-Click **Investigate**. The UI shows queued/running progress. **Cancel investigation** stops further model work for that run; a stale or superseded result cannot become the current diagnosis.
+Click **بررسی با دستیار**. The UI shows queued/running progress. **لغو بررسی** stops further model work for that run; a stale or superseded result cannot become the current diagnosis.
 
-Read the resulting **Investigation record** in this order:
+Read the resulting **نتیجهٔ بررسی** in this order:
 
 1. Cause family and concise explanation—or explicit uncertainty.
 2. Supporting citations and their original payloads.
-3. **Contrary evidence** that tests the hypothesis.
+3. **شواهد مخالف** that tests the hypothesis.
 4. Remaining unknowns and the permitted next step.
-5. **Evidence timeline**, with the actual source observations.
+5. **خط زمانی شواهد**, with the actual source observations.
 
 A genuine model call can take tens of seconds. Investigations have bounded reads/calls/time; repeated clicking does not make the evidence better. **AI configured** does not guarantee a successful call.
 
@@ -60,15 +62,15 @@ A genuine model call can take tens of seconds. Investigations have bounded reads
 
 Delivery can respond **200** on `/quote` yet return `delivery_toman` when storefront expects `shipping_toman`. That payload difference, correlated logs and the failing preview are useful discriminating evidence. The investigator does not receive the fault controller's answer key. It can still leave the intended contract, onset or correct repair target unknown.
 
-Click **delivery** to inspect its checks, then return to storefront. **Recent investigations** reopens records; fresh runs do not erase earlier evidence. Material changes invalidate old conclusions rather than silently reusing them.
+Click **delivery** to inspect its checks, then return to storefront. **بررسی‌های اخیر** reopens records; fresh runs do not erase earlier evidence. Material changes invalidate old conclusions rather than silently reusing them.
 
 ## 4. Try a bounded watch
 
-Click **Start 15-minute watch**. Inspect its countdown and recorded probe count, then use **Stop watch**. You do not need to wait 15 minutes in a demo. Watches stop automatically at expiry; restarting the operator does not silently resume an old watch. An already submitted deployment retains its own bounded reconciliation/verification window.
+Click **شروع پایش ۱۵ دقیقه‌ای**. Inspect its countdown and recorded probe count, then use **توقف پایش**. You do not need to wait 15 minutes in a demo. Watches stop automatically at expiry; restarting the operator does not silently resume an old watch. An already submitted deployment retains its own bounded reconciliation/verification window.
 
 ## 5. Understand why repair may be absent
 
-The default is **Read-only by default**. Both ordinary local fixture targets are un-enrolled. There is no prepare/deploy button for them, and a diagnosis is not permission to bypass this boundary.
+The default is **فقط بررسی، بدون تغییر**. Both ordinary local fixture targets are un-enrolled. There is no prepare/deploy button for them, and a diagnosis is not permission to bypass this boundary.
 
 After actual owner setup and capability enrollment, a supported current repair candidate can follow:
 
@@ -91,7 +93,7 @@ sequenceDiagram
     Probe-->>UI: Recovered, failed or inconclusive
 ```
 
-Inspect **Target**, **Team**, **Current release**, **Approved source SHA256**, policy and expiry. Approval is single-use and expires after five minutes. After expiry or a material state change, prepare a fresh proposal. Never repeat an uncertain write blindly.
+Inspect **سرویس هدف**, **تیم**, **انتشار فعلی**, **اثر انگشت سورس تأییدشده**, policy and expiry. Approval is single-use and expires after five minutes. After expiry or a material state change, prepare a fresh proposal. Never repeat an uncertain write blindly.
 
 The correction is **a new deployment of registered source**, not an invented native rollback. Recovery requires the intended serving identity and three fresh original-symptom/build success rounds. READY alone is not success.
 

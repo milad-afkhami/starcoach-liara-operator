@@ -77,7 +77,7 @@ The fault is introduced by a separate owner-approved controller, not by the inve
 
 ## Evidence, not an unsupported success story
 
-Recorded checks include **204 backend tests**, **4 frontend behavior tests**, **6 browser regressions**, **29/29 independent rendered UI cases**, and **8/8 expected cause-family or abstention outcomes** on separately labelled synthetic cases using genuine Codex. Local packaged containers also exercised a real healthy → dependency failure → restored-build sequence.
+Recorded checks include **213 backend tests**, **9 frontend behavior tests**, **10 browser regressions**, **29/29 independent rendered UI cases**, and **8/8 expected cause-family or abstention outcomes** on separately labelled synthetic cases using genuine Codex. Local packaged containers also exercised a real healthy → dependency failure → restored-build sequence.
 
 These are recorded development results—not proof of real Liara incident resolution, comparative production accuracy or improved MTTR. [Evaluation and practical limits](docs/evaluation.md) link to the raw results and explain what each layer proves.
 

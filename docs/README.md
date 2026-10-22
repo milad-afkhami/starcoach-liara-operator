@@ -23,6 +23,7 @@ Read Service Watch as a **service-monitoring product**, then inspect the evidenc
 | [Architecture](architecture.md) | Evidence flow, isolated inference, incident generations and operation verification |
 | [Configuration and API reference](reference.md) | Settings, route navigation, source layout and troubleshooting |
 | [API capabilities](api-capabilities.md) | Documented Liara interfaces and account-specific acceptance gaps |
+| [Blind review feedback](review-feedback.md) | Independent simulated judge deductions, fixes and remaining limits |
 | [Evaluation](evaluation.md) | Diagnostic cases, observation baselines and evidence qualifications |
 | [Deployment](deployment.md) | Concrete owner-approved bootstrap, baseline, independent fault and repair |
 | [Demo](demo.md) | Five-minute narrated sequence and truthful recording conditions |

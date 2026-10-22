@@ -1,13 +1,18 @@
-# Interface direction — Service Watch
+# Persian customer interface
 
-A service-first incident notebook for a Liara customer. The first question is which deployed service needs attention, what is actually observed, and whether the observer can see enough to diagnose it. No healthy baseline, source upload or checkout contract is required for browsing services or starting an investigation.
+The audience is a Persian-speaking Liara customer investigating deployed services. Persian is the default document and product language; no extra English mode is required to complete the core flow.
 
-Use a light paper surface, dark navy text, blue selected-service controls, orange incident emphasis, and quiet green only for checks that actually pass. Use locally bundled system/Inter-style sans typography; avoid a generic chatbot dashboard and decorative metric tiles. The meaningful contrast is a green process-health response beside a failing configured endpoint, followed by the specific evidence that explains the difference.
+| Decision | Contract |
+|---|---|
+| Typography | Locally bundled Vazirmatn, covered by its bundled OFL license; fontTools inspection confirms GSUB `ss01` exists. `font-feature-settings: "ss01"` shapes ordinary UI digits without mutating data. |
+| Technical data | Service names, paths, hashes, password input and source JSON are isolated LTR; source values keep Latin digits and keys. |
+| Palette | Ink `#153b49`, action blue `#14698a`, evidence teal `#2f7764`, failure red `#b64237`, canvas `#f3f7fa`, line `#d7e3e8`. This is an independent Liara-oriented interface, not a claim to reproduce an official Liara design kit. |
+| Hierarchy | Service navigation includes a first-viewport «پرسیدن از دستیار» action that focuses the question. Observed facts → investigation → exact action → bounded monitoring remain the evidence flow. A failure badge never hides successful liveness evidence. |
+| Direction | Document `lang=fa`, `dir=rtl`; sidebar, arrows, timeline spacing and form reading order follow RTL. |
+| Focus | Visible two-pixel focus ring on actionable controls. Compound search has one group focus treatment; no double input border. |
+| Responsive layout | Existing service dashboard uses available desktop space; mobile stacks navigation and evidence, retaining all operational controls. |
+| Honesty | Local fixture banner, missing evidence, unknown diagnosis and unregistered repair remain explicit in Persian. No cloud capability is fabricated by translating the interface. |
 
-Desktop: compact header with selected team/provider mode, a service list, and a wide detail/incident notebook. Mobile: list then detail with direct navigation. The top persistent fixture banner must say provider metadata is simulated while local HTTP checks and Codex calls are real. Live mode never silently falls back to fixtures. Unknown resource units are shown as an evidence gap, not a zero or percentage.
+API states and error codes stay unchanged. Persian labels are presentation only. Model prose is requested in Persian at the backend boundary; cited raw evidence is never translated or rewritten.
 
-Main actions: select service, refresh observations, ask a plain-language question, investigate, inspect cited evidence, start/stop a15-minute watch. Observation/model loading states and cancellation are explicit. A change timeline separates release timing from cause. Evidence dialogs show source/kind/quality/observation and availability times, bounded content and truncation. No source credential, password or controller scenario label appears in the notebook.
-
-A repair card exists only for an explicitly enrolled verified artifact on a supported target. It shows exact target/current release/artifact/policy/expiry, then separate Approve and Execute controls. Provider readiness and fresh original-symptom/build verification are distinct stages. A failed/inconclusive verification leaves the issue open; stopping periodic watch does not hide a submitted operation. Initial app setup is an owner-only CLI, outside the investigator tools.
-
-Native dialogs provide keyboard containment and Escape/focus return. Do not block access to browser chrome. Use visible focus, readable12–16px evidence labels, minimum44px primary controls, and no horizontal overflow at390×844. Actual user flows must drive controls; API tests alone do not establish UI usability.
+The single configured owner has durable history across browser logins. Browser sessions remain separately revocable; signing out clears all private UI state. Identity derives from the operator instance secret, so this is explicitly a single-owner interface, not a multi-user account system. Existing records written under the earlier session-as-owner bug are not silently reassigned.

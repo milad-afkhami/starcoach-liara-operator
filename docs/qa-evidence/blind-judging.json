@@ -1,0 +1,23 @@
+{
+  "checked_at_utc": "2026-10-22T19:31:45.945424+00:00",
+  "scope": "Independent simulated hackathon rubric review, not official scoring or a forecast. Reviewers saw isolated source snapshots, original briefs and actual output; implementation docs/plans/previous implementation reviews were excluded.",
+  "scores_in_order": [
+    205,
+    218,
+    223
+  ],
+  "cloud_acceptance": "Not established; fixture/local limitations retained as deductions.",
+  "remaining_constraints": "No official score, prize claim, published video or final contest submission.",
+  "final_targeted_proof": {
+    "source_log_lines": 29,
+    "source_log_bytes": 11517,
+    "model_excerpt_retained_lines": 10,
+    "model_excerpt_bytes": 4033,
+    "matched_current_request": true,
+    "model_calls": 2,
+    "wall_ms": 50389,
+    "persian_summary": true,
+    "stable_owner_history": true,
+    "revoked_cookie_status": 401
+  }
+}

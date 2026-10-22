@@ -2,6 +2,8 @@ import pytest
 import threading
 import time
 from fastapi.testclient import TestClient
+from fastapi import Request
+from types import SimpleNamespace
 from liara_guard.api import create_app
 from liara_guard.auth import hash_password
 from liara_guard.runtime import FixtureProvider, local_config
@@ -54,6 +56,30 @@ def login(application):
     return c
 
 
+def owner_dependency(application):
+    route = next(route for route in application.routes if getattr(route, "path", None) == "/api/services")
+    return route.dependant.dependencies[0].call
+
+
+def durable_owner(application, client):
+    return owner_dependency(application)(SimpleNamespace(cookies=client.cookies))
+
+
+def synthetic_multiowner_scope(application):
+    """Exercise lower-layer tenant boundaries, not the single-owner login product contract.
+
+    Production authenticates one configured owner. These adversarial API tests explicitly
+    simulate additional identities while still requiring real valid, nonrevoked sessions.
+    """
+    original = owner_dependency(application)
+
+    def synthetic_owner(request: Request):
+        original(request)
+        return request.cookies.get("liara_owner").split(".")[0]
+
+    application.dependency_overrides[original] = synthetic_owner
+
+
 def test_auth_origin_validation_and_private_endpoints(tmp_path):
     a = app(tmp_path)
     c = TestClient(a)
@@ -82,8 +108,9 @@ def test_inventory_is_explicit_fixture_and_does_not_start_watch(tmp_path):
     assert c.get("/api/state").json()["watches"] == []
 
 
-def test_manual_investigation_is_async_without_baseline_and_owner_scoped(tmp_path):
+def test_manual_investigation_is_async_without_baseline_and_owner_scoped_synthetic_multiowner(tmp_path):
     application = app(tmp_path)
+    synthetic_multiowner_scope(application)
     a = login(application)
     b = login(application)
     response = a.post("/api/services/local-store/investigate", json={"question": "What can be established?"})
@@ -101,8 +128,9 @@ def test_manual_investigation_is_async_without_baseline_and_owner_scoped(tmp_pat
     assert a.post(f"/api/incidents/{identifier}/proposal").status_code == 409
 
 
-def test_watch_scope_stop_and_other_session_denial(tmp_path):
+def test_watch_scope_stop_and_other_session_denial_synthetic_multiowner(tmp_path):
     application = app(tmp_path)
+    synthetic_multiowner_scope(application)
     a = login(application)
     b = login(application)
     w = a.post("/api/watches", json={"target_ids": ["local-store"]})
@@ -129,7 +157,7 @@ def test_oversized_input_and_browser_secret_exposure_refused(tmp_path):
     assert "SESSION_SECRET" not in text and PASSWORD not in text
 
 
-def test_actual_running_model_can_be_canceled_by_owner_only(tmp_path):
+def test_actual_running_model_can_be_canceled_by_owner_only_synthetic_multiowner(tmp_path):
     entered = threading.Event()
 
     class Slow:
@@ -141,6 +169,7 @@ def test_actual_running_model_can_be_canceled_by_owner_only(tmp_path):
             raise ModelError("canceled")
 
     application = app(tmp_path, model=Slow())
+    synthetic_multiowner_scope(application)
     a = login(application)
     b = login(application)
     identifier = a.post("/api/services/local-store/investigate", json={"question": "Investigate"}).json()[
@@ -151,7 +180,7 @@ def test_actual_running_model_can_be_canceled_by_owner_only(tmp_path):
     assert a.post(f"/api/incidents/{identifier}/cancel").status_code == 200
 
 
-def test_model_admission_is_one_per_owner_and_three_total(tmp_path):
+def test_model_admission_is_one_per_owner_and_three_total_synthetic_multiowner(tmp_path):
     release = threading.Event()
 
     class Slow:
@@ -162,6 +191,7 @@ def test_model_admission_is_one_per_owner_and_three_total(tmp_path):
             raise ModelError("canceled")
 
     application = app(tmp_path, model=Slow())
+    synthetic_multiowner_scope(application)
     clients = [login(application) for _ in range(4)]
     try:
         assert (
@@ -190,7 +220,7 @@ def test_model_admission_is_one_per_owner_and_three_total(tmp_path):
         release.set()
 
 
-def test_cancel_queued_job_is_immediate_and_restart_does_not_resume_watch(tmp_path):
+def test_cancel_queued_job_is_immediate_and_restart_does_not_resume_watch_synthetic_multiowner(tmp_path):
     release = threading.Event()
     entered = threading.Event()
 
@@ -203,6 +233,7 @@ def test_cancel_queued_job_is_immediate_and_restart_does_not_resume_watch(tmp_pa
             raise ModelError("canceled")
 
     application = app(tmp_path, model=Slow())
+    synthetic_multiowner_scope(application)
     a = login(application)
     b = login(application)
     try:
@@ -215,6 +246,7 @@ def test_cancel_queued_job_is_immediate_and_restart_does_not_resume_watch(tmp_pa
         release.set()
     watch = a.post("/api/watches", json={"target_ids": ["local-store"]}).json()["id"]
     restarted = app(tmp_path)
+    synthetic_multiowner_scope(restarted)
     c = TestClient(restarted)
     c.cookies.update(a.cookies)
     c.headers["origin"] = ORIGIN
@@ -273,7 +305,7 @@ def test_existing_watch_incident_investigation_preserves_record_and_question(tmp
     application = app(tmp_path)
     c = login(application)
     c.get("/api/services")
-    owner = c.cookies.get("liara_owner").split(".")[0]
+    owner = durable_owner(application, c)
     target = application.state.registry.resolve("local-store")
     incident = application.state.monitor.ensure_incident(
         owner,
@@ -404,7 +436,7 @@ def test_proposal_cannot_promote_historical_diagnosis_to_new_state(tmp_path, mon
     )
     c = login(application)
     c.get("/api/services")
-    owner = c.cookies.get("liara_owner").split(".")[0]
+    owner = durable_owner(application, c)
     target = application.state.registry.resolve("local-store")
     store = application.state.monitor
     incident = store.ensure_incident(owner, target, "log_investigation", "manual", 100)
@@ -515,3 +547,37 @@ def test_unavailable_recovery_inventory_cannot_fail_verification_or_extend_deadl
     application.state.tick()
     result = store.get("owner", op["id"])
     assert result["state"] == "unknown" and result["error"] == "reconciliation_expired"
+
+
+def test_owner_can_resume_watch_and_history_after_logout_and_new_login(tmp_path):
+    application = app(tmp_path)
+    client = login(application)
+    watch = client.post("/api/watches", json={"target_ids": ["local-store"]}).json()
+    investigation = client.post(
+        "/api/services/local-store/investigate", json={"question": "Preserve this investigation history"}
+    )
+    assert investigation.status_code == 202
+    incident_id = investigation.json()["id"]
+    for _ in range(60):
+        previous = client.get("/api/incidents/" + incident_id).json()["incident"]
+        if previous["investigation_state"] in ("done", "failed"):
+            break
+        time.sleep(0.05)
+    assert previous["diagnosis"] is not None
+    first_cookie = client.cookies.get("liara_owner")
+    assert client.post("/api/logout").status_code == 200
+    assert client.get("/api/state").status_code == 401
+    assert client.post("/api/login", json={"password": PASSWORD}).status_code == 200
+    assert client.cookies.get("liara_owner") != first_cookie
+    state = client.get("/api/state").json()
+    assert any(item["id"] == watch["id"] for item in state["watches"])
+    assert any(item["id"] == incident_id for item in state["incidents"])
+    assert (
+        client.get("/api/incidents/" + incident_id).json()["incident"]["diagnosis"] == previous["diagnosis"]
+    )
+    assert client.post("/api/watches/" + watch["id"] + "/stop").status_code == 200
+    revoked = TestClient(application)
+    revoked.headers["origin"] = ORIGIN
+    revoked.cookies.set("liara_owner", first_cookie)
+    assert revoked.get("/api/state").status_code == 401
+    assert revoked.post("/api/watches/" + watch["id"] + "/stop").status_code == 401
