@@ -143,6 +143,25 @@ class LiaraClient:
                 raise ProviderError("observer_network") from exc
         raise ProviderError("provider_error")
 
+    def plan_catalogue(self):
+        payload = self._read("/v1/me")
+        plans = payload.get("plans") if isinstance(payload, dict) else None
+        if not isinstance(plans, dict) or not all(
+            isinstance(plans.get(k), dict) for k in ("projects", "projectBundlePlans")
+        ):
+            raise ProviderError("invalid_plan_catalogue")
+        return {k: plans[k] for k in ("projects", "projectBundlePlans")}
+
+    def list_networks(self):
+        payload = self._read("/v1/networks")
+        rows = payload.get("networks") if isinstance(payload, dict) else None
+        if not isinstance(rows, list) or any(
+            not isinstance(r, dict) or not isinstance(r.get("_id"), str) or not isinstance(r.get("name"), str)
+            for r in rows
+        ):
+            raise ProviderError("invalid_networks")
+        return [{"id": r["_id"], "name": r["name"]} for r in rows]
+
     def _target(self, target):
         # Revalidate even model_copy/test-created values before composing a path.
         try:
@@ -309,6 +328,7 @@ class LiaraClient:
                 "finishedAt",
                 "releaseId",
                 "releaseID",
+                "sourceID",
                 "release",
                 "tag",
                 "type",
@@ -395,7 +415,14 @@ class LiaraClient:
         self._write(
             spec,
             "/v1/projects",
-            json={"name": spec.app_name, "planID": spec.plan_id, "platform": spec.platform},
+            json={
+                "name": spec.app_name,
+                "planID": spec.plan_id,
+                "bundlePlanID": spec.bundle_plan_id,
+                "network": spec.network_id,
+                "platform": spec.platform,
+                "readOnlyRootFilesystem": False,
+            },
         )
         try:
             target = self._project(self._read(f"/v1/projects/{spec.app_name}")["project"])

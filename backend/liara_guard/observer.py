@@ -86,14 +86,32 @@ class MonitorStore:
             for field in (
                 "diagnosis",
                 "investigation_state",
+                "investigation_run_id",
                 "investigation_error",
                 "proposal",
                 "execution",
                 "verification",
+                "repair_pending",
+                "repair_operation_id",
             ):
                 if field in value:
                     current[field] = value[field]
             db.execute("UPDATE incidents SET data=? WHERE id=?", (encode(current), value["id"]))
+
+    def finish_investigation_error(self, owner, identifier, run_id, state, error):
+        with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            row = db.execute(
+                "SELECT data FROM incidents WHERE id=? AND owner=?", (identifier, owner)
+            ).fetchone()
+            if not row:
+                raise KeyError("incident_not_found")
+            value = json.loads(row[0])
+            if (run_id is not None and value.get("investigation_run_id") == run_id) or (
+                run_id is None and value.get("investigation_state") in ("idle", "queued")
+            ):
+                value.update(investigation_state=state, investigation_error=error)
+                db.execute("UPDATE incidents SET data=? WHERE id=?", (encode(value), identifier))
 
     def ensure_incident(
         self, owner, target, kind, scope, now, *, watch_id=None, fingerprint=None, question=None
@@ -328,6 +346,8 @@ class Observer:
                     ).fetchone()
                     if row:
                         value = json.loads(row[0])
+                        if value.get("repair_pending"):
+                            continue
                         value["generation"] += 1
                         value["state"] = "recovered"
                         value["recovered_at"] = self.clock()

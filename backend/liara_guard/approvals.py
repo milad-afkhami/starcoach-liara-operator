@@ -37,6 +37,8 @@ class OperationSpec(Record):
     platform: Literal["docker"] = "docker"
     port: int = Field(default=8000, ge=1, le=65535)
     plan_id: str | None = None
+    bundle_plan_id: str | None = None
+    network_id: str | None = None
     hourly_price_toman: str | None = Field(default=None, pattern=r"^[0-9]+$")
     price_verified_at: float | None = None
     before_release_id: str | None = None
@@ -52,6 +54,8 @@ class OperationSpec(Record):
                 self.app_id
                 or self.artifact_sha256
                 or not self.plan_id
+                or not self.bundle_plan_id
+                or not self.network_id
                 or self.hourly_price_toman is None
                 or self.price_verified_at is None
             ):
@@ -89,6 +93,20 @@ class OperationStore:
                 value["error"] = "interrupted_intent"
                 db.execute(
                     "UPDATE operations SET state='unknown',data=? WHERE id=?", (encode(value), row["id"])
+                )
+            for row in db.execute("SELECT id,data FROM operations WHERE state='verifying'").fetchall():
+                value = json.loads(row["data"])
+                value.update(
+                    state="failed",
+                    error="verification_interrupted",
+                    verification={
+                        "state": "inconclusive",
+                        "reason": "verification_interrupted",
+                        "probe_ids": [],
+                    },
+                )
+                db.execute(
+                    "UPDATE operations SET state='failed',data=? WHERE id=?", (encode(value), row["id"])
                 )
         self.path.chmod(0o600)
 
@@ -224,6 +242,8 @@ class Executor:
                 if (
                     before.get("exists")
                     or before.get("plan_id") != spec.plan_id
+                    or before.get("bundle_plan_id") != spec.bundle_plan_id
+                    or before.get("network_id") != spec.network_id
                     or str(before.get("hourly_price_toman")) != spec.hourly_price_toman
                 ):
                     raise ApprovalError("Name collision or quote changed/unverified")

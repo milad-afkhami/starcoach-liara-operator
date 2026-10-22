@@ -51,12 +51,14 @@ class Investigator:
         self.dependencies = dependencies or {}
         self.repair_capabilities = set(repair_capabilities)
 
-    def investigate(self, owner, incident_id, readers, *, initial_reads=(), cancel=None):
+    def investigate(self, owner, incident_id, readers, *, initial_reads=(), cancel=None, deadline_utc=None):
         cancel = cancel or threading.Event()
         incident = self.store.incident(owner, incident_id)
         generation = incident["generation"]
+        run_id = uuid.uuid4().hex
+        run_started = False
         started = self.clock()
-        deadline = started + 120
+        deadline = min(started + 120, deadline_utc) if deadline_utc is not None else started + 120
         calls = []
         reads = 0
         target_id = incident["target"]["app_id"]
@@ -72,9 +74,19 @@ class Investigator:
             if self.clock() >= deadline:
                 raise ModelError("expired")
             value = self.store.incident(owner, incident_id)
-            if value["generation"] != generation or value["state"] != "open":
+            if (
+                value["generation"] != generation
+                or value["state"] != "open"
+                or (run_started and value.get("investigation_run_id") != run_id)
+            ):
                 raise ModelError("stale_generation")
             return value
+
+        def save(value):
+            try:
+                self.store.save_incident(value, generation)
+            except ValueError as exc:
+                raise ModelError("stale_generation") from exc
 
         def read(name):
             nonlocal reads
@@ -100,7 +112,9 @@ class Investigator:
         try:
             current()
             incident["investigation_state"] = "running"
-            self.store.save_incident(incident, generation)
+            incident["investigation_run_id"] = run_id
+            save(incident)
+            run_started = True
             for name in initial_reads:
                 if reads >= 12:
                     break
@@ -202,7 +216,7 @@ class Investigator:
                 latest = current()
                 latest["diagnosis"] = diagnosis
                 latest["investigation_state"] = "done"
-                self.store.save_incident(latest, generation)
+                save(latest)
                 return diagnosis
             raise ModelError("model_call_budget_exhausted")
         except ModelError as exc:
@@ -217,9 +231,11 @@ class Investigator:
                 "read_operations": reads,
                 "model_calls": calls,
             }
-            latest = self.store.incident(owner, incident_id)
-            if latest["generation"] == generation:
-                latest["investigation_state"] = "canceled" if exc.code == "canceled" else "failed"
-                latest["investigation_error"] = exc.code
-                self.store.save_incident(latest, generation)
+            self.store.finish_investigation_error(
+                owner,
+                incident_id,
+                run_id if run_started else None,
+                "canceled" if exc.code == "canceled" else "failed",
+                exc.code,
+            )
             return result

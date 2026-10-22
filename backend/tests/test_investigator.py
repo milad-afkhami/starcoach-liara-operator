@@ -275,3 +275,18 @@ def test_source_read_failure_is_structured_and_no_raw_secret_enters_model(tmp_pa
 
     result = i.investigate("owner", incident["id"], {"logs": broken}, initial_reads=["logs"])
     assert result["error"] == "evidence_read_failed"
+
+
+def test_generation_race_during_final_save_leaves_explicit_failed_state(tmp_path):
+    s, o, incident, m, i, now = setup(tmp_path)
+    original = s.save_incident
+
+    def racing(value, expected_generation=None):
+        if value.get("diagnosis"):
+            o.set_release("owner", "app", "new-release")
+        return original(value, expected_generation)
+
+    s.save_incident = racing
+    result = i.investigate("owner", incident["id"], {})
+    assert result["error"] == "stale_generation"
+    assert s.incident("owner", incident["id"])["investigation_state"] == "failed"

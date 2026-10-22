@@ -145,3 +145,12 @@ def verify_recovery(
         "failed" if had_symptom_failure else "inconclusive",
         "original_symptom_persists" if had_symptom_failure else "insufficient_fresh_identity_proof",
     )
+
+
+def bind_verification(operation, incident, policy, result):
+    """The approved operation may change release generation; its policy/association may not change."""
+    if policy.digest() != operation["spec"]["verification_policy_hash"]:
+        return {**result, "state": "inconclusive", "reason": "approved_policy_changed"}
+    if incident.get("repair_operation_id") != operation["id"]:
+        return {**result, "state": "inconclusive", "reason": "incident_operation_changed"}
+    return result

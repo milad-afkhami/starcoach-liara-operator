@@ -195,6 +195,8 @@ def test_bootstrap_create_collision_and_exact_price_bound(tmp_path):
         team_id="team",
         app_name="fresh",
         plan_id="earth",
+        bundle_plan_id="basic",
+        network_id="net",
         hourly_price_toman="1040",
         price_verified_at=100,
     )
@@ -209,12 +211,20 @@ def test_bootstrap_create_collision_and_exact_price_bound(tmp_path):
 def test_created_app_does_not_lock_out_its_initial_deployment(tmp_path):
     s, e, p, op, now, a = setup(tmp_path)
     e.allowed_new_names = {"fresh"}
-    p.inspect = lambda spec: {"exists": False, "plan_id": "earth", "hourly_price_toman": "1040"}
+    p.inspect = lambda spec: {
+        "exists": False,
+        "plan_id": "earth",
+        "bundle_plan_id": "basic",
+        "network_id": "net",
+        "hourly_price_toman": "1040",
+    }
     spec = OperationSpec(
         kind="create_app",
         team_id="team",
         app_name="fresh",
         plan_id="earth",
+        bundle_plan_id="basic",
+        network_id="net",
         hourly_price_toman="1040",
         price_verified_at=100,
     )
@@ -255,3 +265,11 @@ def test_upload_uses_approved_bytes_even_if_source_changes_during_before_read(tm
     p.upload_source = upload
     e.execute("owner", op["id"])
     assert sent == [b"known-good"]
+
+
+def test_restart_of_verification_is_inconclusive_not_an_unbounded_new_window(tmp_path):
+    s, e, p, op, now, a = setup(tmp_path)
+    s.update(op, state="verifying")
+    restarted = OperationStore(tmp_path / "operations.sqlite", clock=lambda: now[0])
+    result = restarted.get("owner", op["id"])
+    assert result["state"] == "failed" and result["error"] == "verification_interrupted"

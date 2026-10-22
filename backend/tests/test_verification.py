@@ -136,3 +136,19 @@ def test_one_pass_then_failure_resets_success_streak():
         sleep=lambda n: now.__setitem__(0, now[0] + n),
     )
     assert result["state"] == "recovered" and calls == [100, 105, 110, 115, 120]
+
+
+def test_approved_policy_and_operation_stay_bound_across_expected_release_change():
+    from liara_guard.verification import bind_verification
+
+    p = policy()
+    op = {"id": "op", "spec": {"verification_policy_hash": p.digest(), "incident_generation": 1}}
+    incident = {"generation": 2, "repair_operation_id": "op"}
+    result = {"state": "recovered", "reason": "verified", "probe_ids": ["p1", "p2", "p3"]}
+    assert bind_verification(op, incident, p, result)["state"] == "recovered"
+    changed = p.model_copy(update={"id": "changed-policy"})
+    assert bind_verification(op, incident, changed, result)["state"] == "inconclusive"
+    assert (
+        bind_verification(op, {**incident, "repair_operation_id": "new-op"}, p, result)["state"]
+        == "inconclusive"
+    )
