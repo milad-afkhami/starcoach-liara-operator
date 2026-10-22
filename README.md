@@ -1,33 +1,102 @@
-# Service Watch — Liara monitoring assistant
+<div align="center">
 
-Service Watch helps a Liara customer inspect an existing service, investigate a failure from cited evidence, and approve a narrowly enrolled repair. A service can be investigated immediately even when it is already broken, has no healthy baseline, or has no HTTP endpoint.
+# Service Watch
 
-The core demonstration separates process liveness from a customer-facing failure: a storefront responds200 on `/healthz` while `/preview` returns502 after a genuine dependency response mismatch. The assistant can inspect the dependency’s bounded response, logs and release chronology. A recent deployment is supporting evidence, not automatic proof of cause.
+**Know what failed. Verify what recovered.**
 
-## Current evidence
+Liara service monitoring · Cited evidence · Bounded investigation · Explicit approval
 
-The local operator and two real local HTTP services are implemented. Provider metadata in local mode is explicitly simulated. Genuine Codex diagnosis has been evaluated on eight synthetic cases; precise outcomes and timings are in [results/diagnosis.json](results/diagnosis.json). Independent browser results are in [the local QA ledger](docs/insured-vibe-coding/test-plans/operator-ui.md). Actual Liara account/API/deployment/repair acceptance remains pending in [the live QA ledger](docs/insured-vibe-coding/test-plans/live-liara.md). No local result establishes live sponsor integration.
+[Run locally](docs/getting-started.md) · [User guide](docs/user-guide.md) · [Architecture](docs/architecture.md) · [Evaluation](docs/evaluation.md)
 
-## Run locally
+</div>
 
-Requires Python3.12, uv, Node/npm, and Docker for isolated model calls. Install locked dependencies with `uv sync --locked` and `npm --prefix frontend ci`, then build with `npm --prefix frontend run build`.
+---
 
-Generate a new private environment with `uv run python scripts/init_operator.py --mode fixture --access-file /tmp/liara-local-access.json`. This refuses existing files and prints paths rather than credentials. The owner password is in that private access file. Start real fixture services with `PYTHONPATH=backend uv run python harness/serve_local.py`, then start the operator with `uv run --env-file .env python scripts/dev_server.py`. Open http://127.0.0.1:8661. Monitoring works without model configuration; the UI discloses that diagnosis is unavailable.
+A running process does not mean its useful endpoint works. Service Watch helps a Liara customer inspect an existing service, investigate a symptom using supporting and contrary evidence, and approve a narrowly enrolled corrective deployment only when the evidence and capability allow it.
 
-To enable the intended local Codex worker, supply the three explicit options shown in `scripts/init_operator.py --help`: static executable, local Codex authentication file, and the pinned official runtime image documented in docs/architecture.md. The child container only receives that executable, read-only model authentication, and a unique scratch directory; Liara credentials, operator state, controller state and the Docker socket are absent. This workflow uses `codex exec` with a schema and bounded result file; in the inspected CLI, `-p` is a profile option. Never export personal Codex authentication into a public cloud deployment.
+Existing services are welcome: **read-only investigation requires no healthy baseline, source archive or new deployment**. Workers without an HTTP endpoint are not automatically marked down.
 
-Use the separate fixture controller to propose an incompatible dependency with `PYTHONPATH=backend uv run python harness/control_local.py propose`, then inspect its exact target/archive hash and approve it using the command’s `--id` and `--sha256` options. Fault setup is separate from the investigator and has no web endpoint. It is labelled test setup, not an organic production incident. [Live setup and approvals](docs/deployment.md) cover the actual provider workflow.
+> [!IMPORTANT]
+> **Local monitoring and genuine Codex diagnosis are verified; actual Liara cloud acceptance is pending.** The local demo uses real HTTP services and visibly simulated provider metadata. Its targets are read-only. Cloud inventory/schema checks, baseline enrollment and an approved cloud repair remain open in [LIVE1–LIVE5](docs/insured-vibe-coding/test-plans/live-liara.md).
 
-## Verify
+<img src="docs/images/overview.png" alt="Actual local Service Watch notebook showing a failing preview endpoint beside passing process health and timestamped evidence" width="1100">
 
-Run `uv run pytest -q`, `uv run ruff check backend scripts harness demo`, `npm --prefix frontend test`, and `npm --prefix frontend run build`. With the local services in the documented failing-dependency state and the private operator running, set `LIARA_TEST_ACCESS_FILE` to the generated access file and run `npm --prefix frontend run test:e2e`. Browser tests use actual HTTP services and authenticated application routes; deliberate transport faults are labelled regression setup.
+*Actual local interface. The provider-fixture banner remains visible; HTTP endpoint checks use real local services.*
 
-For a new actual model evaluation, run `PYTHONPATH=backend uv run --env-file .env python scripts/evaluate_diagnosis.py`. This consumes the same persistent model quota as UI use and the separate Torob entry; it never resets that budget. Synthetic fixture truth stays outside model requests. Existing result files do not prove another provider/model would produce the same results.
+## Choose your route
 
-## Product boundaries
+| You want to… | Read |
+|---|---|
+| Understand what the customer can do | [User guide](docs/user-guide.md) |
+| Run the demo from source | [Getting started](docs/getting-started.md) |
+| Review the design and action boundary | [Architecture](docs/architecture.md) |
+| Inspect integration claims | [Liara API capabilities](docs/api-capabilities.md) and [live QA](docs/insured-vibe-coding/test-plans/live-liara.md) |
+| Assess results and failure cases | [Evaluation](docs/evaluation.md) |
+| Connect an approved real account | [Deployment and owner setup](docs/deployment.md) |
+| Prepare the presentation | [Demo sequence](docs/demo.md) and [submission evidence](submission.md) |
+| Find configuration, endpoints or recovery steps | [Reference](docs/reference.md) |
 
-Watches are explicitly started, last15 minutes, and observe at most two services/three configured endpoints/180 periodic probes. Provider reads refresh at most once per minute. Investigations allow at most12 registered evidence reads and two model calls within120 seconds including queue wait. One model worker and persistent global limits bound use. Cancellation, restart, expiry and material service changes have explicit terminal states.
+[Complete documentation map](docs/README.md).
 
-Existing services remain read-only unless the owner has independently enrolled the exact target, verified source/build and recovery policy. Repairs use a new known-good source deployment; no provider-native rollback endpoint is invented. An exact single-use five-minute approval binds target, source hash, before release, incident generation and verification policy. Ambiguous writes are reconciled rather than blindly retried. Provider readiness alone does not establish recovery: three fresh original-symptom/build checks and serving-release identity are required.
+## From observation to a justified next step
 
-No environment replacement, automatic restart/resizing, arbitrary shell/URL execution, continuous24-hour monitoring, workplace Kubernetes access or outbound alerts are implemented. Metric units/limits remain unverified and are shown truthfully. Source details: [API capabilities](docs/api-capabilities.md), [architecture](docs/architecture.md), [demo sequence](docs/demo.md), and [evaluation](docs/evaluation.md), [current build state](docs/insured-vibe-coding/kanban.md), and [submission evidence](submission.md).
+```mermaid
+flowchart LR
+    A[Select an existing service] --> B[Inspect current observations]
+    B --> C[Investigate the symptom]
+    C --> D{Supported outcome}
+    D -->|Evidence incomplete| E[Explain gaps and next read]
+    D -->|Observer problem| F[No application change]
+    D -->|Enrolled repair candidate| G[Review exact proposal]
+    G --> H[Owner approval]
+    H --> I[New source deployment]
+    I --> J[Verify serving build and original symptom]
+```
+
+The right branch describes implemented repair logic; it becomes usable only after actual target enrollment and live acceptance. The current fixture UI follows the read-only investigation path.
+
+| Capability | Customer outcome | Important boundary |
+|---|---|---|
+| Service inventory and notebook | Find a service and inspect its current evidence | A service needs no deployable artifact for diagnosis |
+| HTTP and provider observations | Separate endpoint failure, process state and telemetry access | Unknown metrics are not green zeros |
+| Active investigation | Ask a useful discriminating read and cite findings/contradictions | A recent release is not proof of causality |
+| Bounded watch | Observe selected services for 15 minutes | Not a continuous monitoring/SaaS availability claim |
+| Exact repair proposal | Review target, source hash, before-release, policy and expiry | Requires independently enrolled capability and a supported current diagnosis |
+| Recovery verification | Check the new serving identity and original failure | Provider READY alone is insufficient |
+
+## The demonstration incident
+
+| Observation | Meaning |
+|---|---|
+| Storefront `/healthz` → **200** | The process responds |
+| Storefront `/preview` → **502** | The configured useful endpoint fails |
+| Delivery `/quote` → **200**, incompatible payload | Reachability does not prove the consumer contract is satisfied |
+| Response key `delivery_toman` versus expected `shipping_toman` | Discriminating evidence of a dependency schema mismatch |
+
+The fault is introduced by a separate owner-approved controller, not by the investigator. In the genuine local rehearsal, Codex cited response/log evidence and retained uncertainty about onset, release causality and which service should change. It did not execute a repair.
+
+## Evidence, not an unsupported success story
+
+Recorded checks include **204 backend tests**, **4 frontend behavior tests**, **6 browser regressions**, **29/29 independent rendered UI cases**, and **8/8 expected cause-family or abstention outcomes** on separately labelled synthetic cases using genuine Codex. Local packaged containers also exercised a real healthy → dependency failure → restored-build sequence.
+
+These are recorded development results—not proof of real Liara incident resolution, comparative production accuracy or improved MTTR. [Evaluation and practical limits](docs/evaluation.md) link to the raw results and explain what each layer proves.
+
+<details>
+<summary><strong>Why the model cannot deploy by itself</strong></summary>
+
+The model runs in a disposable container and receives bounded, sanitized evidence and a registered read menu. It has no Liara token, operator database, fault-controller state or deployment tool. Application code validates citations, target identity, freshness and permitted outcomes. A separate trusted executor handles exact owner-approved writes and independent verification. [Architecture and trust boundaries](docs/architecture.md).
+
+</details>
+
+<details>
+<summary><strong>What is outside this MVP</strong></summary>
+
+No workplace Kubernetes connection, automatic topology discovery, native provider rollback, environment replacement, arbitrary shell/URL execution, automatic resizing, outbound alerts or continuous 24-hour monitoring. The operator stays local; only independently approved demo target services are intended for Liara hosting. Provider schemas and metric units still need authenticated live acceptance.
+
+</details>
+
+## Project materials
+
+[Reproducible setup](docs/getting-started.md) · [API reference](docs/reference.md) · [Detailed QA](docs/insured-vibe-coding/test-plans/operator-ui.md) · [Implementation history](docs/implementation-progress.md)
+
+Built for the Starcoach Agentic AI Hackathon 2026 Liara challenge. Dependency versions are locked in the repository; no additional project-wide license grant is implied by this documentation.

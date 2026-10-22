@@ -1,5 +1,7 @@
 # Actual deployment preparation and approval
 
+[← Documentation](README.md) · [User guide](user-guide.md) · [Getting started](getting-started.md)
+
 No cloud app, network, API key or deployment has been created by this implementation. Local fixture acceptance does not close [LIVE1–LIVE5](insured-vibe-coding/test-plans/live-liara.md).
 
 ## Concrete proposed resources
@@ -28,4 +30,4 @@ Only after both baselines pass, `uv run --env-file <private-live-env> python har
 
 Observe the real storefront502/liveness200 in the UI, start a bounded watch or manual investigation, inspect cited evidence and request a repair proposal. Approve the exact operation digest, execute once, and retain results. The UI must remain inconclusive if release readiness, serving identity, build or original endpoint proof is missing. Run the separate observer-access negative case without changing app credentials. Record actual results in the live ledger rather than converting local fixtures into sponsor evidence.
 
-Public source, the narrated five-minute demo and the contest submission remain separate delivery gates. Source excludes `.env`, databases, private archives, authentication and controller runtime state. No placeholder submission or post-deadline change is acceptable.
+Public source is published; its verified URL is in [the submission record](../submission.md). The narrated five-minute demo and contest submission remain separate delivery gates. Source excludes `.env`, databases, private archives, authentication and controller runtime state. No placeholder submission or post-deadline change is acceptable.

@@ -99,3 +99,9 @@ DECISION: use HTTPS with the existing GitHub CLI credential helper per push. Why
 ## Familiarization walkthrough verified — 22 October
 
 Existing operator8661 and actual local services8771/8772 remain running. A fresh isolated rendered login verified storefront preview502 versus healthz200, timestamped evidence and provider-fixture/read-only disclosures. A genuine UI investigation found dependency_schema: dependency delivery_toman versus expected shipping_toman, citing probe/log evidence after8registered reads. It correctly retained uncertainty about repair target, onset/release causality and absent enrolled artifact; no service change occurred. Started/stopped the bounded watch through actual controls, signed out and closed the controlled browser. Both fixture targets remain can_repair false; the live repair UI is intentionally unavailable in this rehearsal. No cloud acceptance or aggregate-suite rerun is claimed.
+
+## Public documentation experience
+
+Expanded the public README into a product/judge entry point with a verified local screenshot, capability/status tables and a Mermaid journey. Added a documentation map, reproducible getting-started guide, screen-by-screen user guide and configuration/API/troubleshooting reference. Architecture diagrams separate model authority, deterministic code and provider/hosted acceptance. Recorded results link to their evidence; local fixture behavior is not promoted to live integration. Documentation verification is separate from unchanged application tests.
+
+Documentation checks passed: local links/anchors and fenced blocks, non-placeholder shell syntax, all running OpenAPI routes covered by the reference, and 4 Mermaid diagrams parsed/rendered in a browser. The README preview loaded its actual screenshot without horizontal overflow at1280px. docs/qa-evidence/documentation.json records this local renderer proof; it does not claim exact GitHub visual parity or newly rerun application suites.

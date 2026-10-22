@@ -1,5 +1,7 @@
 # Five-minute demo sequence
 
+[← Documentation](README.md) · [User guide](user-guide.md) · [Getting started](getting-started.md)
+
 Use actual provider footage only after the live QA ledger passes. Until then, label footage local fixture mode visibly. Do not claim a simulated provider response is an actual Liara deployment.
 
 - 0:00–0:35: Explain the user problem: process liveness can stay green while a deployed service’s useful endpoint fails. Open the customer’s real service inventory without requiring a new deployment or healthy baseline. Show source freshness and missing-resource coverage honestly.

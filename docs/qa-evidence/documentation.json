@@ -1,0 +1,49 @@
+{
+  "checked_at_utc": "2026-10-22T14:05:15.859854+00:00",
+  "scope": "Documentation-only change. Application suites were not rerun; no implementation change.",
+  "checks": {
+    "top_level_document_links_and_anchors": "pass",
+    "fence_balance": "pass",
+    "non_placeholder_shell_block_syntax": "pass",
+    "running_openapi_route_reference_coverage": {
+      "status": "pass",
+      "route_count": 16
+    },
+    "readme_preview": {
+      "status": "pass",
+      "image_loaded": true,
+      "horizontal_overflow_at_1280px": false
+    },
+    "mermaid_render": {
+      "status": "pass",
+      "renderer": "mermaid 12.2.0",
+      "diagrams": [
+        {
+          "repository": "starcoach-liara-operator",
+          "file": "README.md",
+          "diagram": 1,
+          "svgBytes": 39480
+        },
+        {
+          "repository": "starcoach-liara-operator",
+          "file": "docs/architecture.md",
+          "diagram": 2,
+          "svgBytes": 45164
+        },
+        {
+          "repository": "starcoach-liara-operator",
+          "file": "docs/architecture.md",
+          "diagram": 3,
+          "svgBytes": 42476
+        },
+        {
+          "repository": "starcoach-liara-operator",
+          "file": "docs/user-guide.md",
+          "diagram": 4,
+          "svgBytes": 31042
+        }
+      ]
+    }
+  },
+  "qualification": "Local Markdown/HTML browser preview, not a claim of exact GitHub rendering. No new live provider, hosting or product-performance result."
+}
