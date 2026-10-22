@@ -104,6 +104,7 @@ class LiaraClient:
 
     def _read(self, path, params=None):
         parameters = {**(params or {}), "teamID": self.team_id}
+        deadline = time.monotonic() + 10
         for attempt in range(2):
             try:
                 with self.http.stream("GET", path, params=parameters) as response:
@@ -124,6 +125,8 @@ class LiaraClient:
                         raise ProviderError(code, status)
                     data = bytearray()
                     for chunk in response.iter_bytes():
+                        if time.monotonic() > deadline:
+                            raise ProviderError("read_budget_exceeded")
                         data.extend(chunk)
                         if len(data) > 524288:
                             raise ProviderError("response_too_large")

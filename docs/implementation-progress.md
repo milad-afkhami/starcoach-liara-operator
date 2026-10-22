@@ -12,3 +12,5 @@ User authorized Torob first, then Liara after completion or a confirmed blocker.
 - RED missing adapter, then26 passing scenarios cover exact team query/auth, environment exclusion, empty/already-failing inventory, wrong identity,401/403/404/429/500, bounded retry/response size, redirect refusal, v1/v2 log precision, truncation/staleness/future data, missing metrics and preserved release/applet identity. Red regression caught permissive JSON NaN and naive timestamps; both now reject.
 - Public PaaS spec and pinned current CLI were inspected directly. Authenticated log/metrics/release acceptance remains pending; do not call fixtures sponsor integration. No UI surface in this phase, QA N/A; later L6 owns the real user flow.
 - Ruling: metric values may be shown as raw provider evidence with unit_unverified; no inferred CPU percentages or zero-default health. This trades convenient charts for truthful diagnosis until actual units are verified.
+
+- Additional L1 red→green slow-stream budget regression:10-second wall budget checked between chunks, alongside5-second network-phase timeouts;27 tests pass. Live schema evidence remains pending. L2 begins next.

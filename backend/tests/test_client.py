@@ -262,3 +262,17 @@ def test_json_nonfinite_values_rejected_and_log_times_require_timezone():
         client(lambda _: httpx.Response(200, content=b'{"projects":[],"x":NaN}')).list_services()
     with pytest.raises(ProviderError):
         decode_logs([{"datetime": "2026-10-22T00:00:00", "type": "stdout", "message": "line"}], "v1")
+
+
+def test_read_budget_bounds_a_slow_chunk_stream(monkeypatch):
+    ticks = iter([0, 11, 12, 13])
+    monkeypatch.setattr("liara_guard.client.time.monotonic", lambda: next(ticks, 13))
+
+    class Slow(httpx.SyncByteStream):
+        def __iter__(self):
+            yield b'{"projects":[]}'
+
+    c = client(lambda _: httpx.Response(200, stream=Slow()))
+    with pytest.raises(ProviderError) as error:
+        c.list_services()
+    assert error.value.code == "read_budget_exceeded"
