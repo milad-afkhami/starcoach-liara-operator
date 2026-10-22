@@ -1,13 +1,13 @@
 # Build kanban — Liara service assistant
 
-_Last updated:22October2026. Next action: obtain concrete cloud/source-publication approvals, then execute LIVE1–5 and record the final demos/submissions. All local implementation/review/QA work is verified and committed. Operator http://127.0.0.1:8661; actual local fixture services8771/8772. Private login file is outside the repository. The complete entry is not Done: LIVE1–5 and delivery gates remain open._
+_Last updated:22October2026. Next action: obtain concrete cloud approvals, then execute LIVE1–5 and record the final demos/submissions. All local implementation/review/QA work is verified and committed. Operator http://127.0.0.1:8661; actual local fixture services8771/8772. Private login file is outside the repository. The complete entry is not Done: LIVE1–5 and delivery gates remain open._
 
 ## Doing
-- L5/L7 live integration/delivery — scoped read/write bridge, exact owner setup, independent fault controller and source/build verification code implemented. Actual Liara checks LIVE1–5 are blocked by the approved key/network/disposable-target gate. Public repository/video/submission are pending; local fixtures cannot close them.
+- L5/L7 live integration/delivery — scoped read/write bridge, exact owner setup, independent fault controller and source/build verification code implemented. Actual Liara checks LIVE1–5 are blocked by the approved key/network/disposable-target gate. Public source is published and anonymously verified; video/submission remain pending; local fixtures cannot close them.
 
 ## Todo
 - Owner-approved actual API key, isolated contest network, two named demo apps, initial baselines, fault and repair verification; exact quote/proposal in docs/deployment.md.
-- Narrated approximately five-minute demo, approved public source/video and final submission evidence in submission.md. Confirm unresolved intended shared-team participation externally.
+- Narrated approximately five-minute demo, approved public video and final submission evidence in submission.md. Confirm unresolved intended shared-team participation externally.
 
 ## Done — verified local components
 - L6 independent local acceptance —29/29 rendered rows pass, including real401 private-modal reset, completed-diagnosis invalidation, unknown-deployment final canonical read/expiry, charged early cancel create→destroy, and a genuine two-call diagnosis on the corrected pinned runtime. No active QA watch/investigation/model container or fault latch remains; fixture bytes restored and variant browser/server processes closed. Main operator/demo services remain running for review. Exact ledger: test-plans/operator-ui.md and docs/qa-evidence/operator-ui.json.
@@ -17,4 +17,4 @@ _Last updated:22October2026. Next action: obtain concrete cloud/source-publicati
 - L5 domain components — exact expiring/single-use approvals, frozen approved bytes, target lock, bounded ambiguous-write reconciliation and strict fresh policy/build/original-symptom verification tested. Owner setup refuses arbitrary existing apps and registers a baseline only after fresh real proof. Actual sponsor integration remains above.
 - L2/L3 local core — real HTTP502-vs-liveness regression; immutable owner-scoped evidence with derived aging; observation sequence/generation separation; invalidation/stop/expiry/replay/stale-read guards. Actual local HTTP/watch evidence is separate from provider metadata fixtures.
 - L1 local adapter — team-scoped bounded read/write contracts, explicit v1/v2 logs, truthful unknown metrics. Authenticated schema acceptance pending above.
-- Workspace — separate build/liara repository; no existing work affected.
+- Workspace — public source at https://github.com/milad-afkhami/starcoach-liara-operator on main; initial source and anonymous access evidence in submission.md. Original build/liara branch preserved; no existing work affected.
