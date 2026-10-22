@@ -152,3 +152,36 @@ def test_approved_policy_and_operation_stay_bound_across_expected_release_change
         bind_verification(op, {**incident, "repair_operation_id": "new-op"}, p, result)["state"]
         == "inconclusive"
     )
+
+
+def test_last_success_after_deadline_never_counts_as_recovered():
+    now, calls, provider, probe = setup()
+    original = probe
+
+    def late(check):
+        result = original(check)
+        if len(calls) == 3:
+            now[0] = 161
+        return result.model_copy(update={"available_at": now[0]})
+
+    result = verify_recovery(
+        policy(), "r2", provider, late, clock=lambda: now[0], sleep=lambda n: now.__setitem__(0, now[0] + n)
+    )
+    assert result["state"] == "inconclusive" and result["reason"] == "verification_deadline"
+
+
+def test_success_spacing_is_measured_after_reads_not_before_slow_provider():
+    now, calls, provider, probe = setup()
+    original = provider
+    first = [True]
+
+    def slow(target):
+        if first[0]:
+            now[0] += 9
+            first[0] = False
+        return original(target)
+
+    result = verify_recovery(
+        policy(), "r2", slow, probe, clock=lambda: now[0], sleep=lambda n: now.__setitem__(0, now[0] + n)
+    )
+    assert result["state"] == "recovered" and calls == [109, 114, 119]

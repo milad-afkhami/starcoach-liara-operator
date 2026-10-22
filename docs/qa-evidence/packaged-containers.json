@@ -1,0 +1,136 @@
+{
+  "mode": "actual_local_packaged_containers",
+  "live_liara": false,
+  "manifests": [
+    {
+      "path": "/home/milad/Desktop/projects/starcoach-liara-operator/data/artifact-smoke/delivery.tar.gz",
+      "sha256": "db233ce928ade6320e90cce1c7aedf7cfbb92767a0a65a6326188cb233d3daac",
+      "build_id": "64d7f5fed9874562a8b2e8480e63c551",
+      "target": {
+        "team_id": "artifact-preview",
+        "app_name": "artifact-delivery",
+        "app_id": "artifact-delivery",
+        "origin": null
+      },
+      "platform": "docker",
+      "port": 8000,
+      "source_commit": "d359e57fe709c0921296420ab0e65ea5c0658c99",
+      "source_sha256": "e886a4e5d72812c72939af8a9e97a2f3df38d602f6ca8aee7101f3fdfe3ead95"
+    },
+    {
+      "path": "/home/milad/Desktop/projects/starcoach-liara-operator/data/artifact-smoke/storefront.tar.gz",
+      "sha256": "c723e6942d7e8e37c9bf5b787165b31335a859a5f3a2c784275c18ab160d251f",
+      "build_id": "97fd61c2455543c98cb779e2efad4113",
+      "target": {
+        "team_id": "artifact-preview",
+        "app_name": "artifact-storefront",
+        "app_id": "artifact-storefront",
+        "origin": null
+      },
+      "platform": "docker",
+      "port": 8000,
+      "source_commit": "d359e57fe709c0921296420ab0e65ea5c0658c99",
+      "source_sha256": "1695053420e1253f48f2e212592dffcf391c0c5d0f4e71fc1d11fdc126686af4"
+    },
+    {
+      "path": "/home/milad/Desktop/projects/starcoach-liara-operator/data/artifact-smoke/variant.tar.gz",
+      "sha256": "c6b951a3ea084e50f0bda1cece3850373cc77aaa1ac780b7b557e09f26307701",
+      "build_id": "b1573e3c4d1b49e5bf1288db93aa5516",
+      "target": {
+        "team_id": "artifact-preview",
+        "app_name": "artifact-variant",
+        "app_id": "artifact-variant",
+        "origin": null
+      },
+      "platform": "docker",
+      "port": 8000,
+      "source_commit": "d359e57fe709c0921296420ab0e65ea5c0658c99",
+      "source_sha256": "c9c1618cd61db5803b6dd5e452de3e039fc49440af3c892ee05293696ef1ab81"
+    }
+  ],
+  "checks": {
+    "healthy": {
+      "http_status": 200,
+      "payload": {
+        "status": "ready",
+        "shipping_toman": 10000,
+        "build_id": "97fd61c2455543c98cb779e2efad4113",
+        "dependency_build_id": "64d7f5fed9874562a8b2e8480e63c551",
+        "request_id": "f35284ba12ec48bdba7fa688741fa44f"
+      },
+      "at": 1792665565.5903213
+    },
+    "failed_endpoint": {
+      "http_status": 502,
+      "payload": {
+        "status": "unavailable",
+        "reason": "upstream_invalid",
+        "build_id": "97fd61c2455543c98cb779e2efad4113",
+        "dependency_build_id": "b1573e3c4d1b49e5bf1288db93aa5516",
+        "request_id": "146ae4f442d44725a3fc91db8ddc92c5"
+      },
+      "at": 1792665566.8797147
+    },
+    "liveness": {
+      "http_status": 200,
+      "payload": {
+        "status": "ok",
+        "build_id": "97fd61c2455543c98cb779e2efad4113",
+        "request_id": "bad078ae593542bd88ee6819b1119b00"
+      },
+      "at": 1792665566.8966823
+    },
+    "changed_dependency": {
+      "http_status": 200,
+      "payload": {
+        "delivery_toman": 10000,
+        "build_id": "b1573e3c4d1b49e5bf1288db93aa5516",
+        "request_id": "54f816cc9f0841d78221cad61cd3b453"
+      },
+      "at": 1792665566.9142354
+    },
+    "fresh_restored_builds": [
+      {
+        "http_status": 200,
+        "payload": {
+          "status": "ready",
+          "shipping_toman": 10000,
+          "build_id": "97fd61c2455543c98cb779e2efad4113",
+          "dependency_build_id": "64d7f5fed9874562a8b2e8480e63c551",
+          "request_id": "ccb9cb2f66a24ca7b5e152eff221cdea"
+        },
+        "at": 1792665568.2784693
+      },
+      {
+        "http_status": 200,
+        "payload": {
+          "status": "ready",
+          "shipping_toman": 10000,
+          "build_id": "97fd61c2455543c98cb779e2efad4113",
+          "dependency_build_id": "64d7f5fed9874562a8b2e8480e63c551",
+          "request_id": "8be03a7c4f1442f5943c50af28a73ab2"
+        },
+        "at": 1792665573.298309
+      },
+      {
+        "http_status": 200,
+        "payload": {
+          "status": "ready",
+          "shipping_toman": 10000,
+          "build_id": "97fd61c2455543c98cb779e2efad4113",
+          "dependency_build_id": "64d7f5fed9874562a8b2e8480e63c551",
+          "request_id": "e9620675b8164bc39be2ee659ac0814c"
+        },
+        "at": 1792665578.316082
+      }
+    ]
+  },
+  "logs": "INFO:     Started server process [1]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:8775 (Press CTRL+C to quit)\n{\"event\": \"upstream_error\", \"reason\": \"upstream_invalid\", \"request_id\": \"146ae4f442d44725a3fc91db8ddc92c5\", \"build_id\": \"97fd61c2455543c98cb779e2efad4113\", \"dependency_build_id\": \"b1573e3c4d1b49e5bf1288db93aa5516\", \"expected_field\": \"shipping_toman\", \"observed_fields\": [\"build_id\", \"delivery_toman\", \"request_id\"]}",
+  "images": {
+    "delivery": "sha256:c3a78fe8c780eb815d249fc448b24ffdf42cd53b34d1b1784fe32a96daf19bc6",
+    "storefront": "sha256:0661cea48f7a260b4b8b7c3dc0af08e0b2b65aef9deffe917e235586d809b5c6",
+    "variant": "sha256:f57ba94e4b4be7ddb0b20ea8ed93a1c875bee3750ce48c2c36c9bea2e0a1ba8e"
+  },
+  "stats": "{\"BlockIO\":\"3.19MB / 0B\",\"CPUPerc\":\"0.16%\",\"Container\":\"liara-artifact-e52b674e3c-storefront\",\"ID\":\"dc504429941c\",\"MemPerc\":\"7.08%\",\"MemUsage\":\"36.24MiB / 512MiB\",\"Name\":\"liara-artifact-e52b674e3c-storefront\",\"NetIO\":\"0B / 0B\",\"PIDs\":\"2\"}\n{\"BlockIO\":\"0B / 0B\",\"CPUPerc\":\"0.16%\",\"Container\":\"liara-artifact-e52b674e3c-delivery\",\"ID\":\"b64ff7c4db84\",\"MemPerc\":\"6.06%\",\"MemUsage\":\"31.03MiB / 512MiB\",\"Name\":\"liara-artifact-e52b674e3c-delivery\",\"NetIO\":\"0B / 0B\",\"PIDs\":\"2\"}",
+  "passed": true
+}

@@ -174,7 +174,10 @@ class Investigator:
                     if (
                         value["cause_family"] != "unknown"
                         and value["cause_family"] != "observer_access"
-                        and not any(e["quality"] == "fresh" for e in supports)
+                        and not any(
+                            e["quality"] == "fresh" and 0 <= self.clock() - e["observed_at"] <= 300
+                            for e in supports
+                        )
                     ):
                         raise ValueError("No current supporting observation")
                     if value["action"] == "read" and (index or value["next_check"] not in readers):
@@ -207,6 +210,7 @@ class Investigator:
                     }
                 diagnosis = {k: v for k, v in value.items() if k not in ("action", "next_check")}
                 diagnosis.update(
+                    generation=generation,
                     cutoff=cutoff,
                     observation_sequence=current()["observation_sequence"],
                     read_operations=reads,

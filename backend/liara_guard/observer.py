@@ -16,6 +16,14 @@ def encode(value):
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
 
+def invalidate_diagnosis(value, reason="stale_generation"):
+    if value.get("diagnosis") is not None:
+        value["superseded_diagnosis"] = value["diagnosis"]
+    value["diagnosis"] = None
+    value["investigation_state"] = "stale"
+    value["investigation_error"] = reason
+
+
 class MonitorStore:
     def __init__(self, path):
         self.path = Path(path)
@@ -126,6 +134,7 @@ class MonitorStore:
                 value["observation_sequence"] += 1
                 if fingerprint and value["failure_fingerprint"] != fingerprint:
                     value["generation"] += 1
+                    invalidate_diagnosis(value)
                     value["failure_fingerprint"] = fingerprint
             else:
                 value = {
@@ -182,7 +191,20 @@ class MonitorStore:
                     (incident_id, owner),
                 )
             ]
-        return [v for v in values if v["available_at"] <= cutoff][-100:]
+        projected = [v for v in values if v["available_at"] <= cutoff][-100:]
+        for value in projected:
+            original = value["quality"]
+            if value["observed_at"] > cutoff + 5 or value["observed_at"] > value["available_at"] + 5:
+                value["quality"] = "invalid"
+            elif original == "fresh" and cutoff - value["observed_at"] > 300:
+                value["quality"] = "stale"
+            if value["quality"] != original:
+                value["coverage"] = {
+                    **value.get("coverage", {}),
+                    "quality_at_collection": original,
+                    "freshness_as_of": cutoff,
+                }
+        return projected
 
 
 class Observer:
@@ -349,6 +371,7 @@ class Observer:
                         if value.get("repair_pending"):
                             continue
                         value["generation"] += 1
+                        invalidate_diagnosis(value)
                         value["state"] = "recovered"
                         value["recovered_at"] = self.clock()
                         db.execute(
@@ -385,6 +408,7 @@ class Observer:
                 value = json.loads(row[0])
                 if value["target"]["app_id"] == target_id:
                     value["generation"] += 1
+                    invalidate_diagnosis(value)
                     value["current_release_id"] = release
                     db.execute("UPDATE incidents SET data=? WHERE id=?", (encode(value), value["id"]))
 

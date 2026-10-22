@@ -19,11 +19,11 @@ from pydantic import Field
 from .auth import AuthStore
 from .approvals import ApprovalError, Executor, OperationSpec, OperationStore
 from .client import LiaraClient, ProviderError
-from .contracts import ProbeRunner
+from .contracts import ProbeRunner, ProbeResult
 from .investigator import Investigator
 from .model_types import ModelError
-from .observer import MonitorStore, Observer, encode
-from .operations_bridge import LiaraOperationProvider, failure_fingerprint
+from .observer import MonitorStore, Observer, encode, invalidate_diagnosis
+from .operations_bridge import LiaraOperationProvider, failure_fingerprint, current_repair_candidate
 from .runtime import Registry, FixtureProvider, local_config
 from .redaction import redact
 from .types import Evidence, Record
@@ -151,6 +151,7 @@ def create_app(
     jobs = {}
     lock = threading.RLock()
     verifying = set()
+    last_recovery_inventory = [float("-inf")]
     probes = ProbeRunner(registry.targets, allow_loopback=mode == "fixture", clock=clock)
     observer = Observer(monitor, registry.targets, clock=clock)
 
@@ -356,6 +357,24 @@ def create_app(
                         "SELECT data FROM operations WHERE state IN ('pending','unknown','ready')"
                     )
                 ]
+            recoverable = []
+            for value in pending:
+                if value["spec"]["kind"] != "redeploy_known_good":
+                    continue
+                if value.get("reconcile_until") is None or clock() > value["reconcile_until"]:
+                    if value.get("error") != "reconciliation_expired":
+                        operations.update(value, state="unknown", error="reconciliation_expired")
+                    continue
+                recoverable.append(value)
+            pending = recoverable
+            if pending and clock() - last_recovery_inventory[0] >= 10:
+                last_recovery_inventory[0] = clock()
+                try:
+                    refresh()
+                except (HTTPException, ProviderError, ValueError):
+                    return  # Observation gap; retry within existing operation deadlines, no writes.
+            if any(value["spec"].get("app_id") not in registry.targets for value in pending):
+                return  # Never fail verification just because inventory recovery is still unavailable.
             for value in pending:
                 if value["spec"]["kind"] != "redeploy_known_good":
                     continue
@@ -605,13 +624,7 @@ def create_app(
     def propose(identifier: str, owner: Owner):
         incident = monitor.incident(owner, identifier)
         root = incident["target"]["app_id"]
-        if (
-            not registry.can_repair(root)
-            or mode != "live"
-            or incident["state"] != "open"
-            or not incident.get("diagnosis")
-            or incident["diagnosis"]["outcome"] != "repair_candidate"
-        ):
+        if not registry.can_repair(root) or mode != "live" or not current_repair_candidate(incident):
             raise HTTPException(409, "repair_not_enrolled_or_supported")
         policy = registry.policies[root]
         actor = registry.resolve(policy.changed_target_id)
@@ -621,16 +634,36 @@ def create_app(
         if symptom.check_pass is not False:
             raise HTTPException(409, "original_failure_not_current")
         fingerprint = failure_fingerprint(policy.checks[0], symptom)
+        # Bind a manual diagnosis to its frozen observed symptom, rather than promote an old cause.
+        recorded = [
+            e
+            for e in monitor.evidence(owner, identifier, cutoff=incident["diagnosis"]["cutoff"])
+            if e["kind"] == "http_probe"
+            and e["target"]["app_id"] == root
+            and e["redacted_payload"].get("check_id") == policy.checks[0].id
+        ]
+        diagnosed_fingerprint = incident.get("failure_fingerprint")
+        if diagnosed_fingerprint is None and recorded:
+            diagnosed_fingerprint = failure_fingerprint(
+                policy.checks[0], ProbeResult.model_validate(recorded[-1]["redacted_payload"])
+            )
+        stale = diagnosed_fingerprint != fingerprint
         with monitor.connect() as db:
             db.execute("BEGIN IMMEDIATE")
             row = db.execute(
                 "SELECT data FROM incidents WHERE id=? AND owner=?", (identifier, owner)
             ).fetchone()
-            incident = json.loads(row[0])
-            if incident["failure_fingerprint"] != fingerprint:
+            latest = json.loads(row[0])
+            if latest["generation"] != incident["generation"] or not current_repair_candidate(latest):
+                raise HTTPException(409, "diagnosis_changed_reinvestigate")
+            incident = latest
+            if stale:
                 incident["generation"] += 1
-                incident["failure_fingerprint"] = fingerprint
+                invalidate_diagnosis(incident)
+            incident["failure_fingerprint"] = fingerprint
             db.execute("UPDATE incidents SET data=? WHERE id=?", (encode(incident), identifier))
+        if stale:
+            raise HTTPException(409, "failure_changed_reinvestigate")
         releases = provider.get_releases(actor)
         if releases.quality != "fresh" or not releases.redacted_payload.get("currentRelease"):
             raise HTTPException(409, "current_release_unavailable")

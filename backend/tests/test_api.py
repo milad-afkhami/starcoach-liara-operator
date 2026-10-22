@@ -1,3 +1,4 @@
+import pytest
 import threading
 import time
 from fastapi.testclient import TestClient
@@ -291,3 +292,226 @@ def test_existing_watch_incident_investigation_preserves_record_and_question(tmp
     value = c.get("/api/incidents/" + incident["id"]).json()["incident"]
     assert value["question"] == "Explain this specific endpoint alert." and value["watch_id"] == "watch-1"
     assert len(c.get("/api/state").json()["incidents"]) == 1
+
+
+def test_restart_reconciles_submitted_deployment_without_browser_inventory_load(tmp_path):
+    from liara_guard.approvals import OperationSpec
+    from liara_guard.types import Evidence
+
+    class Pending(FixtureProvider):
+        def __init__(self):
+            super().__init__(tmp_path / "demo", clock=lambda: 100)
+            self.status_reads = 0
+
+        def get_releases(self, target):
+            self.status_reads += 1
+            return Evidence(
+                id="r",
+                target=target,
+                kind="releases",
+                observed_at=100,
+                available_at=100,
+                quality="fresh",
+                redacted_payload={
+                    "currentRelease": "r2",
+                    "releases": [{"_id": "r2", "state": "BUILDING", "sourceID": "s1"}],
+                },
+            )
+
+    provider = Pending()
+    application = create_app(
+        state_path=tmp_path / "restart.sqlite",
+        session_secret="s" * 32,
+        password_hash=hash_password(PASSWORD),
+        public_origin=ORIGIN,
+        provider=provider,
+        registry_config={},
+        model=Model(),
+        mode="live",
+        clock=lambda: 100,
+    )
+    store = application.state.operations
+    op = store.propose(
+        "owner",
+        OperationSpec(
+            kind="redeploy_known_good",
+            team_id="local-fixture",
+            app_name="delivery",
+            app_id="local-dep",
+            artifact_sha256="a" * 64,
+            before_release_id="r1",
+            incident_id="i",
+            incident_generation=1,
+            failure_fingerprint="f",
+            verification_policy_hash="p",
+        ),
+    )
+    store.update(op, state="pending", release_id="r2", source_id="s1", submitted_at=90, reconcile_until=690)
+    assert application.state.registry.targets == {}
+    application.state.tick()
+    assert provider.status_reads == 1 and "local-dep" in application.state.registry.targets
+
+
+@pytest.mark.parametrize("case", ["current", "stale", "probe_race", "symptom_change"])
+def test_proposal_cannot_promote_historical_diagnosis_to_new_state(tmp_path, monkeypatch, case):
+    from liara_guard.contracts import ProbeRunner, ProbeResult
+    from liara_guard.types import Evidence
+    from liara_guard.verification import VerificationPolicy
+    from liara_guard.observer import encode
+
+    check = {
+        "id": "preview",
+        "target_id": "local-store",
+        "origin": "https://store.liara.run",
+        "path": "/preview",
+        "require_request_echo": True,
+    }
+    policy = VerificationPolicy(
+        id="p",
+        checks=[check],
+        changed_target_id="local-dep",
+        expected_release_ids={"local-dep": "$submitted"},
+        expected_build_fields={"preview": {"build_id": "store"}},
+    )
+    cfg = {
+        "http_checks": [check],
+        "repair_targets": {"local-store": "local-dep"},
+        "verification_policies": {"local-store": policy.model_dump()},
+        "enrolled": {
+            "local-dep": {
+                "team_id": "local-fixture",
+                "app_name": "delivery",
+                "baseline_verified": True,
+                "known_good": {"a" * 64: str(tmp_path / "good")},
+            }
+        },
+    }
+
+    class Provider(FixtureProvider):
+        def get_releases(self, target):
+            return self._evidence(target, "releases", {"currentRelease": "r1", "releases": []})
+
+    application = create_app(
+        state_path=tmp_path / "proposal.sqlite",
+        session_secret="s" * 32,
+        password_hash=hash_password(PASSWORD),
+        public_origin=ORIGIN,
+        provider=Provider(tmp_path / "demo", clock=lambda: 100),
+        registry_config=cfg,
+        model=Model(),
+        mode="live",
+        clock=lambda: 100,
+    )
+    c = login(application)
+    c.get("/api/services")
+    owner = c.cookies.get("liara_owner").split(".")[0]
+    target = application.state.registry.resolve("local-store")
+    store = application.state.monitor
+    incident = store.ensure_incident(owner, target, "log_investigation", "manual", 100)
+    incident.update(
+        diagnosis={"generation": 1, "outcome": "repair_candidate", "cutoff": 100}, investigation_state="done"
+    )
+    store.save_incident(incident, 1)
+    old = ProbeResult(
+        id="observed",
+        target_id="local-store",
+        check_id="preview",
+        request_id="original",
+        observed_at=100,
+        available_at=100,
+        http_status=502,
+        elapsed_ms=1,
+        check_pass=False,
+        reason="unexpected_status",
+        body_digest="digest",
+        payload={"reason": "upstream_invalid"},
+    )
+    store.add_evidence(
+        owner,
+        incident["id"],
+        Evidence(
+            id="observed",
+            target=target,
+            kind="http_probe",
+            observed_at=100,
+            available_at=100,
+            quality="fresh",
+            redacted_payload=old.model_dump(),
+        ),
+    )
+
+    def change_generation():
+        with store.connect() as db:
+            current = store.incident(owner, incident["id"])
+            current["generation"] += 1
+            db.execute("UPDATE incidents SET data=? WHERE id=?", (encode(current), incident["id"]))
+
+    if case == "stale":
+        change_generation()
+
+    def probe(self, c):
+        if case == "probe_race":
+            change_generation()
+        return (
+            old.model_copy(
+                update={"id": "new", "request_id": "new", "http_status": 504, "payload": {"reason": "new"}}
+            )
+            if case == "symptom_change"
+            else old
+        )
+
+    monkeypatch.setattr(ProbeRunner, "run", probe)
+    response = c.post("/api/incidents/" + incident["id"] + "/proposal")
+    assert response.status_code == (201 if case == "current" else 409)
+    with application.state.operations.connect() as db:
+        assert db.execute("SELECT COUNT(*) FROM operations").fetchone()[0] == (1 if case == "current" else 0)
+    if case == "symptom_change":
+        assert store.incident(owner, incident["id"])["diagnosis"] is None
+
+
+def test_unavailable_recovery_inventory_cannot_fail_verification_or_extend_deadline(tmp_path):
+    from liara_guard.approvals import OperationSpec
+    from liara_guard.client import ProviderError
+
+    now = [100.0]
+
+    class Unavailable(FixtureProvider):
+        def list_services(self):
+            raise ProviderError("observer_auth", 401)
+
+    application = create_app(
+        state_path=tmp_path / "no-inventory.sqlite",
+        session_secret="s" * 32,
+        password_hash=hash_password(PASSWORD),
+        public_origin=ORIGIN,
+        provider=Unavailable(tmp_path / "demo"),
+        registry_config={},
+        model=Model(),
+        mode="live",
+        clock=lambda: now[0],
+    )
+    store = application.state.operations
+    op = store.propose(
+        "owner",
+        OperationSpec(
+            kind="redeploy_known_good",
+            team_id="local-fixture",
+            app_name="delivery",
+            app_id="local-dep",
+            artifact_sha256="a" * 64,
+            before_release_id="r1",
+            incident_id="i",
+            incident_generation=1,
+            failure_fingerprint="f",
+            verification_policy_hash="p",
+        ),
+    )
+    store.update(op, state="ready", release_id="r2", source_id="s1", submitted_at=90, reconcile_until=690)
+    application.state.tick()
+    now[0] += 1
+    application.state.tick()
+    assert store.get("owner", op["id"])["state"] == "ready"
+    now[0] = 691
+    application.state.tick()
+    result = store.get("owner", op["id"])
+    assert result["state"] == "unknown" and result["error"] == "reconciliation_expired"

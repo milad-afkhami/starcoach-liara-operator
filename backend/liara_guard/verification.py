@@ -90,6 +90,8 @@ def verify_recovery(
             required = release_id if expected == "$submitted" else expected
             try:
                 state = provider_status(target)
+                if clock() > deadline:
+                    return finish("inconclusive", "verification_deadline")
             except Exception:
                 provider_ok = False
                 break
@@ -112,6 +114,8 @@ def verify_recovery(
                     return finish("inconclusive", "verification_deadline")
                 try:
                     result = probe(check)
+                    if clock() > deadline:
+                        return finish("inconclusive", "verification_deadline")
                 except Exception:
                     round_ok = False
                     count += 1
@@ -138,6 +142,9 @@ def verify_recovery(
                     round_ok = False
                 else:
                     success_ids.append(result.id)
+        last_round = clock()
+        if current_policy_hash() != policy.digest():
+            return finish("inconclusive", "policy_changed")
         streak = streak + 1 if round_ok else 0
         if streak == 3:
             return finish("recovered", "original_checks_and_serving_build_verified")

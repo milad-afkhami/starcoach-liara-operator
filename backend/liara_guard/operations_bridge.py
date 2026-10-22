@@ -7,6 +7,16 @@ from .bootstrap import quote_for
 from .client import ProviderError
 
 
+def current_repair_candidate(incident):
+    diagnosis = incident.get("diagnosis") or {}
+    return bool(
+        incident.get("state") == "open"
+        and incident.get("investigation_state") == "done"
+        and diagnosis.get("outcome") == "repair_candidate"
+        and diagnosis.get("generation") == incident.get("generation")
+    )
+
+
 def failure_fingerprint(check, result):
     value = {
         "check": check.model_dump(),

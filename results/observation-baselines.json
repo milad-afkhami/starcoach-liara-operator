@@ -1,0 +1,164 @@
+{
+  "scope": "Restricted observation baselines on the same eight synthetic cases. These are intentionally small non-diagnostic baselines, not production SRE competitors. Model outputs are the existing actual recorded run; no new inference.",
+  "comparison_limits": "HTTP state answers endpoint availability from supplied observations; release metadata answers whether a change is visible. Neither alone establishes cause. Cause accuracy is therefore not scored against these different-output baselines. No production savings or live Liara success is measured.",
+  "cases": [
+    {
+      "case": "dependency_schema_regression",
+      "http_only": {
+        "state": "failed",
+        "statuses": [
+          502
+        ],
+        "causal_conclusion": "not_established"
+      },
+      "latest_release_only": {
+        "fresh_release_payload_present": false,
+        "causal_conclusion": "not_established"
+      },
+      "observed_model": {
+        "cause_family": "dependency_schema",
+        "outcome": "need_evidence",
+        "expected_case_outcome": true,
+        "elapsed_ms": 22076
+      }
+    },
+    {
+      "case": "process_crash",
+      "http_only": {
+        "state": "unknown",
+        "statuses": [],
+        "causal_conclusion": "not_established"
+      },
+      "latest_release_only": {
+        "fresh_release_payload_present": false,
+        "causal_conclusion": "not_established"
+      },
+      "observed_model": {
+        "cause_family": "process_crash",
+        "outcome": "need_evidence",
+        "expected_case_outcome": true,
+        "elapsed_ms": 12093
+      }
+    },
+    {
+      "case": "dependency_timeout",
+      "http_only": {
+        "state": "failed",
+        "statuses": [
+          504
+        ],
+        "causal_conclusion": "not_established"
+      },
+      "latest_release_only": {
+        "fresh_release_payload_present": false,
+        "causal_conclusion": "not_established"
+      },
+      "observed_model": {
+        "cause_family": "dependency_timeout",
+        "outcome": "no_app_change",
+        "expected_case_outcome": true,
+        "elapsed_ms": 21952
+      }
+    },
+    {
+      "case": "distracting_unrelated_release",
+      "http_only": {
+        "state": "failed",
+        "statuses": [
+          504
+        ],
+        "causal_conclusion": "not_established"
+      },
+      "latest_release_only": {
+        "fresh_release_payload_present": true,
+        "causal_conclusion": "not_established"
+      },
+      "observed_model": {
+        "cause_family": "dependency_timeout",
+        "outcome": "no_app_change",
+        "expected_case_outcome": true,
+        "elapsed_ms": 21019
+      }
+    },
+    {
+      "case": "observer401_service_passes",
+      "http_only": {
+        "state": "passing",
+        "statuses": [
+          200
+        ],
+        "causal_conclusion": "not_established"
+      },
+      "latest_release_only": {
+        "fresh_release_payload_present": false,
+        "causal_conclusion": "not_established"
+      },
+      "observed_model": {
+        "cause_family": "observer_access",
+        "outcome": "no_app_change",
+        "expected_case_outcome": true,
+        "elapsed_ms": 10391
+      }
+    },
+    {
+      "case": "stale_logs",
+      "http_only": {
+        "state": "failed",
+        "statuses": [
+          503
+        ],
+        "causal_conclusion": "not_established"
+      },
+      "latest_release_only": {
+        "fresh_release_payload_present": false,
+        "causal_conclusion": "not_established"
+      },
+      "observed_model": {
+        "cause_family": "unknown",
+        "outcome": "unresolved",
+        "expected_case_outcome": true,
+        "elapsed_ms": 9997
+      }
+    },
+    {
+      "case": "unknown_metric_units",
+      "http_only": {
+        "state": "passing",
+        "statuses": [
+          200
+        ],
+        "causal_conclusion": "not_established"
+      },
+      "latest_release_only": {
+        "fresh_release_payload_present": false,
+        "causal_conclusion": "not_established"
+      },
+      "observed_model": {
+        "cause_family": "unknown",
+        "outcome": "no_app_change",
+        "expected_case_outcome": true,
+        "elapsed_ms": 10134
+      }
+    },
+    {
+      "case": "insufficient_evidence",
+      "http_only": {
+        "state": "unknown",
+        "statuses": [],
+        "causal_conclusion": "not_established"
+      },
+      "latest_release_only": {
+        "fresh_release_payload_present": false,
+        "causal_conclusion": "not_established"
+      },
+      "observed_model": {
+        "cause_family": "unknown",
+        "outcome": "unresolved",
+        "expected_case_outcome": true,
+        "elapsed_ms": 10234
+      }
+    }
+  ],
+  "model_correct": 8,
+  "total": 8
+}

@@ -1,0 +1,14 @@
+{
+  "provider": "codex_cli",
+  "model": "gpt-6.1-sol",
+  "cli_version": "codex-cli 0.163.0",
+  "elapsed_ms": 16694,
+  "image": "public.ecr.aws/docker/library/python:3.12-slim-bookworm@sha256:6a0e06f5ba0b373d051aabd3fffb9b873f27f9a2a3a14bcbe37dee6f0e3bbc70",
+  "schema_result": {
+    "state": "unknown",
+    "evidence_ids": [
+      "fixture"
+    ]
+  },
+  "scope": "Actual local Codex runtime over a generic non-service fixture; no live Liara claim."
+}

@@ -290,3 +290,11 @@ def test_generation_race_during_final_save_leaves_explicit_failed_state(tmp_path
     result = i.investigate("owner", incident["id"], {})
     assert result["error"] == "stale_generation"
     assert s.incident("owner", incident["id"])["investigation_state"] == "failed"
+
+
+def test_old_originally_fresh_evidence_cannot_support_reinvestigation(tmp_path):
+    s, o, incident, m, i, now = setup(tmp_path)
+    now[0] = 1000
+    result = i.investigate("owner", incident["id"], {})
+    assert m.requests[0].payload["evidence"][0]["quality"] == "stale"
+    assert result["outcome"] == "unresolved" and result["error"] == "invalid_model_output"

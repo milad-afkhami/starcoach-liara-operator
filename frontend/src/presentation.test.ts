@@ -17,3 +17,13 @@ test('investigation of an open selected alert reuses its incident',async()=>{
  assert.equal(investigationEndpoint('service',{id:'incident',target:{app_id:'service'},state:'recovered'}),'/api/services/service/investigate')
  assert.equal(investigationEndpoint('other',{id:'incident',target:{app_id:'service'},state:'open'}),'/api/services/other/investigate')
 })
+
+test('ambiguous submitted operation remains observable only inside reconciliation budget',async()=>{
+ const {operationNeedsPolling,mayReplaceOperation}=await import('./presentation.ts')
+ assert.equal(operationNeedsPolling({state:'unknown',reconcile_until:200},100),true)
+ assert.equal(operationNeedsPolling({state:'unknown',reconcile_until:200},201),false)
+ assert.equal(operationNeedsPolling({state:'completed'},100),false)
+ assert.equal(operationNeedsPolling({state:'verifying'},100),true)
+ assert.equal(mayReplaceOperation({state:'proposed',expires_at:99},false,100),true)
+ assert.equal(mayReplaceOperation({state:'approved',expires_at:199},false,100),false)
+})

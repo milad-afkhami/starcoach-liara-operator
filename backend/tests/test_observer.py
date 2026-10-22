@@ -250,3 +250,47 @@ def test_diagnosis_save_preserves_new_observations_with_same_generation(tmp_path
     s.ensure_incident("owner", TARGET, "http_availability", "scope", 130, fingerprint="changed")
     with pytest.raises(ValueError):
         s.save_incident(old, expected_generation=1)
+
+
+@pytest.mark.parametrize("change", ["release", "fingerprint"])
+def test_completed_diagnosis_is_invalidated_when_actionable_state_changes(tmp_path, change):
+    s, o, now = setup(tmp_path)
+    incident = s.ensure_incident("owner", TARGET, "http_availability", "scope", 100, fingerprint="old")
+    incident.update(
+        diagnosis={"outcome": "repair_candidate", "summary": "old conclusion"}, investigation_state="done"
+    )
+    s.save_incident(incident, incident["generation"])
+    if change == "release":
+        o.set_release("owner", "app", "new-release")
+    else:
+        s.ensure_incident("owner", TARGET, "http_availability", "scope", 115, fingerprint="different")
+    current = s.incident("owner", incident["id"])
+    assert current["generation"] > incident["generation"]
+    assert current["diagnosis"] is None and current["investigation_state"] == "stale"
+
+
+def test_evidence_freshness_ages_in_projection_without_rewriting_original(tmp_path):
+    import json
+
+    s, o, now = setup(tmp_path)
+    incident = o.begin_investigation("owner", TARGET, "Investigate")
+    s.add_evidence(
+        "owner",
+        incident["id"],
+        Evidence(
+            id="old",
+            target=TARGET,
+            kind="logs",
+            observed_at=100,
+            available_at=100,
+            quality="fresh",
+            redacted_payload={"message": "old crash"},
+        ),
+    )
+    assert s.evidence("owner", incident["id"], cutoff=100)[0]["quality"] == "fresh"
+    assert s.evidence("owner", incident["id"], cutoff=1000)[0]["quality"] == "stale"
+    with s.connect() as db:
+        assert (
+            json.loads(db.execute("SELECT data FROM evidence WHERE id='old'").fetchone()[0])["quality"]
+            == "fresh"
+        )

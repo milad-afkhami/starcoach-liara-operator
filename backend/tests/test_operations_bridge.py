@@ -112,3 +112,19 @@ def test_bootstrap_runner_registers_exact_demo_origin(tmp_path):
     assert runner.targets["dep"].origin == check.origin
     with pytest.raises(ApprovalError):
         setup.runner_for([check.model_copy(update={"origin": "https://other.example"})])
+
+
+def test_repair_requires_completed_diagnosis_of_this_exact_generation():
+    from liara_guard.operations_bridge import current_repair_candidate
+
+    value = {
+        "generation": 2,
+        "state": "open",
+        "investigation_state": "done",
+        "diagnosis": {"generation": 1, "outcome": "repair_candidate"},
+    }
+    assert not current_repair_candidate(value)
+    value["diagnosis"]["generation"] = 2
+    assert current_repair_candidate(value)
+    value["investigation_state"] = "running"
+    assert not current_repair_candidate(value)

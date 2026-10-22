@@ -59,3 +59,23 @@ test('failed observation read does not erase configured-check knowledge',async({
  await page.getByRole('button',{name:'Refresh observations'}).click()
  await expect(page.getByTestId('http-store-preview')).toContainText('HTTP 502')
 })
+
+test('real expired session with open evidence cannot restore prior-owner dialog',async({page})=>{
+ await login(page)
+ await page.getByRole('button',{name:'Open storefront'}).click()
+ await expect(page.getByTestId('http-store-preview')).toBeVisible()
+ await page.getByRole('button',{name:'Start 15-minute watch'}).click()
+ await expect(page.getByTestId('watch-panel')).toContainText('Watching')
+ await page.getByRole('button',{name:'Inspect http_probe evidence'}).first().click()
+ await expect(page.getByRole('dialog',{name:'Evidence detail'})).toBeVisible()
+ const state=await (await page.request.get('/api/state')).json()
+ const watch=state.watches.find((w:any)=>w.state==='active')
+ // Controlled own-session expiry uses the actual logout route; do not leave an orphan watch.
+ await page.request.post('/api/watches/'+watch.id+'/stop',{headers:{Origin:'http://127.0.0.1:8661'}})
+ await page.request.post('/api/logout',{headers:{Origin:'http://127.0.0.1:8661'}})
+ await expect(page.getByLabel('Owner password')).toBeVisible({timeout:10000})
+ await page.getByLabel('Owner password').fill(access.password)
+ await page.getByRole('button',{name:'Sign in',exact:true}).click()
+ await expect(page.getByRole('heading',{name:'Your services'})).toBeVisible()
+ await expect(page.getByRole('dialog',{name:'Evidence detail'})).toHaveCount(0)
+})
