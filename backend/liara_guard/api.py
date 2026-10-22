@@ -385,6 +385,7 @@ def create_app(
                         if updated["id"] in verifying:
                             continue
                         verifying.add(updated["id"])
+                        updated = operations.update(updated, state="verifying")
                         pool.submit(verify_operation, updated, bridge)
 
     @asynccontextmanager

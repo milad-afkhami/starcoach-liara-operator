@@ -273,3 +273,18 @@ def test_restart_of_verification_is_inconclusive_not_an_unbounded_new_window(tmp
     restarted = OperationStore(tmp_path / "operations.sqlite", clock=lambda: now[0])
     result = restarted.get("owner", op["id"])
     assert result["state"] == "failed" and result["error"] == "verification_interrupted"
+
+
+def test_status_that_finishes_after_reconciliation_deadline_cannot_start_verification(tmp_path):
+    s, e, p, op, now, a = setup(tmp_path)
+    approve(s, op)
+    e.execute("owner", op["id"])
+    now[0] = 699
+
+    def late_status(spec, release):
+        now[0] = 701
+        return {"state": "READY", "current_release_id": release}
+
+    p.release_status = late_status
+    value = e.reconcile("owner", op["id"])
+    assert value["state"] == "unknown" and value["error"] == "reconciliation_expired"

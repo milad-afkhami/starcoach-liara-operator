@@ -306,6 +306,8 @@ class Executor:
         try:
             if not value["release_id"]:
                 matches = self.provider.release_candidates(spec, value["source_id"])
+                if self.clock() > value["reconcile_until"]:
+                    return self.store.update(value, state="unknown", error="reconciliation_expired")
                 matches = [
                     r
                     for r in matches
@@ -315,6 +317,8 @@ class Executor:
                     value = self.store.update(value, state="pending", release_id=matches[0]["id"], error=None)
             elif hasattr(self.provider, "release_status"):
                 status = self.provider.release_status(spec, value["release_id"])
+                if self.clock() > value["reconcile_until"]:
+                    return self.store.update(value, state="unknown", error="reconciliation_expired")
                 if status.get("state") in ("FAILED", "UNHEALTHY"):
                     value = self.store.update(value, state="failed", error="release_failed")
                 elif (
