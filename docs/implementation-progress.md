@@ -22,3 +22,10 @@ User authorized Torob first, then Liara after completion or a confirmed blocker.
 - Healthy artifacts carry a generated build-id file separately from archive SHA-256; allowlisted packaging excludes .env/auth/VCS state. Configured dependency origin is packaged as an explicit nonsecret file. A changed archive cannot pass verification.
 - Controller execution claims once even if its narrow provider writer fails. That writer must recheck before_release and reconcile ambiguous outcomes in L5; no live fault deployment is authorized or performed yet.
 - Actual local HTTP QA passed: storefront /preview200 with real dependency, changed dependency source then /preview502 while /healthz remained200, changed opaque dependency build propagated, correlated log fields retained. Evidence: docs/qa-evidence/local-services.json. All QA service processes stopped. No Liara deployment/model diagnosis claim is made from this local fixture.
+
+## L3 bounded monitoring
+
+- Persistent15-minute watches, max2services/3HTTPchecks/180probes; provider refresh at most once/minute. Two endpoint failures open an incident without requiring a prior healthy baseline. Endpoint-less workers are normal. Runtime failure and observer401/403 are separate incident kinds; unknown metric units produce no guessed resource alert.
+- Immutable owner-scoped evidence retains acquisition availability, source observation and provenance; incident observation sequence is separate from material generation. Same-failure polls preserve generation; changed release/fingerprint or sustained fresh recovery changes it.
+- Red regressions caught a new probe after stop-during-provider-read, an older delayed probe overwriting newer health, and model completion overwriting newer observation sequence. All fixed;66tests and real local probe/watch acceptance pass. No SQLite write lock is held over network calls.
+- Ruling: L3 fixture/local work proceeds before live L5 bootstrap because the explicit account/provisioning gate is pending, as allowed by the plan. L5 exact approval/intent primitives still precede any actual cloud setup; no circular bootstrap dependency or simulated-live claim.

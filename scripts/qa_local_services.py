@@ -94,6 +94,33 @@ def main():
                 dependency = httpx.get("http://127.0.0.1:8772/quote").json()
                 assert "delivery_toman" in dependency and "shipping_toman" not in dependency
                 output.flush()
+                from liara_guard.observer import MonitorStore, Observer
+
+                clock = [time.time()]
+                monitor = MonitorStore(Path(scratch) / "watch.sqlite")
+                observer = Observer(monitor, {"local-app": target}, clock=lambda: clock[0])
+                watch = observer.start_watch("local-owner", ["local-app"], [check])
+                watched_runner = ProbeRunner(
+                    {"local-app": target}, allow_loopback=True, clock=lambda: clock[0]
+                )
+                observer.tick(watch["id"], watched_runner.run)
+                assert monitor.incidents("local-owner") == []
+                clock[0] += 15
+                observer.tick(watch["id"], watched_runner.run)
+                incident = monitor.incidents("local-owner")[0]
+                assert incident["kind"] == "http_availability" and incident["generation"] == 1
+                clock[0] += 15
+                observer.tick(watch["id"], watched_runner.run)
+                updated = monitor.incident("local-owner", incident["id"])
+                assert updated["generation"] == 1 and updated["observation_sequence"] == 2
+                observer.stop_watch("local-owner", watch["id"])
+                assert (
+                    observer.tick(
+                        watch["id"],
+                        lambda _: (_ for _ in ()).throw(AssertionError("Stopped watch called probe")),
+                    )
+                    == []
+                )
                 record = {
                     "scope": "Real local HTTP, deliberately controlled dependency source change; not Liara deployment.",
                     "healthy": healthy.model_dump(),
@@ -106,6 +133,14 @@ def main():
                     ),
                     "ground_truth_not_supplied_to_model": True,
                     "model_called": False,
+                    "watch": {
+                        "actual_http": True,
+                        "clock": "injected15second steps",
+                        "incident_kind": incident["kind"],
+                        "stable_generation": updated["generation"],
+                        "observation_sequence": updated["observation_sequence"],
+                        "stop_verified": True,
+                    },
                 }
                 assert record["structured_log_contains_evidence"]
             finally:

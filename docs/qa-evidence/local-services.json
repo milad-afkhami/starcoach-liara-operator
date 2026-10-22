@@ -1,58 +1,66 @@
 {
   "scope": "Real local HTTP, deliberately controlled dependency source change; not Liara deployment.",
   "healthy": {
-    "id": "29680439c90e4618b7ae9cc1141fa381",
+    "id": "d377837f9610462788181fae00b3e90d",
     "target_id": "local-app",
     "check_id": "preview",
-    "request_id": "911db0bfd303492cbe74967ad8442b51",
-    "observed_at": 1792631090.087167,
-    "available_at": 1792631090.109695,
+    "request_id": "64e48648541a4414b7940ee5eae65518",
+    "observed_at": 1792631616.7421193,
+    "available_at": 1792631616.7661164,
     "http_status": 200,
-    "elapsed_ms": 22.528868983499706,
+    "elapsed_ms": 23.997940006665885,
     "check_pass": true,
     "contract_pass": null,
     "reason": "pass",
-    "body_digest": "eacc9590a6068d20a44094cfa57d0b0bb0526b68466e4630825fc70fbf1c5a7d",
+    "body_digest": "398a7ccb3205ce713cbdbaceba579edc48bf2332e0585c0618083150b3fa5d0b",
     "payload": {
       "status": "ready",
       "shipping_toman": 10000,
-      "build_id": "d0044915ac9f4d89975f7f73d951eb59",
-      "dependency_build_id": "c1c38e5fae13469ea427b4d43b4cd9d6",
-      "request_id": "911db0bfd303492cbe74967ad8442b51"
+      "build_id": "12657a30eeb042aaaf59c25e66050b9c",
+      "dependency_build_id": "cc48446a44474ebca411b0046d71a587",
+      "request_id": "64e48648541a4414b7940ee5eae65518"
     }
   },
   "broken": {
-    "id": "c99efe34aedf49ed99d41f2ba1292b5d",
+    "id": "e3d45491b038487d9362b8d1c4d7282a",
     "target_id": "local-app",
     "check_id": "preview",
-    "request_id": "affcd593d2454a1e8cbfc5663785e238",
-    "observed_at": 1792631090.6658485,
-    "available_at": 1792631090.6911612,
+    "request_id": "199bbeac884941d48d5de2c582edb449",
+    "observed_at": 1792631617.3196468,
+    "available_at": 1792631617.3447351,
     "http_status": 502,
-    "elapsed_ms": 25.313003978226334,
+    "elapsed_ms": 25.08910500910133,
     "check_pass": false,
     "contract_pass": null,
     "reason": "unexpected_status",
-    "body_digest": "0af9bdb582bc6eefff3f1140184b0add5b6256fbb62225dfd1672b3a5416dd0f",
+    "body_digest": "b0f44ed45367dc2aa6f8c226745fb44d12bad49aa212c68d753f31f6a15d655f",
     "payload": {
       "status": "unavailable",
       "reason": "upstream_invalid",
-      "build_id": "d0044915ac9f4d89975f7f73d951eb59",
-      "dependency_build_id": "0aee3848f8c84db39f531de66cc3bc5b",
-      "request_id": "affcd593d2454a1e8cbfc5663785e238"
+      "build_id": "12657a30eeb042aaaf59c25e66050b9c",
+      "dependency_build_id": "9d721d698dee477b952024b418b01eac",
+      "request_id": "199bbeac884941d48d5de2c582edb449"
     }
   },
   "liveness": {
     "status": "ok",
-    "build_id": "d0044915ac9f4d89975f7f73d951eb59",
-    "request_id": "59715864eae5452fb9b91299e6df4f25"
+    "build_id": "12657a30eeb042aaaf59c25e66050b9c",
+    "request_id": "b716d747b328408eb0dff606afa69c22"
   },
   "dependency_observation": {
     "delivery_toman": 10000,
-    "build_id": "0aee3848f8c84db39f531de66cc3bc5b",
-    "request_id": "46f1d979df4e45d0b379d67f405c24bd"
+    "build_id": "9d721d698dee477b952024b418b01eac",
+    "request_id": "2d2789230b3e44d1a5788eeafcf03bcb"
   },
   "structured_log_contains_evidence": true,
   "ground_truth_not_supplied_to_model": true,
-  "model_called": false
+  "model_called": false,
+  "watch": {
+    "actual_http": true,
+    "clock": "injected15second steps",
+    "incident_kind": "http_availability",
+    "stable_generation": 1,
+    "observation_sequence": 2,
+    "stop_verified": true
+  }
 }
