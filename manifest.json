@@ -1,0 +1,561 @@
+{
+  "status": "DRAFT — unpublished; synthetic Persian narration and edited authentic application evidence",
+  "source_repository": "/home/milad/Desktop/projects/starcoach-liara-operator",
+  "constraints": [
+    "No new model calls",
+    "No model/watch/proposal/execute actions in supplementary capture",
+    "No provider writes or clock changes",
+    "No invented UI/data/verification",
+    "Login excluded"
+  ],
+  "narration": {
+    "file": "recording-sources/liara-final-demo/narration-fa.txt",
+    "sha256": "862fb8db10d802dece876e656a23345fc17cd973919b6585851cbf7883f30fe4",
+    "voice": "fa-IR-FaridNeural",
+    "original_total_seconds": 366.0,
+    "time_stretch": 1.22,
+    "processing": "Pitch-preserving atempo1.22, per-chapter pause padding, loudness normalization -16LUFS/-1.5dBTP, AAC160kbps"
+  },
+  "duration_seconds": 304.91999999999996,
+  "chapter_durations": [
+    48.6,
+    47.72,
+    50.84,
+    49.8,
+    52.88,
+    55.08
+  ],
+  "scenes": [
+    {
+      "chapter": 1,
+      "type": "screenshot_pan",
+      "source": "repository/docs/qa-evidence/live-final-before-diagnosis.png",
+      "duration": 15.0,
+      "crop_start_y": 0,
+      "crop_end_y": 350,
+      "note": "شاهد ثبت‌شدهٔ خرابی — پیش از عملیات",
+      "output_start": 0,
+      "output_end": 15.0
+    },
+    {
+      "chapter": 1,
+      "type": "video",
+      "source": "recording-sources/liara-live-footage/page@94d1efbead5c3a90697f4a5d0258cef5.webm",
+      "input_start": 8.8,
+      "input_end": 14.6,
+      "duration": 5.8,
+      "playback_speed": 0.9999999999999999,
+      "note": "ضبط اصلی — تشخیص واقعی پیش‌تر ثبت شده است",
+      "mobile": false,
+      "output_start": 15.0,
+      "output_end": 20.8
+    },
+    {
+      "chapter": 1,
+      "type": "screenshot_pan",
+      "source": "repository/docs/qa-evidence/live-ready-diagnosis.png",
+      "duration": 27.8,
+      "crop_start_y": 0,
+      "crop_end_y": 650,
+      "note": "سابقهٔ واقعی پیش از اقدام — بدون تحلیل تازه در فیلم",
+      "output_start": 20.8,
+      "output_end": 48.6
+    },
+    {
+      "chapter": 2,
+      "type": "video",
+      "source": "recording-sources/liara-final-demo/page@2aa2cf3e086a1ca960c2c1373591c381.webm",
+      "input_start": 12,
+      "input_end": 25,
+      "duration": 18.0,
+      "playback_speed": 0.7222222222222222,
+      "note": "مرور تکمیلی پس از بازیابی — فقط خواندنی",
+      "mobile": false,
+      "output_start": 48.6,
+      "output_end": 66.6
+    },
+    {
+      "chapter": 2,
+      "type": "video",
+      "source": "recording-sources/liara-final-demo/page@2aa2cf3e086a1ca960c2c1373591c381.webm",
+      "input_start": 25,
+      "input_end": 37,
+      "duration": 17.0,
+      "playback_speed": 0.7058823529411765,
+      "note": "دادهٔ خام تاریخچه — برای بررسی مالک",
+      "mobile": false,
+      "output_start": 66.6,
+      "output_end": 83.6
+    },
+    {
+      "chapter": 2,
+      "type": "screenshot_pan",
+      "source": "repository/docs/qa-evidence/live-final-resources-and-diagnosis.png",
+      "duration": 12.72,
+      "crop_start_y": 350,
+      "crop_end_y": 1050,
+      "note": "نمونهٔ ثبت‌شدهٔ پیش از اقدام — هشدار ساعت همچنان معتبر است",
+      "output_start": 83.6,
+      "output_end": 96.32
+    },
+    {
+      "chapter": 3,
+      "type": "video",
+      "source": "recording-sources/liara-final-demo/page@2aa2cf3e086a1ca960c2c1373591c381.webm",
+      "input_start": 46,
+      "input_end": 68,
+      "duration": 22.0,
+      "playback_speed": 1.0,
+      "note": "مرور تحلیل تاریخی پس از بازیابی — بدون فراخوان مدل",
+      "mobile": false,
+      "output_start": 96.32,
+      "output_end": 118.32
+    },
+    {
+      "chapter": 3,
+      "type": "screenshot_pan",
+      "source": "repository/docs/qa-evidence/live-final-resources-and-diagnosis.png",
+      "duration": 28.84,
+      "crop_start_y": 1250,
+      "crop_end_y": 2050,
+      "note": "اصل تحلیل و ارجاع‌ها در زمان خرابی — پیش از استقرار",
+      "output_start": 118.32,
+      "output_end": 147.16
+    },
+    {
+      "chapter": 4,
+      "type": "video",
+      "source": "recording-sources/liara-live-footage/page@94d1efbead5c3a90697f4a5d0258cef5.webm",
+      "input_start": 14.8,
+      "input_end": 34.8,
+      "duration": 20.0,
+      "playback_speed": 0.9999999999999998,
+      "note": "ضبط اصلی — پیشنهاد دقیقِ نخست، هنوز تأیید نشده",
+      "mobile": false,
+      "output_start": 147.16,
+      "output_end": 167.16
+    },
+    {
+      "chapter": 4,
+      "type": "video",
+      "source": "recording-sources/liara-live-footage/page@94d1efbead5c3a90697f4a5d0258cef5.webm",
+      "input_start": 34.8,
+      "input_end": 314.8,
+      "duration": 7.0,
+      "playback_speed": 40.0,
+      "note": "۲۸۰ ثانیه انتظار واقعی در ۷ ثانیه — مهلت برنامه تغییر نکرده",
+      "mobile": false,
+      "output_start": 167.16,
+      "output_end": 174.16
+    },
+    {
+      "chapter": 4,
+      "type": "video",
+      "source": "recording-sources/liara-live-footage/page@94d1efbead5c3a90697f4a5d0258cef5.webm",
+      "input_start": 314.8,
+      "input_end": 329.3,
+      "duration": 14.48,
+      "playback_speed": 1.0013812154696133,
+      "note": "انقضای واقعی، پیشنهاد تازه، تأیید و یک بار اجرا",
+      "mobile": false,
+      "output_start": 174.16,
+      "output_end": 188.64
+    },
+    {
+      "chapter": 4,
+      "type": "video",
+      "source": "recording-sources/liara-live-footage/page@94d1efbead5c3a90697f4a5d0258cef5.webm",
+      "input_start": 329.3,
+      "input_end": 337.6,
+      "duration": 8.32,
+      "playback_speed": 0.9975961538461552,
+      "note": "ضبط اصلی — همان استقرار تازه در انتظار آماده‌سازی",
+      "mobile": false,
+      "output_start": 188.64,
+      "output_end": 196.96
+    },
+    {
+      "chapter": 5,
+      "type": "video",
+      "source": "recording-sources/liara-live-footage/page@94d1efbead5c3a90697f4a5d0258cef5.webm",
+      "input_start": 337.6,
+      "input_end": 405,
+      "duration": 23.64,
+      "playback_speed": 2.851099830795261,
+      "note": "انتظار آماده‌سازی کوتاه شده — آماده بودن به‌تنهایی کافی نیست",
+      "mobile": false,
+      "output_start": 196.96,
+      "output_end": 220.6
+    },
+    {
+      "chapter": 5,
+      "type": "video",
+      "source": "recording-sources/liara-live-footage/page@94d1efbead5c3a90697f4a5d0258cef5.webm",
+      "input_start": 405,
+      "input_end": 434.25,
+      "duration": 29.24,
+      "playback_speed": 1.000341997264022,
+      "note": "راستی‌آزمایی در زمان واقعی — سه دور، شش بررسی تازه",
+      "mobile": false,
+      "output_start": 220.6,
+      "output_end": 249.84
+    },
+    {
+      "chapter": 6,
+      "type": "video",
+      "source": "recording-sources/liara-live-footage/page@94d1efbead5c3a90697f4a5d0258cef5.webm",
+      "input_start": 434.25,
+      "input_end": 440,
+      "duration": 5.76,
+      "playback_speed": 0.998263888888889,
+      "note": "نتیجهٔ واقعی همان اجرای نهایی — بازیابی تأیید شد",
+      "mobile": false,
+      "output_start": 249.84,
+      "output_end": 255.6
+    },
+    {
+      "chapter": 6,
+      "type": "video",
+      "source": "recording-sources/liara-final-demo/page@2aa2cf3e086a1ca960c2c1373591c381.webm",
+      "input_start": 75,
+      "input_end": 89,
+      "duration": 14.0,
+      "playback_speed": 1.0,
+      "note": "مرور فقط خواندنیِ نتیجه و سابقهٔ همان عملیات",
+      "mobile": false,
+      "output_start": 255.6,
+      "output_end": 269.6
+    },
+    {
+      "chapter": 6,
+      "type": "video",
+      "source": "recording-sources/liara-final-demo/page@2aa2cf3e086a1ca960c2c1373591c381.webm",
+      "input_start": 100,
+      "input_end": 110,
+      "duration": 10.0,
+      "playback_speed": 1.0,
+      "note": "نمای واقعی موبایل — نتیجهٔ همین رخداد",
+      "mobile": true,
+      "output_start": 269.6,
+      "output_end": 279.6
+    },
+    {
+      "chapter": 6,
+      "type": "video",
+      "source": "recording-sources/liara-final-demo/page@2aa2cf3e086a1ca960c2c1373591c381.webm",
+      "input_start": 110,
+      "input_end": 117,
+      "duration": 7.0,
+      "playback_speed": 1.0,
+      "note": "نمای واقعی موبایل — همان عملیات انجام‌شده",
+      "mobile": true,
+      "output_start": 279.6,
+      "output_end": 286.6
+    },
+    {
+      "chapter": 6,
+      "type": "screenshot_pan",
+      "source": "repository/docs/qa-evidence/live-observer-diagnosis.png",
+      "duration": 12.0,
+      "crop_start_y": 0,
+      "crop_end_y": 750,
+      "note": "آزمایش منفی جداگانه — نتیجهٔ نهایی از سند ثبت‌شده نقل شده است",
+      "editorial_reframe": "App viewport scaled to1152x800; independent editorial result below it, never painted as product UI.",
+      "output_start": 286.6,
+      "output_end": 298.6
+    },
+    {
+      "chapter": 6,
+      "type": "video",
+      "source": "recording-sources/liara-final-demo/page@2aa2cf3e086a1ca960c2c1373591c381.webm",
+      "input_start": 90,
+      "input_end": 96,
+      "duration": 6.32,
+      "playback_speed": 0.9493670886075949,
+      "note": "کنترل پایش محدود — در این مرور پایش تازه‌ای آغاز نشد",
+      "mobile": false,
+      "output_start": 298.6,
+      "output_end": 304.92
+    }
+  ],
+  "sources": [
+    {
+      "path": "repository/docs/qa-evidence/live-expiry-repair.json",
+      "sha256": "6a66f903d501529d29844bbecb2fa92d8c281df627812466553a8e6d325e66a7"
+    },
+    {
+      "path": "repository/docs/qa-evidence/live-final-before-diagnosis.png",
+      "sha256": "89979b82734efe3c21daeda28d3efdbc6dcda55ba44395f7dc2df8d0c8a9b154"
+    },
+    {
+      "path": "repository/docs/qa-evidence/live-final-resources-and-diagnosis.png",
+      "sha256": "cd05bbf950371d112099524eb6f6874fe9ae535bef3d0d02ed7db31d7a600780"
+    },
+    {
+      "path": "repository/docs/qa-evidence/live-observer-diagnosis.png",
+      "sha256": "67e2c60d98e71657a798c8d6527148aae51226ad7789ae9388858852f4f51df6"
+    },
+    {
+      "path": "repository/docs/qa-evidence/live-ready-diagnosis.png",
+      "sha256": "079ee77805957a70664ea337c48b72eb15faa4866fdd4d4220fc82e0a0f0e1c0"
+    },
+    {
+      "path": "recording-sources/liara-final-demo/narration.json",
+      "sha256": "7a6b66a887d58bc054a82fd85c9c4754dc0d6faacb28de93d006a359d73281fc"
+    },
+    {
+      "path": "recording-sources/liara-final-demo/page@2aa2cf3e086a1ca960c2c1373591c381.webm",
+      "sha256": "82beadfe81741c96c4f69fa4846f033cf514af548e2292edcad8be01e16fd4fc"
+    },
+    {
+      "path": "recording-sources/liara-final-demo/supplement-events.json",
+      "sha256": "1e647b9929d7895697e2328cc96a95ce7393ddd3554f9a1e5f415830fadaa1dd"
+    },
+    {
+      "path": "recording-sources/liara-live-footage/page@94d1efbead5c3a90697f4a5d0258cef5.webm",
+      "sha256": "d7e23ab7d3adc2f60401a3dd3b676402efe41b058db4862a5d74b930daf3703e"
+    },
+    {
+      "path": "repository/docs/qa-evidence/live-observer-diagnosis.json",
+      "sha256": "9a47bcd5fb5a1b398c137513cca16dac85679a72326cdc921b26a4917b08d52d",
+      "bytes": 10770
+    },
+    {
+      "path": "repository/docs/qa-evidence/live-observer-access.json",
+      "sha256": "48b4fdd1a94f5f505c30fd0ccad30c2cb0345e9511e022249aeecc127d9b2459",
+      "bytes": 2573
+    }
+  ],
+  "truth_notes": [
+    "The genuine diagnosis preceded the original443.44-second recording; this video requests no new inference.",
+    "Initial proposal really remained unused for its five-minute expiry;280seconds are shown in7seconds, with labels.",
+    "One fresh exact replacement was approved and submitted in the original footage.",
+    "Final ordinary recovery had three spaced rounds/six fresh probes; no earlier inconclusive/recheck story is used.",
+    "Supplementary browsing is after recovery and explicitly labelled.",
+    "Negative observer-access screenshot is a separately recorded test and explicitly labelled.",
+    "Full raw source and independent verification details remain in the cited original evidence."
+  ],
+  "excluded_capture": {
+    "file": "recording-sources/liara-final-demo/page@c9faf5f89acc2093f43140029d04fb91.webm",
+    "reason": "Browser-driver selector stopped first supplementary attempt; not used."
+  },
+  "output": {
+    "path": "recording-sources/liara-final-demo/liara-demo.mp4",
+    "sha256": "7064631b095f9ce280669132369a523a017355ec14c2ce400ee0023f64d9b5e3",
+    "bytes": 16584672
+  },
+  "validation": {
+    "duration_seconds": 304.92,
+    "video_codec": "h264",
+    "dimensions": [
+      1440,
+      1080
+    ],
+    "frame_rate": "25/1",
+    "frame_count": 7623,
+    "audio_codec": "aac",
+    "sample_rate": 48000,
+    "audio_duration_seconds": 304.92,
+    "video_duration_seconds": 304.92,
+    "audio_mean_volume_db": -16.6,
+    "audio_peak_db": -1.2,
+    "long_silence_events": [],
+    "full_decode": "passed",
+    "inspection_frames": [
+      {
+        "path": "recording-sources/liara-final-demo/inspection-01-failure.png",
+        "timestamp_seconds": 20,
+        "sha256": "a1fdb7b394f6f988359348f712093530c3b716589c8907c13aa3a9a78d722ff0"
+      },
+      {
+        "path": "recording-sources/liara-final-demo/inspection-02-expiry.png",
+        "timestamp_seconds": 181,
+        "sha256": "1cac75ef5cd3a374b0129f312392c7b2c2ef9c6d5b8982151206beef10330d6c"
+      },
+      {
+        "path": "recording-sources/liara-final-demo/inspection-03-recovery.png",
+        "timestamp_seconds": 256,
+        "sha256": "e0b6a8075d978c433544724bf0f9b9fcde194bc6e21493009bdb814fe730d01b"
+      },
+      {
+        "path": "recording-sources/liara-final-demo/inspection-04-negative.png",
+        "timestamp_seconds": 290,
+        "sha256": "577bcf82cc4ca660f557ef97ee3e59d899bae14d808b97441f857fbcdca87f0f"
+      }
+    ],
+    "actual_result_binding": {
+      "operation_id": "a807cd65ea0748028930f14237fa6bb1",
+      "release_id": "6adac7d5fc09ae5c3cd2272e",
+      "state": "completed",
+      "verification": "recovered",
+      "round_count": 3,
+      "probe_count": 6,
+      "verification_window_seconds": 28.25097680091858,
+      "verification_attempt_count": 1,
+      "rechecks_used": 0
+    }
+  },
+  "transcripts": [
+    {
+      "path": "recording-sources/liara-final-demo/transcript-timed.json",
+      "sha256": "e0c87c72363bf4dae816b6a861ba69d31eeae7489937f6fabe8549d48193eaf1"
+    },
+    {
+      "path": "recording-sources/liara-final-demo/transcript-timed.md",
+      "sha256": "dece5923aeb220e0aaf76d24bd1091e010b9797047f69ee247e7d6d060231139"
+    },
+    {
+      "path": "recording-sources/liara-final-demo/chapters.vtt",
+      "sha256": "9d57a03501d2f9c14c94e7fbbac07199f91e4602318f771c3148ee6f7e23d440"
+    }
+  ],
+  "revision": {
+    "version": 2,
+    "previous": {
+      "path": "recording-sources/liara-final-demo/liara-demo-v1.mp4",
+      "sha256": "f5b568de93b681576d0b19f37928a01147c762f2251d8eee3357ea00f3b5a4da",
+      "bytes": 16354257
+    },
+    "previous_manifest": {
+      "path": "recording-sources/liara-final-demo/manifest-v1.json",
+      "sha256": "1c1e76a8711bea4192438d58bef704d8c4e97f8774896430c8bfee6235e186a2",
+      "bytes": 22434
+    },
+    "changed_interval_seconds": [
+      286.6,
+      298.6
+    ],
+    "change": "Only negative scene reframed: visibly distinct editorial explanation of pre-completion capture and actual final JSON result. No invented product UI.",
+    "audio_packet_hashes": {
+      "liara-demo-v1.mp4": "SHA256=029e840c3116702c292836c5375da4d67d5b64be7ba019c628f34c0502677c9d",
+      "liara-demo.mp4": "SHA256=029e840c3116702c292836c5375da4d67d5b64be7ba019c628f34c0502677c9d"
+    },
+    "audio_identical": true,
+    "transcript_unchanged": true,
+    "other_inspection_frames_byte_identical": true,
+    "negative_case_binding": {
+      "source": {
+        "path": "repository/docs/qa-evidence/live-observer-diagnosis.json",
+        "sha256": "9a47bcd5fb5a1b398c137513cca16dac85679a72326cdc921b26a4917b08d52d",
+        "bytes": 10770
+      },
+      "access_audit": {
+        "path": "repository/docs/qa-evidence/live-observer-access.json",
+        "sha256": "48b4fdd1a94f5f505c30fd0ccad30c2cb0345e9511e022249aeecc127d9b2459",
+        "bytes": 2573
+      },
+      "investigation_state": "done",
+      "cause_family": "observer_access",
+      "outcome": "no_app_change",
+      "action_allowed": false,
+      "all_recorded_provider_requests_read_only": true
+    },
+    "perceptual_audio_review": "No human listening or pronunciation certification claimed."
+  },
+  "visual_inspection": {
+    "status": "Three unchanged v1 frames match byte-for-byte; corrected negative frame inspected separately.",
+    "negative_scene": "App viewport precedes completion, explicitly stated outside it. Recorded final observer_access/no_app_change with zero writes is editorial text citing actual JSON."
+  },
+  "audio_sources": [
+    {
+      "path": "recording-sources/liara-final-demo/narration-01.mp3",
+      "sha256": "59dd2c3c7664a6b0251a283f743e8c7c53e2dc81cfcf8391711337acaf4f6d9c",
+      "bytes": 349776,
+      "duration_seconds": 58.296,
+      "section": 1
+    },
+    {
+      "path": "recording-sources/liara-final-demo/narration-02.mp3",
+      "sha256": "1053f8f51f8a181881c4d0e0eff03acd0e66b04f334010fdd58189f524535fcf",
+      "bytes": 343440,
+      "duration_seconds": 57.24,
+      "section": 2
+    },
+    {
+      "path": "recording-sources/liara-final-demo/narration-03.mp3",
+      "sha256": "dbe70ca302a8ecf50f373dddabf5e9a48d042d4ed187423dcecde92ed2394f2b",
+      "bytes": 366048,
+      "duration_seconds": 61.008,
+      "section": 3
+    },
+    {
+      "path": "recording-sources/liara-final-demo/narration-04.mp3",
+      "sha256": "e8ee21e2a9af05385b65d0c893f08190ba71522ace3f6a53e231fc3d4f076503",
+      "bytes": 358416,
+      "duration_seconds": 59.736,
+      "section": 4
+    },
+    {
+      "path": "recording-sources/liara-final-demo/narration-05.mp3",
+      "sha256": "089d813af4df1d0111420c2550f2c6733c24e0864931c0155761d2494065eab5",
+      "bytes": 381168,
+      "duration_seconds": 63.528,
+      "section": 5
+    },
+    {
+      "path": "recording-sources/liara-final-demo/narration-06.mp3",
+      "sha256": "5659c84ccf09c0c47becc65432969e844568273c1ed9c7b6693c1069d912dfc3",
+      "bytes": 397152,
+      "duration_seconds": 66.192,
+      "section": 6
+    }
+  ],
+  "audio_master": {
+    "path": "recording-sources/liara-final-demo/narration-master.wav",
+    "sha256": "fa4da8d0a98d72b4b177ad3410b33e56f896ff5be31e1e0ba7928c360e917abe",
+    "bytes": 117089382
+  },
+  "assembly_files": [
+    {
+      "path": "recording-sources/liara-final-demo/editorial-labels.ass",
+      "sha256": "1c0dd7e13def3cee1969c6a32823a9366b310954d481337d512c9b3df2fd1997",
+      "bytes": 5191
+    },
+    {
+      "path": "recording-sources/liara-final-demo/render_demo.py",
+      "sha256": "b551895f48c915e37625901be7785d6079fb75039e90c4d8d52b05e89ecc2381",
+      "bytes": 10924
+    },
+    {
+      "path": "recording-sources/liara-final-demo/record_readonly.cjs",
+      "sha256": "346bb8205b793e07b198da9812256dfad8c1067dab4a6027b13677d48b78858a",
+      "bytes": 3842
+    },
+    {
+      "path": "recording-sources/liara-final-demo/build_transcript.py",
+      "sha256": "c3238e3ebf843908c11482f4897103ed0504f14fe1ddc406f13e67b9ab2130eb",
+      "bytes": 1775
+    },
+    {
+      "path": "recording-sources/liara-final-demo/validate_demo.py",
+      "sha256": "fe8280bc7c4b7ca5e50969df77253ec67d2465336c1557abd3cdeacf5a09a9fb",
+      "bytes": 3646
+    },
+    {
+      "path": "recording-sources/liara-final-demo/correct_negative_scene.py",
+      "sha256": "43d9fd263d655695b8776c6407288db04eacfe53382061d84a9411ade1e4e545",
+      "bytes": 2803
+    },
+    {
+      "path": "recording-sources/liara-final-demo/finalize_correction.py",
+      "sha256": "f268b5a02d7e77368d085e3093dd8a97412e418085c6e5fff52b4e8fae3e7554",
+      "bytes": 4012
+    },
+    {
+      "path": "recording-sources/liara-final-demo/capture-failures.json",
+      "sha256": "788462b550d68f6c0a3639d9e81bce3741649e719685632bb765fe8d6235437d",
+      "bytes": 293
+    },
+    {
+      "path": "recording-sources/liara-final-demo/render-notes.json",
+      "sha256": "8171c29bbf1a1ee6afe02fc870d0621e72c3a00a736166f6c88fde557b5e2498",
+      "bytes": 595
+    }
+  ],
+  "public_video": {
+    "file": "demo.mp4",
+    "sha256": "7064631b095f9ce280669132369a523a017355ec14c2ce400ee0023f64d9b5e3",
+    "bytes": 16584672,
+    "status": "Reviewable narrated demonstration, not a contest-submission receipt"
+  }
+}
