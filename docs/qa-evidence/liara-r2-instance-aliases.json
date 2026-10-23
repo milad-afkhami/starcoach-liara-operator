@@ -1,0 +1,21 @@
+{
+  "scope": "Frontend-only instance aliases after actual live applet IDs exposed heading density. No provider/model/domain changes.",
+  "behavior": "Per-service aliases persist for the lifetime of the resource view across refresh/reorder; same actual applet shares one alias across CPU/RAM. New IDs get distinct aliases; no series merging. Exact source ID remains unchanged in the title and closed per-chart sample/source detail.",
+  "tests": {
+    "frontend_behavior": 19,
+    "affected_browser": 3,
+    "typescript_vite_build": "pass",
+    "fixture_ruff": "pass",
+    "diff_check": "pass"
+  },
+  "fixture": "Owned deterministic server8696; actual loopback HTTP8823/8824; real-shaped long IDs in committed fixture, no live reads/writes or inference.",
+  "preserved": "Metric validation, units, timestamps, invalid/unknown handling and gap segmentation are unchanged and covered by retained behavior plus affected browser checks.",
+  "failures": [
+    "Initial RED: alias helper absent, intended failing regression.",
+    "Initial TypeScript build caught inline metric property type widening; helper now accepts structurally typed series without dropping fields. Final build passes."
+  ],
+  "evidence": [
+    "liara-r2-instance-aliases-mobile.png"
+  ],
+  "root_ownership": "Root live acceptance evidence and progress/kanban remain separate, unstaged by this change. Root owns publication and main operator refresh."
+}

@@ -71,3 +71,23 @@ test('evidence is readable before optional JSON and mobile target switching stay
   await expect(page.getByRole('region',{name:'مشاهدهٔ مصرف CPU و RAM'})).toContainText('دادهٔ معتبر با واحد مشخص نداریم')
   await expect(page.locator('svg[role=img]')).toHaveCount(0)
  })
+
+ test('long instance IDs use one friendly CPU RAM alias with exact identity in closed provenance',async({page})=>{
+  await page.setViewportSize({width:390,height:844});await open(page)
+  await page.getByRole('button',{name:'منابع',exact:true}).click()
+  const charts=page.locator('.resource-chart'),labels=charts.locator('.instance-alias')
+  await expect(charts).toHaveCount(2)
+  const names=await labels.allTextContents()
+  expect(names[0]).toBe(names[1]);expect(names[0]).toMatch(/^نمونهٔ /)
+  expect(names[0].length).toBeLessThan(16)
+  const exact='6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY'
+  await expect(labels.first()).toHaveAttribute('title',exact)
+  await expect(charts.first().locator('.instance-provenance')).toBeHidden()
+  await charts.first().getByText('زمان و مقدار نمونه‌ها',{exact:true}).click()
+  await expect(charts.first().locator('.instance-provenance')).toContainText(exact)
+  expect(await charts.locator('polyline').count()).toBeGreaterThan(2)
+  await expect(charts.first()).toContainText('%');await expect(charts.last()).toContainText('MiB')
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)).toBe(false)
+  await charts.first().getByText('زمان و مقدار نمونه‌ها',{exact:true}).click()
+  await page.screenshot({path:'../docs/qa-evidence/liara-r2-instance-aliases-mobile.png',fullPage:true})
+ })

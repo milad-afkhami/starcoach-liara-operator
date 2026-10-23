@@ -157,3 +157,20 @@ test('chart evidence with malformed series and duplicate times cannot crash or i
  history.redacted_payload.provider_data.cpu.result=[{applet:'a',values:[[900,.1],[900,.2],[920,.3]]}]
  assert.deepEqual(resourceSeries(undefined,history)[0].points,[{at:900,value:null},{at:920,value:30}])
 })
+
+test('resource instance aliases keep long IDs distinct and stable across CPU RAM ordering and refresh',async()=>{
+ const {resourceInstanceAliases}=await import('./presentation.ts')
+ const long='6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY'
+ const other=long.replace('91d88b18','81d88b18')
+ const rows=[{applet:long,metric:'cpu'},{applet:other,metric:'cpu'},{applet:long,metric:'memory'},{applet:other,metric:'memory'}]
+ const aliases=resourceInstanceAliases(rows)
+ assert.equal(aliases.size,2)
+ assert.notEqual(aliases.get(long),aliases.get(other))
+ assert.ok(aliases.get(long)!.startsWith('نمونهٔ '))
+ assert.ok(aliases.get(long)!.length<16)
+ assert.equal(resourceInstanceAliases([...rows].reverse()).get(long),aliases.get(long))
+ const refreshed=resourceInstanceAliases([{applet:'000-new',metric:'cpu'},{applet:long,metric:'memory'}],aliases)
+ assert.equal(refreshed.get(long),aliases.get(long))
+ assert.notEqual(refreshed.get('000-new'),aliases.get(other))
+ assert.equal(rows[0].applet,long)
+})

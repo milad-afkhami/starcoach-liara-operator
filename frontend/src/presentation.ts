@@ -181,3 +181,12 @@ export function codexHandoff(incident:any,evidence:any[]):string{
  '4. Recheck the original failing request after the fix. This handoff is not approval to deploy, restart, resize, alter configuration or change secrets. Sensitive operations require separate owner approval. Do not read, copy or print secrets.'
  ].join('\n\n'))
 }
+
+/** Friendly labels are view-local; source identities and metric series stay untouched. */
+export function resourceInstanceAliases<T extends {applet:string}>(series:T[],previous:ReadonlyMap<string,string>=new Map()):Map<string,string>{
+ const aliases=new Map(previous)
+ for(const applet of [...new Set(series.map(item=>item.applet))].sort()){
+  if(!aliases.has(applet))aliases.set(applet,`نمونهٔ ${(aliases.size+1).toLocaleString('fa-IR')}`)
+ }
+ return aliases
+}

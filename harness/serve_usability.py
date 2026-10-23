@@ -63,11 +63,18 @@ class Provider(FixtureProvider):
             [now + 20, 0.99],
         ]
         sources = {
-            "cpu": {"result": [{"applet": "app-1", "values": rows}]},
+            "cpu": {
+                "result": [
+                    {
+                        "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+                        "values": rows,
+                    }
+                ]
+            },
             "memory": {
                 "result": [
                     {
-                        "applet": "app-1",
+                        "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
                         "values": [[at, 104857600 + index * 1048576] for index, (at, _) in enumerate(rows)],
                     }
                 ]
