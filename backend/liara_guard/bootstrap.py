@@ -40,16 +40,17 @@ def quote_for(catalogue, plan_id, bundle_id):
         raise ValueError("Incomplete plan catalogue") from exc
 
 
-def select_quote(catalogue):
+def select_quote(catalogue, *, min_ram_gb="0.5", min_cpu="0.5", min_disk_gb=5):
+    ram_floor, cpu_floor, disk_floor = number(min_ram_gb), number(min_cpu), number(min_disk_gb)
     candidates = []
     for plan_id in catalogue.get("projects", {}):
         try:
             q = quote_for(catalogue, plan_id, "basic")
             if (
                 q["region"] == "iran"
-                and number(q["ram_gb"]) >= Decimal("0.5")
-                and number(q["cpu"]) >= Decimal("0.5")
-                and q["disk_gb"] >= 5
+                and number(q["ram_gb"]) >= ram_floor
+                and number(q["cpu"]) >= cpu_floor
+                and q["disk_gb"] >= disk_floor
             ):
                 candidates.append(q)
         except ValueError:

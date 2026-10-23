@@ -282,7 +282,7 @@ def test_material_release_refresh_invalidates_running_decision(tmp_path):
         release.set()
         for _ in range(40):
             result = c.get("/api/incidents/" + identifier).json()["incident"]
-            if result["investigation_state"] not in ("queued", "running"):
+            if result["investigation_state"] in ("failed", "done", "canceled"):
                 break
             time.sleep(0.05)
         assert result["diagnosis"] is None
@@ -581,3 +581,110 @@ def test_owner_can_resume_watch_and_history_after_logout_and_new_login(tmp_path)
     revoked.cookies.set("liara_owner", first_cookie)
     assert revoked.get("/api/state").status_code == 401
     assert revoked.post("/api/watches/" + watch["id"] + "/stop").status_code == 401
+
+
+def test_setup_recommendation_is_authenticated_validated_read_only_and_current(tmp_path):
+    from test_bootstrap import catalogue
+    provider = FixtureProvider(tmp_path / 'demo')
+    reads = []
+    provider.plan_catalogue = lambda: reads.append('catalogue') or catalogue()
+    application = create_app(state_path=tmp_path / 'state.sqlite', session_secret='s' * 32,
+                             password_hash=hash_password(PASSWORD), public_origin=ORIGIN,
+                             provider=provider, registry_config=local_config(), model=Model(), mode='fixture')
+    caller = TestClient(application)
+    caller.headers['origin'] = ORIGIN
+    body = {'workload': 'web', 'ram_gb': 1, 'cpu_cores': 1, 'disk_gb': 10}
+    assert caller.post('/api/setup/recommendation', json=body).status_code == 401
+    assert reads == []
+    caller = login(application)
+    assert caller.post('/api/setup/recommendation', json={**body, 'cpu_cores': -1}).status_code == 422
+    result = caller.post('/api/setup/recommendation', json=body).json()
+    assert result['scope'] == 'guidance_only' and result['catalogue_status'] == 'available'
+    assert result['recommended_plan']['plan_id'] == 'g2-medium'
+    assert result['recommended_plan']['ram_gb'] == '1'
+    assert result['checked_at'] > 0 and len(result['steps']) >= 4
+    assert reads == ['catalogue']
+    assert caller.get('/api/state').json()['operations'] == []
+    assert 'load_capacity' not in result and 'token' not in str(result)
+
+
+def test_setup_guidance_keeps_unavailable_catalogue_and_no_matching_plan_explicit(tmp_path):
+    from liara_guard.client import ProviderError
+    from test_bootstrap import catalogue
+    provider = FixtureProvider(tmp_path / 'demo')
+    application = create_app(state_path=tmp_path / 'state.sqlite', session_secret='s' * 32,
+                             password_hash=hash_password(PASSWORD), public_origin=ORIGIN,
+                             provider=provider, registry_config=local_config(), model=Model(), mode='fixture')
+    caller = login(application)
+    body = {'workload': 'worker', 'ram_gb': 8, 'cpu_cores': 2, 'disk_gb': 5}
+    unavailable = caller.post('/api/setup/recommendation', json=body).json()
+    assert unavailable['catalogue_status'] == 'unavailable' and unavailable['recommended_plan'] is None
+    provider.plan_catalogue = lambda: catalogue()
+    no_match = caller.post('/api/setup/recommendation', json=body).json()
+    assert no_match['catalogue_status'] == 'no_matching_plan' and no_match['recommended_plan'] is None
+
+    def denied():
+        raise ProviderError('observer_auth', 401)
+
+    provider.plan_catalogue = denied
+    denied_result = caller.post('/api/setup/recommendation', json=body).json()
+    assert denied_result['catalogue_error'] == 'observer_auth'
+    assert denied_result['recommended_plan'] is None
+
+
+def test_recheck_recovery_is_owner_only_once_and_never_redeploys(tmp_path):
+    from liara_guard.approvals import OperationSpec
+    from liara_guard.verification import VerificationPolicy
+    from liara_guard.contracts import RegisteredHttpCheck
+    provider=FixtureProvider(tmp_path/'demo',clock=lambda:100)
+    writes=[]
+    provider.upload_source=lambda *args:writes.append('upload')
+    provider.create_release=lambda *args:writes.append('release')
+    check=RegisteredHttpCheck(id='preview',target_id='local-store',origin='https://store.liara.run',path='/preview',require_request_echo=True)
+    policy=VerificationPolicy(id='p',checks=[check],expected_build_fields={'preview':{'build_id':'store'}},expected_release_ids={'local-dep':'$submitted'},changed_target_id='local-dep')
+    application=create_app(state_path=tmp_path/'recheck.sqlite',session_secret='s'*32,password_hash=hash_password(PASSWORD),
+        public_origin=ORIGIN,provider=provider,registry_config={'verification_policies':{'local-store':policy.model_dump()}},mode='live',clock=lambda:100,model=Model())
+    policy=application.state.registry.policies['local-store']
+    c=login(application)
+    c.get('/api/services')
+    owner=durable_owner(application,c)
+    target=application.state.registry.resolve('local-store')
+    incident=application.state.monitor.ensure_incident(owner,target,'http_availability','manual',100)
+    op=application.state.operations.propose(owner,OperationSpec(kind='redeploy_known_good',team_id='local-fixture',app_name='delivery',app_id='local-dep',
+        artifact_sha256='a'*64,before_release_id='r1',incident_id=incident['id'],incident_generation=1,failure_fingerprint='f',verification_policy_hash=policy.digest()))
+    original={'state':'inconclusive','reason':'insufficient_fresh_identity_proof','probe_ids':['original']}
+    application.state.operations.update(op,state='failed',release_id='r2',source_id='source',approved_at=80,submitted_at=90,reconcile_until=700,verification=original)
+    incident.update(repair_operation_id=op['id'],repair_pending=True)
+    application.state.monitor.save_incident(incident,1)
+    path='/api/operations/'+op['id']+'/recheck-recovery'
+    assert TestClient(application).post(path,headers={'Origin':ORIGIN}).status_code==401
+    response=c.post(path)
+    assert response.status_code==202, response.json()
+    assert response.json()['state']=='awaiting_serving'
+    assert response.json()['verification_attempts'][0]['result']==original
+    assert c.post(path).status_code==409
+    assert c.post('/api/operations/'+op['id']+'/execute').status_code==409
+    assert writes==[]
+
+
+def test_rejected_draft_diagnostics_require_owner_and_never_become_a_diagnosis(tmp_path):
+    class Rejected(Model):
+        def generate(self,request,schema,cancel):
+            return ModelResult(request_id=request.id,provider='test',model='test',cli_version='test',elapsed_ms=1,
+                value={'action':'conclude','outcome':'repair_candidate','cause_family':'dependency_schema','summary':'unaccepted draft',
+                       'evidence_ids':[],'contradiction_ids':[],'unknowns':[],'next_check':None})
+    application=app(tmp_path,model=Rejected())
+    synthetic_multiowner_scope(application)
+    first,other=login(application),login(application)
+    identifier=first.post('/api/services/local-store/investigate',json={'question':'Inspect'}).json()['id']
+    for _ in range(60):
+        if first.get('/api/incidents/'+identifier).json()['incident']['investigation_state']=='failed':
+            break
+        time.sleep(.05)
+    path='/api/incidents/'+identifier+'/rejected-drafts'
+    assert TestClient(application).get(path).status_code==401
+    assert other.get(path).status_code==404
+    records=first.get(path).json()
+    assert records['rejected_not_a_diagnosis'] is True
+    assert records['diagnostics'][0]['reason']=='missing_support'
+    assert first.get('/api/incidents/'+identifier).json()['incident']['diagnosis'] is None

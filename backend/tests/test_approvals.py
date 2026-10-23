@@ -288,3 +288,79 @@ def test_status_that_finishes_after_reconciliation_deadline_cannot_start_verific
     p.release_status = late_status
     value = e.reconcile("owner", op["id"])
     assert value["state"] == "unknown" and value["error"] == "reconciliation_expired"
+
+
+def test_recheck_claim_is_owner_bound_once_readonly_and_preserves_original_attempt(tmp_path):
+    s,e,p,op,now,_=setup(tmp_path)
+    original={'state':'inconclusive','reason':'insufficient_fresh_identity_proof','probe_ids':['old'],'observed_window':[110,160]}
+    s.update(op,state='failed',release_id='r2',source_id='source',approved_at=80,submitted_at=90,reconcile_until=701,verification=original)
+    claimed=s.claim_recovery_recheck('owner',op['id'],incident_generation=1,policy_hash='policy')
+    assert claimed['state']=='awaiting_serving' and claimed['recovery_rechecks_used']==1
+    assert claimed['verification_attempts'][0]['result']==original
+    assert claimed['verification']==original and claimed['reconcile_until']==701
+    with pytest.raises(ApprovalError):
+        s.claim_recovery_recheck('owner',op['id'],incident_generation=1,policy_hash='policy')
+    assert p.writes==[]
+
+
+@pytest.mark.parametrize('case',['owner','expired','generation','policy','no_release','failed_result'])
+def test_recovery_recheck_rejects_changed_or_ineligible_binding(tmp_path,case):
+    s,e,p,op,now,_=setup(tmp_path)
+    s.update(op,state='failed',release_id=None if case=='no_release' else 'r2',source_id='source',approved_at=80,submitted_at=90,reconcile_until=701,
+             verification={'state':'failed' if case=='failed_result' else 'inconclusive','reason':'proof','probe_ids':[]})
+    if case=='expired':
+        now[0]=702
+    with pytest.raises(ApprovalError):
+        s.claim_recovery_recheck('other' if case=='owner' else 'owner',op['id'],
+                                incident_generation=2 if case=='generation' else 1,
+                                policy_hash='changed' if case=='policy' else 'policy')
+    assert p.writes==[]
+
+
+def test_restart_preserves_original_and_interrupted_recheck_attempts(tmp_path):
+    s,e,p,op,now,_=setup(tmp_path)
+    original={'state':'inconclusive','reason':'original','probe_ids':['old']}
+    s.update(op,state='failed',release_id='r2',source_id='source',approved_at=80,submitted_at=90,reconcile_until=701,verification=original)
+    claimed=s.claim_recovery_recheck('owner',op['id'],incident_generation=1,policy_hash='policy')
+    s.update(claimed,state='verifying')
+    restarted=OperationStore(s.path,clock=lambda:now[0])
+    result=restarted.get('owner',op['id'])
+    assert len(result['verification_attempts'])==2
+    assert result['verification_attempts'][0]['result']==original
+    assert result['verification_attempts'][1]['result']['reason']=='verification_interrupted'
+    with pytest.raises(ApprovalError):
+        restarted.claim_recovery_recheck('owner',op['id'],incident_generation=1,policy_hash='policy')
+
+
+def test_duplicate_completion_cannot_append_or_replace_an_attempt(tmp_path):
+    s,e,p,op,now,_=setup(tmp_path)
+    original={'state':'inconclusive','reason':'original','probe_ids':['old']}
+    s.update(op,state='failed',release_id='r2',source_id='source',approved_at=80,submitted_at=90,reconcile_until=701,verification=original)
+    claimed=s.claim_recovery_recheck('owner',op['id'],incident_generation=1,policy_hash='policy')
+    proof={'state':'recovered','reason':'verified','probe_ids':['a','b','c']}
+    result=s.finish_verification(claimed,proof)
+    with pytest.raises(ApprovalError):
+        s.finish_verification(claimed,{'state':'inconclusive','reason':'late','probe_ids':[]})
+    assert s.get('owner',op['id'])['verification_attempts']==result['verification_attempts']
+
+
+def test_stale_readiness_transition_is_compare_and_swap_and_preserves_latest_fields(tmp_path):
+    s,e,p,op,now,_=setup(tmp_path)
+    original={'state':'inconclusive','reason':'original','probe_ids':['old']}
+    s.update(op,state='failed',release_id='r2',source_id='source',approved_at=80,submitted_at=90,reconcile_until=701,verification=original)
+    claimed=s.claim_recovery_recheck('owner',op['id'],incident_generation=1,policy_hash='policy')
+    current=s.transition_verification(claimed,last_serving_checked=101)
+    with pytest.raises(ApprovalError):
+        s.transition_verification(claimed,last_serving_checked=99,serving_readiness={'state':'ready'})
+    assert s.get('owner',op['id'])==current
+
+
+def test_generic_update_cannot_bypass_a_newer_verification_revision(tmp_path):
+    s,e,p,op,now,_=setup(tmp_path)
+    s.update(op,state='failed',release_id='r2',source_id='source',approved_at=80,submitted_at=90,reconcile_until=701,
+             verification={'state':'inconclusive','reason':'original','probe_ids':[]})
+    claimed=s.claim_recovery_recheck('owner',op['id'],incident_generation=1,policy_hash='policy')
+    current=s.transition_verification(claimed,last_serving_checked=101)
+    with pytest.raises(ApprovalError):
+        s.update(claimed,state='verifying')
+    assert s.get('owner',op['id'])==current

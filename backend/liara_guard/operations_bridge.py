@@ -133,10 +133,28 @@ class LiaraOperationProvider:
         target = self.registry.resolve(target_id)
         releases = self.client.get_releases(target)
         applets = self.client.get_applets(target)
-        if releases.quality != "fresh" or applets.quality != "fresh":
+        if releases.quality != "fresh":
             return {"state": "unknown"}
         current = releases.redacted_payload.get("currentRelease")
         row = next((r for r in releases.redacted_payload.get("releases", []) if r.get("_id") == current), {})
+        if applets.quality != "fresh":
+            # New network runtimes do not expose the legacy applet endpoint. Its
+            # concrete lifecycle interface must independently establish completeness.
+            reader = getattr(self.client, "get_runtime_identity", None)
+            if reader is None:
+                return {"state": "unknown"}
+            try:
+                identity = reader(target, [r.get("_id") for r in releases.redacted_payload.get("releases", [])])
+            except ProviderError:
+                return {"state": "unknown"}
+            coverage = identity.get("coverage", {})
+            result = {
+                "state": "unknown", "current_release_id": current, "serving_release_ids": [],
+                "identity_source": identity.get("identity_source"), "identity_coverage": coverage,
+            }
+            if coverage.get("complete_interval") is True and identity.get("serving_release_ids"):
+                result.update(state=row.get("state", "unknown"), serving_release_ids=identity["serving_release_ids"])
+            return result
         active = [
             a
             for a in applets.redacted_payload.get("applets", [])
@@ -147,4 +165,6 @@ class LiaraOperationProvider:
             "state": row.get("state", "unknown"),
             "current_release_id": current,
             "serving_release_ids": ids,
+            "identity_source": "legacy_applets",
+            "identity_coverage": {"direct_snapshot": True, **applets.coverage},
         }

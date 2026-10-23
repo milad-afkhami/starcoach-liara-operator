@@ -276,3 +276,53 @@ def test_read_budget_bounds_a_slow_chunk_stream(monkeypatch):
     with pytest.raises(ProviderError) as error:
         c.list_services()
     assert error.value.code == "read_budget_exceeded"
+
+
+def test_current_network_events_wrapper_preserves_instance_action_release_and_time():
+    payload = {'data': [{'id': 'container', 'action': 'start', 'status': 'start',
+                         'time': str(int(NOW)-10), 'release': 'release-current', 'tag': 'v1'}]}
+    result = client(lambda _: httpx.Response(200, json=payload)).get_events(TARGET, NOW-300, NOW)
+    assert result.quality == 'fresh'
+    assert result.redacted_payload['events'] == payload['data']
+    assert result.coverage['schema'] == 'network-events-v1'
+
+
+@pytest.mark.parametrize('stamp,quality', [(NOW-301, 'stale'), (NOW+60, 'invalid')])
+def test_network_event_collection_keeps_source_age_and_future_data_explicit(stamp, quality):
+    payload = {'data': [{'id': 'c', 'action': 'start', 'time': str(int(stamp)), 'release': 'r'}]}
+    result = client(lambda _: httpx.Response(200, json=payload)).get_events(TARGET, NOW-300, NOW)
+    assert result.quality == quality and result.observed_at == stamp
+
+
+def test_network_events_with_missing_identity_are_not_current_runtime_proof():
+    payload = {'data': [{'id': 'c', 'action': 'start', 'time': str(int(NOW))}]}
+    result = client(lambda _: httpx.Response(200, json=payload)).get_events(TARGET, NOW-300, NOW)
+    assert result.quality == 'unavailable' and result.redacted_payload['error'] == 'invalid_events'
+
+
+def test_network_event_queries_use_integer_unix_seconds_required_by_current_api():
+    seen = []
+    c = LiaraClient('test-token', TEAM, clock=lambda: 1000.75,
+                    transport=httpx.MockTransport(lambda request: seen.append(request) or httpx.Response(200, json={'data': []})))
+    result = c.get_events(TARGET, 600.2, 1001.9)
+    assert result.quality == 'fresh'
+    assert seen[0].url.params['start'] == '700'
+    assert seen[0].url.params['end'] == '1000'
+
+
+def test_current_v2_log_query_uses_boolean_last_lines_and_retains_window_and_normalization():
+    seen=[]
+    def handler(request):
+        seen.append(request)
+        if request.url.params.get('last_lines')!='false':
+            return httpx.Response(400,json={'message':'"last_lines" must be a boolean'})
+        return httpx.Response(200,json={'data':[{'metaData':{'releaseId':'current-release'},'values':[
+            [str(int((NOW-1)*1_000_000_000)),json.dumps({'_entry':'current request reached the service','type':'stdout'})]
+        ]}]})
+    result=client(handler,log_version='v2').get_logs(TARGET,NOW-3600)
+    assert result.quality=='fresh'
+    assert result.redacted_payload['lines'][0]['message']=='current request reached the service'
+    assert result.redacted_payload['lines'][0]['release_id']=='current-release'
+    assert seen[0].url.params['start']==str(int(NOW-300))
+    assert seen[0].url.params['last_lines']=='false'
+    assert result.coverage['window_start']==NOW-300

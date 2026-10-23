@@ -1,0 +1,91 @@
+{
+  "scope": "Actual provider HTTP responses and public cloud probes. QA changes only this isolated observer HTTP authorization after real inventory. No provider credential is revoked and no app credential/configuration is changed.",
+  "provider_requests": [
+    {
+      "method": "GET",
+      "path": "/v1/projects",
+      "status": 200,
+      "received_at": 1792717657.8866346
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/liara-watch-storefront-2026",
+      "status": 401,
+      "received_at": 1792717658.5169468
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/liara-watch-storefront-2026/applets",
+      "status": 401,
+      "received_at": 1792717659.1609411
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/liara-watch-storefront-2026/releases",
+      "status": 401,
+      "received_at": 1792717659.7965314
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/liara-watch-storefront-2026/metrics/summary",
+      "status": 401,
+      "received_at": 1792717660.0186057
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/liara-watch-storefront-2026",
+      "status": 401,
+      "received_at": 1792717660.894744
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/liara-watch-storefront-2026/applets",
+      "status": 401,
+      "received_at": 1792717661.0569818
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/liara-watch-storefront-2026/releases",
+      "status": 401,
+      "received_at": 1792717661.2337418
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/liara-watch-storefront-2026/metrics/summary",
+      "status": 401,
+      "received_at": 1792717661.45135
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/liara-watch-storefront-2026",
+      "status": 401,
+      "received_at": 1792717662.315272
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/liara-watch-storefront-2026/applets",
+      "status": 401,
+      "received_at": 1792717662.544909
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/liara-watch-storefront-2026/releases",
+      "status": 401,
+      "received_at": 1792717662.7797356
+    },
+    {
+      "method": "GET",
+      "path": "/v2/projects/liara-watch-storefront-2026/logs",
+      "status": 401,
+      "received_at": 1792717663.4401288
+    },
+    {
+      "method": "GET",
+      "path": "/v1/projects/liara-watch-storefront-2026/metrics/summary",
+      "status": 401,
+      "received_at": 1792717663.6306837
+    }
+  ],
+  "write_attempts": [],
+  "credential_loss_at": 1792717657.8891177
+}

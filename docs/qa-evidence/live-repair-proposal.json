@@ -1,0 +1,33 @@
+{
+  "id": "d762c41cf08d45e18a4324961764c0fb",
+  "spec": {
+    "kind": "redeploy_known_good",
+    "team_id": "6ad5c19f63b87278cb8cd077",
+    "app_name": "liara-watch-delivery-2026",
+    "app_id": "6adaa46772aa39a87a745fd7",
+    "artifact_sha256": "98f87ed8347d53c7532621c0ea11bbfe6c51c3f24f7d95f16abd2b234c569ce3",
+    "platform": "docker",
+    "port": 8000,
+    "plan_id": null,
+    "bundle_plan_id": null,
+    "network_id": null,
+    "hourly_price_toman": null,
+    "price_verified_at": null,
+    "before_release_id": "6adaaec772aa39a87a786916",
+    "incident_id": "63a6a82586664f4082bf794c431948de",
+    "incident_generation": 2,
+    "failure_fingerprint": "1ded4e1aa712698d1b8e1d8d97065909568917ffd595bab3a10d639d5e6c79ed",
+    "verification_policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127"
+  },
+  "digest": "d4888ca4e3f9806e76ef84c77eec163d4efe3daa4435c431df0c4aedf5548e3b",
+  "created_at": 1792716914.2644362,
+  "expires_at": 1792717214.2644362,
+  "state": "proposed",
+  "approved_at": null,
+  "source_id": null,
+  "release_id": null,
+  "submitted_at": null,
+  "reconcile_until": null,
+  "last_reconciled": null,
+  "error": null
+}

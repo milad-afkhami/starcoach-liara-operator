@@ -1,0 +1,139 @@
+{
+  "scope": "Read-only exact approved storefront; no raw service log contents or credentials",
+  "reads": [
+    {
+      "case": "integer_500",
+      "route": "/v2/projects/liara-watch-storefront-2026/logs",
+      "params": {
+        "start": 1792716453,
+        "direction": "forward",
+        "last_lines": 500
+      },
+      "status": 400,
+      "retrieved_at": 1792716753.7714653,
+      "sanitized_error": {
+        "statusCode": 400,
+        "error": "Bad Request",
+        "message": "\"last_lines\" must be a boolean",
+        "data": null
+      }
+    },
+    {
+      "case": "boolean_false",
+      "route": "/v2/projects/liara-watch-storefront-2026/logs",
+      "params": {
+        "start": 1792716453,
+        "direction": "forward",
+        "last_lines": "false"
+      },
+      "status": 200,
+      "retrieved_at": 1792716753.9934611,
+      "top_level_keys": [
+        "data"
+      ],
+      "groups": 2,
+      "line_count": 3,
+      "group_schema": [
+        {
+          "keys": [
+            "metaData",
+            "values"
+          ],
+          "metadata_keys": [
+            "releaseId"
+          ],
+          "sample_pair_types": [
+            "str",
+            "str"
+          ]
+        },
+        {
+          "keys": [
+            "metaData",
+            "values"
+          ],
+          "metadata_keys": [
+            "releaseId"
+          ],
+          "sample_pair_types": [
+            "str",
+            "str"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "omitted",
+      "route": "/v2/projects/liara-watch-storefront-2026/logs",
+      "params": {
+        "start": 1792716453,
+        "direction": "forward"
+      },
+      "status": 200,
+      "retrieved_at": 1792716754.1851523,
+      "top_level_keys": [
+        "data"
+      ],
+      "groups": 2,
+      "line_count": 3,
+      "group_schema": [
+        {
+          "keys": [
+            "metaData",
+            "values"
+          ],
+          "metadata_keys": [
+            "releaseId"
+          ],
+          "sample_pair_types": [
+            "str",
+            "str"
+          ]
+        },
+        {
+          "keys": [
+            "metaData",
+            "values"
+          ],
+          "metadata_keys": [
+            "releaseId"
+          ],
+          "sample_pair_types": [
+            "str",
+            "str"
+          ]
+        }
+      ]
+    }
+  ],
+  "normalized_reads_after_fix": [
+    {
+      "app_name": "liara-watch-delivery-2026",
+      "quality": "fresh",
+      "line_count": 8,
+      "observed_at": 1792716564.2597606,
+      "available_at": 1792716814.8608599,
+      "observed_minus_available": -250.6010992527008,
+      "error": null,
+      "coverage": {
+        "truncated": false,
+        "empty": false,
+        "window_start": 1792716514.6168056
+      }
+    },
+    {
+      "app_name": "liara-watch-storefront-2026",
+      "quality": "fresh",
+      "line_count": 3,
+      "observed_at": 1792716742.940527,
+      "available_at": 1792716815.2557936,
+      "observed_minus_available": -72.3152666091919,
+      "error": null,
+      "coverage": {
+        "truncated": false,
+        "empty": false,
+        "window_start": 1792716515.0464811
+      }
+    }
+  ]
+}

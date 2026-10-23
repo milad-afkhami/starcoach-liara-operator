@@ -185,3 +185,34 @@ def test_success_spacing_is_measured_after_reads_not_before_slow_provider():
         policy(), "r2", slow, probe, clock=lambda: now[0], sleep=lambda n: now.__setitem__(0, now[0] + n)
     )
     assert result["state"] == "recovered" and calls == [109, 114, 119]
+
+
+def test_recovery_proof_keeps_event_identity_source_and_completeness_coverage():
+    now, calls, original, probe = setup()
+    def provider(target):
+        return {**original(target),'identity_source':'network_lifecycle_events',
+                'identity_coverage':{'complete_interval':True,'creation_anchor':50,'event_count':2}}
+    result = verify_recovery(policy(),'r2',provider,probe,clock=lambda:now[0],sleep=lambda n:now.__setitem__(0,now[0]+n))
+    assert result['state'] == 'recovered'
+    assert len(result['provider_identity']) == 6
+    assert all(row['identity_source']=='network_lifecycle_events' and row['coverage']['complete_interval']
+               for row in result['provider_identity'])
+
+
+def test_serving_readiness_wait_does_not_spend_verification_probe_budget():
+    from liara_guard.verification import serving_readiness
+    now,calls,provider,probe=setup()
+    ready=serving_readiness(policy(),'r2',provider,clock=lambda:now[0],deadline=700)
+    assert ready['state']=='ready' and calls==[]
+    original=provider
+    waiting=serving_readiness(policy(),'r2',lambda target:{**original(target),'serving_release_ids':['old']},clock=lambda:now[0],deadline=700)
+    assert waiting['state']=='waiting' and calls==[]
+
+
+def test_verification_retains_raw_safe_probe_payloads_and_exact_policy_snapshot():
+    now,calls,provider,probe=setup()
+    result=verify_recovery(policy(),'r2',provider,probe,clock=lambda:now[0],sleep=lambda n:now.__setitem__(0,now[0]+n))
+    assert len(result['probe_results'])==3
+    assert result['probe_results'][0]['payload']=={'build_id':'store-build','dependency_build_id':'good-dep','request_id':'p1'}
+    assert result['probe_results'][0]['observed_at']==100
+    assert result['verification_policy']==policy().model_dump()

@@ -96,14 +96,15 @@ class OperationStore:
                 )
             for row in db.execute("SELECT id,data FROM operations WHERE state='verifying'").fetchall():
                 value = json.loads(row["data"])
+                interrupted = {"state": "inconclusive", "reason": "verification_interrupted", "probe_ids": []}
+                attempts = value.setdefault("verification_attempts", [])
+                if value.get("verification") and value["verification"] not in [attempt["result"] for attempt in attempts]:
+                    attempts.append({"attempt": len(attempts)+1, "result": value["verification"]})
+                attempts.append({"attempt": len(attempts)+1, "result": interrupted})
                 value.update(
                     state="failed",
                     error="verification_interrupted",
-                    verification={
-                        "state": "inconclusive",
-                        "reason": "verification_interrupted",
-                        "probe_ids": [],
-                    },
+                    verification=interrupted,
                 )
                 db.execute(
                     "UPDATE operations SET state='failed',data=? WHERE id=?", (encode(value), row["id"])
@@ -192,7 +193,7 @@ class OperationStore:
             if value["state"] != "approved" or value["expires_at"] <= self.clock():
                 raise ApprovalError("Unexpired unused approval required")
             if db.execute(
-                "SELECT 1 FROM operations WHERE target=? AND id!=? AND state IN ('checking','uploading','creating_release','creating_app','pending','ready','verifying','unknown')",
+                "SELECT 1 FROM operations WHERE target=? AND id!=? AND state IN ('checking','uploading','creating_release','creating_app','pending','ready','awaiting_serving','verifying','unknown')",
                 (row["target"], identifier),
             ).fetchone():
                 raise ApprovalError("Target has unresolved operation")
@@ -202,9 +203,111 @@ class OperationStore:
             )
         return value
 
-    def update(self, value, **changes):
-        value = {**value, **changes}
+    def claim_recovery_recheck(self, owner, identifier, *, incident_generation, policy_hash):
+        """Claim one observation-only retry; this path cannot invoke the write executor."""
         with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            row = db.execute("SELECT data FROM operations WHERE id=? AND owner=?", (identifier, owner)).fetchone()
+            if not row:
+                raise ApprovalError("Operation unavailable")
+            value = json.loads(row[0])
+            spec = value["spec"]
+            if (value["state"] != "failed" or value.get("verification", {}).get("state") != "inconclusive"
+                    or spec["kind"] != "redeploy_known_good" or not value.get("release_id") or not value.get("source_id")
+                    or value.get("submitted_at") is None or value.get("approved_at") is None
+                    or value.get("recovery_rechecks_used", 0) != 0
+                    or value.get("reconcile_until") is None or self.clock() >= value["reconcile_until"]
+                    or spec["incident_generation"] != incident_generation or spec["verification_policy_hash"] != policy_hash
+                    or hashlib.sha256(encode(spec).encode()).hexdigest() != value["digest"]):
+                raise ApprovalError("Read-only recovery recheck unavailable")
+            if db.execute(
+                "SELECT 1 FROM operations WHERE target=? AND id!=? AND state IN ('checking','uploading','creating_release','pending','ready','awaiting_serving','verifying','unknown')",
+                (f"{spec['team_id']}:{spec['app_name']}", identifier),
+            ).fetchone():
+                raise ApprovalError("Target has another unresolved operation")
+            attempts = value.setdefault("verification_attempts", [])
+            if not attempts:
+                attempts.append({"attempt": 1, "result": value["verification"]})
+            value.update(state="awaiting_serving", recovery_rechecks_used=1,
+                         recovery_recheck_generation=incident_generation, recovery_recheck_requested_at=self.clock(),
+                         recovery_recheck_release_id=value["release_id"],
+                         verification_revision=value.get("verification_revision", 0)+1,
+                         verification_attempt_id=uuid.uuid4().hex, error=None)
+            db.execute("UPDATE operations SET state=?,data=? WHERE id=?", (value["state"], encode(value), identifier))
+            return value
+
+    def transition_verification(self, value, **changes):
+        allowed = {"state", "last_serving_checked", "serving_readiness", "verification_attempt_id", "error"}
+        if set(changes)-allowed:
+            raise ApprovalError("Verification transition cannot change operation scope")
+        with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            row = db.execute("SELECT data FROM operations WHERE id=? AND owner=?", (value["id"], value["owner"])).fetchone()
+            latest = json.loads(row[0])
+            if (latest.get("verification_attempt_id") != value.get("verification_attempt_id")
+                    or latest.get("verification_revision", 0) != value.get("verification_revision", 0)
+                    or latest["state"] != value["state"]
+                    or latest["state"] not in ("ready", "awaiting_serving", "verifying")
+                    or latest.get("release_id") != value.get("release_id")
+                    or latest["spec"] != value["spec"] or latest["digest"] != value["digest"]):
+                raise ApprovalError("Verification attempt changed")
+            latest.update(changes, verification_revision=latest.get("verification_revision", 0)+1)
+            db.execute("UPDATE operations SET state=?,data=? WHERE id=? AND owner=?",
+                       (latest["state"], encode(latest), latest["id"], latest["owner"]))
+            return latest
+
+    def finish_verification(self, value, result, *, publish_incident=False, policy_hash=None):
+        with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            row = db.execute("SELECT data FROM operations WHERE id=? AND owner=?", (value["id"], value["owner"])).fetchone()
+            latest = json.loads(row[0])
+            if (latest.get("verification_attempt_id") != value.get("verification_attempt_id")
+                    or latest.get("verification_revision", 0) != value.get("verification_revision", 0)
+                    or latest["state"] not in ("ready", "awaiting_serving", "verifying")
+                    or latest.get("release_id") != value.get("release_id")
+                    or latest["spec"] != value["spec"] or latest["digest"] != value["digest"]):
+                raise ApprovalError("Verification attempt changed")
+            if publish_incident:
+                row = db.execute("SELECT data FROM incidents WHERE id=? AND owner=?",
+                                 (latest["spec"]["incident_id"], latest["owner"])).fetchone()
+                if not row:
+                    raise ApprovalError("Incident unavailable")
+                incident = json.loads(row[0])
+                reason = None
+                if policy_hash != latest["spec"]["verification_policy_hash"]:
+                    reason = "approved_policy_changed"
+                elif incident.get("repair_operation_id") != latest["id"] or incident["state"] != "open":
+                    reason = "incident_operation_changed"
+                elif latest.get("recovery_rechecks_used") and (
+                        incident["generation"] != latest.get("recovery_recheck_generation")
+                        or latest["release_id"] != latest.get("recovery_recheck_release_id")):
+                    reason = "operation_binding_changed"
+                if reason is not None:
+                    result = {**result, "state": "inconclusive", "reason": reason}
+                else:
+                    incident["verification"] = result
+                    if result["state"] == "recovered":
+                        incident.update(state="recovered", generation=incident["generation"]+1, repair_pending=False)
+                    db.execute("UPDATE incidents SET state=?,data=? WHERE id=? AND owner=?",
+                               (incident["state"], encode(incident), incident["id"], latest["owner"]))
+            attempts = latest.setdefault("verification_attempts", [])
+            attempts.append({"attempt": len(attempts)+1, "result": result})
+            latest.update(state="completed" if result["state"] == "recovered" else "failed", verification=result,
+                          verification_revision=latest.get("verification_revision", 0)+1)
+            db.execute("UPDATE operations SET state=?,data=? WHERE id=?", (latest["state"], encode(latest), latest["id"]))
+            return latest
+
+    def update(self, value, **changes):
+        with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            row = db.execute("SELECT data FROM operations WHERE id=? AND owner=?", (value["id"], value["owner"])).fetchone()
+            latest = json.loads(row[0])
+            if (latest.get("verification_attempt_id") or latest.get("verification_revision")) and (
+                    latest.get("verification_attempt_id") != value.get("verification_attempt_id")
+                    or latest.get("verification_revision", 0) != value.get("verification_revision", 0)
+                    or latest["state"] != value["state"]):
+                raise ApprovalError("Verification attempt changed")
+            value = {**value, **changes}
             db.execute(
                 "UPDATE operations SET state=?,data=? WHERE id=? AND owner=?",
                 (value["state"], encode(value), value["id"], value["owner"]),

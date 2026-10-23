@@ -1,0 +1,991 @@
+{
+  "scope": "Actual final-source live UI unused approval expiry, fresh exact replacement and one cloud redeployment; unchanged deadlines/verification thresholds",
+  "started_at": "2026-10-23T02:29:16.748Z",
+  "phases": [
+    {
+      "name": "actual_failure_and_existing_genuine_diagnosis",
+      "elapsed_ms": 8694,
+      "at": "2026-10-23T02:29:25.442Z"
+    },
+    {
+      "name": "unused_exact_proposal_created",
+      "elapsed_ms": 14822,
+      "at": "2026-10-23T02:29:31.570Z"
+    },
+    {
+      "name": "expiry_enforced_in_ui_and_api_without_write",
+      "elapsed_ms": 325611,
+      "at": "2026-10-23T02:34:42.359Z"
+    },
+    {
+      "name": "fresh_replacement_prepared",
+      "elapsed_ms": 327036,
+      "at": "2026-10-23T02:34:43.784Z"
+    },
+    {
+      "name": "one_fresh_approved_deployment_submitted",
+      "elapsed_ms": 328906,
+      "at": "2026-10-23T02:34:45.654Z"
+    },
+    {
+      "name": "final_operation_result",
+      "elapsed_ms": 434239,
+      "at": "2026-10-23T02:36:30.987Z"
+    },
+    {
+      "name": "verified_result_rendered_desktop_mobile",
+      "elapsed_ms": 441652,
+      "at": "2026-10-23T02:36:38.400Z"
+    }
+  ],
+  "errors": [],
+  "initial_proposal": {
+    "id": "fd696571b3dd44309f7537b129737b43",
+    "spec": {
+      "kind": "redeploy_known_good",
+      "team_id": "6ad5c19f63b87278cb8cd077",
+      "app_name": "liara-watch-delivery-2026",
+      "app_id": "6adaa46772aa39a87a745fd7",
+      "artifact_sha256": "98f87ed8347d53c7532621c0ea11bbfe6c51c3f24f7d95f16abd2b234c569ce3",
+      "platform": "docker",
+      "port": 8000,
+      "plan_id": null,
+      "bundle_plan_id": null,
+      "network_id": null,
+      "hourly_price_toman": null,
+      "price_verified_at": null,
+      "before_release_id": "6adaba84aa8f2ba374e868bc",
+      "incident_id": "60046c5732e846629f8c152ce19d81ea",
+      "incident_generation": 3,
+      "failure_fingerprint": "1ded4e1aa712698d1b8e1d8d97065909568917ffd595bab3a10d639d5e6c79ed",
+      "verification_policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127"
+    },
+    "digest": "61d9bb341dd6c9c578429f13b9cdd0f4a8c0edfe1f971db0c3314e7223526504",
+    "created_at": 1792722571.551865,
+    "expires_at": 1792722871.551865,
+    "state": "proposed",
+    "approved_at": null,
+    "source_id": null,
+    "release_id": null,
+    "submitted_at": null,
+    "reconcile_until": null,
+    "last_reconciled": null,
+    "error": null
+  },
+  "expired_approval": {
+    "status": 409,
+    "body": {
+      "detail": "approval_rejected"
+    },
+    "operation": {
+      "approved_at": null,
+      "created_at": 1792722571.551865,
+      "digest": "61d9bb341dd6c9c578429f13b9cdd0f4a8c0edfe1f971db0c3314e7223526504",
+      "error": null,
+      "expires_at": 1792722871.551865,
+      "id": "fd696571b3dd44309f7537b129737b43",
+      "last_reconciled": null,
+      "reconcile_until": null,
+      "release_id": null,
+      "source_id": null,
+      "spec": {
+        "app_id": "6adaa46772aa39a87a745fd7",
+        "app_name": "liara-watch-delivery-2026",
+        "artifact_sha256": "98f87ed8347d53c7532621c0ea11bbfe6c51c3f24f7d95f16abd2b234c569ce3",
+        "before_release_id": "6adaba84aa8f2ba374e868bc",
+        "bundle_plan_id": null,
+        "failure_fingerprint": "1ded4e1aa712698d1b8e1d8d97065909568917ffd595bab3a10d639d5e6c79ed",
+        "hourly_price_toman": null,
+        "incident_generation": 3,
+        "incident_id": "60046c5732e846629f8c152ce19d81ea",
+        "kind": "redeploy_known_good",
+        "network_id": null,
+        "plan_id": null,
+        "platform": "docker",
+        "port": 8000,
+        "price_verified_at": null,
+        "team_id": "6ad5c19f63b87278cb8cd077",
+        "verification_policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127"
+      },
+      "state": "proposed",
+      "submitted_at": null
+    }
+  },
+  "replacement_proposal": {
+    "id": "a807cd65ea0748028930f14237fa6bb1",
+    "spec": {
+      "kind": "redeploy_known_good",
+      "team_id": "6ad5c19f63b87278cb8cd077",
+      "app_name": "liara-watch-delivery-2026",
+      "app_id": "6adaa46772aa39a87a745fd7",
+      "artifact_sha256": "98f87ed8347d53c7532621c0ea11bbfe6c51c3f24f7d95f16abd2b234c569ce3",
+      "platform": "docker",
+      "port": 8000,
+      "plan_id": null,
+      "bundle_plan_id": null,
+      "network_id": null,
+      "hourly_price_toman": null,
+      "price_verified_at": null,
+      "before_release_id": "6adaba84aa8f2ba374e868bc",
+      "incident_id": "60046c5732e846629f8c152ce19d81ea",
+      "incident_generation": 3,
+      "failure_fingerprint": "1ded4e1aa712698d1b8e1d8d97065909568917ffd595bab3a10d639d5e6c79ed",
+      "verification_policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127"
+    },
+    "digest": "61d9bb341dd6c9c578429f13b9cdd0f4a8c0edfe1f971db0c3314e7223526504",
+    "created_at": 1792722883.7586412,
+    "expires_at": 1792723183.7586412,
+    "state": "proposed",
+    "approved_at": null,
+    "source_id": null,
+    "release_id": null,
+    "submitted_at": null,
+    "reconcile_until": null,
+    "last_reconciled": null,
+    "error": null
+  },
+  "execution": {
+    "approved_at": 1792722883.8813968,
+    "created_at": 1792722883.7586412,
+    "digest": "61d9bb341dd6c9c578429f13b9cdd0f4a8c0edfe1f971db0c3314e7223526504",
+    "error": null,
+    "expires_at": 1792723183.7586412,
+    "id": "a807cd65ea0748028930f14237fa6bb1",
+    "last_reconciled": null,
+    "reconcile_until": 1792723484.7621145,
+    "release_id": "6adac7d5fc09ae5c3cd2272e",
+    "source_id": "1e396921-8931-4e96-9d40-647e2b327231.tar.gz",
+    "spec": {
+      "app_id": "6adaa46772aa39a87a745fd7",
+      "app_name": "liara-watch-delivery-2026",
+      "artifact_sha256": "98f87ed8347d53c7532621c0ea11bbfe6c51c3f24f7d95f16abd2b234c569ce3",
+      "before_release_id": "6adaba84aa8f2ba374e868bc",
+      "bundle_plan_id": null,
+      "failure_fingerprint": "1ded4e1aa712698d1b8e1d8d97065909568917ffd595bab3a10d639d5e6c79ed",
+      "hourly_price_toman": null,
+      "incident_generation": 3,
+      "incident_id": "60046c5732e846629f8c152ce19d81ea",
+      "kind": "redeploy_known_good",
+      "network_id": null,
+      "plan_id": null,
+      "platform": "docker",
+      "port": 8000,
+      "price_verified_at": null,
+      "team_id": "6ad5c19f63b87278cb8cd077",
+      "verification_policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127"
+    },
+    "state": "pending",
+    "submitted_at": 1792722884.7621145
+  },
+  "operation": {
+    "approved_at": 1792722883.8813968,
+    "created_at": 1792722883.7586412,
+    "digest": "61d9bb341dd6c9c578429f13b9cdd0f4a8c0edfe1f971db0c3314e7223526504",
+    "error": null,
+    "expires_at": 1792723183.7586412,
+    "id": "a807cd65ea0748028930f14237fa6bb1",
+    "last_reconciled": 1792722908.4704876,
+    "last_serving_checked": 1792722950.955966,
+    "reconcile_until": 1792723484.7621145,
+    "release_id": "6adac7d5fc09ae5c3cd2272e",
+    "serving_readiness": {
+      "provider_identity": [
+        {
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792722953,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "state": "READY",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "current_release_id": "6adac7d5fc09ae5c3cd2272e",
+          "identity_coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 5,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 25,
+            "history_end": 1792722954,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 7,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adac7d5fc09ae5c3cd2272e"
+          ],
+          "state": "READY",
+          "target_id": "6adaa46772aa39a87a745fd7"
+        }
+      ],
+      "reason": "serving_identity_ready",
+      "state": "ready"
+    },
+    "source_id": "1e396921-8931-4e96-9d40-647e2b327231.tar.gz",
+    "spec": {
+      "app_id": "6adaa46772aa39a87a745fd7",
+      "app_name": "liara-watch-delivery-2026",
+      "artifact_sha256": "98f87ed8347d53c7532621c0ea11bbfe6c51c3f24f7d95f16abd2b234c569ce3",
+      "before_release_id": "6adaba84aa8f2ba374e868bc",
+      "bundle_plan_id": null,
+      "failure_fingerprint": "1ded4e1aa712698d1b8e1d8d97065909568917ffd595bab3a10d639d5e6c79ed",
+      "hourly_price_toman": null,
+      "incident_generation": 3,
+      "incident_id": "60046c5732e846629f8c152ce19d81ea",
+      "kind": "redeploy_known_good",
+      "network_id": null,
+      "plan_id": null,
+      "platform": "docker",
+      "port": 8000,
+      "price_verified_at": null,
+      "team_id": "6ad5c19f63b87278cb8cd077",
+      "verification_policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127"
+    },
+    "state": "completed",
+    "submitted_at": 1792722884.7621145,
+    "verification": {
+      "observed_window": [
+        1792722960.8101602,
+        1792722989.061137
+      ],
+      "policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127",
+      "probe_ids": [
+        "183efa76e1dd4dc18c6c97716cfa5138",
+        "4542959a2a9f4b03b91cf7c7736acf5c",
+        "fcab0e13f07a40dca098e36f6c39d425",
+        "892bfe0986d84d27b201d95341c94d51",
+        "e458ac5c5cd24f23836576f713f23348",
+        "83e0bf932d6e4307a1823fd28b190e56"
+      ],
+      "probe_results": [
+        {
+          "available_at": 1792722967.8928602,
+          "body_digest": "578ceb6ca218f72ea9ed614d87da8fc44ad6eafcdb3486efcc2291c4e46adbf3",
+          "check_id": "store-preview",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 1106.2894309870899,
+          "http_status": 200,
+          "id": "183efa76e1dd4dc18c6c97716cfa5138",
+          "observed_at": 1792722966.7865713,
+          "payload": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "bcade88d1da14957936365f80c82aff5",
+            "shipping_toman": 10000,
+            "status": "ready"
+          },
+          "reason": "pass",
+          "request_id": "bcade88d1da14957936365f80c82aff5",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "available_at": 1792722968.7420678,
+          "body_digest": "be99f58392064df3008af0884805388a1ee9ae1f87ad4d7369e038f7f202b73d",
+          "check_id": "dep-quote",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 849.013949977234,
+          "http_status": 200,
+          "id": "4542959a2a9f4b03b91cf7c7736acf5c",
+          "observed_at": 1792722967.8930545,
+          "payload": {
+            "build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "52ebb40dfcdf4bbc929d278e0f961db1",
+            "shipping_toman": 10000
+          },
+          "reason": "pass",
+          "request_id": "52ebb40dfcdf4bbc929d278e0f961db1",
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "available_at": 1792722978.455875,
+          "body_digest": "c4acd8e17cf01c1a91fdeddc0410695decf74947c4d868487cef3532157aaa01",
+          "check_id": "store-preview",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 258.70548299280927,
+          "http_status": 200,
+          "id": "fcab0e13f07a40dca098e36f6c39d425",
+          "observed_at": 1792722978.1971705,
+          "payload": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "6ae603dcd0494afca5819fde7575ce25",
+            "shipping_toman": 10000,
+            "status": "ready"
+          },
+          "reason": "pass",
+          "request_id": "6ae603dcd0494afca5819fde7575ce25",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "available_at": 1792722978.6545246,
+          "body_digest": "d37c8a0795b3b6f3ccbf8ae7c9d493ef8a36a167e458702a2a11052e787f426c",
+          "check_id": "dep-quote",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 198.42885102843866,
+          "http_status": 200,
+          "id": "892bfe0986d84d27b201d95341c94d51",
+          "observed_at": 1792722978.4560966,
+          "payload": {
+            "build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "3e2697e16da5437f84da6b54f95f6f31",
+            "shipping_toman": 10000
+          },
+          "reason": "pass",
+          "request_id": "3e2697e16da5437f84da6b54f95f6f31",
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "available_at": 1792722988.8742862,
+          "body_digest": "9f0fee0752559a489955d79f835bdf625d7676af0353f296d22becd1ca58ffed",
+          "check_id": "store-preview",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 227.98808198422194,
+          "http_status": 200,
+          "id": "e458ac5c5cd24f23836576f713f23348",
+          "observed_at": 1792722988.6462986,
+          "payload": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "c12c95f5e6a841ba912318051c4b0b67",
+            "shipping_toman": 10000,
+            "status": "ready"
+          },
+          "reason": "pass",
+          "request_id": "c12c95f5e6a841ba912318051c4b0b67",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "available_at": 1792722989.0609975,
+          "body_digest": "74d478bc55dfd77868c23e7363f3e82cfcdcc064e828ffde90b04e2e6fbd4fb9",
+          "check_id": "dep-quote",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 186.52148300316185,
+          "http_status": 200,
+          "id": "83e0bf932d6e4307a1823fd28b190e56",
+          "observed_at": 1792722988.8744762,
+          "payload": {
+            "build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "7de761c7130a47889bc6a35a8b16e0a5",
+            "shipping_toman": 10000
+          },
+          "reason": "pass",
+          "request_id": "7de761c7130a47889bc6a35a8b16e0a5",
+          "target_id": "6adaa46772aa39a87a745fd7"
+        }
+      ],
+      "provider_identity": [
+        {
+          "checked_at": 1792722963.3123672,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792722963,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792722966.7864692,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 5,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 25,
+            "history_end": 1792722965,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 7,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adac7d5fc09ae5c3cd2272e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adac7d5fc09ae5c3cd2272e"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792722975.3298354,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792722975,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792722978.1970692,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 5,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 25,
+            "history_end": 1792722977,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 7,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adac7d5fc09ae5c3cd2272e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adac7d5fc09ae5c3cd2272e"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792722985.906827,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792722985,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792722988.6462297,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 5,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 25,
+            "history_end": 1792722987,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 7,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adac7d5fc09ae5c3cd2272e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adac7d5fc09ae5c3cd2272e"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        }
+      ],
+      "reason": "original_checks_and_serving_build_verified",
+      "round_times": [
+        1792722960.810278,
+        1792722973.7422419,
+        1792722983.6547387
+      ],
+      "state": "recovered",
+      "submitted_release_id": "6adac7d5fc09ae5c3cd2272e",
+      "success_probe_ids": [
+        "183efa76e1dd4dc18c6c97716cfa5138",
+        "4542959a2a9f4b03b91cf7c7736acf5c",
+        "fcab0e13f07a40dca098e36f6c39d425",
+        "892bfe0986d84d27b201d95341c94d51",
+        "e458ac5c5cd24f23836576f713f23348",
+        "83e0bf932d6e4307a1823fd28b190e56"
+      ],
+      "verification_policy": {
+        "changed_target_id": "6adaa46772aa39a87a745fd7",
+        "checks": [
+          {
+            "expected_status": 200,
+            "id": "store-preview",
+            "origin": "https://liara-watch-storefront-2026.liara.run",
+            "path": "/preview",
+            "require_request_echo": true,
+            "target_id": "6adaa8e2aa8f2ba374e1617d",
+            "timeout_seconds": 3
+          },
+          {
+            "expected_status": 200,
+            "id": "dep-quote",
+            "origin": "https://liara-watch-delivery-2026.liara.run",
+            "path": "/quote",
+            "require_request_echo": true,
+            "target_id": "6adaa46772aa39a87a745fd7",
+            "timeout_seconds": 3
+          }
+        ],
+        "expected_build_fields": {
+          "dep-quote": {
+            "build_id": "7789311e98f849daac989526de9a9f2a"
+          },
+          "store-preview": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "dependency_build_id": "7789311e98f849daac989526de9a9f2a"
+          }
+        },
+        "expected_release_ids": {
+          "6adaa46772aa39a87a745fd7": "$submitted",
+          "6adaa8e2aa8f2ba374e1617d": "6adaabf07b39ae0264b0116e"
+        },
+        "id": "dependency-recovery"
+      }
+    },
+    "verification_attempt_id": "1319cd98d3fd41ac94097a28e9637f71",
+    "verification_attempts": [
+      {
+        "attempt": 1,
+        "result": {
+          "observed_window": [
+            1792722960.8101602,
+            1792722989.061137
+          ],
+          "policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127",
+          "probe_ids": [
+            "183efa76e1dd4dc18c6c97716cfa5138",
+            "4542959a2a9f4b03b91cf7c7736acf5c",
+            "fcab0e13f07a40dca098e36f6c39d425",
+            "892bfe0986d84d27b201d95341c94d51",
+            "e458ac5c5cd24f23836576f713f23348",
+            "83e0bf932d6e4307a1823fd28b190e56"
+          ],
+          "probe_results": [
+            {
+              "available_at": 1792722967.8928602,
+              "body_digest": "578ceb6ca218f72ea9ed614d87da8fc44ad6eafcdb3486efcc2291c4e46adbf3",
+              "check_id": "store-preview",
+              "check_pass": true,
+              "contract_pass": null,
+              "elapsed_ms": 1106.2894309870899,
+              "http_status": 200,
+              "id": "183efa76e1dd4dc18c6c97716cfa5138",
+              "observed_at": 1792722966.7865713,
+              "payload": {
+                "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+                "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+                "request_id": "bcade88d1da14957936365f80c82aff5",
+                "shipping_toman": 10000,
+                "status": "ready"
+              },
+              "reason": "pass",
+              "request_id": "bcade88d1da14957936365f80c82aff5",
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "available_at": 1792722968.7420678,
+              "body_digest": "be99f58392064df3008af0884805388a1ee9ae1f87ad4d7369e038f7f202b73d",
+              "check_id": "dep-quote",
+              "check_pass": true,
+              "contract_pass": null,
+              "elapsed_ms": 849.013949977234,
+              "http_status": 200,
+              "id": "4542959a2a9f4b03b91cf7c7736acf5c",
+              "observed_at": 1792722967.8930545,
+              "payload": {
+                "build_id": "7789311e98f849daac989526de9a9f2a",
+                "request_id": "52ebb40dfcdf4bbc929d278e0f961db1",
+                "shipping_toman": 10000
+              },
+              "reason": "pass",
+              "request_id": "52ebb40dfcdf4bbc929d278e0f961db1",
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "available_at": 1792722978.455875,
+              "body_digest": "c4acd8e17cf01c1a91fdeddc0410695decf74947c4d868487cef3532157aaa01",
+              "check_id": "store-preview",
+              "check_pass": true,
+              "contract_pass": null,
+              "elapsed_ms": 258.70548299280927,
+              "http_status": 200,
+              "id": "fcab0e13f07a40dca098e36f6c39d425",
+              "observed_at": 1792722978.1971705,
+              "payload": {
+                "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+                "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+                "request_id": "6ae603dcd0494afca5819fde7575ce25",
+                "shipping_toman": 10000,
+                "status": "ready"
+              },
+              "reason": "pass",
+              "request_id": "6ae603dcd0494afca5819fde7575ce25",
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "available_at": 1792722978.6545246,
+              "body_digest": "d37c8a0795b3b6f3ccbf8ae7c9d493ef8a36a167e458702a2a11052e787f426c",
+              "check_id": "dep-quote",
+              "check_pass": true,
+              "contract_pass": null,
+              "elapsed_ms": 198.42885102843866,
+              "http_status": 200,
+              "id": "892bfe0986d84d27b201d95341c94d51",
+              "observed_at": 1792722978.4560966,
+              "payload": {
+                "build_id": "7789311e98f849daac989526de9a9f2a",
+                "request_id": "3e2697e16da5437f84da6b54f95f6f31",
+                "shipping_toman": 10000
+              },
+              "reason": "pass",
+              "request_id": "3e2697e16da5437f84da6b54f95f6f31",
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "available_at": 1792722988.8742862,
+              "body_digest": "9f0fee0752559a489955d79f835bdf625d7676af0353f296d22becd1ca58ffed",
+              "check_id": "store-preview",
+              "check_pass": true,
+              "contract_pass": null,
+              "elapsed_ms": 227.98808198422194,
+              "http_status": 200,
+              "id": "e458ac5c5cd24f23836576f713f23348",
+              "observed_at": 1792722988.6462986,
+              "payload": {
+                "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+                "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+                "request_id": "c12c95f5e6a841ba912318051c4b0b67",
+                "shipping_toman": 10000,
+                "status": "ready"
+              },
+              "reason": "pass",
+              "request_id": "c12c95f5e6a841ba912318051c4b0b67",
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "available_at": 1792722989.0609975,
+              "body_digest": "74d478bc55dfd77868c23e7363f3e82cfcdcc064e828ffde90b04e2e6fbd4fb9",
+              "check_id": "dep-quote",
+              "check_pass": true,
+              "contract_pass": null,
+              "elapsed_ms": 186.52148300316185,
+              "http_status": 200,
+              "id": "83e0bf932d6e4307a1823fd28b190e56",
+              "observed_at": 1792722988.8744762,
+              "payload": {
+                "build_id": "7789311e98f849daac989526de9a9f2a",
+                "request_id": "7de761c7130a47889bc6a35a8b16e0a5",
+                "shipping_toman": 10000
+              },
+              "reason": "pass",
+              "request_id": "7de761c7130a47889bc6a35a8b16e0a5",
+              "target_id": "6adaa46772aa39a87a745fd7"
+            }
+          ],
+          "provider_identity": [
+            {
+              "checked_at": 1792722963.3123672,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 1,
+                "creation_anchor": 1792714978.693,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 2,
+                "history_end": 1792722963,
+                "history_start": 1792714977,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adaabf07b39ae0264b0116e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaabf07b39ae0264b0116e"
+              ],
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "checked_at": 1792722966.7864692,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 5,
+                "creation_anchor": 1792713831.05,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 25,
+                "history_end": 1792722965,
+                "history_start": 1792713830,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 7,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adac7d5fc09ae5c3cd2272e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adac7d5fc09ae5c3cd2272e"
+              ],
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "checked_at": 1792722975.3298354,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 1,
+                "creation_anchor": 1792714978.693,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 2,
+                "history_end": 1792722975,
+                "history_start": 1792714977,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adaabf07b39ae0264b0116e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaabf07b39ae0264b0116e"
+              ],
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "checked_at": 1792722978.1970692,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 5,
+                "creation_anchor": 1792713831.05,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 25,
+                "history_end": 1792722977,
+                "history_start": 1792713830,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 7,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adac7d5fc09ae5c3cd2272e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adac7d5fc09ae5c3cd2272e"
+              ],
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "checked_at": 1792722985.906827,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 1,
+                "creation_anchor": 1792714978.693,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 2,
+                "history_end": 1792722985,
+                "history_start": 1792714977,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adaabf07b39ae0264b0116e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaabf07b39ae0264b0116e"
+              ],
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "checked_at": 1792722988.6462297,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 5,
+                "creation_anchor": 1792713831.05,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 25,
+                "history_end": 1792722987,
+                "history_start": 1792713830,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 7,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adac7d5fc09ae5c3cd2272e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adac7d5fc09ae5c3cd2272e"
+              ],
+              "target_id": "6adaa46772aa39a87a745fd7"
+            }
+          ],
+          "reason": "original_checks_and_serving_build_verified",
+          "round_times": [
+            1792722960.810278,
+            1792722973.7422419,
+            1792722983.6547387
+          ],
+          "state": "recovered",
+          "submitted_release_id": "6adac7d5fc09ae5c3cd2272e",
+          "success_probe_ids": [
+            "183efa76e1dd4dc18c6c97716cfa5138",
+            "4542959a2a9f4b03b91cf7c7736acf5c",
+            "fcab0e13f07a40dca098e36f6c39d425",
+            "892bfe0986d84d27b201d95341c94d51",
+            "e458ac5c5cd24f23836576f713f23348",
+            "83e0bf932d6e4307a1823fd28b190e56"
+          ],
+          "verification_policy": {
+            "changed_target_id": "6adaa46772aa39a87a745fd7",
+            "checks": [
+              {
+                "expected_status": 200,
+                "id": "store-preview",
+                "origin": "https://liara-watch-storefront-2026.liara.run",
+                "path": "/preview",
+                "require_request_echo": true,
+                "target_id": "6adaa8e2aa8f2ba374e1617d",
+                "timeout_seconds": 3
+              },
+              {
+                "expected_status": 200,
+                "id": "dep-quote",
+                "origin": "https://liara-watch-delivery-2026.liara.run",
+                "path": "/quote",
+                "require_request_echo": true,
+                "target_id": "6adaa46772aa39a87a745fd7",
+                "timeout_seconds": 3
+              }
+            ],
+            "expected_build_fields": {
+              "dep-quote": {
+                "build_id": "7789311e98f849daac989526de9a9f2a"
+              },
+              "store-preview": {
+                "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+                "dependency_build_id": "7789311e98f849daac989526de9a9f2a"
+              }
+            },
+            "expected_release_ids": {
+              "6adaa46772aa39a87a745fd7": "$submitted",
+              "6adaa8e2aa8f2ba374e1617d": "6adaabf07b39ae0264b0116e"
+            },
+            "id": "dependency-recovery"
+          }
+        }
+      }
+    ],
+    "verification_revision": 13
+  },
+  "status": "pass",
+  "video_path": "/tmp/codex-scratchpad-01a15365-1037-78b2-a19e-e47bb7574a9c/liara-live-footage/page@94d1efbead5c3a90697f4a5d0258cef5.webm"
+}

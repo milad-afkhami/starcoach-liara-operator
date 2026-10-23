@@ -37,6 +37,7 @@ class MonitorStore:
             CREATE TABLE IF NOT EXISTS incident_evidence(incident TEXT,evidence TEXT,PRIMARY KEY(incident,evidence));
             CREATE TABLE IF NOT EXISTS probe_ids(watch TEXT,request_id TEXT,PRIMARY KEY(watch,request_id));
             CREATE TABLE IF NOT EXISTS release_state(owner TEXT,target TEXT,release TEXT,PRIMARY KEY(owner,target));
+            CREATE TABLE IF NOT EXISTS investigation_rejections(owner TEXT,incident TEXT,run TEXT,call INTEGER,data TEXT,UNIQUE(owner,incident,run,call));
             """)
         self.path.chmod(0o600)
 
@@ -79,6 +80,25 @@ class MonitorStore:
                 )
             ]
 
+    def record_rejected_draft(self, owner, incident_id, record):
+        self.incident(owner, incident_id)
+        safe = redact(record)
+        encoded = encode(safe)
+        if len(encoded.encode("utf-8")) > 8192:
+            raise ValueError("Rejected diagnostic exceeds byte bound")
+        with self.connect() as db:
+            db.execute("INSERT OR IGNORE INTO investigation_rejections VALUES(?,?,?,?,?)",
+                       (owner, incident_id, safe["run_id"], safe["call"], encoded))
+            db.execute("DELETE FROM investigation_rejections WHERE owner=? AND incident=? AND rowid NOT IN (SELECT rowid FROM investigation_rejections WHERE owner=? AND incident=? ORDER BY rowid DESC LIMIT 8)",
+                       (owner, incident_id, owner, incident_id))
+
+    def rejected_drafts(self, owner, incident_id):
+        self.incident(owner, incident_id)
+        with self.connect() as db:
+            return [json.loads(row[0]) for row in db.execute(
+                "SELECT data FROM investigation_rejections WHERE owner=? AND incident=? ORDER BY rowid DESC LIMIT 8",
+                (owner, incident_id))]
+
     def save_incident(self, value, expected_generation=None):
         with self.connect() as db:
             db.execute("BEGIN IMMEDIATE")
@@ -96,6 +116,7 @@ class MonitorStore:
                 "investigation_state",
                 "investigation_run_id",
                 "investigation_error",
+                "investigation_progress",
                 "proposal",
                 "execution",
                 "verification",

@@ -1,0 +1,282 @@
+{
+  "observed_at": "2026-10-23T01:07:59.042Z",
+  "elapsed_ms": 16940,
+  "details": {
+    "incident": {
+      "action_allowed": false,
+      "diagnosis": {
+        "cause_family": "observer_access",
+        "contradiction_ids": [],
+        "cutoff": 1792717663.6430485,
+        "evidence_ids": [
+          "1b500438b701432f9c63060fbbce46d2",
+          "2bfc77ea458a432dabefd5d405c200b2",
+          "cc22991ea9a4433eab485e1dc5c28641",
+          "8429f99e15cd408da06257611d296974",
+          "45bed5d94f364f9093ea730732c14b54",
+          "61eb9af58c0e408799e4e7b232384aa2",
+          "d583ae784df449bb984df017a7a686ea"
+        ],
+        "generation": 1,
+        "model_calls": [
+          {
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 15302,
+            "model": "gpt-6.1-sol",
+            "provider": "codex_cli"
+          }
+        ],
+        "observation_sequence": 1,
+        "outcome": "no_app_change",
+        "prompt_version": "liara-investigation-v2-fa",
+        "read_operations": 7,
+        "summary": "فعلاً شواهدی برای تغییر سرویس وجود ندارد: store-health و store-preview با HTTP 200 موفق بوده‌اند. خطاهای 401 مربوط به دسترسی ناظر هستند، نه اثبات خرابی سرویس. برای بررسی کامل‌تر، دسترسی ناظر نیاز به رسیدگی دارد؛ اقدامی اجرا نشده است.",
+        "unknowns": [
+          "سلامت فرایندها و وضعیت منابع به‌دلیل نبود دسترسی ناظر مشخص نیست.",
+          "لاگ‌ها و تاریخچه انتشار در دسترس نیستند.",
+          "موفقیت دو نقطهٔ پایانی، سلامت همهٔ قابلیت‌ها و وابستگی‌ها را تضمین نمی‌کند؛ قرارداد پاسخ نیز ارزیابی نشده است."
+        ]
+      },
+      "failure_fingerprint": null,
+      "generation": 1,
+      "id": "4650c653f1c64028bfdabc79d210d36f",
+      "investigation_error": null,
+      "investigation_progress": {
+        "model_call": 1,
+        "read_name": null,
+        "reads_completed": 7,
+        "stage": "done",
+        "updated_at": 1792717678.9709115
+      },
+      "investigation_run_id": "14985eb6964149b6ac7eb65511e149bb",
+      "investigation_state": "done",
+      "kind": "log_investigation",
+      "observation_sequence": 1,
+      "opened_at": 1792717662.078505,
+      "question": "آیا این سرویس نیاز به اقدامی دارد؟ شواهد موجود و محدودیت بررسی را توضیح بده.",
+      "state": "open",
+      "target": {
+        "app_id": "6adaa8e2aa8f2ba374e1617d",
+        "app_name": "liara-watch-storefront-2026",
+        "origin": "https://liara-watch-storefront-2026.liara.run",
+        "team_id": "6ad5c19f63b87278cb8cd077"
+      },
+      "watch_id": null
+    },
+    "evidence": [
+      {
+        "available_at": 1792717662.315674,
+        "coverage": {
+          "observed_service_health": false,
+          "provider_fixture": false
+        },
+        "id": "d583ae784df449bb984df017a7a686ea",
+        "kind": "project",
+        "observed_at": 1792717662.315674,
+        "quality": "unavailable",
+        "redacted_payload": {
+          "error": "observer_auth",
+          "http_status": 401
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792717662.5458317,
+        "coverage": {
+          "observed_service_health": false
+        },
+        "id": "61eb9af58c0e408799e4e7b232384aa2",
+        "kind": "applets",
+        "observed_at": 1792717662.5458314,
+        "quality": "unavailable",
+        "redacted_payload": {
+          "error": "observer_auth",
+          "http_status": 401
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792717662.7802212,
+        "coverage": {
+          "observed_service_health": false
+        },
+        "id": "45bed5d94f364f9093ea730732c14b54",
+        "kind": "releases",
+        "observed_at": 1792717662.780221,
+        "quality": "unavailable",
+        "redacted_payload": {
+          "error": "observer_auth",
+          "http_status": 401
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792717663.0200615,
+        "coverage": {
+          "configured_endpoint": true,
+          "local_fixture_target": false
+        },
+        "id": "2bfc77ea458a432dabefd5d405c200b2",
+        "kind": "http_probe",
+        "observed_at": 1792717662.79834,
+        "quality": "fresh",
+        "redacted_payload": {
+          "available_at": 1792717663.0200615,
+          "body_digest": "4a79723261dd9c0e55059649c1ce1867785dc5c91739b715d753c2b951f2e55c",
+          "check_id": "store-preview",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 221.72230598516762,
+          "http_status": 200,
+          "id": "2bfc77ea458a432dabefd5d405c200b2",
+          "observed_at": 1792717662.79834,
+          "payload": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "c94b3f590b894c9c89812b9ae3c1c8ea",
+            "shipping_toman": 10000,
+            "status": "ready"
+          },
+          "reason": "pass",
+          "request_id": "c94b3f590b894c9c89812b9ae3c1c8ea",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792717663.2348866,
+        "coverage": {
+          "configured_endpoint": true,
+          "local_fixture_target": false
+        },
+        "id": "1b500438b701432f9c63060fbbce46d2",
+        "kind": "http_probe",
+        "observed_at": 1792717663.0412102,
+        "quality": "fresh",
+        "redacted_payload": {
+          "available_at": 1792717663.2348866,
+          "body_digest": "24115afff6262b74ed723cbe92cc9f91a75f28c856f3fe440e54cd249f38aa2c",
+          "check_id": "store-health",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 193.67905601393431,
+          "http_status": 200,
+          "id": "1b500438b701432f9c63060fbbce46d2",
+          "observed_at": 1792717663.0412102,
+          "payload": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "request_id": "c77f04d462e64f398ab9a2f78ffb8186",
+            "status": "ok"
+          },
+          "reason": "pass",
+          "request_id": "c77f04d462e64f398ab9a2f78ffb8186",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792717663.441112,
+        "coverage": {
+          "observed_service_health": false
+        },
+        "id": "8429f99e15cd408da06257611d296974",
+        "kind": "logs",
+        "observed_at": 1792717663.4411118,
+        "quality": "unavailable",
+        "redacted_payload": {
+          "error": "observer_auth",
+          "http_status": 401
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792717663.6316154,
+        "coverage": {
+          "observed_service_health": false
+        },
+        "id": "cc22991ea9a4433eab485e1dc5c28641",
+        "kind": "metrics",
+        "observed_at": 1792717663.631615,
+        "quality": "unavailable",
+        "redacted_payload": {
+          "error": "observer_auth",
+          "http_status": 401
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      }
+    ],
+    "can_repair": true,
+    "guidance": {
+      "mode": "restore_observation",
+      "automatic_changes": false,
+      "limitation": "هر استقرار به پیشنهاد دقیق و تأیید جداگانهٔ شما نیاز دارد.",
+      "steps": [
+        {
+          "id": "inspect",
+          "title": "دسترسی مشاهده را برگردانید",
+          "detail": "مالک حساب باید اعتبار دسترسی API و محدودهٔ تیم را در سرور بررسی کند؛ خطای دسترسی به شواهد، خرابی خود برنامه را ثابت نمی‌کند.",
+          "actor": "owner",
+          "evidence_ids": [
+            "2bfc77ea458a432dabefd5d405c200b2",
+            "1b500438b701432f9c63060fbbce46d2",
+            "8429f99e15cd408da06257611d296974"
+          ],
+          "check_ids": []
+        },
+        {
+          "id": "coordinate",
+          "title": "مشاهده را پس از رفع دسترسی تکرار کنید",
+          "detail": "فهرست سرویس‌ها و شواهد فعلی را تازه کنید. نتیجهٔ این بررسی مجوز تغییر برنامه نیست.",
+          "actor": "owner",
+          "evidence_ids": [
+            "45bed5d94f364f9093ea730732c14b54"
+          ],
+          "check_ids": []
+        },
+        {
+          "id": "verify",
+          "title": "رفع مشکل را با مشاهدهٔ تازه بسنجید",
+          "detail": "پس از برقراری دسترسی، شواهد تازه را دریافت و بررسی را تکرار کنید؛ وضعیت سلامت برنامه هنوز مستقل از دسترسی API است.",
+          "actor": "assistant",
+          "evidence_ids": [],
+          "check_ids": []
+        }
+      ]
+    }
+  }
+}

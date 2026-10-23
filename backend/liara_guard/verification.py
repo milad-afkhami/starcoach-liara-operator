@@ -36,6 +36,25 @@ class VerificationPolicy(Record):
         ).hexdigest()
 
 
+def serving_readiness(policy, release_id, provider_status, *, clock=time.time, deadline):
+    result = {"state": "waiting", "reason": "serving_identity_pending", "provider_identity": []}
+    for target, expected in policy.expected_release_ids.items():
+        if clock() >= deadline:
+            return {**result, "state": "expired", "reason": "reconciliation_expired"}
+        try:
+            state = provider_status(target)
+        except Exception:
+            return result
+        result["provider_identity"].append({"target_id": target, **state})
+        if clock() >= deadline:
+            return {**result, "state": "expired", "reason": "reconciliation_expired"}
+        required = release_id if expected == "$submitted" else expected
+        serving = state.get("serving_release_ids", [])
+        if state.get("state") != "READY" or state.get("current_release_id") != required or not serving or set(serving) != {required}:
+            return result
+    return {**result, "state": "ready", "reason": "serving_identity_ready"}
+
+
 def verify_recovery(
     policy,
     release_id,
@@ -46,12 +65,15 @@ def verify_recovery(
     sleep=time.sleep,
     current_policy_hash=None,
     cancel=None,
+    deadline_utc=None,
 ):
     start = clock()
-    deadline = start + 60
+    deadline = min(start + 60, deadline_utc) if deadline_utc is not None else start + 60
     seen = set()
     probe_ids = []
+    probe_results = []
     success_ids = []
+    provider_identity = []
     round_times = []
     streak = 0
     count = 0
@@ -64,11 +86,14 @@ def verify_recovery(
             "state": state,
             "reason": reason,
             "probe_ids": probe_ids,
+            "probe_results": probe_results,
+            "verification_policy": policy.model_dump(),
             "success_probe_ids": success_ids,
             "round_times": round_times,
             "observed_window": [start, clock()],
             "policy_hash": policy.digest(),
             "submitted_release_id": release_id,
+            "provider_identity": provider_identity,
         }
 
     while clock() <= deadline and count + len(policy.checks) <= 12:
@@ -92,6 +117,13 @@ def verify_recovery(
                 state = provider_status(target)
                 if clock() > deadline:
                     return finish("inconclusive", "verification_deadline")
+                provider_identity.append({
+                    "target_id": target, "checked_at": clock(),
+                    "identity_source": state.get("identity_source"),
+                    "coverage": state.get("identity_coverage", {}),
+                    "current_release_id": state.get("current_release_id"),
+                    "serving_release_ids": state.get("serving_release_ids", []),
+                })
             except Exception:
                 provider_ok = False
                 break
@@ -114,6 +146,7 @@ def verify_recovery(
                     return finish("inconclusive", "verification_deadline")
                 try:
                     result = probe(check)
+                    probe_results.append(result.model_dump())
                     if clock() > deadline:
                         return finish("inconclusive", "verification_deadline")
                 except Exception:

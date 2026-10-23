@@ -1,0 +1,146 @@
+{
+  "scope": "Fixed ordinary GET /preview twice; actual GET logs immediately/20s later; no model/infrastructure mutation/time shift. Native source timestamps retained.",
+  "requests": [
+    {
+      "path": "/preview",
+      "target": "liara-watch-storefront-2026",
+      "started_at": 1792720991.7726889,
+      "completed_at": 1792720992.0220177,
+      "http_status": 502
+    },
+    {
+      "path": "/preview",
+      "target": "liara-watch-storefront-2026",
+      "started_at": 1792721012.0220964,
+      "completed_at": 1792721012.238572,
+      "http_status": 502
+    }
+  ],
+  "reads": [
+    {
+      "stage": "immediate_after_second_request",
+      "target": "liara-watch-storefront-2026",
+      "cutoff": 1792721012.238701,
+      "evidence": {
+        "id": "e51edc6f1493491eaae62a56f156363c",
+        "kind": "logs",
+        "observed_at": 1792721007.520068,
+        "available_at": 1792721012.583345,
+        "quality": "fresh",
+        "redacted_payload": {
+          "lines": [
+            {
+              "timestamp": "1792721007520067916",
+              "release_id": "6adaabf07b39ae0264b0116e",
+              "type": "stdout",
+              "message": "{\"event\": \"upstream_error\", \"reason\": \"upstream_invalid\", \"request_id\": \"0550df932dc945ae8538e4abab85b7f9\", \"build_id\": \"0553e44e5ec34e70b0706d3a4f521b20\", \"dependency_build_id\": \"d803bfa223bf468cb2d83186b5d245ef\", \"expected_field\": \"shipping_toman\", \"observed_fields\": [\"build_id\", \"delivery_toman\", \"request_id\"]}"
+            }
+          ],
+          "schema": "v2"
+        },
+        "coverage": {
+          "truncated": false,
+          "empty": false,
+          "window_start": 1792720712.238701
+        }
+      },
+      "native_timestamps": [
+        1792721007.520068
+      ],
+      "eligible_past": 1,
+      "future": 0,
+      "stale": 0
+    },
+    {
+      "stage": "immediate_after_second_request",
+      "target": "liara-watch-delivery-2026",
+      "cutoff": 1792721012.5835629,
+      "evidence": {
+        "id": "50e8d4662e8c414799ffe841a5042c70",
+        "kind": "logs",
+        "observed_at": 1792721012.5835629,
+        "available_at": 1792721012.784741,
+        "quality": "fresh",
+        "redacted_payload": {
+          "lines": [],
+          "schema": "v2"
+        },
+        "coverage": {
+          "truncated": false,
+          "empty": true,
+          "window_start": 1792720712.5835629
+        }
+      },
+      "native_timestamps": [],
+      "eligible_past": 0,
+      "future": 0,
+      "stale": 0
+    },
+    {
+      "stage": "twenty_seconds_later",
+      "target": "liara-watch-storefront-2026",
+      "cutoff": 1792721032.7849681,
+      "evidence": {
+        "id": "329f5a880b264de6b72cd10582a68a4e",
+        "kind": "logs",
+        "observed_at": 1792721027.7365975,
+        "available_at": 1792721033.1949775,
+        "quality": "fresh",
+        "redacted_payload": {
+          "lines": [
+            {
+              "timestamp": "1792721007520067916",
+              "release_id": "6adaabf07b39ae0264b0116e",
+              "type": "stdout",
+              "message": "{\"event\": \"upstream_error\", \"reason\": \"upstream_invalid\", \"request_id\": \"0550df932dc945ae8538e4abab85b7f9\", \"build_id\": \"0553e44e5ec34e70b0706d3a4f521b20\", \"dependency_build_id\": \"d803bfa223bf468cb2d83186b5d245ef\", \"expected_field\": \"shipping_toman\", \"observed_fields\": [\"build_id\", \"delivery_toman\", \"request_id\"]}"
+            },
+            {
+              "timestamp": "1792721027736597612",
+              "release_id": "6adaabf07b39ae0264b0116e",
+              "type": "stdout",
+              "message": "{\"event\": \"upstream_error\", \"reason\": \"upstream_invalid\", \"request_id\": \"5b50d77f443f40de80ab134301227e3f\", \"build_id\": \"0553e44e5ec34e70b0706d3a4f521b20\", \"dependency_build_id\": \"d803bfa223bf468cb2d83186b5d245ef\", \"expected_field\": \"shipping_toman\", \"observed_fields\": [\"build_id\", \"delivery_toman\", \"request_id\"]}"
+            }
+          ],
+          "schema": "v2"
+        },
+        "coverage": {
+          "truncated": false,
+          "empty": false,
+          "window_start": 1792720732.7849681
+        }
+      },
+      "native_timestamps": [
+        1792721007.520068,
+        1792721027.7365975
+      ],
+      "eligible_past": 2,
+      "future": 0,
+      "stale": 0
+    },
+    {
+      "stage": "twenty_seconds_later",
+      "target": "liara-watch-delivery-2026",
+      "cutoff": 1792721033.1950848,
+      "evidence": {
+        "id": "1c9c2783e6964cdcac9a48a815667ea3",
+        "kind": "logs",
+        "observed_at": 1792721033.1950848,
+        "available_at": 1792721033.3810601,
+        "quality": "fresh",
+        "redacted_payload": {
+          "lines": [],
+          "schema": "v2"
+        },
+        "coverage": {
+          "truncated": false,
+          "empty": true,
+          "window_start": 1792720733.1950848
+        }
+      },
+      "native_timestamps": [],
+      "eligible_past": 0,
+      "future": 0,
+      "stale": 0
+    }
+  ]
+}

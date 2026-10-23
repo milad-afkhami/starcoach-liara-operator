@@ -1,0 +1,425 @@
+{
+  "scope": "Actual GET-only exact enrolled demo targets; no model calls/provider writes/time shifts. Raw native metric series retained; model projection excludes raw data. Log timing counts are from newly acquired evidence only.",
+  "results": [
+    {
+      "target": "liara-watch-delivery-2026",
+      "recorded_at": 1792720842.2449982,
+      "summary_quality": "invalid",
+      "summary_observed_at": 1792720857.0,
+      "history": {
+        "id": "4da81b12017641e8a4c278999a33c0c7",
+        "kind": "metrics_history",
+        "observed_at": 1792720841.0,
+        "available_at": 1792720842.0347807,
+        "quality": "fresh",
+        "redacted_payload": {
+          "unit": "verified",
+          "historical_only": true,
+          "cutoff": 1792720841.6046154,
+          "window_start": 1792720541.6046154,
+          "measurements": [
+            {
+              "metric": "cpu",
+              "applet": "6adaa46772aa39a87a745fd7.1.8e9d0cd8-79f1-46ef-907e-0381f70bd64c-DEPLOY",
+              "value": 0.6479995799642964,
+              "unit": "percent",
+              "observed_at": 1792720841.0,
+              "age_seconds": 0.6046154499053955
+            },
+            {
+              "metric": "memory",
+              "applet": "6adaa46772aa39a87a745fd7.1.8e9d0cd8-79f1-46ef-907e-0381f70bd64c-DEPLOY",
+              "value": 34308096.0,
+              "unit": "bytes",
+              "observed_at": 1792720841.0,
+              "age_seconds": 0.6046154499053955
+            }
+          ],
+          "provider_data": {
+            "cpu": {
+              "end": 1792720857,
+              "result": [
+                {
+                  "values": [
+                    [
+                      1792720541,
+                      "0.00612965901502804"
+                    ],
+                    [
+                      1792720571,
+                      "0.005841512305246196"
+                    ],
+                    [
+                      1792720601,
+                      "0.0056165362087803854"
+                    ],
+                    [
+                      1792720631,
+                      "0.005802640084494012"
+                    ],
+                    [
+                      1792720661,
+                      "0.00598450547377067"
+                    ],
+                    [
+                      1792720691,
+                      "0.006065888065636907"
+                    ],
+                    [
+                      1792720721,
+                      "0.006023535860497783"
+                    ],
+                    [
+                      1792720751,
+                      "0.006071501627150166"
+                    ],
+                    [
+                      1792720781,
+                      "0.0062575834066552205"
+                    ],
+                    [
+                      1792720811,
+                      "0.006310493030366402"
+                    ],
+                    [
+                      1792720841,
+                      "0.006479995799642964"
+                    ]
+                  ],
+                  "applet": "6adaa46772aa39a87a745fd7.1.8e9d0cd8-79f1-46ef-907e-0381f70bd64c-DEPLOY"
+                }
+              ]
+            },
+            "memory": {
+              "end": 1792720857,
+              "result": [
+                {
+                  "values": [
+                    [
+                      1792720541,
+                      "34308096"
+                    ],
+                    [
+                      1792720571,
+                      "34308096"
+                    ],
+                    [
+                      1792720601,
+                      "34308096"
+                    ],
+                    [
+                      1792720631,
+                      "34308096"
+                    ],
+                    [
+                      1792720661,
+                      "34308096"
+                    ],
+                    [
+                      1792720691,
+                      "34308096"
+                    ],
+                    [
+                      1792720721,
+                      "34308096"
+                    ],
+                    [
+                      1792720751,
+                      "34308096"
+                    ],
+                    [
+                      1792720781,
+                      "34308096"
+                    ],
+                    [
+                      1792720811,
+                      "34308096"
+                    ],
+                    [
+                      1792720841,
+                      "34308096"
+                    ]
+                  ],
+                  "applet": "6adaa46772aa39a87a745fd7.1.8e9d0cd8-79f1-46ef-907e-0381f70bd64c-DEPLOY"
+                }
+              ]
+            }
+          },
+          "unit_source": {
+            "url": "https://console.liara.ir/static/js/main.25f709b7.js",
+            "sha256": "d3e0d8646a7dde8e13f42b22fb659b1bb135531d069b0b0c2024a57ed983f5ec",
+            "inspected_at": "2026-10-22",
+            "cpu_denominator": "provider_reported_ratio"
+          },
+          "source": "/v1/projects/{app}/metrics/{cpu,memory}?since=window_start",
+          "capacity_assessment": "not_established",
+          "clock_uncertainty": "Past relative to observer cutoff only; summary/provider/observer clock agreement is not established."
+        },
+        "coverage": {
+          "excluded_future": 0,
+          "excluded_stale": 2,
+          "excluded_invalid": 0,
+          "eligible_points": 20,
+          "unit_verified": true,
+          "threshold_evaluated": false,
+          "source_errors": {},
+          "truncated": false,
+          "selected_count": 2,
+          "missing_metrics": []
+        }
+      },
+      "model_projection": {
+        "unit": "verified",
+        "historical_only": true,
+        "cutoff": 1792720841.6046154,
+        "window_start": 1792720541.6046154,
+        "measurements": [
+          {
+            "metric": "cpu",
+            "applet": "6adaa46772aa39a87a745fd7.1.8e9d0cd8-79f1-46ef-907e-0381f70bd64c-DEPLOY",
+            "value": 0.6479995799642964,
+            "unit": "percent",
+            "observed_at": 1792720841.0,
+            "age_seconds": 0.6046154499053955
+          },
+          {
+            "metric": "memory",
+            "applet": "6adaa46772aa39a87a745fd7.1.8e9d0cd8-79f1-46ef-907e-0381f70bd64c-DEPLOY",
+            "value": 34308096.0,
+            "unit": "bytes",
+            "observed_at": 1792720841.0,
+            "age_seconds": 0.6046154499053955
+          }
+        ],
+        "unit_source": {
+          "url": "https://console.liara.ir/static/js/main.25f709b7.js",
+          "sha256": "d3e0d8646a7dde8e13f42b22fb659b1bb135531d069b0b0c2024a57ed983f5ec",
+          "inspected_at": "2026-10-22",
+          "cpu_denominator": "provider_reported_ratio"
+        },
+        "source": "/v1/projects/{app}/metrics/{cpu,memory}?since=window_start",
+        "capacity_assessment": "not_established",
+        "clock_uncertainty": "Past relative to observer cutoff only; summary/provider/observer clock agreement is not established."
+      },
+      "logs_new_read": {
+        "quality": "fresh",
+        "available_at": 1792720842.24457,
+        "observed_at": 1792720842.0349789,
+        "native_timestamps": [],
+        "past_at_receipt": 0,
+        "future_at_receipt": 0,
+        "stale_at_receipt": 0
+      }
+    },
+    {
+      "target": "liara-watch-storefront-2026",
+      "recorded_at": 1792720843.5471385,
+      "summary_quality": "invalid",
+      "summary_observed_at": 1792720858.0,
+      "history": {
+        "id": "1b231910f7d149d3bfe3dec24afec05a",
+        "kind": "metrics_history",
+        "observed_at": 1792720842.0,
+        "available_at": 1792720843.2638438,
+        "quality": "fresh",
+        "redacted_payload": {
+          "unit": "verified",
+          "historical_only": true,
+          "cutoff": 1792720842.8330522,
+          "window_start": 1792720542.8330522,
+          "measurements": [
+            {
+              "metric": "cpu",
+              "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+              "value": 0.4694395623240587,
+              "unit": "percent",
+              "observed_at": 1792720842.0,
+              "age_seconds": 0.8330521583557129
+            },
+            {
+              "metric": "memory",
+              "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+              "value": 39190528.0,
+              "unit": "bytes",
+              "observed_at": 1792720842.0,
+              "age_seconds": 0.8330521583557129
+            }
+          ],
+          "provider_data": {
+            "cpu": {
+              "end": 1792720858,
+              "result": [
+                {
+                  "values": [
+                    [
+                      1792720542,
+                      "0.005478958887504623"
+                    ],
+                    [
+                      1792720572,
+                      "0.00531960787777091"
+                    ],
+                    [
+                      1792720602,
+                      "0.005332897102178755"
+                    ],
+                    [
+                      1792720632,
+                      "0.00505582891457453"
+                    ],
+                    [
+                      1792720662,
+                      "0.00496637731638439"
+                    ],
+                    [
+                      1792720692,
+                      "0.005217085399486941"
+                    ],
+                    [
+                      1792720722,
+                      "0.004953774839196516"
+                    ],
+                    [
+                      1792720752,
+                      "0.004991838586987832"
+                    ],
+                    [
+                      1792720782,
+                      "0.004961822593884306"
+                    ],
+                    [
+                      1792720812,
+                      "0.0049174687910936545"
+                    ],
+                    [
+                      1792720842,
+                      "0.004694395623240587"
+                    ]
+                  ],
+                  "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY"
+                }
+              ]
+            },
+            "memory": {
+              "end": 1792720858,
+              "result": [
+                {
+                  "values": [
+                    [
+                      1792720542,
+                      "39190528"
+                    ],
+                    [
+                      1792720572,
+                      "39190528"
+                    ],
+                    [
+                      1792720602,
+                      "39190528"
+                    ],
+                    [
+                      1792720632,
+                      "39190528"
+                    ],
+                    [
+                      1792720662,
+                      "39190528"
+                    ],
+                    [
+                      1792720692,
+                      "39190528"
+                    ],
+                    [
+                      1792720722,
+                      "39190528"
+                    ],
+                    [
+                      1792720752,
+                      "39190528"
+                    ],
+                    [
+                      1792720782,
+                      "39190528"
+                    ],
+                    [
+                      1792720812,
+                      "39190528"
+                    ],
+                    [
+                      1792720842,
+                      "39190528"
+                    ]
+                  ],
+                  "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY"
+                }
+              ]
+            }
+          },
+          "unit_source": {
+            "url": "https://console.liara.ir/static/js/main.25f709b7.js",
+            "sha256": "d3e0d8646a7dde8e13f42b22fb659b1bb135531d069b0b0c2024a57ed983f5ec",
+            "inspected_at": "2026-10-22",
+            "cpu_denominator": "provider_reported_ratio"
+          },
+          "source": "/v1/projects/{app}/metrics/{cpu,memory}?since=window_start",
+          "capacity_assessment": "not_established",
+          "clock_uncertainty": "Past relative to observer cutoff only; summary/provider/observer clock agreement is not established."
+        },
+        "coverage": {
+          "excluded_future": 0,
+          "excluded_stale": 2,
+          "excluded_invalid": 0,
+          "eligible_points": 20,
+          "unit_verified": true,
+          "threshold_evaluated": false,
+          "source_errors": {},
+          "truncated": false,
+          "selected_count": 2,
+          "missing_metrics": []
+        }
+      },
+      "model_projection": {
+        "unit": "verified",
+        "historical_only": true,
+        "cutoff": 1792720842.8330522,
+        "window_start": 1792720542.8330522,
+        "measurements": [
+          {
+            "metric": "cpu",
+            "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+            "value": 0.4694395623240587,
+            "unit": "percent",
+            "observed_at": 1792720842.0,
+            "age_seconds": 0.8330521583557129
+          },
+          {
+            "metric": "memory",
+            "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+            "value": 39190528.0,
+            "unit": "bytes",
+            "observed_at": 1792720842.0,
+            "age_seconds": 0.8330521583557129
+          }
+        ],
+        "unit_source": {
+          "url": "https://console.liara.ir/static/js/main.25f709b7.js",
+          "sha256": "d3e0d8646a7dde8e13f42b22fb659b1bb135531d069b0b0c2024a57ed983f5ec",
+          "inspected_at": "2026-10-22",
+          "cpu_denominator": "provider_reported_ratio"
+        },
+        "source": "/v1/projects/{app}/metrics/{cpu,memory}?since=window_start",
+        "capacity_assessment": "not_established",
+        "clock_uncertainty": "Past relative to observer cutoff only; summary/provider/observer clock agreement is not established."
+      },
+      "logs_new_read": {
+        "quality": "fresh",
+        "available_at": 1792720843.5470092,
+        "observed_at": 1792720843.2641563,
+        "native_timestamps": [],
+        "past_at_receipt": 0,
+        "future_at_receipt": 0,
+        "stale_at_receipt": 0
+      }
+    }
+  ]
+}

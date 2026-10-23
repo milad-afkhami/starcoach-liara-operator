@@ -1,0 +1,669 @@
+{
+  "scope": "Read-only authenticated exact owner-approved demo apps; sanitized input snapshots, not a recovery assertion",
+  "captured_at": "2026-10-23T00:49:28.330783+00:00",
+  "targets": [
+    {
+      "target": {
+        "app_id": "6adaa46772aa39a87a745fd7",
+        "app_name": "liara-watch-delivery-2026"
+      },
+      "project_input": {
+        "_id": "6adaa46772aa39a87a745fd7",
+        "project_id": "liara-watch-delivery-2026",
+        "created_at": "2026-10-23T00:03:51.050Z",
+        "scale": 1,
+        "network": {
+          "_id": "6adaa415bffb36d784c6b756",
+          "name": "starcoach-contest-2026"
+        }
+      },
+      "release_input": {
+        "currentRelease": "6adaaec772aa39a87a786916",
+        "total": 2,
+        "readyReleasesCount": 2,
+        "platform": "docker",
+        "releases": [
+          {
+            "_id": "6adaaec772aa39a87a786916",
+            "type": "DEPLOY",
+            "projectType": "docker",
+            "state": "READY",
+            "finishedAt": "2026-10-23T00:48:48.523Z",
+            "createdAt": "2026-10-23T00:48:07.408Z",
+            "tag": "v2"
+          },
+          {
+            "_id": "6adaa507fc09ae5c3cc59ae7",
+            "type": "DEPLOY",
+            "projectType": "docker",
+            "state": "READY",
+            "finishedAt": "2026-10-23T00:07:12.891Z",
+            "createdAt": "2026-10-23T00:06:31.790Z",
+            "tag": "v1"
+          }
+        ]
+      },
+      "runtime_identity_now": 1792716568.8426983,
+      "lifecycle_reads": [
+        {
+          "method": "GET",
+          "route": "/v1/projects/liara-watch-delivery-2026/events",
+          "interval": {
+            "start": 1792713830,
+            "end": 1792716569,
+            "semantics": "start-inclusive/end-exclusive"
+          },
+          "local_requested_at": 1792716568.8427823,
+          "local_received_at": 1792716569.2159574,
+          "raw_sanitized_response": {
+            "data": [
+              {
+                "id": "dbc27dffaea433df44d06686071a794ab0a3999e53d39da1c8fca034216d9115",
+                "status": "die",
+                "action": "die",
+                "time": "1792716565",
+                "release": "6adaa507fc09ae5c3cc59ae7",
+                "tag": "v1"
+              },
+              {
+                "id": "dbc27dffaea433df44d06686071a794ab0a3999e53d39da1c8fca034216d9115",
+                "status": "stop",
+                "action": "stop",
+                "time": "1792716565",
+                "release": "6adaa507fc09ae5c3cc59ae7",
+                "tag": "v1"
+              },
+              {
+                "id": "dbc27dffaea433df44d06686071a794ab0a3999e53d39da1c8fca034216d9115",
+                "status": "kill",
+                "action": "kill",
+                "time": "1792716564",
+                "release": "6adaa507fc09ae5c3cc59ae7",
+                "tag": "v1"
+              },
+              {
+                "id": "4a5f73b6a652ffe215251a91b207d496cbdd5edbb7d4f02c89142b5ce0276a6a",
+                "status": "start",
+                "action": "start",
+                "time": "1792716552",
+                "release": "6adaaec772aa39a87a786916",
+                "tag": "v2"
+              },
+              {
+                "id": "4a5f73b6a652ffe215251a91b207d496cbdd5edbb7d4f02c89142b5ce0276a6a",
+                "status": "create",
+                "action": "create",
+                "time": "1792716551",
+                "release": "6adaaec772aa39a87a786916",
+                "tag": "v2"
+              },
+              {
+                "id": "dbc27dffaea433df44d06686071a794ab0a3999e53d39da1c8fca034216d9115",
+                "status": "start",
+                "action": "start",
+                "time": "1792714059",
+                "release": "6adaa507fc09ae5c3cc59ae7",
+                "tag": "v1"
+              },
+              {
+                "id": "dbc27dffaea433df44d06686071a794ab0a3999e53d39da1c8fca034216d9115",
+                "status": "create",
+                "action": "create",
+                "time": "1792714057",
+                "release": "6adaa507fc09ae5c3cc59ae7",
+                "tag": "v1"
+              }
+            ]
+          },
+          "extra_wrapper_keys": [],
+          "extra_row_keys": [
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            []
+          ]
+        },
+        {
+          "method": "GET",
+          "route": "/v1/projects/liara-watch-delivery-2026/events",
+          "interval": {
+            "start": 1792714057,
+            "end": 1792714058,
+            "semantics": "start-inclusive/end-exclusive"
+          },
+          "local_requested_at": 1792716569.2160804,
+          "local_received_at": 1792716569.378533,
+          "raw_sanitized_response": {
+            "data": [
+              {
+                "id": "dbc27dffaea433df44d06686071a794ab0a3999e53d39da1c8fca034216d9115",
+                "status": "create",
+                "action": "create",
+                "time": "1792714057",
+                "release": "6adaa507fc09ae5c3cc59ae7",
+                "tag": "v1"
+              }
+            ]
+          },
+          "extra_wrapper_keys": [],
+          "extra_row_keys": [
+            []
+          ]
+        },
+        {
+          "method": "GET",
+          "route": "/v1/projects/liara-watch-delivery-2026/events",
+          "interval": {
+            "start": 1792713830,
+            "end": 1792714057,
+            "semantics": "start-inclusive/end-exclusive"
+          },
+          "local_requested_at": 1792716569.3785608,
+          "local_received_at": 1792716569.8224888,
+          "raw_sanitized_response": {
+            "data": []
+          },
+          "extra_wrapper_keys": [],
+          "extra_row_keys": []
+        }
+      ],
+      "derived_result": {
+        "serving_release_ids": [
+          "6adaaec772aa39a87a786916"
+        ],
+        "identity_source": "network_lifecycle_events",
+        "observed_at": 1792716568.8426983,
+        "coverage": {
+          "complete_interval": true,
+          "event_count": 7,
+          "requests": 3,
+          "derived": true,
+          "uncertainty": "event-derived identity; fresh original build probes remain required",
+          "creation_anchor": 1792713831.05,
+          "history_start": 1792713830,
+          "history_end": 1792716569,
+          "max_requests": 12,
+          "max_events": 200,
+          "max_history_seconds": 86400,
+          "empty_older_interval": true,
+          "reason": "complete_lifecycle_history",
+          "active_count": 1,
+          "container_count": 2,
+          "boundary_check": "exact-second bucket below observed page-size lower bound"
+        }
+      }
+    },
+    {
+      "target": {
+        "app_id": "6adaa8e2aa8f2ba374e1617d",
+        "app_name": "liara-watch-storefront-2026"
+      },
+      "project_input": {
+        "_id": "6adaa8e2aa8f2ba374e1617d",
+        "project_id": "liara-watch-storefront-2026",
+        "created_at": "2026-10-23T00:22:58.693Z",
+        "scale": 1,
+        "network": {
+          "_id": "6adaa415bffb36d784c6b756",
+          "name": "starcoach-contest-2026"
+        }
+      },
+      "release_input": {
+        "currentRelease": "6adaabf07b39ae0264b0116e",
+        "total": 1,
+        "readyReleasesCount": 1,
+        "platform": "docker",
+        "releases": [
+          {
+            "_id": "6adaabf07b39ae0264b0116e",
+            "type": "DEPLOY",
+            "projectType": "docker",
+            "state": "READY",
+            "finishedAt": "2026-10-23T00:37:49.015Z",
+            "createdAt": "2026-10-23T00:36:00.254Z",
+            "tag": "v1"
+          }
+        ]
+      },
+      "runtime_identity_now": 1792716570.2246988,
+      "lifecycle_reads": [
+        {
+          "method": "GET",
+          "route": "/v1/projects/liara-watch-storefront-2026/events",
+          "interval": {
+            "start": 1792714977,
+            "end": 1792716571,
+            "semantics": "start-inclusive/end-exclusive"
+          },
+          "local_requested_at": 1792716570.2247205,
+          "local_received_at": 1792716570.4929142,
+          "raw_sanitized_response": {
+            "data": [
+              {
+                "id": "f983c91dbf376d77769fd86479a0ae36184ff11b325977482c219905057a5b91",
+                "status": "start",
+                "action": "start",
+                "time": "1792715885",
+                "release": "6adaabf07b39ae0264b0116e",
+                "tag": "v1"
+              },
+              {
+                "id": "f983c91dbf376d77769fd86479a0ae36184ff11b325977482c219905057a5b91",
+                "status": "create",
+                "action": "create",
+                "time": "1792715884",
+                "release": "6adaabf07b39ae0264b0116e",
+                "tag": "v1"
+              }
+            ]
+          },
+          "extra_wrapper_keys": [],
+          "extra_row_keys": [
+            [],
+            []
+          ]
+        },
+        {
+          "method": "GET",
+          "route": "/v1/projects/liara-watch-storefront-2026/events",
+          "interval": {
+            "start": 1792715884,
+            "end": 1792715885,
+            "semantics": "start-inclusive/end-exclusive"
+          },
+          "local_requested_at": 1792716570.4929442,
+          "local_received_at": 1792716570.6758344,
+          "raw_sanitized_response": {
+            "data": [
+              {
+                "id": "f983c91dbf376d77769fd86479a0ae36184ff11b325977482c219905057a5b91",
+                "status": "create",
+                "action": "create",
+                "time": "1792715884",
+                "release": "6adaabf07b39ae0264b0116e",
+                "tag": "v1"
+              }
+            ]
+          },
+          "extra_wrapper_keys": [],
+          "extra_row_keys": [
+            []
+          ]
+        },
+        {
+          "method": "GET",
+          "route": "/v1/projects/liara-watch-storefront-2026/events",
+          "interval": {
+            "start": 1792714977,
+            "end": 1792715884,
+            "semantics": "start-inclusive/end-exclusive"
+          },
+          "local_requested_at": 1792716570.6758587,
+          "local_received_at": 1792716571.0044796,
+          "raw_sanitized_response": {
+            "data": []
+          },
+          "extra_wrapper_keys": [],
+          "extra_row_keys": []
+        }
+      ],
+      "derived_result": {
+        "serving_release_ids": [
+          "6adaabf07b39ae0264b0116e"
+        ],
+        "identity_source": "network_lifecycle_events",
+        "observed_at": 1792716570.2246988,
+        "coverage": {
+          "complete_interval": true,
+          "event_count": 2,
+          "requests": 3,
+          "derived": true,
+          "uncertainty": "event-derived identity; fresh original build probes remain required",
+          "creation_anchor": 1792714978.693,
+          "history_start": 1792714977,
+          "history_end": 1792716571,
+          "max_requests": 12,
+          "max_events": 200,
+          "max_history_seconds": 86400,
+          "empty_older_interval": true,
+          "reason": "complete_lifecycle_history",
+          "active_count": 1,
+          "container_count": 1,
+          "boundary_check": "exact-second bucket below observed page-size lower bound"
+        }
+      }
+    }
+  ],
+  "clock_samples": [
+    {
+      "round": 1,
+      "app_name": "liara-watch-delivery-2026",
+      "local_requested_at": 1792716571.0045366,
+      "local_received_at": 1792716571.1405807,
+      "local_received_utc": "2026-10-23T00:49:31.140581+00:00",
+      "http_status": 200,
+      "http_date": "Fri, 23 Oct 2026 00:52:57 GMT",
+      "age": null,
+      "cache_control": null,
+      "raw_metric_samples": [
+        {
+          "metric": "cpuUsage",
+          "applet": "6adaa46772aa39a87a745fd7.1.93a875d8-ab99-458f-b581-bb0b97eccec6-DEPLOY",
+          "raw_value": [
+            1792716586,
+            "0.02233783531940003"
+          ]
+        },
+        {
+          "metric": "memoryUsage",
+          "applet": "6adaa46772aa39a87a745fd7.1.fb378c9c-e0fa-4ab7-baa6-5ea0a9780059-DEPLOY",
+          "raw_value": [
+            1792716586,
+            "34455552"
+          ]
+        },
+        {
+          "metric": "memoryUsage",
+          "applet": "6adaa46772aa39a87a745fd7.1.93a875d8-ab99-458f-b581-bb0b97eccec6-DEPLOY",
+          "raw_value": [
+            1792716586,
+            "33353728"
+          ]
+        }
+      ],
+      "sample_minus_local_receipt_seconds": [
+        14.859419345855713,
+        14.859419345855713,
+        14.859419345855713
+      ]
+    },
+    {
+      "round": 1,
+      "app_name": "liara-watch-storefront-2026",
+      "local_requested_at": 1792716571.1406255,
+      "local_received_at": 1792716571.3437355,
+      "local_received_utc": "2026-10-23T00:49:31.343735+00:00",
+      "http_status": 200,
+      "http_date": "Fri, 23 Oct 2026 00:52:57 GMT",
+      "age": null,
+      "cache_control": null,
+      "raw_metric_samples": [
+        {
+          "metric": "cpuUsage",
+          "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+          "raw_value": [
+            1792716586,
+            "0.00600336152796726"
+          ]
+        },
+        {
+          "metric": "memoryUsage",
+          "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+          "raw_value": [
+            1792716586,
+            "38969344"
+          ]
+        }
+      ],
+      "sample_minus_local_receipt_seconds": [
+        14.656264543533325,
+        14.656264543533325
+      ]
+    },
+    {
+      "round": 2,
+      "app_name": "liara-watch-delivery-2026",
+      "local_requested_at": 1792716574.3438745,
+      "local_received_at": 1792716574.473517,
+      "local_received_utc": "2026-10-23T00:49:34.473517+00:00",
+      "http_status": 200,
+      "http_date": "Fri, 23 Oct 2026 00:53:00 GMT",
+      "age": null,
+      "cache_control": null,
+      "raw_metric_samples": [
+        {
+          "metric": "cpuUsage",
+          "applet": "6adaa46772aa39a87a745fd7.1.93a875d8-ab99-458f-b581-bb0b97eccec6-DEPLOY",
+          "raw_value": [
+            1792716589,
+            "0.024237238014694684"
+          ]
+        },
+        {
+          "metric": "memoryUsage",
+          "applet": "6adaa46772aa39a87a745fd7.1.fb378c9c-e0fa-4ab7-baa6-5ea0a9780059-DEPLOY",
+          "raw_value": [
+            1792716589,
+            "34455552"
+          ]
+        },
+        {
+          "metric": "memoryUsage",
+          "applet": "6adaa46772aa39a87a745fd7.1.93a875d8-ab99-458f-b581-bb0b97eccec6-DEPLOY",
+          "raw_value": [
+            1792716589,
+            "33353728"
+          ]
+        }
+      ],
+      "sample_minus_local_receipt_seconds": [
+        14.526483058929443,
+        14.526483058929443,
+        14.526483058929443
+      ]
+    },
+    {
+      "round": 2,
+      "app_name": "liara-watch-storefront-2026",
+      "local_requested_at": 1792716574.473566,
+      "local_received_at": 1792716574.6540258,
+      "local_received_utc": "2026-10-23T00:49:34.654026+00:00",
+      "http_status": 200,
+      "http_date": "Fri, 23 Oct 2026 00:53:00 GMT",
+      "age": null,
+      "cache_control": null,
+      "raw_metric_samples": [
+        {
+          "metric": "cpuUsage",
+          "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+          "raw_value": [
+            1792716590,
+            "0.00600336152796726"
+          ]
+        },
+        {
+          "metric": "memoryUsage",
+          "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+          "raw_value": [
+            1792716590,
+            "38969344"
+          ]
+        }
+      ],
+      "sample_minus_local_receipt_seconds": [
+        15.345974206924438,
+        15.345974206924438
+      ]
+    },
+    {
+      "round": 3,
+      "app_name": "liara-watch-delivery-2026",
+      "local_requested_at": 1792716577.654229,
+      "local_received_at": 1792716578.76574,
+      "local_received_utc": "2026-10-23T00:49:38.765740+00:00",
+      "http_status": 200,
+      "http_date": "Fri, 23 Oct 2026 00:53:04 GMT",
+      "age": null,
+      "cache_control": null,
+      "raw_metric_samples": [
+        {
+          "metric": "cpuUsage",
+          "applet": "6adaa46772aa39a87a745fd7.1.93a875d8-ab99-458f-b581-bb0b97eccec6-DEPLOY",
+          "raw_value": [
+            1792716593,
+            "0.018072409999999997"
+          ]
+        },
+        {
+          "metric": "memoryUsage",
+          "applet": "6adaa46772aa39a87a745fd7.1.fb378c9c-e0fa-4ab7-baa6-5ea0a9780059-DEPLOY",
+          "raw_value": [
+            1792716593,
+            "34455552"
+          ]
+        },
+        {
+          "metric": "memoryUsage",
+          "applet": "6adaa46772aa39a87a745fd7.1.93a875d8-ab99-458f-b581-bb0b97eccec6-DEPLOY",
+          "raw_value": [
+            1792716593,
+            "33353728"
+          ]
+        }
+      ],
+      "sample_minus_local_receipt_seconds": [
+        14.234260082244873,
+        14.234260082244873,
+        14.234260082244873
+      ]
+    },
+    {
+      "round": 3,
+      "app_name": "liara-watch-storefront-2026",
+      "local_requested_at": 1792716578.7657795,
+      "local_received_at": 1792716579.0053535,
+      "local_received_utc": "2026-10-23T00:49:39.005353+00:00",
+      "http_status": 200,
+      "http_date": "Fri, 23 Oct 2026 00:53:04 GMT",
+      "age": null,
+      "cache_control": null,
+      "raw_metric_samples": [
+        {
+          "metric": "cpuUsage",
+          "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+          "raw_value": [
+            1792716594,
+            "0.005767958049252693"
+          ]
+        },
+        {
+          "metric": "memoryUsage",
+          "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+          "raw_value": [
+            1792716594,
+            "38969344"
+          ]
+        }
+      ],
+      "sample_minus_local_receipt_seconds": [
+        14.994646549224854,
+        14.994646549224854
+      ]
+    }
+  ],
+  "independent_https_clock_comparison": [
+    {
+      "round": 1,
+      "source": "cloudflare_trace",
+      "request_at": 1792716599.8941686,
+      "received_at": 1792716600.3311088,
+      "status": 200,
+      "date": "Fri, 23 Oct 2026 00:50:15 GMT",
+      "age": null,
+      "cache_status": null,
+      "date_minus_local_receipt": 14.668891191482544,
+      "trace_ts": 1792716615,
+      "trace_minus_local_receipt": 14.668891191482544
+    },
+    {
+      "round": 1,
+      "source": "github_api",
+      "request_at": 1792716600.331211,
+      "received_at": 1792716600.759876,
+      "status": 200,
+      "date": "Fri, 23 Oct 2026 00:50:10 GMT",
+      "age": null,
+      "cache_status": null,
+      "date_minus_local_receipt": 9.240123987197876
+    },
+    {
+      "round": 2,
+      "source": "cloudflare_trace",
+      "request_at": 1792716603.7600348,
+      "received_at": 1792716603.8738608,
+      "status": 200,
+      "date": "Fri, 23 Oct 2026 00:50:19 GMT",
+      "age": null,
+      "cache_status": null,
+      "date_minus_local_receipt": 15.126139163970947,
+      "trace_ts": 1792716619,
+      "trace_minus_local_receipt": 15.126139163970947
+    },
+    {
+      "round": 2,
+      "source": "github_api",
+      "request_at": 1792716603.873933,
+      "received_at": 1792716604.0057173,
+      "status": 200,
+      "date": "Fri, 23 Oct 2026 00:50:10 GMT",
+      "age": null,
+      "cache_status": null,
+      "date_minus_local_receipt": 5.9942827224731445
+    },
+    {
+      "round": 3,
+      "source": "cloudflare_trace",
+      "request_at": 1792716607.0059052,
+      "received_at": 1792716607.133093,
+      "status": 200,
+      "date": "Fri, 23 Oct 2026 00:50:22 GMT",
+      "age": null,
+      "cache_status": null,
+      "date_minus_local_receipt": 14.866906881332397,
+      "trace_ts": 1792716622,
+      "trace_minus_local_receipt": 14.866906881332397
+    },
+    {
+      "round": 3,
+      "source": "github_api",
+      "request_at": 1792716607.1331687,
+      "received_at": 1792716607.2625291,
+      "status": 200,
+      "date": "Fri, 23 Oct 2026 00:50:21 GMT",
+      "age": null,
+      "cache_status": null,
+      "date_minus_local_receipt": 13.737470865249634
+    }
+  ],
+  "local_clock_status": {
+    "ntp_enabled": false,
+    "ntp_synchronized": false,
+    "source": "timedatectl show -p NTPSynchronized -p NTP; no system setting changed"
+  },
+  "nist_rendered_clock_comparison": [
+    {
+      "round": 1,
+      "source": "NIST time.gov normal rendered website clock-offset display",
+      "requested_at": 1792716666.39,
+      "received_at": 1792716671.259,
+      "visible_device_offset_seconds": "-15.349"
+    },
+    {
+      "round": 2,
+      "source": "NIST time.gov normal rendered website clock-offset display",
+      "requested_at": 1792716671.279,
+      "received_at": 1792716672.071,
+      "visible_device_offset_seconds": "-15.386"
+    },
+    {
+      "round": 3,
+      "source": "NIST time.gov normal rendered website clock-offset display",
+      "requested_at": 1792716672.074,
+      "received_at": 1792716672.755,
+      "visible_device_offset_seconds": "-15.388"
+    }
+  ]
+}

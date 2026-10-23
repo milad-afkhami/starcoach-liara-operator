@@ -79,3 +79,9 @@ def test_create_requires_explicit_feature_bundle_and_network():
             hourly_price_toman="1146",
             price_verified_at=100,
         )
+
+
+def test_user_requirements_choose_a_matching_plan_without_claiming_load_capacity():
+    assert select_quote(catalogue(), min_ram_gb='1', min_cpu='1', min_disk_gb=10)['plan_id'] == 'g2-medium'
+    with pytest.raises(ValueError):
+        select_quote(catalogue(), min_ram_gb='8', min_cpu='2', min_disk_gb=5)

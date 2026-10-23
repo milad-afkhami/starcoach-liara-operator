@@ -1,0 +1,76 @@
+{
+  "scope": "Registered read-only HTTP checks and fixed build/release policy; no provider credentials, private artifacts or controller state",
+  "http_checks": [
+    {
+      "id": "store-preview",
+      "target_id": "6adaa8e2aa8f2ba374e1617d",
+      "origin": "https://liara-watch-storefront-2026.liara.run",
+      "path": "/preview",
+      "timeout_seconds": 3,
+      "expected_status": 200,
+      "require_request_echo": true
+    },
+    {
+      "id": "store-health",
+      "target_id": "6adaa8e2aa8f2ba374e1617d",
+      "origin": "https://liara-watch-storefront-2026.liara.run",
+      "path": "/healthz",
+      "timeout_seconds": 3,
+      "expected_status": 200,
+      "require_request_echo": true
+    },
+    {
+      "id": "dep-quote",
+      "target_id": "6adaa46772aa39a87a745fd7",
+      "origin": "https://liara-watch-delivery-2026.liara.run",
+      "path": "/quote",
+      "timeout_seconds": 3,
+      "expected_status": 200,
+      "require_request_echo": true
+    }
+  ],
+  "verification_policies": {
+    "6adaa8e2aa8f2ba374e1617d": {
+      "id": "dependency-recovery",
+      "checks": [
+        {
+          "id": "store-preview",
+          "target_id": "6adaa8e2aa8f2ba374e1617d",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "path": "/preview",
+          "timeout_seconds": 3,
+          "expected_status": 200,
+          "require_request_echo": true
+        },
+        {
+          "id": "dep-quote",
+          "target_id": "6adaa46772aa39a87a745fd7",
+          "origin": "https://liara-watch-delivery-2026.liara.run",
+          "path": "/quote",
+          "timeout_seconds": 3,
+          "expected_status": 200,
+          "require_request_echo": true
+        }
+      ],
+      "expected_build_fields": {
+        "store-preview": {
+          "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+          "dependency_build_id": "7789311e98f849daac989526de9a9f2a"
+        },
+        "dep-quote": {
+          "build_id": "7789311e98f849daac989526de9a9f2a"
+        }
+      },
+      "expected_release_ids": {
+        "6adaa8e2aa8f2ba374e1617d": "6adaabf07b39ae0264b0116e",
+        "6adaa46772aa39a87a745fd7": "$submitted"
+      },
+      "changed_target_id": "6adaa46772aa39a87a745fd7"
+    }
+  },
+  "dependencies": {
+    "6adaa8e2aa8f2ba374e1617d": [
+      "6adaa46772aa39a87a745fd7"
+    ]
+  }
+}

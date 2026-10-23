@@ -400,3 +400,139 @@ def test_deterministic_failure_and_repair_caveat_are_in_persian(tmp_path):
     result = investigator.investigate("owner", incident["id"], {})
     assert result["outcome"] == "need_evidence"
     assert any("\u0600" <= char <= "\u06ff" for char in result["unknowns"][-1])
+
+
+def test_investigation_reports_actual_collection_model_and_completion_stages(tmp_path):
+    store, _, incident, model, investigator, _ = setup(tmp_path)
+    seen = []
+
+    def reader():
+        seen.append(store.incident('owner', incident['id'])['investigation_progress'])
+        return Evidence(id='new-log', target=TARGET, kind='logs', observed_at=99,
+                        available_at=100, quality='fresh', redacted_payload={'lines': []})
+
+    model.hook = lambda: seen.append(store.incident('owner', incident['id'])['investigation_progress'])
+    investigator.investigate('owner', incident['id'], {'logs': reader}, initial_reads=['logs'])
+    assert seen[0]['stage'] == 'collecting' and seen[0]['read_name'] == 'logs'
+    assert seen[0]['reads_completed'] == 0
+    assert seen[1]['stage'] == 'analyzing' and seen[1]['reads_completed'] == 1
+    assert seen[1]['model_call'] == 1
+    assert store.incident('owner', incident['id'])['investigation_progress']['stage'] == 'done'
+
+
+def test_rejected_draft_records_controlled_guard_reason_without_promoting_or_leaking_secrets(tmp_path):
+    output={'action':'conclude','outcome':'repair_candidate','cause_family':'dependency_schema','summary':'private-value token=another-secret',
+            'evidence_ids':[],'contradiction_ids':[],'unknowns':[],'next_check':None}
+    store,_,incident,model,investigator,_=setup(tmp_path,output)
+    investigator.diagnostic_secrets=('private-value',)
+    result=investigator.investigate('owner',incident['id'],{})
+    assert result['error']=='invalid_model_output' and result['outcome']=='unresolved'
+    assert store.incident('owner',incident['id'])['diagnosis'] is None
+    records=store.rejected_drafts('owner',incident['id'])
+    assert records[0]['reason']=='missing_support'
+    assert records[0]['rejected_not_a_diagnosis'] is True
+    assert 'private-value' not in json.dumps(records) and 'another-secret' not in json.dumps(records)
+    assert model.requests[0].payload.get('rejected_drafts') is None
+
+
+def test_second_call_read_none_is_rejected_by_executable_contract(tmp_path):
+    store,_,incident,model,investigator,_=setup(tmp_path)
+    def generate(request,schema,cancel):
+        model.requests.append(request)
+        return ModelResult(request_id=request.id,provider='test',model='test',cli_version='test',elapsed_ms=1,
+            value={'action':'read','outcome':'need_evidence','cause_family':'unknown','summary':'Another check requested',
+                   'evidence_ids':[],'contradiction_ids':[],'unknowns':[],
+                   'next_check':'logs' if len(model.requests)==1 else None})
+    model.generate=generate
+    def reader():
+        return Evidence(id='new',target=TARGET,kind='logs',observed_at=99,available_at=100,quality='fresh',redacted_payload={})
+    result=investigator.investigate('owner',incident['id'],{'logs':reader})
+    assert result['error']=='invalid_model_output'
+    record=store.rejected_drafts('owner',incident['id'])[0]
+    assert record['call']==2 and record['reason']=='schema_violation'
+    assert record['draft']['action']=='read' and record['draft']['next_check'] is None
+    assert record['allowed_next_checks']==[]
+
+
+def test_rejected_diagnostic_is_byte_bounded_and_not_part_of_future_model_evidence(tmp_path):
+    output={'action':'conclude','outcome':'repair_candidate','cause_family':'unknown','summary':'ژ'*15000,
+            'evidence_ids':[],'contradiction_ids':[],'unknowns':['😀'*5000]*8,'next_check':None}
+    store,_,incident,model,investigator,_=setup(tmp_path,output)
+    investigator.investigate('owner',incident['id'],{})
+    record=store.rejected_drafts('owner',incident['id'])[0]
+    assert record['reason']=='schema_violation'
+    assert len(json.dumps(record,ensure_ascii=False).encode())<=8192
+    assert record['draft']['truncated_for_diagnostic'] is True
+    assert all(item['kind']!='rejected_draft' for item in store.evidence('owner',incident['id'],cutoff=100))
+
+
+def test_rejected_diagnostic_redacts_known_credentials_even_in_untrusted_field_names(tmp_path):
+    output={'action':'conclude','outcome':'unresolved','cause_family':'unknown','summary':'diagnostic',
+            'evidence_ids':[],'contradiction_ids':[],'unknowns':[],'next_check':None,'private-credential-key':'value'}
+    store,_,incident,model,investigator,_=setup(tmp_path,output)
+    investigator.diagnostic_secrets=('private-credential-key',)
+    investigator.investigate('owner',incident['id'],{})
+    assert 'private-credential-key' not in json.dumps(store.rejected_drafts('owner',incident['id']))
+
+
+def test_rejected_draft_retention_is_bounded_owner_scoped_and_keeps_first_record_for_call(tmp_path):
+    store,_,incident,model,investigator,_=setup(tmp_path)
+    for index in range(12):
+        store.record_rejected_draft('owner',incident['id'],{'run_id':str(index),'call':1,'draft':{'summary':str(index)}})
+    rows=store.rejected_drafts('owner',incident['id'])
+    assert len(rows)==8 and rows[0]['run_id']=='11' and rows[-1]['run_id']=='4'
+    store.record_rejected_draft('owner',incident['id'],{'run_id':'11','call':1,'draft':{'summary':'replacement'}})
+    assert store.rejected_drafts('owner',incident['id'])[0]['draft']['summary']=='11'
+    with pytest.raises(KeyError):
+        store.rejected_drafts('other',incident['id'])
+
+
+def test_historical_model_projection_excludes_raw_future_rejected_series_but_preserves_audit(tmp_path):
+    s, o, incident, m, i, now = setup(tmp_path)
+    payload = {'historical_only': True, 'cutoff': 100, 'unit': 'verified',
+               'measurements': [{'metric': 'cpu', 'applet': 'a', 'value': 12.5, 'unit': 'percent', 'observed_at': 99, 'age_seconds': 1}],
+               'provider_data': {'cpu': {'end': 900, 'result': [{'values': [[900, 'rejected-future-marker'], [99, '0.125']]}]}},
+               'capacity_assessment': 'not_established', 'unit_source': {'cpu_denominator': 'provider_reported_ratio'}}
+    s.add_evidence('owner', incident['id'], Evidence(id='history', target=TARGET, kind='metrics_history', observed_at=99,
+                   available_at=100, quality='fresh', redacted_payload=payload, coverage={'excluded_future': 1}))
+    i.investigate('owner', incident['id'], {})
+    projected = next(e for e in m.requests[0].payload['evidence'] if e['id'] == 'history')
+    assert 'provider_data' not in projected['redacted_payload']
+    assert 'rejected-future-marker' not in json.dumps(m.requests[0].payload)
+    assert projected['redacted_payload']['measurements'] == payload['measurements']
+    assert projected['coverage']['excluded_future'] == 1
+    assert next(e for e in s.evidence('owner', incident['id'], cutoff=100) if e['id'] == 'history')['redacted_payload'] == payload
+
+
+def test_final_call_advertises_only_executable_actions_and_zero_remaining_reads(tmp_path):
+    from jsonschema import Draft202012Validator
+    s, _, incident, model, investigator, _ = setup(tmp_path)
+    contracts=[]
+    def generate(request, contract, cancel):
+        model.requests.append(request)
+        contracts.append(contract)
+        final = len(model.requests)==2
+        value={'action':'conclude' if final else 'read','outcome':'unresolved','cause_family':'unknown',
+               'summary':'شواهد کافی نیست؛ علت نامشخص است.','evidence_ids':[],'contradiction_ids':[],
+               'unknowns':['بررسی بیشتر لازم است.'],'next_check':None if final else 'logs'}
+        if final:
+            assert request.payload['available_reads']==[]
+            assert request.payload['remaining_read_budget']==0
+            assert contract['properties']['action']['enum']==['conclude']
+            assert not Draft202012Validator(contract).is_valid({**value,'action':'read'})
+        else:
+            assert request.payload['available_reads']==['logs']
+            assert request.payload['remaining_read_budget']==12
+        return ModelResult(request_id=request.id,provider='test',model='test',cli_version='test',elapsed_ms=1,value=value)
+    model.generate=generate
+    result=investigator.investigate('owner',incident['id'],{'logs':lambda: Evidence(id='new-log',target=TARGET,kind='logs',
+                                   observed_at=99,available_at=100,quality='fresh',redacted_payload={})})
+    assert result['outcome']=='unresolved' and len(contracts)==2
+
+
+def test_exhausted_initial_read_budget_disallows_read_even_on_first_call(tmp_path):
+    s, _, incident, model, investigator, _=setup(tmp_path)
+    investigator.investigate('owner',incident['id'],{'logs':lambda: Evidence(id='same-log',target=TARGET,kind='logs',
+                            observed_at=99,available_at=100,quality='fresh',redacted_payload={})}, initial_reads=['logs']*12)
+    assert model.requests[0].payload['available_reads']==[]
+    assert model.requests[0].payload['remaining_read_budget']==0

@@ -71,8 +71,8 @@ test('real expired session with open evidence cannot restore prior-owner dialog'
  const state=await (await page.request.get('/api/state')).json()
  const watch=state.watches.find((w:any)=>w.state==='active')
  // Controlled own-session expiry uses the actual logout route; do not leave an orphan watch.
- await page.request.post('/api/watches/'+watch.id+'/stop',{headers:{Origin:'http://127.0.0.1:8661'}})
- await page.request.post('/api/logout',{headers:{Origin:'http://127.0.0.1:8661'}})
+ await page.request.post('/api/watches/'+watch.id+'/stop',{headers:{Origin:new URL(page.url()).origin}})
+ await page.request.post('/api/logout',{headers:{Origin:new URL(page.url()).origin}})
  await expect(page.getByLabel('رمز مالک')).toBeVisible({timeout:10000})
  await page.getByLabel('رمز مالک').fill(access.password)
  await page.getByRole('button',{name:'ورود',exact:true}).click()
@@ -131,7 +131,7 @@ test('same owner can recover watch history in a fresh session and revoked sessio
   expect(restored.watches.some((w:any)=>w.id===watch.id&&w.state==='stopped')).toBe(true)
  }finally{
   // Original session remains authenticated, allowing cleanup even if the second login regression fails.
-  await page.request.post('/api/watches/'+watch.id+'/stop',{headers:{Origin:'http://127.0.0.1:8661'}})
+  await page.request.post('/api/watches/'+watch.id+'/stop',{headers:{Origin:new URL(page.url()).origin}})
   await second.close()
  }
 })

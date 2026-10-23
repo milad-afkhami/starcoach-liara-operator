@@ -159,6 +159,9 @@ class FixtureProvider:
     def get_events(self, target, start, end):
         return self._evidence(target, "events", {"events": []})
 
+    def get_metrics_history(self, target):
+        return self._evidence(target, "metrics_history", {"error": "fixture_has_no_provider_metrics", "historical_only": True}, "unavailable")
+
     def get_metrics(self, target):
         return self._evidence(
             target,

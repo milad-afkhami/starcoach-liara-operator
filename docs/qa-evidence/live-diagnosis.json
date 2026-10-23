@@ -1,0 +1,654 @@
+{
+  "observed_at": "2026-10-23T00:54:13.598Z",
+  "elapsed_ms": 19362,
+  "incident": {
+    "incident": {
+      "action_allowed": false,
+      "diagnosis": {
+        "cause_family": "dependency_schema",
+        "contradiction_ids": [
+          "fa2ec6592d1f4706b6591c3fd950ae21",
+          "ed479603a389476cac965053b1f552f1"
+        ],
+        "cutoff": 1792716837.0276499,
+        "evidence_ids": [
+          "57582618470f447b9641d946e3569b8e",
+          "e03f5ad0eeb84fb6a0498aac9e6bbe6e",
+          "ed479603a389476cac965053b1f552f1"
+        ],
+        "generation": 2,
+        "model_calls": [
+          {
+            "cli_version": "codex-cli 0.163.0",
+            "elapsed_ms": 16338,
+            "model": "gpt-6.1-sol",
+            "provider": "codex_cli"
+          }
+        ],
+        "observation_sequence": 1,
+        "outcome": "repair_candidate",
+        "prompt_version": "liara-investigation-v2-fa",
+        "read_operations": 7,
+        "summary": "شواهد نشان‌دهندهٔ ناسازگاری قرارداد با وابستگی است: پیش‌نمایش با upstream_invalid خطای ۵۰۲ می‌دهد؛ سرویس shipping_toman انتظار دارد، اما وابستگی با پاسخ ۲۰۰، delivery_toman می‌فرستد. پاسخ ۲۰۰ مسیر سلامت، سلامت پیش‌نمایش را تضمین نمی‌کند و شاهدی بر کرش فعلی نداریم. امن‌ترین قدم، تأیید قرارداد مورد توافق و آماده‌سازی اصلاح سازگاری فیلدها همراه با آزمون پیش‌نمایش است؛ هیچ تغییری اجرا نشده است.",
+        "unknowns": [
+          "قرارداد مرجع مشخص نیست؛ معلوم نیست اصلاح باید در سرویس انجام شود یا وابستگی.",
+          "برابری معنایی delivery_toman و shipping_toman تأیید نشده است.",
+          "وضعیت همهٔ پردازش‌ها به‌دلیل خطای دریافت applets مشخص نیست.",
+          "شواهد، انتشار مشخصی را علت ناسازگاری اثبات نمی‌کنند."
+        ]
+      },
+      "failure_fingerprint": null,
+      "generation": 2,
+      "id": "63a6a82586664f4082bf794c431948de",
+      "investigation_error": null,
+      "investigation_progress": {
+        "model_call": 1,
+        "read_name": null,
+        "reads_completed": 7,
+        "stage": "done",
+        "updated_at": 1792716853.3910959
+      },
+      "investigation_run_id": "9c69fdd2d1b74500a4bb2b6a67e63183",
+      "investigation_state": "done",
+      "kind": "log_investigation",
+      "observation_sequence": 1,
+      "opened_at": 1792716603.8706908,
+      "question": "سرویس روشن است، ولی پیش‌نمایش درخواست‌ها خطای ۵۰۲ می‌دهد. با شواهد واقعی بررسی کن منشأ مشکل در این سرویس است یا وابستگی آن، و امن‌ترین قدم بعدی چیست.",
+      "state": "open",
+      "target": {
+        "app_id": "6adaa8e2aa8f2ba374e1617d",
+        "app_name": "liara-watch-storefront-2026",
+        "origin": "https://liara-watch-storefront-2026.liara.run",
+        "team_id": "6ad5c19f63b87278cb8cd077"
+      },
+      "watch_id": null
+    },
+    "evidence": [
+      {
+        "available_at": 1792716603.9132905,
+        "coverage": {
+          "provider_fixture": false
+        },
+        "id": "86d4b1a8b1624765876ae272fb098ad4",
+        "kind": "project",
+        "observed_at": 1792716603.9132903,
+        "quality": "fresh",
+        "redacted_payload": {
+          "_id": "6adaa8e2aa8f2ba374e1617d",
+          "created_at": "2026-10-23T00:22:58.693Z",
+          "hourlyPrice": 659.72,
+          "isDeployed": true,
+          "network": {
+            "_id": "6adaa415bffb36d784c6b756",
+            "name": "starcoach-contest-2026"
+          },
+          "planID": "small-g2",
+          "project_id": "liara-watch-storefront-2026",
+          "scale": 1,
+          "status": "ACTIVE",
+          "type": "docker"
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716604.8694296,
+        "coverage": {
+          "observed_service_health": false
+        },
+        "id": "95ff066d4b2045399a97ce02c3a31df9",
+        "kind": "applets",
+        "observed_at": 1792716604.8694293,
+        "quality": "unavailable",
+        "redacted_payload": {
+          "error": "provider_error",
+          "http_status": 500
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716605.270032,
+        "coverage": {
+          "empty": false,
+          "truncated": false
+        },
+        "id": "45407ac2ccfc424eafeaef74f7023a5c",
+        "kind": "releases",
+        "observed_at": 1792716605.270032,
+        "quality": "fresh",
+        "redacted_payload": {
+          "currentRelease": "6adaabf07b39ae0264b0116e",
+          "releases": [
+            {
+              "_id": "6adaabf07b39ae0264b0116e",
+              "createdAt": "2026-10-23T00:36:00.254Z",
+              "finishedAt": "2026-10-23T00:37:49.015Z",
+              "state": "READY",
+              "tag": "v1",
+              "type": "DEPLOY"
+            }
+          ]
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716605.4590745,
+        "coverage": {
+          "configured_endpoint": true,
+          "local_fixture_target": false
+        },
+        "id": "0fd223c4ffe3474c964d4d7de7192539",
+        "kind": "http_probe",
+        "observed_at": 1792716605.2916558,
+        "quality": "fresh",
+        "redacted_payload": {
+          "available_at": 1792716605.4590745,
+          "body_digest": "dbdc19e27d652fe2acc376e05335ab0962c7df4741f085770e861814ecc82ece",
+          "check_id": "store-preview",
+          "check_pass": false,
+          "contract_pass": null,
+          "elapsed_ms": 167.42065199650824,
+          "http_status": 502,
+          "id": "0fd223c4ffe3474c964d4d7de7192539",
+          "observed_at": 1792716605.2916558,
+          "payload": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "dependency_build_id": "d85f4897b3fe42ddb971bdcc8f55f899",
+            "reason": "upstream_invalid",
+            "request_id": "c294e717ec144ca1a4b05c4d6e9700c7",
+            "status": "unavailable"
+          },
+          "reason": "unexpected_status",
+          "request_id": "c294e717ec144ca1a4b05c4d6e9700c7",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716605.6569006,
+        "coverage": {
+          "configured_endpoint": true,
+          "local_fixture_target": false
+        },
+        "id": "978813a1e1d44271a75836e23e13107e",
+        "kind": "http_probe",
+        "observed_at": 1792716605.4807818,
+        "quality": "fresh",
+        "redacted_payload": {
+          "available_at": 1792716605.6569006,
+          "body_digest": "633582b938f9b82f418443d9df228c6f2730094597d2a879bf19297a5f1c932e",
+          "check_id": "store-health",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 176.12033599289134,
+          "http_status": 200,
+          "id": "978813a1e1d44271a75836e23e13107e",
+          "observed_at": 1792716605.4807818,
+          "payload": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "request_id": "2e4f27a63a71474c8719b39efd7c8164",
+            "status": "ok"
+          },
+          "reason": "pass",
+          "request_id": "2e4f27a63a71474c8719b39efd7c8164",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716605.8109534,
+        "coverage": {
+          "observed_service_health": false
+        },
+        "id": "5bf016cb825742c4bb5ef1749ece6570",
+        "kind": "logs",
+        "observed_at": 1792716605.8109534,
+        "quality": "unavailable",
+        "redacted_payload": {
+          "error": "provider_error",
+          "http_status": 400
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716606.346115,
+        "coverage": {
+          "missing_metrics": [],
+          "sample_count": 2,
+          "threshold_evaluated": false,
+          "truncated": false,
+          "unit_verified": true
+        },
+        "id": "d2127e9e14034c00850287df5e0d467b",
+        "kind": "metrics",
+        "observed_at": 1792716621,
+        "quality": "invalid",
+        "redacted_payload": {
+          "capacity_assessment": "not_established",
+          "measurements": [
+            {
+              "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+              "metric": "cpu",
+              "observed_at": 1792716621,
+              "unit": "percent",
+              "value": 0.5963689374603396
+            },
+            {
+              "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+              "metric": "memory",
+              "observed_at": 1792716621,
+              "unit": "bytes",
+              "value": 38969344
+            }
+          ],
+          "provider_data": {
+            "cpuUsage": [
+              {
+                "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+                "value": [
+                  1792716621,
+                  "0.005963689374603396"
+                ]
+              }
+            ],
+            "disksUsage": [],
+            "memoryUsage": [
+              {
+                "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+                "value": [
+                  1792716621,
+                  "38969344"
+                ]
+              }
+            ]
+          },
+          "snapshot_only": true,
+          "unit": "verified",
+          "unit_source": {
+            "cpu_denominator": "provider_reported_ratio",
+            "inspected_at": "2026-10-22",
+            "sha256": "d3e0d8646a7dde8e13f42b22fb659b1bb135531d069b0b0c2024a57ed983f5ec",
+            "url": "https://console.liara.ir/static/js/main.25f709b7.js"
+          }
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716625.8687816,
+        "coverage": {
+          "configured_endpoint": true,
+          "local_fixture_target": false
+        },
+        "id": "ed479603a389476cac965053b1f552f1",
+        "kind": "http_probe",
+        "observed_at": 1792716625.3141742,
+        "quality": "fresh",
+        "redacted_payload": {
+          "available_at": 1792716625.8687816,
+          "body_digest": "e115b7f42755b7bd52092b5b7b6ade2229acd2f8206d0bdbff198fb21a675a32",
+          "check_id": "dep-quote",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 554.6085970127024,
+          "http_status": 200,
+          "id": "ed479603a389476cac965053b1f552f1",
+          "observed_at": 1792716625.3141742,
+          "payload": {
+            "build_id": "d85f4897b3fe42ddb971bdcc8f55f899",
+            "delivery_toman": 10000,
+            "request_id": "525e8d9f70a942ef82ec7794c96b3f58"
+          },
+          "reason": "pass",
+          "request_id": "525e8d9f70a942ef82ec7794c96b3f58",
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        "target": {
+          "app_id": "6adaa46772aa39a87a745fd7",
+          "app_name": "liara-watch-delivery-2026",
+          "origin": "https://liara-watch-delivery-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716834.2693427,
+        "coverage": {
+          "provider_fixture": false
+        },
+        "id": "f25e91994e12442f92336b7fd7a3919d",
+        "kind": "project",
+        "observed_at": 1792716834.2693424,
+        "quality": "fresh",
+        "redacted_payload": {
+          "_id": "6adaa8e2aa8f2ba374e1617d",
+          "created_at": "2026-10-23T00:22:58.693Z",
+          "hourlyPrice": 659.72,
+          "isDeployed": true,
+          "network": {
+            "_id": "6adaa415bffb36d784c6b756",
+            "name": "starcoach-contest-2026"
+          },
+          "planID": "small-g2",
+          "project_id": "liara-watch-storefront-2026",
+          "scale": 1,
+          "status": "ACTIVE",
+          "type": "docker"
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716835.1695895,
+        "coverage": {
+          "observed_service_health": false
+        },
+        "id": "a4e999af271e4827b560b0aeaa95c0b5",
+        "kind": "applets",
+        "observed_at": 1792716835.169589,
+        "quality": "unavailable",
+        "redacted_payload": {
+          "error": "provider_error",
+          "http_status": 500
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716835.6483936,
+        "coverage": {
+          "empty": false,
+          "truncated": false
+        },
+        "id": "3f72e0d1caf843f885fc52d45f53e010",
+        "kind": "releases",
+        "observed_at": 1792716835.6483934,
+        "quality": "fresh",
+        "redacted_payload": {
+          "currentRelease": "6adaabf07b39ae0264b0116e",
+          "releases": [
+            {
+              "_id": "6adaabf07b39ae0264b0116e",
+              "createdAt": "2026-10-23T00:36:00.254Z",
+              "finishedAt": "2026-10-23T00:37:49.015Z",
+              "state": "READY",
+              "tag": "v1",
+              "type": "DEPLOY"
+            }
+          ]
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716835.8832588,
+        "coverage": {
+          "configured_endpoint": true,
+          "local_fixture_target": false
+        },
+        "id": "e03f5ad0eeb84fb6a0498aac9e6bbe6e",
+        "kind": "http_probe",
+        "observed_at": 1792716835.6703444,
+        "quality": "fresh",
+        "redacted_payload": {
+          "available_at": 1792716835.8832588,
+          "body_digest": "233f020f47b457f5a8332848920e3f703b9d4754a2359cc67c2c21ad924d7e75",
+          "check_id": "store-preview",
+          "check_pass": false,
+          "contract_pass": null,
+          "elapsed_ms": 212.91524200933054,
+          "http_status": 502,
+          "id": "e03f5ad0eeb84fb6a0498aac9e6bbe6e",
+          "observed_at": 1792716835.6703444,
+          "payload": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "dependency_build_id": "d85f4897b3fe42ddb971bdcc8f55f899",
+            "reason": "upstream_invalid",
+            "request_id": "6db2f2863a244e3198ca9075fc77395c",
+            "status": "unavailable"
+          },
+          "reason": "unexpected_status",
+          "request_id": "6db2f2863a244e3198ca9075fc77395c",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716836.113397,
+        "coverage": {
+          "configured_endpoint": true,
+          "local_fixture_target": false
+        },
+        "id": "fa2ec6592d1f4706b6591c3fd950ae21",
+        "kind": "http_probe",
+        "observed_at": 1792716835.9064572,
+        "quality": "fresh",
+        "redacted_payload": {
+          "available_at": 1792716836.113397,
+          "body_digest": "943d817fa20632fdc31f50a846e62f07ae67093f3a126ca952510c6ce79a4851",
+          "check_id": "store-health",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 206.9417960010469,
+          "http_status": 200,
+          "id": "fa2ec6592d1f4706b6591c3fd950ae21",
+          "observed_at": 1792716835.9064572,
+          "payload": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "request_id": "4d2955b464e3425aa0fe1963cd55c57c",
+            "status": "ok"
+          },
+          "reason": "pass",
+          "request_id": "4d2955b464e3425aa0fe1963cd55c57c",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716836.3649728,
+        "coverage": {
+          "empty": false,
+          "truncated": false,
+          "window_start": 1792716536.1381207
+        },
+        "id": "57582618470f447b9641d946e3569b8e",
+        "kind": "logs",
+        "observed_at": 1792716742.940527,
+        "quality": "fresh",
+        "redacted_payload": {
+          "lines": [
+            {
+              "message": "{\"event\": \"upstream_error\", \"reason\": \"upstream_invalid\", \"request_id\": \"9aa4cbef6e724e4db5f5337e01b5df13\", \"build_id\": \"0553e44e5ec34e70b0706d3a4f521b20\", \"dependency_build_id\": \"d85f4897b3fe42ddb971bdcc8f55f899\", \"expected_field\": \"shipping_toman\", \"observed_fields\": [\"build_id\", \"delivery_toman\", \"request_id\"]}",
+              "release_id": "6adaabf07b39ae0264b0116e",
+              "timestamp": "1792716618864532626",
+              "type": "stdout"
+            },
+            {
+              "message": "{\"event\": \"upstream_error\", \"reason\": \"upstream_invalid\", \"request_id\": \"c294e717ec144ca1a4b05c4d6e9700c7\", \"build_id\": \"0553e44e5ec34e70b0706d3a4f521b20\", \"dependency_build_id\": \"d85f4897b3fe42ddb971bdcc8f55f899\", \"expected_field\": \"shipping_toman\", \"observed_fields\": [\"build_id\", \"delivery_toman\", \"request_id\"]}",
+              "release_id": "6adaabf07b39ae0264b0116e",
+              "timestamp": "1792716620954548467",
+              "type": "stdout"
+            },
+            {
+              "message": "{\"event\": \"upstream_error\", \"reason\": \"upstream_invalid\", \"request_id\": \"9da6363d09eb4e50909493e5b0292e31\", \"build_id\": \"0553e44e5ec34e70b0706d3a4f521b20\", \"dependency_build_id\": \"d85f4897b3fe42ddb971bdcc8f55f899\", \"expected_field\": \"shipping_toman\", \"observed_fields\": [\"build_id\", \"delivery_toman\", \"request_id\"]}",
+              "release_id": "6adaabf07b39ae0264b0116e",
+              "timestamp": "1792716742940526966",
+              "type": "stdout"
+            }
+          ],
+          "schema": "v2"
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      },
+      {
+        "available_at": 1792716837.015336,
+        "coverage": {
+          "missing_metrics": [],
+          "sample_count": 2,
+          "threshold_evaluated": false,
+          "truncated": false,
+          "unit_verified": true
+        },
+        "id": "121295431b2f4d289cf423a694f9f1a5",
+        "kind": "metrics",
+        "observed_at": 1792716852,
+        "quality": "invalid",
+        "redacted_payload": {
+          "capacity_assessment": "not_established",
+          "measurements": [
+            {
+              "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+              "metric": "cpu",
+              "observed_at": 1792716852,
+              "unit": "percent",
+              "value": 0.6029867290122549
+            },
+            {
+              "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+              "metric": "memory",
+              "observed_at": 1792716852,
+              "unit": "bytes",
+              "value": 39018496
+            }
+          ],
+          "provider_data": {
+            "cpuUsage": [
+              {
+                "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+                "value": [
+                  1792716852,
+                  "0.006029867290122549"
+                ]
+              }
+            ],
+            "disksUsage": [],
+            "memoryUsage": [
+              {
+                "applet": "6adaa8e2aa8f2ba374e1617d.1.91d88b18-ce13-42e2-b424-bac025bcacf8-DEPLOY",
+                "value": [
+                  1792716852,
+                  "39018496"
+                ]
+              }
+            ]
+          },
+          "snapshot_only": true,
+          "unit": "verified",
+          "unit_source": {
+            "cpu_denominator": "provider_reported_ratio",
+            "inspected_at": "2026-10-22",
+            "sha256": "d3e0d8646a7dde8e13f42b22fb659b1bb135531d069b0b0c2024a57ed983f5ec",
+            "url": "https://console.liara.ir/static/js/main.25f709b7.js"
+          }
+        },
+        "target": {
+          "app_id": "6adaa8e2aa8f2ba374e1617d",
+          "app_name": "liara-watch-storefront-2026",
+          "origin": "https://liara-watch-storefront-2026.liara.run",
+          "team_id": "6ad5c19f63b87278cb8cd077"
+        }
+      }
+    ],
+    "can_repair": true,
+    "guidance": {
+      "mode": "review_proposal",
+      "automatic_changes": false,
+      "limitation": "هر استقرار به پیشنهاد دقیق و تأیید جداگانهٔ شما نیاز دارد.",
+      "steps": [
+        {
+          "id": "inspect",
+          "title": "پاسخ دو سرویس را مقایسه کنید",
+          "detail": "با شناسهٔ همان درخواست، نام و نوع فیلدهای پاسخ سرویس وابسته را با انتظار سرویس فراخوان مقایسه کنید. هم‌زمانی انتشار به‌تنهایی علت را ثابت نمی‌کند.",
+          "actor": "owner",
+          "evidence_ids": [
+            "ed479603a389476cac965053b1f552f1",
+            "e03f5ad0eeb84fb6a0498aac9e6bbe6e",
+            "57582618470f447b9641d946e3569b8e"
+          ],
+          "check_ids": []
+        },
+        {
+          "id": "coordinate",
+          "title": "اصلاح سازگار را با مالک سرویس هماهنگ کنید",
+          "detail": "اگر ناسازگاری قرارداد تأیید شد، پاسخ یا مصرف‌کنندهٔ آن باید هماهنگ شود. پیش از هر استقرار، سورس، سرویس هدف و اثر تغییر را جداگانه بازبینی کنید.",
+          "actor": "owner",
+          "evidence_ids": [],
+          "check_ids": []
+        },
+        {
+          "id": "verify",
+          "title": "رفع مشکل را با مشاهدهٔ تازه بسنجید",
+          "detail": "پس از اصلاح تأییدشده، همان بررسی‌های اولیه را تکرار کنید: store-preview (HTTP 502), store-preview (HTTP 502). پاسخ مورد انتظار و هویت نسخهٔ در حال سرویس‌دهی را بررسی کنید؛ آماده بودن انتشار کافی نیست.",
+          "actor": "assistant",
+          "evidence_ids": [
+            "0fd223c4ffe3474c964d4d7de7192539",
+            "e03f5ad0eeb84fb6a0498aac9e6bbe6e"
+          ],
+          "check_ids": [
+            "store-preview"
+          ]
+        }
+      ]
+    }
+  },
+  "errors": []
+}

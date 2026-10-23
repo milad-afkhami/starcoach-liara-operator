@@ -68,3 +68,52 @@ test('observations show absolute Persian date and Tehran time across UTC midnigh
  assert.equal(when(Date.parse('2026-10-22T21:30:00Z')/1000),value)
  assert.equal(when('not a timestamp'),'زمان در دسترس نیست')
 })
+
+test('evidence references identify the service and exact registered check',async()=>{
+ const {evidenceLocation,progressLabel}=await import('./presentation.ts')
+ assert.equal(evidenceLocation({target:{app_name:'delivery'},redacted_payload:{check_id:'dep-quote'}}),'delivery · dep-quote')
+ assert.equal(evidenceLocation({target:{app_name:'storefront'},redacted_payload:{}}),'storefront')
+ assert.match(progressLabel({stage:'collecting',read_name:'dependency:dep-quote',reads_completed:5}),/dep-quote/)
+ assert.match(progressLabel({stage:'analyzing',reads_completed:6,model_call:2}),/۲|2/)
+ assert.match(progressLabel({stage:'validating',reads_completed:6,model_call:2}),/اعتبار/)
+})
+
+test('resource values keep verified units and unavailable values never become zero',async()=>{
+ const {resourceValue}=await import('./presentation.ts')
+ assert.match(resourceValue({metric:'memory',value:67108864,unit:'bytes'}),/۶۴ MiB/)
+ assert.match(resourceValue({metric:'cpu',value:12.5,unit:'percent'}),/۱۲٫۵/)
+ assert.equal(resourceValue({metric:'cpu',value:NaN,unit:'percent'}),'در دسترس نیست')
+ assert.equal(resourceValue({metric:'cpu',value:0.5,unit:'unknown'}),'واحد تأیید نشده')
+})
+
+test('read-only recovery recheck is once-only within original deadline and exact generation',async()=>{
+ const {mayRecheckRecovery,operationNeedsPolling}=await import('./presentation.ts')
+ const op={state:'failed',release_id:'r2',reconcile_until:700,recovery_rechecks_used:0,spec:{kind:'redeploy_known_good',incident_generation:2},verification:{state:'inconclusive'}}
+ assert.equal(mayRecheckRecovery(op,100,2),true)
+ assert.equal(mayRecheckRecovery(op,701,2),false)
+ assert.equal(mayRecheckRecovery({...op,recovery_rechecks_used:1},100,2),false)
+ assert.equal(mayRecheckRecovery(op,100,3),false)
+ assert.equal(mayRecheckRecovery({...op,verification:{state:'failed'}},100,2),false)
+ assert.equal(operationNeedsPolling({state:'awaiting_serving',reconcile_until:700},100),true)
+})
+
+test('recovered incidents present the preserved diagnosis as pre-action history',async()=>{
+ const {diagnosisPresentation,releasePresentation}=await import('./presentation.ts')
+ assert.deepEqual(diagnosisPresentation('recovered',true),{historical:true,title:'تحلیل پیش از اقدام',outcomePrefix:'نتیجه در زمان تحلیل: ',unknownsTitle:'موارد نامعلوم در زمان تحلیل'})
+ assert.equal(diagnosisPresentation('open').historical,false)
+ assert.equal(diagnosisPresentation('open',true).historical,true)
+ assert.equal(diagnosisPresentation('recovered').title,'تحلیل ثبت‌شدهٔ پیشین')
+ assert.equal(releasePresentation('pending','inconclusive').afterLabel,'انتشار ارسال‌شده')
+ assert.equal(releasePresentation('completed','recovered').afterLabel,'انتشار مستقرشده و تأییدشده')
+ assert.equal(releasePresentation('completed','recovered').beforeLabel,'انتشار پیش از استقرار')
+})
+
+test('historical resource fallback keeps source and clock uncertainty distinct from summary',async()=>{
+ const {resourceSamples}=await import('./presentation.ts')
+ const historical={kind:'metrics_history',quality:'fresh',coverage:{unit_verified:true},redacted_payload:{historical_only:true,measurements:[{metric:'cpu',applet:'old',value:12.5,unit:'percent',observed_at:99}]}}
+ assert.equal(resourceSamples(historical).length,1)
+ assert.deepEqual(resourceSamples({...historical,quality:'unavailable'}),[])
+ assert.deepEqual(resourceSamples({...historical,coverage:{unit_verified:false}}),[])
+ assert.deepEqual(resourceSamples({...historical,redacted_payload:{...historical.redacted_payload,historical_only:false}}),[])
+ assert.deepEqual(resourceSamples({...historical,quality:'invalid'}),[])
+})

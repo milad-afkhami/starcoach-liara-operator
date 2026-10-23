@@ -9,7 +9,7 @@ import uuid
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import asynccontextmanager
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Literal
 from urllib.parse import urlsplit
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.responses import JSONResponse
@@ -21,13 +21,15 @@ from .approvals import ApprovalError, Executor, OperationSpec, OperationStore
 from .client import LiaraClient, ProviderError
 from .contracts import ProbeRunner, ProbeResult
 from .investigator import Investigator
+from .guidance import remediation_guidance
+from .setup_advice import setup_recommendation
 from .model_types import ModelError
 from .observer import MonitorStore, Observer, encode, invalidate_diagnosis
 from .operations_bridge import LiaraOperationProvider, failure_fingerprint, current_repair_candidate
 from .runtime import Registry, FixtureProvider, local_config
 from .redaction import redact
 from .types import Evidence, Record
-from .verification import verify_recovery, bind_verification
+from .verification import verify_recovery, bind_verification, serving_readiness
 
 
 class Login(Record):
@@ -44,6 +46,13 @@ class WatchInput(Record):
 
 class ApprovalInput(Record):
     digest: str = Field(min_length=64, max_length=64)
+
+
+class SetupRequirements(Record):
+    workload: Literal["web", "worker", "static"] = "web"
+    ram_gb: float = Field(default=0.5, ge=0.25, le=128)
+    cpu_cores: float = Field(default=0.5, ge=0.1, le=64)
+    disk_gb: int = Field(default=5, ge=1, le=1024)
 
 
 class LimitedRoute(APIRoute):
@@ -211,7 +220,7 @@ def create_app(
     def readers_for(target):
         reads = {
             name: (lambda name=name: evidence_read(target, name))
-            for name in ["project", "applets", "releases", "logs", "metrics", "events"]
+            for name in ["project", "applets", "releases", "logs", "metrics", "metrics_history", "events"]
         }
         for check in registry.checks_for(target.app_id):
             reads["http:" + check.id] = lambda check=check: probe_evidence(check)
@@ -228,6 +237,7 @@ def create_app(
             *["http:" + c.id for c in registry.checks_for(target.app_id)],
             "logs",
             "metrics",
+            "metrics_history",
         ]
 
     def provider_snapshot(target):
@@ -243,6 +253,8 @@ def create_app(
             clock=clock,
             dependencies=registry.dependencies,
             repair_capabilities=[i for i in registry.targets if registry.can_repair(i)],
+            diagnostic_secrets=(getattr(provider, "token", None), session_secret or os.environ.get("SESSION_SECRET", ""),
+                                password_hash or os.environ.get("OPERATOR_PASSWORD_HASH", "")),
         )
 
     def public_incident(value):
@@ -264,7 +276,8 @@ def create_app(
             capacity(owner)
             cancel = threading.Event()
             target = resolve(incident["target"]["app_id"])
-            incident.update(investigation_state="queued", diagnosis=None, investigation_error=None)
+            incident.update(investigation_state="queued", diagnosis=None, investigation_error=None,
+                            investigation_progress={"stage": "queued", "reads_completed": 0})
             monitor.save_incident(incident, incident["generation"])
             future = model_pool.submit(
                 investigator().investigate,
@@ -299,7 +312,7 @@ def create_app(
                 value, incident, policy, {"state": "pending", "reason": "not_started", "probe_ids": []}
             )
             if result["state"] != "inconclusive":
-                value = operations.update(value, state="verifying")
+                value = operations.transition_verification(value, state="verifying")
                 result = verify_recovery(
                     policy,
                     value["release_id"],
@@ -307,35 +320,20 @@ def create_app(
                     probes.run,
                     clock=clock,
                     current_policy_hash=lambda: registry.policies[incident["target"]["app_id"]].digest(),
+                    deadline_utc=value["reconcile_until"],
                 )
-            with monitor.connect() as db:
-                db.execute("BEGIN IMMEDIATE")
-                row = db.execute(
-                    "SELECT data FROM incidents WHERE id=? AND owner=?", (incident["id"], value["owner"])
-                ).fetchone()
-                latest = json.loads(row[0])
-                result = bind_verification(
-                    value, latest, registry.policies[incident["target"]["app_id"]], result
-                )
-                latest["verification"] = result
-                if result["state"] == "recovered":
-                    latest["state"] = "recovered"
-                    latest["generation"] += 1
-                    latest["repair_pending"] = False
-                db.execute(
-                    "UPDATE incidents SET state=?,data=? WHERE id=?",
-                    (latest["state"], encode(latest), latest["id"]),
-                )
-            operations.update(
-                value, state="completed" if result["state"] == "recovered" else "failed", verification=result
-            )
+            operations.finish_verification(value, result, publish_incident=True,
+                policy_hash=registry.policies[incident["target"]["app_id"]].digest())
+        except ApprovalError:
+            # A stale worker cannot publish to either record or finalize the newer attempt.
+            pass
         except Exception:
-            operations.update(
-                value,
-                state="failed",
-                error="verification_unavailable",
-                verification={"state": "inconclusive", "reason": "verification_unavailable", "probe_ids": []},
-            )
+            try:
+                operations.finish_verification(value, {"state": "inconclusive", "reason": "verification_unavailable", "probe_ids": []},
+                    publish_incident=True,
+                    policy_hash=registry.policies[incident["target"]["app_id"]].digest() if "incident" in locals() else None)
+            except ApprovalError:
+                pass
         finally:
             with lock:
                 verifying.discard(value["id"])
@@ -354,7 +352,7 @@ def create_app(
                 pending = [
                     json.loads(r[0])
                     for r in db.execute(
-                        "SELECT data FROM operations WHERE state IN ('pending','unknown','ready')"
+                        "SELECT data FROM operations WHERE state IN ('pending','unknown','ready','awaiting_serving')"
                     )
                 ]
             recoverable = []
@@ -362,6 +360,12 @@ def create_app(
                 if value["spec"]["kind"] != "redeploy_known_good":
                     continue
                 if value.get("reconcile_until") is None or clock() > value["reconcile_until"]:
+                    if value["state"] == "awaiting_serving":
+                        try:
+                            operations.finish_verification(value, {"state": "inconclusive", "reason": "reconciliation_expired", "probe_ids": []})
+                        except ApprovalError:
+                            pass
+                        continue
                     if value.get("error") != "reconciliation_expired":
                         operations.update(value, state="unknown", error="reconciliation_expired")
                     continue
@@ -376,17 +380,45 @@ def create_app(
             if any(value["spec"].get("app_id") not in registry.targets for value in pending):
                 return  # Never fail verification just because inventory recovery is still unavailable.
             for value in pending:
-                if value["spec"]["kind"] != "redeploy_known_good":
-                    continue
-                ex, bridge = executor(value["owner"])
-                updated = ex.reconcile(value["owner"], value["id"])
-                if updated["state"] == "ready":
-                    with lock:
-                        if updated["id"] in verifying:
-                            continue
-                        verifying.add(updated["id"])
-                        updated = operations.update(updated, state="verifying")
-                        pool.submit(verify_operation, updated, bridge)
+                try:
+                    if value["spec"]["kind"] != "redeploy_known_good":
+                        continue
+                    ex, bridge = executor(value["owner"])
+                    updated = ex.reconcile(value["owner"], value["id"])
+                    if updated["state"] in ("ready", "awaiting_serving"):
+                        with lock:
+                            if updated["id"] in verifying:
+                                continue
+                            if clock()-updated.get("last_serving_checked", float("-inf")) < 10:
+                                continue
+                            incident = monitor.incident(updated["owner"], updated["spec"]["incident_id"])
+                            policy = registry.policies[incident["target"]["app_id"]]
+                            binding = bind_verification(updated, incident, policy, {"state": "pending"})
+                            if updated.get("recovery_rechecks_used") and incident["generation"] != updated.get("recovery_recheck_generation"):
+                                binding = {"state": "inconclusive"}
+                            if binding["state"] == "inconclusive":
+                                operations.finish_verification(updated, {"state": "inconclusive", "reason": "operation_binding_changed", "probe_ids": []})
+                                continue
+                            updated = operations.transition_verification(updated, state="awaiting_serving", last_serving_checked=clock())
+                        readiness = serving_readiness(policy, updated["release_id"], bridge.status_for_policy,
+                                                      clock=clock, deadline=updated["reconcile_until"])
+                        latest_incident = monitor.incident(updated["owner"], updated["spec"]["incident_id"])
+                        if (policy.digest() != updated["spec"]["verification_policy_hash"]
+                                or latest_incident.get("repair_operation_id") != updated["id"]
+                                or (updated.get("recovery_rechecks_used") and latest_incident["generation"] != updated.get("recovery_recheck_generation"))):
+                            readiness = {"state": "expired", "reason": "operation_binding_changed"}
+                        updated = operations.transition_verification(updated, serving_readiness=readiness)
+                        if readiness["state"] == "expired":
+                            operations.finish_verification(updated, {"state": "inconclusive", "reason": readiness["reason"], "probe_ids": []})
+                        elif readiness["state"] == "ready":
+                            with lock:
+                                if updated["id"] in verifying:
+                                    continue
+                                verifying.add(updated["id"])
+                                updated = operations.transition_verification(updated, state="verifying", verification_attempt_id=updated.get("verification_attempt_id") or uuid.uuid4().hex)
+                                pool.submit(verify_operation, updated, bridge)
+                except ApprovalError:
+                    continue  # A stale readiness observation cannot replace a newer attempt.
 
     @asynccontextmanager
     async def lifespan(app):
@@ -501,11 +533,15 @@ def create_app(
             ],
         }
 
+    @app.post("/api/setup/recommendation")
+    def recommend_setup(body: SetupRequirements, _: Owner):
+        return setup_recommendation(provider, body.model_dump(), checked_at=clock(), mode=mode)
+
     @app.get("/api/services/{identifier}")
     def detail(identifier: str, owner: Owner):
         target = resolve(identifier)
         evidence = []
-        for name in ["project", "applets", "releases", "metrics"]:
+        for name in ["project", "applets", "releases", "metrics", "metrics_history"]:
             try:
                 item = evidence_read(target, name)
                 evidence.append(item.model_dump())
@@ -544,10 +580,13 @@ def create_app(
     @app.get("/api/incidents/{identifier}")
     def incident(identifier: str, owner: Owner):
         value = monitor.incident(owner, identifier)
+        evidence = monitor.evidence(owner, identifier, cutoff=clock())
+        can_repair = registry.can_repair(value["target"]["app_id"])
         return {
             "incident": public_incident(value),
-            "evidence": monitor.evidence(owner, identifier, cutoff=clock()),
-            "can_repair": registry.can_repair(value["target"]["app_id"]),
+            "evidence": evidence,
+            "can_repair": can_repair,
+            "guidance": remediation_guidance(value, evidence, can_repair=can_repair),
         }
 
     @app.post("/api/incidents/{identifier}/investigate", status_code=202)
@@ -569,6 +608,10 @@ def create_app(
                 value["question"] = redact(body.question)
                 db.execute("UPDATE incidents SET data=? WHERE id=?", (encode(value), identifier))
             return start_investigation(owner, value)
+
+    @app.get("/api/incidents/{identifier}/rejected-drafts")
+    def rejected_drafts(identifier: str, owner: Owner):
+        return {"rejected_not_a_diagnosis": True, "diagnostics": monitor.rejected_drafts(owner, identifier)}
 
     @app.post("/api/incidents/{identifier}/cancel")
     def cancel_investigation(identifier: str, owner: Owner):
@@ -700,6 +743,22 @@ def create_app(
     @app.get("/api/operations/{identifier}")
     def operation(identifier: str, owner: Owner):
         return public_operation(operations.get(owner, identifier))
+
+    @app.post("/api/operations/{identifier}/recheck-recovery", status_code=202)
+    def recheck_recovery(identifier: str, owner: Owner):
+        if mode != "live" or provider is None:
+            raise HTTPException(409, "live_provider_required_for_deployment")
+        value = operations.get(owner, identifier)
+        incident = monitor.incident(owner, value["spec"]["incident_id"])
+        policy = registry.policies.get(incident["target"]["app_id"])
+        if (policy is None or incident["state"] != "open" or incident.get("repair_operation_id") != identifier
+                or policy.changed_target_id != value["spec"]["app_id"]):
+            raise HTTPException(409, "recovery_recheck_unavailable")
+        target = resolve(value["spec"]["app_id"])
+        if target.team_id != value["spec"]["team_id"] or target.app_name != value["spec"]["app_name"]:
+            raise HTTPException(409, "recovery_recheck_unavailable")
+        return public_operation(operations.claim_recovery_recheck(owner, identifier,
+            incident_generation=incident["generation"], policy_hash=policy.digest()))
 
     root = Path(__file__).resolve().parents[2]
     dist = Path(frontend_dist) if frontend_dist else root / "frontend/dist"

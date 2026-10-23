@@ -1,0 +1,943 @@
+{
+  "rows": [
+    {
+      "id": "RR1",
+      "status": "pass",
+      "assertion": "Actual rendered owner login and eligible read-only control; explicitly seeded prior failure visible"
+    },
+    {
+      "id": "RR2",
+      "status": "pass",
+      "assertion": "One local read-only action accepted; awaiting-serving guidance and polling visible"
+    },
+    {
+      "id": "RR3",
+      "status": "pass",
+      "assertion": "Duplicate action rejected409; same single attempt token"
+    },
+    {
+      "id": "RR4",
+      "status": "pass",
+      "assertion": "Real current approved-demo GETs verified3rounds/6raw build+echo probes with actual timing and policy"
+    },
+    {
+      "id": "RR5",
+      "status": "pass",
+      "assertion": "Both original seeded inconclusive and new recovered attempt rendered; retry removed"
+    },
+    {
+      "id": "RR6",
+      "status": "pass",
+      "assertion": "390px history readable; no page errors or overflow"
+    },
+    {
+      "id": "RR7",
+      "status": "pass",
+      "assertion": "No active watch/job or attempted provider write; browser closed"
+    }
+  ],
+  "errors": [],
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/api/services"
+    },
+    {
+      "method": "GET",
+      "path": "/api/state"
+    },
+    {
+      "method": "POST",
+      "path": "/api/login"
+    },
+    {
+      "method": "GET",
+      "path": "/api/services"
+    },
+    {
+      "method": "GET",
+      "path": "/api/state"
+    },
+    {
+      "method": "GET",
+      "path": "/api/services/6adaa8e2aa8f2ba374e1617d"
+    },
+    {
+      "method": "GET",
+      "path": "/api/incidents/40b2b9d8c4da4f0da1c57dcd1ff7d9ac"
+    },
+    {
+      "method": "POST",
+      "path": "/api/operations/4b051bf177f84d16a0eefbabc5399ae8/recheck-recovery"
+    },
+    {
+      "method": "GET",
+      "path": "/api/state"
+    },
+    {
+      "method": "GET",
+      "path": "/api/state"
+    },
+    {
+      "method": "GET",
+      "path": "/api/operations/4b051bf177f84d16a0eefbabc5399ae8"
+    }
+  ],
+  "historical_driver_failures": [
+    {
+      "status": "fail",
+      "error": "Error: read-only verification failed {\"id\":\"4b051bf177f84d16a0eefbabc5399ae8\",\"state\":\"awaiting_serving\",\"error\":null,\"verification\":{\"observed_window\":[1792718528.8915527,1792718578.8915527],\"probe_ids\":[],\"reason\":\"نمونهٔ آزمون رابط؛ نتیجهٔ قبلی مصنوعی است\",\"state\":\"inconclusive\"}}"
+    },
+    {
+      "scope": "canonical10browser rerun before fixture preflight",
+      "error": "all10failedwithERR_CONNECTION_REFUSED on stopped owned8682; no product assertions reached; fixture restarted before rerun"
+    },
+    {
+      "scope": "canonical rerun after restarting operator but before local endpoint restoration",
+      "result": "6pass/4fail",
+      "tests": [
+        "real service evidence separates liveness from failure and watch can stop",
+        "reselecting a service during its real detail read does not strand refresh",
+        "failed observation read does not erase configured-check knowledge",
+        "Persian shell uses RTL and shaped UI numbers while original evidence stays Latin LTR"
+      ],
+      "cause": "8771/8772 fixture services were stopped; preflight now verifies502preview/200health/200dependency on owned temporary source copies before rerun"
+    }
+  ],
+  "result": {
+    "approved_at": 1792718318.8915527,
+    "created_at": 1792718628.9057055,
+    "digest": "bce6c18b47935d99054f296b539d1843eaafe7712f1d2c69fab87b214bf34187",
+    "error": null,
+    "expires_at": 1792718928.9057055,
+    "id": "4b051bf177f84d16a0eefbabc5399ae8",
+    "last_reconciled": null,
+    "last_serving_checked": 1792718645.6374485,
+    "qa_seeded_previous_attempt": true,
+    "reconcile_until": 1792718928.8915527,
+    "recovery_recheck_generation": 1,
+    "recovery_recheck_release_id": "6adab0837b39ae0264b1d525",
+    "recovery_recheck_requested_at": 1792718644.4411209,
+    "recovery_rechecks_used": 1,
+    "release_id": "6adab0837b39ae0264b1d525",
+    "serving_readiness": {
+      "provider_identity": [
+        {
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792718648,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "state": "READY",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 3,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 13,
+            "history_end": 1792718650,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 5,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adab0837b39ae0264b1d525"
+          ],
+          "state": "READY",
+          "target_id": "6adaa46772aa39a87a745fd7"
+        }
+      ],
+      "reason": "serving_identity_ready",
+      "state": "ready"
+    },
+    "source_id": "qa-seeded-source-reference",
+    "spec": {
+      "app_id": "6adaa46772aa39a87a745fd7",
+      "app_name": "liara-watch-delivery-2026",
+      "artifact_sha256": "98f87ed8347d53c7532621c0ea11bbfe6c51c3f24f7d95f16abd2b234c569ce3",
+      "before_release_id": "qa-seeded-before",
+      "bundle_plan_id": null,
+      "failure_fingerprint": "qa-seeded-failure",
+      "hourly_price_toman": null,
+      "incident_generation": 1,
+      "incident_id": "40b2b9d8c4da4f0da1c57dcd1ff7d9ac",
+      "kind": "redeploy_known_good",
+      "network_id": null,
+      "plan_id": null,
+      "platform": "docker",
+      "port": 8000,
+      "price_verified_at": null,
+      "team_id": "6ad5c19f63b87278cb8cd077",
+      "verification_policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127"
+    },
+    "state": "completed",
+    "submitted_at": 1792718328.8915527,
+    "verification": {
+      "observed_window": [
+        1792718651.8463483,
+        1792718678.5496829
+      ],
+      "policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127",
+      "probe_ids": [
+        "aa0147f86fb241a488ba75c2165e5a34",
+        "8a7c178432f8469d9ffea4a984a97acb",
+        "174e6d71eb5f48ab8e3fbc687fc5610a",
+        "270bbc0b7eb44051a73e3476e7ed01d4",
+        "cdc76adfc7e84d12a08dd71cab776830",
+        "2e70fb595da244e29cec3476f1b2d6fd"
+      ],
+      "probe_results": [
+        {
+          "available_at": 1792718657.7696471,
+          "body_digest": "a607de9c863cb7c41fcd388d53f849b756dac7128100ae9fc6c278b234f42545",
+          "check_id": "store-preview",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 240.25400896789506,
+          "http_status": 200,
+          "id": "aa0147f86fb241a488ba75c2165e5a34",
+          "observed_at": 1792718657.5293941,
+          "payload": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "e58eef21a05f4992b6c168e603b711ff",
+            "shipping_toman": 10000,
+            "status": "ready"
+          },
+          "reason": "pass",
+          "request_id": "e58eef21a05f4992b6c168e603b711ff",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "available_at": 1792718657.9630013,
+          "body_digest": "45071b9dc6a65e6aaff6249072ca480f0d3a910328fed3401b476af99117abd4",
+          "check_id": "dep-quote",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 193.19555803667754,
+          "http_status": 200,
+          "id": "8a7c178432f8469d9ffea4a984a97acb",
+          "observed_at": 1792718657.7698066,
+          "payload": {
+            "build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "dfdb4a24701e40ac96a227d0fa76e7cc",
+            "shipping_toman": 10000
+          },
+          "reason": "pass",
+          "request_id": "dfdb4a24701e40ac96a227d0fa76e7cc",
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "available_at": 1792718668.3292263,
+          "body_digest": "e71c588cb39779662c14fc3d1d54a858e25f79b89ebedfdc8f628d359fa4450b",
+          "check_id": "store-preview",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 189.2152390209958,
+          "http_status": 200,
+          "id": "174e6d71eb5f48ab8e3fbc687fc5610a",
+          "observed_at": 1792718668.140012,
+          "payload": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "fe635399e5af463db8a57caaa28feb33",
+            "shipping_toman": 10000,
+            "status": "ready"
+          },
+          "reason": "pass",
+          "request_id": "fe635399e5af463db8a57caaa28feb33",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "available_at": 1792718668.5338035,
+          "body_digest": "033a448bb0519e6cdc537cfe495665491881c561af9c7c14c01cf86ad053fdbe",
+          "check_id": "dep-quote",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 204.41613101866096,
+          "http_status": 200,
+          "id": "270bbc0b7eb44051a73e3476e7ed01d4",
+          "observed_at": 1792718668.3293886,
+          "payload": {
+            "build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "eac477f052a045cab695eb36b4fa7923",
+            "shipping_toman": 10000
+          },
+          "reason": "pass",
+          "request_id": "eac477f052a045cab695eb36b4fa7923",
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "available_at": 1792718678.3290832,
+          "body_digest": "fc9e08363c336993d1bd892301e0e012ae23549734c9c9cf5ef080f95bb3d108",
+          "check_id": "store-preview",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 219.8052490130067,
+          "http_status": 200,
+          "id": "cdc76adfc7e84d12a08dd71cab776830",
+          "observed_at": 1792718678.1092787,
+          "payload": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "5337963c44c94412b27a022a9b507324",
+            "shipping_toman": 10000,
+            "status": "ready"
+          },
+          "reason": "pass",
+          "request_id": "5337963c44c94412b27a022a9b507324",
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "available_at": 1792718678.549553,
+          "body_digest": "edaa11b30c1be6bc6fc452d3cf037865d38ed896e1f0cd2f0b93b7076287dc49",
+          "check_id": "dep-quote",
+          "check_pass": true,
+          "contract_pass": null,
+          "elapsed_ms": 220.31293401960284,
+          "http_status": 200,
+          "id": "2e70fb595da244e29cec3476f1b2d6fd",
+          "observed_at": 1792718678.3292406,
+          "payload": {
+            "build_id": "7789311e98f849daac989526de9a9f2a",
+            "request_id": "9ece4944a588470b8662c0b83a3b4388",
+            "shipping_toman": 10000
+          },
+          "reason": "pass",
+          "request_id": "9ece4944a588470b8662c0b83a3b4388",
+          "target_id": "6adaa46772aa39a87a745fd7"
+        }
+      ],
+      "provider_identity": [
+        {
+          "checked_at": 1792718654.4393065,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792718654,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792718657.5291998,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 3,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 13,
+            "history_end": 1792718656,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 5,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adab0837b39ae0264b1d525"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792718665.5850492,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792718665,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792718668.1398623,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 3,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 13,
+            "history_end": 1792718667,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 5,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adab0837b39ae0264b1d525"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792718675.5454416,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792718675,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792718678.109214,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 3,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 13,
+            "history_end": 1792718677,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 5,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adab0837b39ae0264b1d525"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        }
+      ],
+      "reason": "original_checks_and_serving_build_verified",
+      "round_times": [
+        1792718651.8464894,
+        1792718662.9631875,
+        1792718673.5340965
+      ],
+      "state": "recovered",
+      "submitted_release_id": "6adab0837b39ae0264b1d525",
+      "success_probe_ids": [
+        "aa0147f86fb241a488ba75c2165e5a34",
+        "8a7c178432f8469d9ffea4a984a97acb",
+        "174e6d71eb5f48ab8e3fbc687fc5610a",
+        "270bbc0b7eb44051a73e3476e7ed01d4",
+        "cdc76adfc7e84d12a08dd71cab776830",
+        "2e70fb595da244e29cec3476f1b2d6fd"
+      ],
+      "verification_policy": {
+        "changed_target_id": "6adaa46772aa39a87a745fd7",
+        "checks": [
+          {
+            "expected_status": 200,
+            "id": "store-preview",
+            "origin": "https://liara-watch-storefront-2026.liara.run",
+            "path": "/preview",
+            "require_request_echo": true,
+            "target_id": "6adaa8e2aa8f2ba374e1617d",
+            "timeout_seconds": 3
+          },
+          {
+            "expected_status": 200,
+            "id": "dep-quote",
+            "origin": "https://liara-watch-delivery-2026.liara.run",
+            "path": "/quote",
+            "require_request_echo": true,
+            "target_id": "6adaa46772aa39a87a745fd7",
+            "timeout_seconds": 3
+          }
+        ],
+        "expected_build_fields": {
+          "dep-quote": {
+            "build_id": "7789311e98f849daac989526de9a9f2a"
+          },
+          "store-preview": {
+            "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+            "dependency_build_id": "7789311e98f849daac989526de9a9f2a"
+          }
+        },
+        "expected_release_ids": {
+          "6adaa46772aa39a87a745fd7": "$submitted",
+          "6adaa8e2aa8f2ba374e1617d": "6adaabf07b39ae0264b0116e"
+        },
+        "id": "dependency-recovery"
+      }
+    },
+    "verification_attempt_id": "ac317434be6647f5860ab1795e638cc9",
+    "verification_attempts": [
+      {
+        "attempt": 1,
+        "result": {
+          "observed_window": [
+            1792718528.8915527,
+            1792718578.8915527
+          ],
+          "probe_ids": [],
+          "reason": "نمونهٔ آزمون رابط؛ نتیجهٔ قبلی مصنوعی است",
+          "state": "inconclusive"
+        }
+      },
+      {
+        "attempt": 2,
+        "result": {
+          "observed_window": [
+            1792718651.8463483,
+            1792718678.5496829
+          ],
+          "policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127",
+          "probe_ids": [
+            "aa0147f86fb241a488ba75c2165e5a34",
+            "8a7c178432f8469d9ffea4a984a97acb",
+            "174e6d71eb5f48ab8e3fbc687fc5610a",
+            "270bbc0b7eb44051a73e3476e7ed01d4",
+            "cdc76adfc7e84d12a08dd71cab776830",
+            "2e70fb595da244e29cec3476f1b2d6fd"
+          ],
+          "probe_results": [
+            {
+              "available_at": 1792718657.7696471,
+              "body_digest": "a607de9c863cb7c41fcd388d53f849b756dac7128100ae9fc6c278b234f42545",
+              "check_id": "store-preview",
+              "check_pass": true,
+              "contract_pass": null,
+              "elapsed_ms": 240.25400896789506,
+              "http_status": 200,
+              "id": "aa0147f86fb241a488ba75c2165e5a34",
+              "observed_at": 1792718657.5293941,
+              "payload": {
+                "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+                "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+                "request_id": "e58eef21a05f4992b6c168e603b711ff",
+                "shipping_toman": 10000,
+                "status": "ready"
+              },
+              "reason": "pass",
+              "request_id": "e58eef21a05f4992b6c168e603b711ff",
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "available_at": 1792718657.9630013,
+              "body_digest": "45071b9dc6a65e6aaff6249072ca480f0d3a910328fed3401b476af99117abd4",
+              "check_id": "dep-quote",
+              "check_pass": true,
+              "contract_pass": null,
+              "elapsed_ms": 193.19555803667754,
+              "http_status": 200,
+              "id": "8a7c178432f8469d9ffea4a984a97acb",
+              "observed_at": 1792718657.7698066,
+              "payload": {
+                "build_id": "7789311e98f849daac989526de9a9f2a",
+                "request_id": "dfdb4a24701e40ac96a227d0fa76e7cc",
+                "shipping_toman": 10000
+              },
+              "reason": "pass",
+              "request_id": "dfdb4a24701e40ac96a227d0fa76e7cc",
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "available_at": 1792718668.3292263,
+              "body_digest": "e71c588cb39779662c14fc3d1d54a858e25f79b89ebedfdc8f628d359fa4450b",
+              "check_id": "store-preview",
+              "check_pass": true,
+              "contract_pass": null,
+              "elapsed_ms": 189.2152390209958,
+              "http_status": 200,
+              "id": "174e6d71eb5f48ab8e3fbc687fc5610a",
+              "observed_at": 1792718668.140012,
+              "payload": {
+                "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+                "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+                "request_id": "fe635399e5af463db8a57caaa28feb33",
+                "shipping_toman": 10000,
+                "status": "ready"
+              },
+              "reason": "pass",
+              "request_id": "fe635399e5af463db8a57caaa28feb33",
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "available_at": 1792718668.5338035,
+              "body_digest": "033a448bb0519e6cdc537cfe495665491881c561af9c7c14c01cf86ad053fdbe",
+              "check_id": "dep-quote",
+              "check_pass": true,
+              "contract_pass": null,
+              "elapsed_ms": 204.41613101866096,
+              "http_status": 200,
+              "id": "270bbc0b7eb44051a73e3476e7ed01d4",
+              "observed_at": 1792718668.3293886,
+              "payload": {
+                "build_id": "7789311e98f849daac989526de9a9f2a",
+                "request_id": "eac477f052a045cab695eb36b4fa7923",
+                "shipping_toman": 10000
+              },
+              "reason": "pass",
+              "request_id": "eac477f052a045cab695eb36b4fa7923",
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "available_at": 1792718678.3290832,
+              "body_digest": "fc9e08363c336993d1bd892301e0e012ae23549734c9c9cf5ef080f95bb3d108",
+              "check_id": "store-preview",
+              "check_pass": true,
+              "contract_pass": null,
+              "elapsed_ms": 219.8052490130067,
+              "http_status": 200,
+              "id": "cdc76adfc7e84d12a08dd71cab776830",
+              "observed_at": 1792718678.1092787,
+              "payload": {
+                "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+                "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+                "request_id": "5337963c44c94412b27a022a9b507324",
+                "shipping_toman": 10000,
+                "status": "ready"
+              },
+              "reason": "pass",
+              "request_id": "5337963c44c94412b27a022a9b507324",
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "available_at": 1792718678.549553,
+              "body_digest": "edaa11b30c1be6bc6fc452d3cf037865d38ed896e1f0cd2f0b93b7076287dc49",
+              "check_id": "dep-quote",
+              "check_pass": true,
+              "contract_pass": null,
+              "elapsed_ms": 220.31293401960284,
+              "http_status": 200,
+              "id": "2e70fb595da244e29cec3476f1b2d6fd",
+              "observed_at": 1792718678.3292406,
+              "payload": {
+                "build_id": "7789311e98f849daac989526de9a9f2a",
+                "request_id": "9ece4944a588470b8662c0b83a3b4388",
+                "shipping_toman": 10000
+              },
+              "reason": "pass",
+              "request_id": "9ece4944a588470b8662c0b83a3b4388",
+              "target_id": "6adaa46772aa39a87a745fd7"
+            }
+          ],
+          "provider_identity": [
+            {
+              "checked_at": 1792718654.4393065,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 1,
+                "creation_anchor": 1792714978.693,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 2,
+                "history_end": 1792718654,
+                "history_start": 1792714977,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adaabf07b39ae0264b0116e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaabf07b39ae0264b0116e"
+              ],
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "checked_at": 1792718657.5291998,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 3,
+                "creation_anchor": 1792713831.05,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 13,
+                "history_end": 1792718656,
+                "history_start": 1792713830,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 5,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adab0837b39ae0264b1d525",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adab0837b39ae0264b1d525"
+              ],
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "checked_at": 1792718665.5850492,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 1,
+                "creation_anchor": 1792714978.693,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 2,
+                "history_end": 1792718665,
+                "history_start": 1792714977,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adaabf07b39ae0264b0116e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaabf07b39ae0264b0116e"
+              ],
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "checked_at": 1792718668.1398623,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 3,
+                "creation_anchor": 1792713831.05,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 13,
+                "history_end": 1792718667,
+                "history_start": 1792713830,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 5,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adab0837b39ae0264b1d525",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adab0837b39ae0264b1d525"
+              ],
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "checked_at": 1792718675.5454416,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 1,
+                "creation_anchor": 1792714978.693,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 2,
+                "history_end": 1792718675,
+                "history_start": 1792714977,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adaabf07b39ae0264b0116e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaabf07b39ae0264b0116e"
+              ],
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "checked_at": 1792718678.109214,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 3,
+                "creation_anchor": 1792713831.05,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 13,
+                "history_end": 1792718677,
+                "history_start": 1792713830,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 5,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adab0837b39ae0264b1d525",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adab0837b39ae0264b1d525"
+              ],
+              "target_id": "6adaa46772aa39a87a745fd7"
+            }
+          ],
+          "reason": "original_checks_and_serving_build_verified",
+          "round_times": [
+            1792718651.8464894,
+            1792718662.9631875,
+            1792718673.5340965
+          ],
+          "state": "recovered",
+          "submitted_release_id": "6adab0837b39ae0264b1d525",
+          "success_probe_ids": [
+            "aa0147f86fb241a488ba75c2165e5a34",
+            "8a7c178432f8469d9ffea4a984a97acb",
+            "174e6d71eb5f48ab8e3fbc687fc5610a",
+            "270bbc0b7eb44051a73e3476e7ed01d4",
+            "cdc76adfc7e84d12a08dd71cab776830",
+            "2e70fb595da244e29cec3476f1b2d6fd"
+          ],
+          "verification_policy": {
+            "changed_target_id": "6adaa46772aa39a87a745fd7",
+            "checks": [
+              {
+                "expected_status": 200,
+                "id": "store-preview",
+                "origin": "https://liara-watch-storefront-2026.liara.run",
+                "path": "/preview",
+                "require_request_echo": true,
+                "target_id": "6adaa8e2aa8f2ba374e1617d",
+                "timeout_seconds": 3
+              },
+              {
+                "expected_status": 200,
+                "id": "dep-quote",
+                "origin": "https://liara-watch-delivery-2026.liara.run",
+                "path": "/quote",
+                "require_request_echo": true,
+                "target_id": "6adaa46772aa39a87a745fd7",
+                "timeout_seconds": 3
+              }
+            ],
+            "expected_build_fields": {
+              "dep-quote": {
+                "build_id": "7789311e98f849daac989526de9a9f2a"
+              },
+              "store-preview": {
+                "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+                "dependency_build_id": "7789311e98f849daac989526de9a9f2a"
+              }
+            },
+            "expected_release_ids": {
+              "6adaa46772aa39a87a745fd7": "$submitted",
+              "6adaa8e2aa8f2ba374e1617d": "6adaabf07b39ae0264b0116e"
+            },
+            "id": "dependency-recovery"
+          }
+        }
+      }
+    ],
+    "verification_revision": 6
+  },
+  "polling_note": "Early async browser wait returned before terminal state; explicit awaited Node-side API polling used; no additional retry was claimed",
+  "canonical_browser_regressions": {
+    "passed": 10,
+    "scope": "owned temporary local endpoint copies and isolated8682; no repository data edited"
+  },
+  "cleanup": {
+    "owned_apps_idle": true,
+    "provider_write_attempted": false,
+    "browser_contexts_closed": true
+  }
+}

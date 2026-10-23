@@ -1,0 +1,16 @@
+{
+  "scope": "Actual final-source live UI unused approval expiry, fresh exact replacement and one cloud redeployment; unchanged deadlines/verification thresholds",
+  "started_at": "2026-10-23T02:25:30.839Z",
+  "phases": [
+    {
+      "name": "failure",
+      "elapsed_ms": 6122,
+      "at": "2026-10-23T02:25:36.961Z"
+    }
+  ],
+  "errors": [],
+  "status": "fail",
+  "failure": "Error: expect(locator).toContainText(expected) failed\n\nLocator: getByTestId('http-store-preview')\nExpected substring: \"HTTP 502\"\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toContainText\" getByTestId('http-store-preview') with timeout 5000ms\n  - waiting for getByTestId('http-store-preview')\n",
+  "video_path": "/tmp/codex-scratchpad-01a15365-1037-78b2-a19e-e47bb7574a9c/liara-live-footage/page@9b0399f4dc46418f9f7e4bc3b71df878.webm",
+  "classification": "Browser driver stopped at5s while current observation request was still loading; no proposal, approval or deployment reached."
+}

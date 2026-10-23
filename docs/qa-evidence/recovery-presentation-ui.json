@@ -1,0 +1,31 @@
+{
+  "scope": "Isolated seeded presentation snapshot; no root/cloud/model changes",
+  "rows": [
+    {
+      "id": "RP1",
+      "status": "pass",
+      "assertion": "Verified recovery/timestamp dominates, prior analysis closed below"
+    },
+    {
+      "id": "RP2",
+      "status": "pass",
+      "assertion": "Cutoff/pre-action context visible; original summary/outcome/citations retained unchanged"
+    },
+    {
+      "id": "RP3",
+      "status": "pass",
+      "assertion": "Exact before and verified deployed release IDs separately and accurately labelled"
+    },
+    {
+      "id": "RP5",
+      "status": "pass",
+      "assertion": "390px no overflow/page errors, original target citation opens and approval hashes remain visible"
+    },
+    {
+      "id": "RP4",
+      "status": "pass",
+      "assertion": "Pending release only labelled submitted; no verified recovery banner; pre-action analysis remains expanded"
+    }
+  ],
+  "errors": []
+}

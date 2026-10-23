@@ -37,8 +37,9 @@ The running local FastAPI app exposes `/docs` and `/openapi.json` for exact sche
 | POST | `/api/login`, `/api/logout` | Private owner session |
 | GET | `/api/services` | Scoped provider inventory, configured checks and repair capability |
 | GET | `/api/services/{identifier}` | Current service observations |
+| POST | `/api/setup/recommendation` | Read-only requirement matching and initial deployment/domain guidance |
 | POST | `/api/services/{identifier}/investigate` | Start a bounded investigation |
-| GET | `/api/incidents/{identifier}` | Owned incident, evidence and capability |
+| GET | `/api/incidents/{identifier}` | Owned incident, evidence, capability and current fixed remediation checklist |
 | POST | `/api/incidents/{identifier}/investigate` | Re-investigate a current incident |
 | POST | `/api/incidents/{identifier}/cancel` | Cancel its current model work |
 | POST | `/api/watches` | Start an explicitly scoped bounded watch |
@@ -47,7 +48,8 @@ The running local FastAPI app exposes `/docs` and `/openapi.json` for exact sche
 | POST | `/api/incidents/{identifier}/proposal` | Prepare a supported enrolled repair candidate |
 | POST | `/api/operations/{identifier}/approve` | Bind approval to its exact displayed digest |
 | POST | `/api/operations/{identifier}/execute` | Fresh preflight and single-write execution |
-| GET | `/api/operations/{identifier}` | Reconciliation/verification state |
+| GET | `/api/operations/{identifier}` | Reconciliation/verification state and preserved attempt history |
+| POST | `/api/operations/{identifier}/recheck-recovery` | One owner-triggered read-only recheck of the same submitted operation within its original deadline |
 
 Identifiers are scoped to the signed-in owner and registry. Being able to list a service does not enroll mutation capability. Proposal requests are rejected unless live mode, enrolled repair support and a current supported diagnosis all agree.
 

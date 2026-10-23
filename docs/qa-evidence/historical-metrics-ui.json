@@ -1,0 +1,30 @@
+{
+  "scope": "Isolated rendered fixture only; no model/cloud calls; actual GET acceptance separate",
+  "results": [
+    {
+      "id": "HM1",
+      "status": "pass",
+      "assertion": "Invalid summary retained; historical native units, times, ages, source and clock warning rendered"
+    },
+    {
+      "id": "HM2",
+      "status": "pass",
+      "assertion": "Raw rejected future point available only in owner evidence dialog; ordinary cards exclude it"
+    },
+    {
+      "id": "HM5",
+      "status": "pass",
+      "assertion": "390px resource panel and raw dialog fit viewport"
+    },
+    {
+      "id": "HM3",
+      "status": "pass",
+      "assertion": "No eligible history remains unavailable, no invented zero, exclusions visible"
+    },
+    {
+      "id": "HM4",
+      "status": "pass",
+      "assertion": "Existing valid summary is presented without historical blend"
+    }
+  ]
+}

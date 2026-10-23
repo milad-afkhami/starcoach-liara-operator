@@ -1,0 +1,1116 @@
+{
+  "status": 202,
+  "before": {
+    "approved_at": 1792716914.5410893,
+    "created_at": 1792716914.2644362,
+    "digest": "d4888ca4e3f9806e76ef84c77eec163d4efe3daa4435c431df0c4aedf5548e3b",
+    "error": null,
+    "expires_at": 1792717214.2644362,
+    "id": "d762c41cf08d45e18a4324961764c0fb",
+    "last_reconciled": 1792716938.030732,
+    "reconcile_until": 1792717515.3322377,
+    "release_id": "6adab0837b39ae0264b1d525",
+    "source_id": "403761cb-3db5-4e45-a848-2b7bc15db169.tar.gz",
+    "spec": {
+      "app_id": "6adaa46772aa39a87a745fd7",
+      "app_name": "liara-watch-delivery-2026",
+      "artifact_sha256": "98f87ed8347d53c7532621c0ea11bbfe6c51c3f24f7d95f16abd2b234c569ce3",
+      "before_release_id": "6adaaec772aa39a87a786916",
+      "bundle_plan_id": null,
+      "failure_fingerprint": "1ded4e1aa712698d1b8e1d8d97065909568917ffd595bab3a10d639d5e6c79ed",
+      "hourly_price_toman": null,
+      "incident_generation": 2,
+      "incident_id": "63a6a82586664f4082bf794c431948de",
+      "kind": "redeploy_known_good",
+      "network_id": null,
+      "plan_id": null,
+      "platform": "docker",
+      "port": 8000,
+      "price_verified_at": null,
+      "team_id": "6ad5c19f63b87278cb8cd077",
+      "verification_policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127"
+    },
+    "state": "failed",
+    "submitted_at": 1792716915.3322377,
+    "verification": {
+      "observed_window": [
+        1792716938.5065026,
+        1792716992.642803
+      ],
+      "policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127",
+      "probe_ids": [
+        "6898a20071c441ce95ac1b0f728ca581",
+        "3ac3b24ad76842639c9a998ad126c117",
+        "1e4398fe49b6480cb8edfbd26b6e9022",
+        "346136187fda40078848b8064bba0a22"
+      ],
+      "provider_identity": [
+        {
+          "checked_at": 1792716941.0592031,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792716941,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792716944.3400357,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 2,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 7,
+            "history_end": 1792716944,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaaec772aa39a87a786916"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792716951.2501628,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792716951,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792716953.0303688,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 2,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 7,
+            "history_end": 1792716953,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaaec772aa39a87a786916"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792716959.878502,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792716960,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792716961.706833,
+          "coverage": {
+            "complete_interval": false,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 9,
+            "history_end": 1792716961,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "active_count_mismatch",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792716968.4194388,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792716968,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792716970.426388,
+          "coverage": {
+            "complete_interval": false,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 9,
+            "history_end": 1792716970,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "active_count_mismatch",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792716978.1713068,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792716978,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792716981.8359165,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 3,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 13,
+            "history_end": 1792716981,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 5,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adab0837b39ae0264b1d525"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792716989.347576,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792716989,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792716992.208727,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 3,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 13,
+            "history_end": 1792716991,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 5,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adab0837b39ae0264b1d525"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        }
+      ],
+      "reason": "insufficient_fresh_identity_proof",
+      "round_times": [
+        1792716938.5065572,
+        1792716949.3401227,
+        1792716958.0304675,
+        1792716966.706905,
+        1792716975.426587,
+        1792716987.578989
+      ],
+      "state": "inconclusive",
+      "submitted_release_id": "6adab0837b39ae0264b1d525",
+      "success_probe_ids": [
+        "6898a20071c441ce95ac1b0f728ca581",
+        "3ac3b24ad76842639c9a998ad126c117",
+        "1e4398fe49b6480cb8edfbd26b6e9022",
+        "346136187fda40078848b8064bba0a22"
+      ]
+    }
+  },
+  "claimed": {
+    "approved_at": 1792716914.5410893,
+    "created_at": 1792716914.2644362,
+    "digest": "d4888ca4e3f9806e76ef84c77eec163d4efe3daa4435c431df0c4aedf5548e3b",
+    "error": null,
+    "expires_at": 1792717214.2644362,
+    "id": "d762c41cf08d45e18a4324961764c0fb",
+    "last_reconciled": 1792716938.030732,
+    "reconcile_until": 1792717515.3322377,
+    "release_id": "6adab0837b39ae0264b1d525",
+    "source_id": "403761cb-3db5-4e45-a848-2b7bc15db169.tar.gz",
+    "spec": {
+      "app_id": "6adaa46772aa39a87a745fd7",
+      "app_name": "liara-watch-delivery-2026",
+      "artifact_sha256": "98f87ed8347d53c7532621c0ea11bbfe6c51c3f24f7d95f16abd2b234c569ce3",
+      "before_release_id": "6adaaec772aa39a87a786916",
+      "bundle_plan_id": null,
+      "failure_fingerprint": "1ded4e1aa712698d1b8e1d8d97065909568917ffd595bab3a10d639d5e6c79ed",
+      "hourly_price_toman": null,
+      "incident_generation": 2,
+      "incident_id": "63a6a82586664f4082bf794c431948de",
+      "kind": "redeploy_known_good",
+      "network_id": null,
+      "plan_id": null,
+      "platform": "docker",
+      "port": 8000,
+      "price_verified_at": null,
+      "team_id": "6ad5c19f63b87278cb8cd077",
+      "verification_policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127"
+    },
+    "state": "awaiting_serving",
+    "submitted_at": 1792716915.3322377,
+    "verification": {
+      "observed_window": [
+        1792716938.5065026,
+        1792716992.642803
+      ],
+      "policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127",
+      "probe_ids": [
+        "6898a20071c441ce95ac1b0f728ca581",
+        "3ac3b24ad76842639c9a998ad126c117",
+        "1e4398fe49b6480cb8edfbd26b6e9022",
+        "346136187fda40078848b8064bba0a22"
+      ],
+      "provider_identity": [
+        {
+          "checked_at": 1792716941.0592031,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792716941,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792716944.3400357,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 2,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 7,
+            "history_end": 1792716944,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaaec772aa39a87a786916"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792716951.2501628,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792716951,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792716953.0303688,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 2,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 7,
+            "history_end": 1792716953,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaaec772aa39a87a786916"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792716959.878502,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792716960,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792716961.706833,
+          "coverage": {
+            "complete_interval": false,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 9,
+            "history_end": 1792716961,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "active_count_mismatch",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792716968.4194388,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792716968,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792716970.426388,
+          "coverage": {
+            "complete_interval": false,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 9,
+            "history_end": 1792716970,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "active_count_mismatch",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792716978.1713068,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792716978,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792716981.8359165,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 3,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 13,
+            "history_end": 1792716981,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 5,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adab0837b39ae0264b1d525"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        },
+        {
+          "checked_at": 1792716989.347576,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 1,
+            "creation_anchor": 1792714978.693,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 2,
+            "history_end": 1792716989,
+            "history_start": 1792714977,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 3,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adaabf07b39ae0264b0116e",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adaabf07b39ae0264b0116e"
+          ],
+          "target_id": "6adaa8e2aa8f2ba374e1617d"
+        },
+        {
+          "checked_at": 1792716992.208727,
+          "coverage": {
+            "active_count": 1,
+            "boundary_check": "exact-second bucket below observed page-size lower bound",
+            "complete_interval": true,
+            "container_count": 3,
+            "creation_anchor": 1792713831.05,
+            "derived": true,
+            "empty_older_interval": true,
+            "event_count": 13,
+            "history_end": 1792716991,
+            "history_start": 1792713830,
+            "max_events": 200,
+            "max_history_seconds": 86400,
+            "max_requests": 12,
+            "reason": "complete_lifecycle_history",
+            "requests": 5,
+            "uncertainty": "event-derived identity; fresh original build probes remain required"
+          },
+          "current_release_id": "6adab0837b39ae0264b1d525",
+          "identity_source": "network_lifecycle_events",
+          "serving_release_ids": [
+            "6adab0837b39ae0264b1d525"
+          ],
+          "target_id": "6adaa46772aa39a87a745fd7"
+        }
+      ],
+      "reason": "insufficient_fresh_identity_proof",
+      "round_times": [
+        1792716938.5065572,
+        1792716949.3401227,
+        1792716958.0304675,
+        1792716966.706905,
+        1792716975.426587,
+        1792716987.578989
+      ],
+      "state": "inconclusive",
+      "submitted_release_id": "6adab0837b39ae0264b1d525",
+      "success_probe_ids": [
+        "6898a20071c441ce95ac1b0f728ca581",
+        "3ac3b24ad76842639c9a998ad126c117",
+        "1e4398fe49b6480cb8edfbd26b6e9022",
+        "346136187fda40078848b8064bba0a22"
+      ]
+    },
+    "verification_attempts": [
+      {
+        "attempt": 1,
+        "result": {
+          "observed_window": [
+            1792716938.5065026,
+            1792716992.642803
+          ],
+          "policy_hash": "a81e2f2607403ef27438235236d53124fd41f1aaa813b5592c7cfa6cf3b9c127",
+          "probe_ids": [
+            "6898a20071c441ce95ac1b0f728ca581",
+            "3ac3b24ad76842639c9a998ad126c117",
+            "1e4398fe49b6480cb8edfbd26b6e9022",
+            "346136187fda40078848b8064bba0a22"
+          ],
+          "provider_identity": [
+            {
+              "checked_at": 1792716941.0592031,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 1,
+                "creation_anchor": 1792714978.693,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 2,
+                "history_end": 1792716941,
+                "history_start": 1792714977,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adaabf07b39ae0264b0116e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaabf07b39ae0264b0116e"
+              ],
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "checked_at": 1792716944.3400357,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 2,
+                "creation_anchor": 1792713831.05,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 7,
+                "history_end": 1792716944,
+                "history_start": 1792713830,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adab0837b39ae0264b1d525",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaaec772aa39a87a786916"
+              ],
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "checked_at": 1792716951.2501628,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 1,
+                "creation_anchor": 1792714978.693,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 2,
+                "history_end": 1792716951,
+                "history_start": 1792714977,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adaabf07b39ae0264b0116e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaabf07b39ae0264b0116e"
+              ],
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "checked_at": 1792716953.0303688,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 2,
+                "creation_anchor": 1792713831.05,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 7,
+                "history_end": 1792716953,
+                "history_start": 1792713830,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adab0837b39ae0264b1d525",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaaec772aa39a87a786916"
+              ],
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "checked_at": 1792716959.878502,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 1,
+                "creation_anchor": 1792714978.693,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 2,
+                "history_end": 1792716960,
+                "history_start": 1792714977,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adaabf07b39ae0264b0116e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaabf07b39ae0264b0116e"
+              ],
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "checked_at": 1792716961.706833,
+              "coverage": {
+                "complete_interval": false,
+                "creation_anchor": 1792713831.05,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 9,
+                "history_end": 1792716961,
+                "history_start": 1792713830,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "active_count_mismatch",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adab0837b39ae0264b1d525",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [],
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "checked_at": 1792716968.4194388,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 1,
+                "creation_anchor": 1792714978.693,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 2,
+                "history_end": 1792716968,
+                "history_start": 1792714977,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adaabf07b39ae0264b0116e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaabf07b39ae0264b0116e"
+              ],
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "checked_at": 1792716970.426388,
+              "coverage": {
+                "complete_interval": false,
+                "creation_anchor": 1792713831.05,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 9,
+                "history_end": 1792716970,
+                "history_start": 1792713830,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "active_count_mismatch",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adab0837b39ae0264b1d525",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [],
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "checked_at": 1792716978.1713068,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 1,
+                "creation_anchor": 1792714978.693,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 2,
+                "history_end": 1792716978,
+                "history_start": 1792714977,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adaabf07b39ae0264b0116e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaabf07b39ae0264b0116e"
+              ],
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "checked_at": 1792716981.8359165,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 3,
+                "creation_anchor": 1792713831.05,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 13,
+                "history_end": 1792716981,
+                "history_start": 1792713830,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 5,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adab0837b39ae0264b1d525",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adab0837b39ae0264b1d525"
+              ],
+              "target_id": "6adaa46772aa39a87a745fd7"
+            },
+            {
+              "checked_at": 1792716989.347576,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 1,
+                "creation_anchor": 1792714978.693,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 2,
+                "history_end": 1792716989,
+                "history_start": 1792714977,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 3,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adaabf07b39ae0264b0116e",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adaabf07b39ae0264b0116e"
+              ],
+              "target_id": "6adaa8e2aa8f2ba374e1617d"
+            },
+            {
+              "checked_at": 1792716992.208727,
+              "coverage": {
+                "active_count": 1,
+                "boundary_check": "exact-second bucket below observed page-size lower bound",
+                "complete_interval": true,
+                "container_count": 3,
+                "creation_anchor": 1792713831.05,
+                "derived": true,
+                "empty_older_interval": true,
+                "event_count": 13,
+                "history_end": 1792716991,
+                "history_start": 1792713830,
+                "max_events": 200,
+                "max_history_seconds": 86400,
+                "max_requests": 12,
+                "reason": "complete_lifecycle_history",
+                "requests": 5,
+                "uncertainty": "event-derived identity; fresh original build probes remain required"
+              },
+              "current_release_id": "6adab0837b39ae0264b1d525",
+              "identity_source": "network_lifecycle_events",
+              "serving_release_ids": [
+                "6adab0837b39ae0264b1d525"
+              ],
+              "target_id": "6adaa46772aa39a87a745fd7"
+            }
+          ],
+          "reason": "insufficient_fresh_identity_proof",
+          "round_times": [
+            1792716938.5065572,
+            1792716949.3401227,
+            1792716958.0304675,
+            1792716966.706905,
+            1792716975.426587,
+            1792716987.578989
+          ],
+          "state": "inconclusive",
+          "submitted_release_id": "6adab0837b39ae0264b1d525",
+          "success_probe_ids": [
+            "6898a20071c441ce95ac1b0f728ca581",
+            "3ac3b24ad76842639c9a998ad126c117",
+            "1e4398fe49b6480cb8edfbd26b6e9022",
+            "346136187fda40078848b8064bba0a22"
+          ]
+        }
+      }
+    ],
+    "recovery_rechecks_used": 1,
+    "recovery_recheck_generation": 2,
+    "recovery_recheck_requested_at": 1792717461.8067677,
+    "verification_attempt_id": "b56b820dbcf842988d7be646d4ae3fc9"
+  }
+}

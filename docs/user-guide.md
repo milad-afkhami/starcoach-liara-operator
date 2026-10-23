@@ -38,6 +38,8 @@ Select **storefront**. In the faulty rehearsal scenario, `/healthz` returns **20
 
 Open **Project**, **Applets**, **Releases** and **Metrics** to inspect their payloads/coverage. **تازه‌سازی مشاهدات** takes a new set. Collection time, evidence age and service health are separate facts.
 
+Recognized CPU/RAM summary samples display per-process values with their sample times: CPU uses the percentage rendering of the inspected Liara console; memory is converted from bytes to MiB. Unknown or future-invalid samples do not display guessed values. A single snapshot does not establish sustained resource exhaustion or workload capacity; inspect original evidence and allocation before deciding on resources.
+
 The mobile **پرسیدن از دستیار** action jumps directly to the investigation question after observations load. Evidence timestamps now include the Persian-calendar date and explicit Tehran time.
 
 ## 3. Investigate the symptom
@@ -46,7 +48,7 @@ Use this question as a starting point:
 
 > The process health endpoint succeeds, but /preview fails. Investigate the configured dependency and cite evidence for the cause. Do not change any service.
 
-Click **بررسی با دستیار**. The UI shows queued/running progress. **لغو بررسی** stops further model work for that run; a stale or superseded result cannot become the current diagnosis.
+Click **بررسی با دستیار**. The UI reports actual collection/read names, completed reads, the model-call stage and response validation; it does not estimate a percentage. **لغو بررسی** stops further model work for that run; a stale or superseded result cannot become the current diagnosis.
 
 Read the resulting **نتیجهٔ بررسی** in this order:
 
@@ -63,6 +65,8 @@ A genuine model call can take tens of seconds. Investigations have bounded reads
 Delivery can respond **200** on `/quote` yet return `delivery_toman` when storefront expects `shipping_toman`. That payload difference, correlated logs and the failing preview are useful discriminating evidence. The investigator does not receive the fault controller's answer key. It can still leave the intended contract, onset or correct repair target unknown.
 
 Click **delivery** to inspect its checks, then return to storefront. **بررسی‌های اخیر** reopens records; fresh runs do not erase earlier evidence. Material changes invalidate old conclusions rather than silently reusing them.
+
+For a current completed diagnosis, **حالا چه کار کنم؟** provides fixed, cause-specific owner steps with evidence links and the original failed check to repeat. On an unenrolled service these are manual guidance, not an executable repair plan. Changing the service generation invalidates the checklist with its diagnosis.
 
 ## 4. Try a bounded watch
 
@@ -107,3 +111,7 @@ The correction is **a new deployment of registered source**, not an invented nat
 | Watch start/stop and history | Fresh provider/serving/build recovery proof |
 
 Keep the local/fixture banner visible in local footage. The [demo plan](demo.md) describes the final five-minute story; [LIVE1–LIVE5](insured-vibe-coding/test-plans/live-liara.md) record whether the actual provider gates passed.
+
+## Initial setup guidance
+
+Open **راهنمای راه‌اندازی سرویس تازه** from the service sidebar. Select web, background worker or static website and enter explicit minimum RAM/CPU/disk requirements. Submit to read the account catalogue and match an available plan; changing an input clears the old recommendation. Unavailable access and no matching plan remain explicit, with no invented price or zero default. The guide covers deployment method, private configuration, default-domain verification and manual custom-domain DNS/HTTPS checks. It never provisions, resizes, changes DNS or deploys. The separately approved owner setup ledger remains the only initial demo provisioning path.

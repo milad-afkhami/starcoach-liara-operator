@@ -128,3 +128,45 @@ def test_repair_requires_completed_diagnosis_of_this_exact_generation():
     assert current_repair_candidate(value)
     value["investigation_state"] = "running"
     assert not current_repair_candidate(value)
+
+
+@pytest.mark.parametrize('actual_release', ['r1', 'r2'])
+def test_network_runtime_compatibility_preserves_actual_serving_release_and_scope(actual_release):
+    from liara_guard.types import Target
+    from test_runtime_identity import read_history, row
+    target = Target(team_id='team', app_id='app', app_name='demo')
+    requests = []
+    history = read_history([row('container','create',610,actual_release),row('container','start',612,actual_release)])
+
+    def handler(request):
+        requests.append(request)
+        if request.url.path.endswith('/applets'):
+            return httpx.Response(500, json={'error':'Internal Server Error'})
+        if request.url.path.endswith('/releases'):
+            return httpx.Response(200,json={'currentRelease':'r2','releases':[{'_id':'r1','state':'READY'},{'_id':'r2','state':'READY'}]})
+        if request.url.path.endswith('/events'):
+            return httpx.Response(200,json=history(int(request.url.params['start']),int(request.url.params['end'])))
+        return httpx.Response(200,json={'project':{'_id':'app','project_id':'demo','teamID':'team','scale':1,
+            'network':{'_id':'net'},'created_at':'1970-01-01T00:10:00Z'}})
+
+    client = LiaraClient('private-token','team',clock=lambda:1000,sleep=lambda _:None,transport=httpx.MockTransport(handler))
+    bridge = LiaraOperationProvider(client,SimpleNamespace(resolve=lambda identifier:target),None,None,'owner')
+    result = bridge.status_for_policy('app')
+    assert result['state'] == 'READY' and result['current_release_id'] == 'r2'
+    assert result['serving_release_ids'] == [actual_release]
+    assert result['identity_source'] == 'network_lifecycle_events'
+    assert result['identity_coverage']['complete_interval'] is True
+    assert all(request.method == 'GET' and request.url.params['teamID']=='team' for request in requests)
+
+
+def test_incomplete_network_history_never_uses_ready_current_release_as_serving_identity():
+    from liara_guard.types import Target, Evidence
+    target = Target(team_id='team',app_id='app',app_name='demo')
+    def evidence(kind,quality,payload):
+        return Evidence(id=kind,target=target,kind=kind,observed_at=1000,available_at=1000,
+                        quality=quality,redacted_payload=payload)
+    client = SimpleNamespace(get_releases=lambda target:evidence('releases','fresh',{'currentRelease':'r2','releases':[{'_id':'r2','state':'READY'}]}),
+        get_applets=lambda target:evidence('applets','unavailable',{'error':'provider_error','http_status':500}),
+        get_runtime_identity=lambda target,known:{'serving_release_ids':['r2'],'identity_source':'network_lifecycle_events','coverage':{'complete_interval':False,'reason':'history_truncated'}})
+    result = LiaraOperationProvider(client,SimpleNamespace(resolve=lambda identifier:target),None,None,'owner').status_for_policy('app')
+    assert result['state'] == 'unknown' and result.get('serving_release_ids',[]) == []

@@ -8,6 +8,7 @@ from decimal import Decimal, InvalidOperation
 import httpx
 from .redaction import redact
 from .types import Evidence, ServiceSummary, Target
+from .metrics import normalize_summary, normalize_history
 
 
 class ProviderError(Exception):
@@ -231,6 +232,7 @@ class LiaraClient:
                 "hourlyPrice",
                 "isDeployed",
                 "created_at",
+                "network",
             )
             if k in p
         }
@@ -260,7 +262,7 @@ class LiaraClient:
         target = self._target(target)
         now = self.clock()
         params = (
-            {"start": int(max(since, now - 300)), "direction": "forward", "last_lines": 500}
+            {"start": int(max(since, now - 300)), "direction": "forward", "last_lines": False}
             if self.log_version == "v2"
             else {"since": int(max(since, now - 300))}
         )
@@ -289,6 +291,14 @@ class LiaraClient:
             payload = self._read(f"/v1/projects/{target.app_name}/metrics/summary")
             if not isinstance(payload, dict) or not payload:
                 raise ProviderError("metrics_unavailable")
+            try:
+                normalized = normalize_summary(payload, self.clock())
+            except ValueError as exc:
+                raise ProviderError(str(exc)) from exc
+            if normalized is not None:
+                safe, coverage, quality, observed = normalized
+                return self._evidence(target, "metrics", safe, quality=quality,
+                                      coverage=coverage, observed_at=observed)
             return self._evidence(
                 target,
                 "metrics",
@@ -298,13 +308,38 @@ class LiaraClient:
         except ProviderError as exc:
             return self._failure(target, "metrics", exc)
 
+    def get_metrics_history(self, target):
+        target = self._target(target)
+        cutoff = self.clock()
+        sources, errors = {}, {}
+        for metric in ("cpu", "memory"):
+            try:
+                sources[metric] = self._read(f"/v1/projects/{target.app_name}/metrics/{metric}",
+                                             {"since": int(cutoff-300)})
+            except ProviderError as exc:
+                errors[metric] = exc.code
+        payload, coverage, quality, observed = normalize_history(sources, cutoff, errors)
+        return self._evidence(target, "metrics_history", payload, quality, coverage, observed)
+
     def get_events(self, target, start, end):
         target = self._target(target)
         now = self.clock()
-        return self._collection(target, "events", {"start": max(now - 300, start), "end": min(now, end)})
+        return self._collection(target, "events", {"start": int(max(now - 300, start)), "end": int(min(now, end))})
 
     def get_applets(self, target):
         return self._collection(self._target(target), "applets")
+
+    def get_runtime_identity(self, target, known_releases):
+        """Network-runtime compatibility; no applets are invented from release readiness."""
+        from .runtime_identity import network_runtime_identity
+
+        target = self._target(target)
+        project = self.get_project(target)
+        return network_runtime_identity(
+            project, set(known_releases),
+            lambda start, end: self._read(f"/v1/projects/{target.app_name}/events", {"start": start, "end": end}),
+            now=self.clock(),
+        )
 
     def get_releases(self, target):
         return self._collection(self._target(target), "releases", {"page": 1, "count": 10})
@@ -312,6 +347,9 @@ class LiaraClient:
     def _collection(self, target, kind, params=None):
         try:
             payload = self._read(f"/v1/projects/{target.app_name}/{kind}", params)
+            network_events = kind == "events" and isinstance(payload, dict) and "data" in payload
+            if network_events:
+                payload = {"events": payload["data"]}
             if not isinstance(payload, dict) or not isinstance(payload.get(kind), list):
                 raise ProviderError("invalid_" + kind)
             # Only diagnostic fields, never provider environment/node/author data.
@@ -332,6 +370,8 @@ class LiaraClient:
                 "release",
                 "tag",
                 "type",
+                "action",
+                "time",
             }
             rows = []
             for row in payload[kind][:100]:
@@ -339,10 +379,22 @@ class LiaraClient:
                     raise ProviderError("invalid_" + kind)
                 rows.append({k: redact(v, (self.token,)) for k, v in row.items() if k in fields})
             safe = {kind: rows}
+            coverage = {"truncated": len(payload[kind]) > 100, "empty": not rows}
+            quality, observed = "fresh", None
+            if network_events:
+                coverage["schema"] = "network-events-v1"
+                try:
+                    if any(not all(isinstance(row.get(key), str) for key in ("id", "action", "time", "release"))
+                           or not row["time"].isdigit() for row in rows):
+                        raise ValueError("Invalid event identity")
+                    observed = max((int(row["time"]) for row in rows), default=self.clock())
+                    quality = "invalid" if observed > self.clock() + 5 else "stale" if self.clock() - observed > 300 else "fresh"
+                except (TypeError, ValueError) as exc:
+                    raise ProviderError("invalid_events") from exc
             if kind == "releases":
                 safe["currentRelease"] = redact(payload.get("currentRelease"), (self.token,))
             return self._evidence(
-                target, kind, safe, coverage={"truncated": len(payload[kind]) > 100, "empty": not rows}
+                target, kind, safe, quality=quality, observed_at=observed, coverage=coverage
             )
         except ProviderError as exc:
             return self._failure(target, kind, exc)

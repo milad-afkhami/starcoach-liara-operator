@@ -1,0 +1,179 @@
+{
+  "service": {
+    "target": {
+      "team_id": "6ad5c19f63b87278cb8cd077",
+      "app_name": "liara-watch-storefront-2026",
+      "app_id": "6adaa8e2aa8f2ba374e1617d",
+      "origin": "https://liara-watch-storefront-2026.liara.run"
+    },
+    "platform": "docker",
+    "runtime_state": "ACTIVE",
+    "last_release_id": null,
+    "observed_at": 1792717657.8875525,
+    "capabilities": {
+      "provider_reads": true,
+      "http_check_configured": false,
+      "log_schema": "v2",
+      "live_schema_verified": false
+    }
+  },
+  "mode": "live",
+  "evidence": [
+    {
+      "id": "3ff91a57da3e4c4e9c5e975bebd23caa",
+      "target": {
+        "team_id": "6ad5c19f63b87278cb8cd077",
+        "app_name": "liara-watch-storefront-2026",
+        "app_id": "6adaa8e2aa8f2ba374e1617d",
+        "origin": "https://liara-watch-storefront-2026.liara.run"
+      },
+      "kind": "project",
+      "observed_at": 1792717660.8950636,
+      "available_at": 1792717660.8950639,
+      "quality": "unavailable",
+      "redacted_payload": {
+        "error": "observer_auth",
+        "http_status": 401
+      },
+      "coverage": {
+        "observed_service_health": false,
+        "provider_fixture": false
+      }
+    },
+    {
+      "id": "4c2c64fd39cb4e1bba2c7bf265865dfb",
+      "target": {
+        "team_id": "6ad5c19f63b87278cb8cd077",
+        "app_name": "liara-watch-storefront-2026",
+        "app_id": "6adaa8e2aa8f2ba374e1617d",
+        "origin": "https://liara-watch-storefront-2026.liara.run"
+      },
+      "kind": "applets",
+      "observed_at": 1792717661.057671,
+      "available_at": 1792717661.0576713,
+      "quality": "unavailable",
+      "redacted_payload": {
+        "error": "observer_auth",
+        "http_status": 401
+      },
+      "coverage": {
+        "observed_service_health": false
+      }
+    },
+    {
+      "id": "b057c2700062437aa9e7d3eecf996b26",
+      "target": {
+        "team_id": "6ad5c19f63b87278cb8cd077",
+        "app_name": "liara-watch-storefront-2026",
+        "app_id": "6adaa8e2aa8f2ba374e1617d",
+        "origin": "https://liara-watch-storefront-2026.liara.run"
+      },
+      "kind": "releases",
+      "observed_at": 1792717661.2340786,
+      "available_at": 1792717661.2340786,
+      "quality": "unavailable",
+      "redacted_payload": {
+        "error": "observer_auth",
+        "http_status": 401
+      },
+      "coverage": {
+        "observed_service_health": false
+      }
+    },
+    {
+      "id": "484d42e38e064d53a96ff169e1068e86",
+      "target": {
+        "team_id": "6ad5c19f63b87278cb8cd077",
+        "app_name": "liara-watch-storefront-2026",
+        "app_id": "6adaa8e2aa8f2ba374e1617d",
+        "origin": "https://liara-watch-storefront-2026.liara.run"
+      },
+      "kind": "metrics",
+      "observed_at": 1792717661.4518032,
+      "available_at": 1792717661.4518034,
+      "quality": "unavailable",
+      "redacted_payload": {
+        "error": "observer_auth",
+        "http_status": 401
+      },
+      "coverage": {
+        "observed_service_health": false
+      }
+    },
+    {
+      "id": "b0f7b145b429474d9bba0dcb35815b2f",
+      "target": {
+        "team_id": "6ad5c19f63b87278cb8cd077",
+        "app_name": "liara-watch-storefront-2026",
+        "app_id": "6adaa8e2aa8f2ba374e1617d",
+        "origin": "https://liara-watch-storefront-2026.liara.run"
+      },
+      "kind": "http_probe",
+      "observed_at": 1792717661.4519222,
+      "available_at": 1792717661.7034183,
+      "quality": "fresh",
+      "redacted_payload": {
+        "id": "b0f7b145b429474d9bba0dcb35815b2f",
+        "target_id": "6adaa8e2aa8f2ba374e1617d",
+        "check_id": "store-preview",
+        "request_id": "518394d5045b41ebbb237435a59cacd3",
+        "observed_at": 1792717661.4519222,
+        "available_at": 1792717661.7034183,
+        "http_status": 200,
+        "elapsed_ms": 251.4968719915487,
+        "check_pass": true,
+        "contract_pass": null,
+        "reason": "pass",
+        "body_digest": "cdf332c1e9709005c38d3f17737eacfad45483ea4efb201526d64a9d6dafaed1",
+        "payload": {
+          "status": "ready",
+          "shipping_toman": 10000,
+          "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+          "dependency_build_id": "7789311e98f849daac989526de9a9f2a",
+          "request_id": "518394d5045b41ebbb237435a59cacd3"
+        }
+      },
+      "coverage": {
+        "configured_endpoint": true,
+        "local_fixture_target": false
+      }
+    },
+    {
+      "id": "50294fb07560482b9e62ebf563a87243",
+      "target": {
+        "team_id": "6ad5c19f63b87278cb8cd077",
+        "app_name": "liara-watch-storefront-2026",
+        "app_id": "6adaa8e2aa8f2ba374e1617d",
+        "origin": "https://liara-watch-storefront-2026.liara.run"
+      },
+      "kind": "http_probe",
+      "observed_at": 1792717661.7037253,
+      "available_at": 1792717661.9129786,
+      "quality": "fresh",
+      "redacted_payload": {
+        "id": "50294fb07560482b9e62ebf563a87243",
+        "target_id": "6adaa8e2aa8f2ba374e1617d",
+        "check_id": "store-health",
+        "request_id": "b9af43ea02074f6eb9ddcf5f3f69297c",
+        "observed_at": 1792717661.7037253,
+        "available_at": 1792717661.9129786,
+        "http_status": 200,
+        "elapsed_ms": 209.25445097964257,
+        "check_pass": true,
+        "contract_pass": null,
+        "reason": "pass",
+        "body_digest": "aa758aae4eec0a149ff77a705560661bb1753319e9c1628c6ce7a1cac4984198",
+        "payload": {
+          "status": "ok",
+          "build_id": "0553e44e5ec34e70b0706d3a4f521b20",
+          "request_id": "b9af43ea02074f6eb9ddcf5f3f69297c"
+        }
+      },
+      "coverage": {
+        "configured_endpoint": true,
+        "local_fixture_target": false
+      }
+    }
+  ],
+  "can_repair": true
+}

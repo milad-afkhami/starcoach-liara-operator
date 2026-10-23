@@ -1,0 +1,196 @@
+{
+  "scope": "isolated rendered UI, deterministic model, fixture provider plus actual local HTTP endpoints",
+  "at": "2026-10-22T23:51:25.324Z",
+  "results": [
+    {
+      "id": "PP1",
+      "status": "pass",
+      "assertion": "Rendered fresh login loaded private inventory"
+    },
+    {
+      "id": "PP2",
+      "status": "pass",
+      "assertion": "Fixture catalogue selected g2-small; deployment/domain checklist visible; operations empty"
+    },
+    {
+      "id": "PP3",
+      "status": "pass",
+      "assertion": "Changed RAM clears old quote and selects g2-medium after resubmission"
+    },
+    {
+      "id": "PP4",
+      "status": "pass",
+      "assertion": "Impossible requirement leaves quote absent, explicit no match and useful checklist"
+    },
+    {
+      "id": "PP5",
+      "status": "pass",
+      "assertion": "Evidence dialog identifies storefront/store-preview and preserves LTR raw payload"
+    },
+    {
+      "id": "PP6",
+      "status": "pass",
+      "assertion": "Actual persisted analysis stage/read count visible during deterministic-model wait; cancellation control available"
+    },
+    {
+      "id": "PP7",
+      "status": "pass",
+      "assertion": "Current manual checklist references original failed check; citation opens evidence; no deploy action"
+    },
+    {
+      "id": "PP8",
+      "status": "pass",
+      "assertion": "390px setup controls and checklist usable with no page/dialog horizontal overflow"
+    },
+    {
+      "id": "PP9",
+      "status": "pass",
+      "assertion": "Actual logout/revocation clears private guide and new login does not restore it"
+    },
+    {
+      "id": "PP11",
+      "status": "pass",
+      "assertion": "No page errors, active watches/jobs or operations; deterministic UI model only"
+    },
+    {
+      "id": "PP10",
+      "status": "pass",
+      "assertion": "Actual rendered form displays catalogue access refusal, no invented plan/price; deployment/domain checklist remains"
+    },
+    {
+      "id": "PP12",
+      "status": "pass",
+      "assertion": "Actual rendered normalized fixture shows12.5% CPU,64MiB RAM, timestamps and no workload capacity claim;390px no overflow"
+    },
+    {
+      "id": "PP13",
+      "status": "pass",
+      "assertion": "Stale resources are labelled old; future invalid samples are hidden"
+    },
+    {
+      "id": "PP14",
+      "status": "pass",
+      "assertion": "Unknown resource schema has no guessed value or zero default"
+    }
+  ],
+  "errors": [],
+  "responses": [
+    {
+      "path": "/api/services",
+      "status": 401
+    },
+    {
+      "path": "/api/state",
+      "status": 401
+    },
+    {
+      "path": "/api/login",
+      "status": 200
+    },
+    {
+      "path": "/api/services",
+      "status": 200
+    },
+    {
+      "path": "/api/state",
+      "status": 200
+    },
+    {
+      "path": "/api/setup/recommendation",
+      "status": 200
+    },
+    {
+      "path": "/api/setup/recommendation",
+      "status": 200
+    },
+    {
+      "path": "/api/setup/recommendation",
+      "status": 200
+    },
+    {
+      "path": "/api/services/local-store",
+      "status": 200
+    },
+    {
+      "path": "/api/state",
+      "status": 200
+    },
+    {
+      "path": "/api/services/local-store/investigate",
+      "status": 202
+    },
+    {
+      "path": "/api/state",
+      "status": 200
+    },
+    {
+      "path": "/api/incidents/cfda78d9c3104a2da5b13c1d17f7bf7c",
+      "status": 200
+    },
+    {
+      "path": "/api/state",
+      "status": 200
+    },
+    {
+      "path": "/api/state",
+      "status": 200
+    },
+    {
+      "path": "/api/state",
+      "status": 200
+    },
+    {
+      "path": "/api/state",
+      "status": 200
+    },
+    {
+      "path": "/api/state",
+      "status": 200
+    },
+    {
+      "path": "/api/incidents/cfda78d9c3104a2da5b13c1d17f7bf7c",
+      "status": 200
+    },
+    {
+      "path": "/api/setup/recommendation",
+      "status": 200
+    },
+    {
+      "path": "/api/services",
+      "status": 401
+    },
+    {
+      "path": "/api/login",
+      "status": 200
+    },
+    {
+      "path": "/api/services",
+      "status": 200
+    },
+    {
+      "path": "/api/state",
+      "status": 200
+    }
+  ],
+  "historical_failures": [
+    {
+      "scope": "isolated canonical browser run before cleanup/Origin fix",
+      "result": "7 passed;3 failed",
+      "tests": [
+        "real service evidence separates liveness from failure and watch can stop",
+        "real expired session with open evidence cannot restore prior-owner dialog",
+        "same owner can recover watch history in a fresh session and revoked session stays signed out"
+      ],
+      "cause": "Hard-coded8661 request Origin left an owned isolated8682 watch active; a cleanup command using the wrong cwd did not run. Complete inventory collected, owned watch stopped, derived page Origin fixed."
+    },
+    {
+      "scope": "first resource rendered check",
+      "result": "failed accessible-region lookup",
+      "cause": "Resource panel had an accessible label without a region role; semantic region added and actual rendered checks passed."
+    }
+  ],
+  "canonical_browser_regressions": {
+    "passed": 10,
+    "scope": "actual isolated8682 app and real local HTTP endpoints; existing browser suite with dynamic Origin"
+  }
+}
