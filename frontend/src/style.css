@@ -43,3 +43,11 @@ h1,h2,h3,.brand b,.eyebrow{letter-spacing:0}.eyebrow{font-size:11px;color:#55798
 @media(max-width:760px){.service-title{flex-direction:row;align-items:start}.title-actions{align-items:flex-end}.sidebar .service-item{min-height:54px}.sidebar .service-item small{display:none}.sidebar .service-item .service-cube{width:28px;height:28px}.sidebar .service-list{min-height:56px}.service-search{margin-bottom:6px}.sidebar .section-head{margin-bottom:5px}.resource-chart svg text{font-size:16px}.resource-chart svg text:first-of-type{font-size:14px}}
 
 .resource-chart h3 .instance-alias{font-family:Vazirmatn,Arial,sans-serif;font-size:12px}.instance-provenance{font-size:11px;color:var(--muted);overflow-wrap:anywhere}.instance-provenance .technical{display:block;margin-top:4px}
+
+/* R2a: outcomes guide action; history remains available on phones. */
+.handoff-optional{margin:12px 0;border-top:1px solid var(--line);font-size:13px}.handoff-optional>summary{padding:12px 0;cursor:pointer;color:var(--blue)}.handoff.review-only{background:#f5f8fa;border-color:var(--line);margin-top:0}.handoff.review-only h3{font-size:15px}.operation-meaning{padding:12px 16px;background:#edf5fa;border-radius:7px;margin-bottom:16px}.operation-meaning p{font-size:13px;margin:5px 0;line-height:1.95}.recent>summary{cursor:pointer;font-size:13px;padding:8px 0}.recent>summary>span{font-size:11px;color:var(--muted);margin-inline-start:8px}.recent>button[aria-pressed=true]{background:#e6f2f8}.setup-measured{margin:16px 0;font-size:13px}.setup-measured>summary{cursor:pointer;padding:8px 0;color:var(--blue)}.setup-measured>.setup-resources{margin-top:8px}.setup-dialog form>.coverage-note{display:block}
+@media(max-width:760px){.sidebar .recent{display:block;margin-top:10px;border-top:1px solid var(--line)}.sidebar .recent>summary{padding:8px 0;font-size:12px}.sidebar .recent>button{padding:8px 10px}.sidebar .recent small{font-size:11px}.operation-meaning{padding:10px 12px}.operation-meaning p{font-size:12px}.handoff-optional>summary{font-size:12px}}
+
+.recent[open]{max-height:360px;overflow-y:auto}.historical-label{display:block;font-size:12px;color:var(--muted);margin:8px 0}
+
+.recent[open]>summary{position:sticky;top:0;z-index:1;background:#edf3f8}

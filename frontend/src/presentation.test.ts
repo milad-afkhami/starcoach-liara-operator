@@ -144,7 +144,7 @@ test('Codex handoff is frozen and scoped to cited evidence with explicit uncerta
  const e=(id:string,extra:any={})=>({id,kind:'http_probe',quality:'fresh',target:incident.target,observed_at:990,available_at:995,redacted_payload:{check_id:'preview',http_status:502,check_pass:false,body:{secret:'DO_NOT_EXPORT'},token:'DO_NOT_EXPORT'},...extra})
  const source=[e('cited'),e('late',{available_at:1001}),e('foreign',{target:{app_id:'other',app_name:'other'}}),e('against',{redacted_payload:{check_id:'health',http_status:200,check_pass:true}})]
  const prompt=codexHandoff(incident,source)
- for(const expected of ['storefront','cited','against','فایل مسئول مشخص نیست.','regression test','repository','approval'])assert.ok(prompt.includes(expected),expected)
+ for(const expected of ['storefront','cited','against','فایل مسئول مشخص نیست.','Do not modify code','repository','approval','Original support IDs: cited, late, foreign','Original contrary IDs: against'])assert.ok(prompt.includes(expected),expected)
  for(const forbidden of ['DO_NOT_EXPORT','src/','late —','foreign —'])assert.ok(!prompt.includes(forbidden),forbidden)
  assert.ok(codexHandoff({...incident,state:'recovered'},source).includes('Historical'))
  assert.ok(evidenceFacts(source[0]).some((s:string)=>s.includes('502')))
@@ -173,4 +173,45 @@ test('resource instance aliases keep long IDs distinct and stable across CPU RAM
  assert.equal(refreshed.get(long),aliases.get(long))
  assert.notEqual(refreshed.get('000-new'),aliases.get(other))
  assert.equal(rows[0].applet,long)
+})
+
+test('handoff prominence and requested work follow current supported failure rather than always asking for repairs',async()=>{
+ const {handoffPresentation,codexHandoff}=await import('./presentation.ts')
+ const summary='بررسی اصلی موفق بود. وضعیت پردازش از لیارا دریافت نشده است. همان وضعیت را دوباره بررسی کنید.'
+ const base:any={id:'i',state:'open',generation:4,investigation_state:'done',target:{app_id:'service',app_name:'demo'},diagnosis:{generation:4,outcome:'repair_candidate',cause_family:'dependency_schema',summary,unknowns:['سورس بررسی نشده است.'],cutoff:1000,evidence_ids:['failure'],contradiction_ids:[]}}
+ const failure:any={id:'failure',target:base.target,kind:'http_probe',quality:'fresh',observed_at:990,available_at:995,redacted_payload:{http_status:502,check_pass:false,check_id:'preview'}}
+ assert.equal(handoffPresentation(base,[failure]).mode,'repair_review')
+ assert.equal(handoffPresentation(base,[failure]).prominent,true)
+ const repair=codexHandoff(base,[failure]);assert.ok(repair.includes('If the cause can be established'));assert.ok(repair.includes('regression test'));assert.ok(repair.includes(summary));assert.ok(repair.includes('failure'))
+ for(const [value,expected] of [
+  [{...base,diagnosis:{...base.diagnosis,outcome:'no_app_change'}},'no_change'],
+  [{...base,diagnosis:{...base.diagnosis,outcome:'need_evidence'}},'diagnostic'],
+  [{...base,state:'recovered'},'historical'],
+  [{...base,generation:5},'stale'],
+  [{...base,investigation_state:'running'},'stale'],
+ ] as const){
+  const presentation=handoffPresentation(value,[failure]);assert.equal(presentation.mode,expected);assert.equal(presentation.prominent,false)
+  const prompt=codexHandoff(value,[failure]);assert.ok(prompt.includes('Do not modify code'));assert.ok(!prompt.includes('make the smallest appropriate fix'));assert.ok(prompt.includes(summary));assert.ok(prompt.includes('سورس بررسی نشده است.'));assert.ok(prompt.includes('failure'))
+ }
+ assert.equal(handoffPresentation(base,[]).prominent,false)
+ assert.equal(handoffPresentation(base,[{...failure,quality:'stale'}]).prominent,false)
+ assert.equal(handoffPresentation(base,[failure],{historical:true}).mode,'historical')
+ assert.equal(handoffPresentation({...base,diagnosis:{...base.diagnosis,cause_family:'unknown'}},[failure]).prominent,false)
+})
+
+test('a recorded repair candidate is review-only when latest service checks pass or current failure is unobserved',async()=>{
+ const {handoffPresentation}=await import('./presentation.ts')
+ const incident:any={state:'open',investigation_state:'done',generation:1,target:{app_id:'app'},diagnosis:{generation:1,outcome:'repair_candidate',cause_family:'dependency_schema',cutoff:1000,evidence_ids:['failure']}}
+ const failure:any={id:'failure',target:{app_id:'app'},kind:'http_probe',quality:'fresh',observed_at:990,available_at:995,redacted_payload:{check_id:'preview',check_pass:false}}
+ assert.equal(handoffPresentation(incident,[failure],{currentEvidence:[{...failure,observed_at:1001,redacted_payload:{check_id:'preview',check_pass:true}}]}).prominent,false)
+ assert.equal(handoffPresentation(incident,[failure],{currentEvidence:[]}).prominent,false)
+ assert.equal(handoffPresentation(incident,[failure],{currentEvidence:[{...failure,observed_at:1001}]}).prominent,true)
+})
+
+test('diagnosis chronology distinguishes a new analysis from the older submitted operation',async()=>{
+ const {diagnosisPrecedesAction}=await import('./presentation.ts')
+ assert.equal(diagnosisPrecedesAction(100,{submitted_at:120,release_id:'release'}),true)
+ assert.equal(diagnosisPrecedesAction(130,{submitted_at:120,release_id:'release'}),false)
+ assert.equal(diagnosisPrecedesAction(130,{submitted_at:null,release_id:'legacy-release'}),true)
+ assert.equal(diagnosisPrecedesAction(130,undefined),false)
 })

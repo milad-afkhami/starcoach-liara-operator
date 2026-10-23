@@ -1,0 +1,43 @@
+
+> liara-service-watch-ui@0.1.0 test
+> node --experimental-strip-types --test src/presentation.test.ts
+
+✔ HTTP failure is distinct from absent observation and healthy process (3.66424ms)
+✔ watch countdown never becomes negative or extends the deadline (0.23489ms)
+✔ investigation of an open selected alert reuses its incident (0.354568ms)
+✔ ambiguous submitted operation remains observable only inside reconciliation budget (0.35248ms)
+✔ Persian UI labels cover service states, evidence and investigation without rewriting identifiers (0.281212ms)
+✔ missing observations and provider errors explain uncertainty in Persian (3.540727ms)
+✔ legacy server policy caveat is localized without translating arbitrary model evidence (0.508978ms)
+✔ need-evidence state is Persian for both API and legacy normalized forms (0.362964ms)
+✔ observations show absolute Persian date and Tehran time across UTC midnight (45.828577ms)
+✔ evidence references identify the service and exact registered check (3.911411ms)
+✔ resource values keep verified units and unavailable values never become zero (0.573577ms)
+✔ read-only recovery recheck is once-only within original deadline and exact generation (0.433955ms)
+✔ recovered incidents present the preserved diagnosis as pre-action history (0.204245ms)
+✔ historical resource fallback keeps source and clock uncertainty distinct from summary (0.214426ms)
+✔ resource history charts use native timestamps and verified units while excluding invalid/future points and breaking gaps (0.589207ms)
+✔ resource snapshots reject corrupt values, preserve lone sample state and never invent CPU percent (0.201228ms)
+✔ Codex handoff is frozen and scoped to cited evidence with explicit uncertainty and no raw secrets or invented repo paths (1.054441ms)
+✔ chart evidence with malformed series and duplicate times cannot crash or imply conflicting observations (0.200391ms)
+✔ resource instance aliases keep long IDs distinct and stable across CPU RAM ordering and refresh (0.298526ms)
+✔ handoff prominence and requested work follow current supported failure rather than always asking for repairs (0.574134ms)
+✔ a recorded repair candidate is review-only when latest service checks pass or current failure is unobserved (0.238188ms)
+✖ diagnosis chronology distinguishes a new analysis from the older submitted operation (0.268825ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 21
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 214.107059
+
+✖ failing tests:
+
+test at src/presentation.test.ts:211:1
+✖ diagnosis chronology distinguishes a new analysis from the older submitted operation (0.268825ms)
+  TypeError: diagnosisPrecedesAction is not a function
+      at TestContext.<anonymous> (file:///home/milad/Desktop/projects/starcoach-liara-operator/frontend/src/presentation.test.ts:213:15)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

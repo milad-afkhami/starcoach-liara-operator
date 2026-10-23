@@ -1,0 +1,78 @@
+{
+  "revision": "R2a bounded outcome-aware UX",
+  "source_base": "74fcc35a355e87d6b77ddb0d6f7f0a440962e09c",
+  "locked_review": {
+    "path": "/tmp/starcoach-ui-revision-20261023/r2-liara/review.md",
+    "first_score": 251,
+    "maximum": 300,
+    "sha256": "96f5297a48041463147b64965273bab733573dd2901f5336199f3d302273b904",
+    "status": "Original report unchanged; no new scoring performed."
+  },
+  "scope": "Frontend presentation only plus isolated deterministic QA fixtures. No provider/model/schema/authorization/recovery/15-minute/two-call bound changes.",
+  "outcome_contract": "Only open, done, exact-generation repair_candidate with known cause and fresh cited failing endpoint proof, matching current service failure when available, receives prominent conditional source-review text. No-change, uncertain, stale and historical exports are optional, muted and request no code modifications. Original summary, unknowns and citation lists are preserved.",
+  "verification": {
+    "frontend_behavior": {
+      "passed": 22,
+      "artifact": "liara-r2a/frontend.txt"
+    },
+    "canonical_and_prior_usability": {
+      "passed": 15,
+      "seeded_cases_skipped_in_this_run": 4,
+      "artifact": "liara-r2a/canonical-browser.txt"
+    },
+    "seeded_outcome_matrix": {
+      "passed": 4,
+      "artifact": "liara-r2a/outcomes-browser.txt"
+    },
+    "typescript_vite_build": "pass",
+    "ruff": "pass",
+    "diff_check": "pass",
+    "backend": "No backend source changed; previous308 backend evidence remains applicable, not newly rerun."
+  },
+  "rendered_cases": [
+    "Healthy endpoint/no_app_change retains full >300-character provider-gap instruction and closed optional review export.",
+    "Need-evidence and stale generation offer review-only text; stale approval remains disabled.",
+    "Supported current repair candidate has conditional fix/regression text, without deploy authority.",
+    "Recovered and pre-submission analysis remain historical; a newer analysis is not mislabelled as the older pre-action diagnosis.",
+    "Phone history opens older actual records, maintains selected service/record and stays clear on new target/logout.",
+    "Human operation explanation precedes unchanged target/team/release/source SHA256/policy hash and approval controls.",
+    "Setup submits transparent sample defaults or edited measured minima through the unchanged authenticated read-only API.",
+    "Prior watch/session/auth, clipboard denial/copy-download equivalence, resource units/gaps/aliases/unknowns regressions remain green."
+  ],
+  "negative_inventory": [
+    {
+      "result": "First seeded browser run3 fail /1 pass",
+      "cause": "QA fixture incorrectly assumed MonitorStore.save_incident updates state/generation; it deliberately preserves these. Fixture now explicitly seeds intended persistent states. Old fixture proof and approval also aged out while tests were authored; final cases launch and execute together with real clocks. No application guard was relaxed.",
+      "artifact": "liara-r2a/initial-fixture-failures.txt"
+    },
+    {
+      "result": "Intended RED behavior regressions",
+      "cause": "Missing outcome-aware mode/current-check guard/analysis-versus-action chronology were demonstrated before implementation.",
+      "artifacts": [
+        "liara-r2a/handoff-red.txt",
+        "liara-r2a/current-proof-red.txt",
+        "liara-r2a/chronology-red.txt"
+      ]
+    }
+  ],
+  "screenshots": [
+    "liara-r2a-healthy-desktop.png",
+    "liara-r2a-operation-desktop.png",
+    "liara-r2a-history-mobile.png",
+    "liara-r2a-diagnostic-export-desktop.png",
+    "liara-r2a-overview-mobile.png",
+    "liara-r2a-resources-mobile.png",
+    "liara-r2a-instance-aliases-mobile.png"
+  ],
+  "reproduction": "Start harness/serve_usability.py with LIARA_UI_QA_CASES=1 in a new private state directory, then immediately run outcomes.spec.ts with LIARA_OUTCOME_FIXTURE=1 and its private access path/APP_URL. Existing canonical15 use LIARA_USABILITY_FIXTURE=1 without seeded cases. No real model calls or cloud writes exist in this harness.",
+  "remaining_gates": [
+    "Root independent scoped R2a source/output re-review.",
+    "Root runtime/source publication and any final acceptance. Original video/source and first251 review remain separate unchanged evidence."
+  ],
+  "limits": [
+    "All added outcome diagnoses/operations are explicit deterministic or seeded presentation cases, not genuine inference or a cloud repair. HTTP checks are actual loopback requests.",
+    "No approval/execute/recheck action was clicked in the seeded matrix. Canonical watches and deterministic diagnosis exercised only owned fixtures.",
+    "General deployment onboarding, broader diagnosis taxonomy and continuous monitoring were intentionally not expanded."
+  ],
+  "receipt_format": "Public text receipts normalize trailing whitespace only; original raw captures remain under /tmp/liara-r2a-*."
+}

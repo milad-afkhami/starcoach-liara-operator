@@ -53,9 +53,11 @@ Use this question as a starting point:
 
 Click **بررسی با دستیار**. The UI reports actual collection/read names, completed reads, the model-call stage and response validation; it does not estimate a percentage. **لغو بررسی** stops further model work for that run; a stale or superseded result cannot become the current diagnosis.
 
-Read **نتیجهٔ بررسی** for the short diagnosis, observed impact and next step. Detailed original model text, citations, unknowns and contrary evidence are available under **جزئیات نتیجه و شواهد**; collection history is collapsed separately.
+Read **نتیجهٔ بررسی** for the full recorded summary, observed impact and its own next instruction. The summary is not truncated; the UI does not substitute a generic cause checklist for the recorded action. Detailed original model text, citations, unknowns and contrary evidence are available under **جزئیات نتیجه و شواهد**; collection history is collapsed separately.
 
-To continue in your codebase, copy **کپی متن برای Codex** or download the same plain-text file with **دانلود فایل**. The handoff uses English instructions with the original Persian diagnosis and unknowns preserved unchanged. It includes the frozen diagnosis, cited same-service observations available by its cutoff and explicit unknowns. It asks your coding agent to inspect the repository, establish the cause, make a minimal fix and run a regression plus relevant project tests. It does not invent repository file paths or provide deploy permission. Raw response bodies/logs/configuration are excluded from the export. **دیدن متن قبل از کپی** opens selectable text when clipboard access is denied. Recovered incidents mark their handoff as historical and ask the coding agent to establish whether a current problem exists.
+A current supported repair candidate, with a cited fresh failed check and a matching current failure, offers **بررسی اصلاح در سورس با Codex**. Its English handoff asks the coding agent to confirm the cause in the repository before any minimal fix and regression test. No-change, uncertain, stale or historical outcomes instead expose a closed optional review export; their instructions explicitly request no code changes. Recovered results and analysis predating a submitted operation are labelled historical. A newer analysis is not silently treated as the old pre-action diagnosis.
+
+Open the relevant optional disclosure if needed, then use **کپی متن برای Codex** or **دانلود فایل**. Original Persian summary, unknowns and citation ID lists are retained; inspectable same-service facts are limited to the frozen cutoff. No repository file path or deploy authority is invented. Raw bodies/logs/configuration are excluded. **دیدن متن قبل از کپی** opens selectable text when clipboard access is denied.
 
 A genuine model call can take tens of seconds. Investigations have bounded reads/calls/time; repeated clicking does not make the evidence better. **AI configured** does not guarantee a successful call.
 
@@ -63,9 +65,9 @@ A genuine model call can take tens of seconds. Investigations have bounded reads
 
 Delivery can respond **200** on `/quote` yet return `delivery_toman` when storefront expects `shipping_toman`. That payload difference, correlated logs and the failing preview are useful discriminating evidence. The investigator does not receive the fault controller's answer key. It can still leave the intended contract, onset or correct repair target unknown.
 
-Click **delivery** to inspect its checks, then return to storefront. **بررسی‌های اخیر** reopens records; fresh runs do not erase earlier evidence. Material changes invalidate old conclusions rather than silently reusing them.
+Click **delivery** to inspect its checks, then return to storefront. **بررسی‌های اخیر** is a compact disclosure on desktop and phone. It lists the actual returned records with service, state and date; selecting one reopens that record. Fresh runs do not erase earlier evidence. Material changes invalidate old conclusions rather than silently reusing them.
 
-For a current completed diagnosis, **حالا چه کار کنم؟** provides fixed, cause-specific owner steps with evidence links and the original failed check to repeat. On an unenrolled service these are manual guidance, not an executable repair plan. Changing the service generation invalidates the checklist with its diagnosis.
+For appropriate current diagnoses, **راهنمای کلی برای بررسی بیشتر** contains optional general cause-family guidance, distinct from the actual recorded next instruction. It is not shown as a new next step, or as a current repair plan after no-change/historical outcomes. Changing the service generation invalidates the checklist with its diagnosis.
 
 ## 4. Try a bounded watch
 
@@ -96,7 +98,7 @@ sequenceDiagram
     Probe-->>UI: Recovered, failed or inconclusive
 ```
 
-Inspect **سرویس هدف**, **تیم**, the before/submitted release, **SHA-256 سورس تأییدشده**, the verification-policy hash and expiry. Approval is single-use and expires after five minutes. After expiry or a material state change, prepare a fresh proposal. Never repeat an uncertain write blindly.
+The operation first explains the proposed registered-source redeployment, its relationship to the recorded issue and the three fresh original-symptom/serving-version verification rounds. Then inspect **سرویس هدف**, **تیم**, the before/submitted release, **SHA-256 سورس تأییدشده**, the verification-policy hash and expiry; all exact scope remains visible before approval. Approval is single-use and expires after five minutes. After expiry or a material state change, prepare a fresh proposal. Never repeat an uncertain write blindly.
 
 The correction is **a new deployment of registered source**, not an invented native rollback. Recovery requires the intended serving identity and three fresh original-symptom/build success rounds. READY alone is not success.
 
@@ -113,4 +115,4 @@ Keep the local/fixture banner visible in local footage. The [demo plan](demo.md)
 
 ## Initial setup guidance
 
-Open **راهنمای راه‌اندازی سرویس تازه** from the service sidebar. Select web, background worker or static website and enter explicit minimum RAM/CPU/disk requirements. Submit to read the account catalogue and match an available plan; changing an input clears the old recommendation. Unavailable access and no matching plan remain explicit, with no invented price or zero default. The guide covers deployment method, private configuration, default-domain verification and manual custom-domain DNS/HTTPS checks. It never provisions, resizes, changes DNS or deploys. The separately approved owner setup ledger remains the only initial demo provisioning path.
+Open **راهنمای راه‌اندازی سرویس تازه** from the service sidebar. Select web, background worker or static website. The visible sample comparison inputs start at RAM0.5GB, CPU0.5 and disk5GB; they are explicitly not an estimate of the project’s needs or capacity. If you have measured requirements, open **منابع اندازه‌گیری‌شده را دارم (اختیاری)** and edit them. Submit **دریافت راهنمای شروع** to read the account catalogue and match those input minima; changing an input clears the old recommendation. Unavailable access and no matching plan remain explicit, with no invented price or zero default. The guide covers deployment method, private configuration, default-domain verification and manual custom-domain DNS/HTTPS checks. It never provisions, resizes, changes DNS or deploys. The separately approved owner setup ledger remains the only initial demo provisioning path.

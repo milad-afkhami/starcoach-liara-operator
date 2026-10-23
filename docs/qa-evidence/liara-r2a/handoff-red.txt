@@ -1,0 +1,41 @@
+
+> liara-service-watch-ui@0.1.0 test
+> node --experimental-strip-types --test src/presentation.test.ts
+
+✔ HTTP failure is distinct from absent observation and healthy process (6.744925ms)
+✔ watch countdown never becomes negative or extends the deadline (0.697444ms)
+✔ investigation of an open selected alert reuses its incident (1.084024ms)
+✔ ambiguous submitted operation remains observable only inside reconciliation budget (0.876334ms)
+✔ Persian UI labels cover service states, evidence and investigation without rewriting identifiers (0.640299ms)
+✔ missing observations and provider errors explain uncertainty in Persian (7.135353ms)
+✔ legacy server policy caveat is localized without translating arbitrary model evidence (0.776934ms)
+✔ need-evidence state is Persian for both API and legacy normalized forms (0.601519ms)
+✔ observations show absolute Persian date and Tehran time across UTC midnight (36.611017ms)
+✔ evidence references identify the service and exact registered check (10.245492ms)
+✔ resource values keep verified units and unavailable values never become zero (1.273404ms)
+✔ read-only recovery recheck is once-only within original deadline and exact generation (0.780819ms)
+✔ recovered incidents present the preserved diagnosis as pre-action history (0.651443ms)
+✔ historical resource fallback keeps source and clock uncertainty distinct from summary (0.725643ms)
+✔ resource history charts use native timestamps and verified units while excluding invalid/future points and breaking gaps (1.740863ms)
+✔ resource snapshots reject corrupt values, preserve lone sample state and never invent CPU percent (0.684167ms)
+✔ Codex handoff is frozen and scoped to cited evidence with explicit uncertainty and no raw secrets or invented repo paths (3.043499ms)
+✔ chart evidence with malformed series and duplicate times cannot crash or imply conflicting observations (0.660501ms)
+✔ resource instance aliases keep long IDs distinct and stable across CPU RAM ordering and refresh (1.075096ms)
+✖ handoff prominence and requested work follow current supported failure rather than always asking for repairs (1.300928ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 19
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 382.800806
+
+✖ failing tests:
+
+test at src/presentation.test.ts:178:1
+✖ handoff prominence and requested work follow current supported failure rather than always asking for repairs (1.300928ms)
+  TypeError: handoffPresentation is not a function
+      at TestContext.<anonymous> (file:///home/milad/Desktop/projects/starcoach-liara-operator/frontend/src/presentation.test.ts:183:15)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)

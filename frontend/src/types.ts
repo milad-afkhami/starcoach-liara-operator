@@ -2,7 +2,7 @@ export interface Target {team_id:string;app_id:string;app_name:string;origin:str
 export interface Check {id:string;target_id:string;origin:string;path:string;expected_status:number}
 export interface Service {target:Target;platform:string;runtime_state:string;observed_at:number;checks:Check[];can_repair:boolean}
 export interface Evidence {id:string;target?:Target;kind:string;quality:string;observed_at:number;available_at:number;redacted_payload:Record<string,any>;coverage?:Record<string,any>}
-export interface Diagnosis {outcome:string;cause_family:string;summary:string;evidence_ids:string[];contradiction_ids:string[];unknowns:string[];cutoff:number;read_operations:number;model_calls:{provider:string;model:string;elapsed_ms:number}[]}
+export interface Diagnosis {generation?:number;outcome:string;cause_family:string;summary:string;evidence_ids:string[];contradiction_ids:string[];unknowns:string[];cutoff:number;read_operations:number;model_calls:{provider:string;model:string;elapsed_ms:number}[]}
 export interface Progress {stage:string;read_name?:string|null;reads_completed:number;model_call?:number|null;updated_at?:number}
 export interface Guidance {mode:string;automatic_changes:false;limitation:string;steps:{id:string;title:string;detail:string;actor:string;evidence_ids:string[];check_ids:string[]}[]}
 export interface Incident {id:string;target:Target;kind:string;generation:number;observation_sequence:number;opened_at:number;state:string;question:string;investigation_state:string;investigation_progress?:Progress;investigation_error?:string;diagnosis:Diagnosis|null;repair_pending?:boolean;verification?:{state:string;reason:string;observed_window?:number[];probe_ids?:string[]}}

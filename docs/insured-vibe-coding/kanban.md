@@ -3,6 +3,7 @@
 _Last updated:23October2026. Final local code and actual cloud acceptance pass; reviewed narrated demo/public playback are complete; final team/submission identity remains open. The operator is local on8662; only the two exact scenario services are deployed to Liara. Source and raw proof are distinct from contest submission._
 
 ## Doing
+- R2a scoped review/delivery — owner implementation and9/9 QA complete;22 frontend,15 canonical/prior-usability and4 seeded outcome browser tests pass, build/Ruff/diff pass. docs/qa-evidence/usability-r2a.json owns receipts/limits. Next: root independent R2a review, then runtime/publication; first locked251 review is unchanged.
 - Final delivery — scoped actual LIVE1–LIVE5 and public narrated demo/playback pass. Final shared-team identity and one-time contest submission remain open; submission.md owns confirmations.
 - Final documentation/publication — preserve raw failures, later repairs, historical-metric qualifications and scoped independent review. No unsupported production or ranking claim.
 - Final source publication —307backend source is reviewed and loaded on private8662; public CI/push for the latest contention checkpoint is in progress. No additional cloud setup is needed.

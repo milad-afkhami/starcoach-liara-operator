@@ -179,16 +179,22 @@ if __name__ == "__main__":
     config = local_config()
     for check in config["http_checks"]:
         check["origin"] = check["origin"].replace(":8771", f":{STORE_PORT}").replace(":8772", f":{DEP_PORT}")
+    session_secret = secrets.token_urlsafe(48)
+    provider = Provider(ROOT)
     application = create_app(
         state_path=ROOT / "operator.sqlite",
-        session_secret=secrets.token_urlsafe(48),
+        session_secret=session_secret,
         password_hash=hash_password(password),
         public_origin=f"http://127.0.0.1:{PORT}",
-        provider=Provider(ROOT),
+        provider=provider,
         registry_config=config,
         model=Model(),
         mode="fixture",
     )
+    if os.environ.get("LIARA_UI_QA_CASES") == "1":
+        from seed_usability_cases import seed_cases
+
+        seed_cases(application, provider, session_secret)
     print(
         "Deterministic fixture only; no model calls or cloud writes. Private login: " + str(access.resolve()),
         flush=True,

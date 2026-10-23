@@ -1,0 +1,133 @@
+
+> liara-service-watch-ui@0.1.0 test:e2e
+> playwright test outcomes.spec.ts
+
+
+Running 4 tests using 1 worker
+
+(node:3414326) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 e2e/outcomes.spec.ts:21:1 › healthy and uncertain results preserve full diagnosis and offer only optional review without guessed next steps (30.5s)
+(node:3414537) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 e2e/outcomes.spec.ts:37:1 › only a supported current repair candidate is prominent and exact operation review follows human explanation (7.1s)
+(node:3414753) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 e2e/outcomes.spec.ts:52:1 › phone history selects older actual records and target changes and logout clear the private result (7.2s)
+(node:3414921) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 e2e/outcomes.spec.ts:65:1 › setup starts with transparent sample inputs and measured minima remain optional and editable (2.4s)
+
+
+  1) e2e/outcomes.spec.ts:21:1 › healthy and uncertain results preserve full diagnosis and offer only optional review without guessed next steps
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByText('بازبینی نتیجهٔ قبلی با Codex (اختیاری)', { exact: true })
+
+
+      14 | }
+      15 | async function prompt(page:any,summary:string){
+    > 16 |  await page.getByText(summary,{exact:true}).click()
+         |                                             ^
+      17 |  const handoff=page.getByRole('region',{name:'راهنمای آماده برای Codex'})
+      18 |  await expect(handoff).toBeVisible();await handoff.getByText('دیدن متن قبل از کپی',{exact:true}).click()
+      19 |  return handoff.getByRole('textbox',{name:'متن آماده برای Codex'}).inputValue()
+        at prompt (/home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/outcomes.spec.ts:16:45)
+        at /home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/outcomes.spec.ts:34:15
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/outcomes-healthy-and-uncer-3982b--without-guessed-next-steps/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/outcomes-healthy-and-uncer-3982b--without-guessed-next-steps/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/outcomes-healthy-and-uncer-3982b--without-guessed-next-steps/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/outcomes-healthy-and-uncer-3982b--without-guessed-next-steps/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) e2e/outcomes.spec.ts:37:1 › only a supported current repair candidate is prominent and exact operation review follows human explanation
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('region', { name: 'راهنمای آماده برای Codex' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('region', { name: 'راهنمای آماده برای Codex' }) with timeout 5000ms
+      - waiting for getByRole('region', { name: 'راهنمای آماده برای Codex' })
+
+
+      37 | test('only a supported current repair candidate is prominent and exact operation review follows human explanation',async({page})=>{
+      38 |  await login(page);await selectCase(page,'repair')
+    > 39 |  const handoff=page.getByRole('region',{name:'راهنمای آماده برای Codex'});await expect(handoff).toBeVisible()
+         |                                                                                                 ^
+      40 |  await expect(handoff.getByRole('heading',{name:'بررسی اصلاح در سورس با Codex'})).toBeVisible()
+      41 |  await handoff.getByText('دیدن متن قبل از کپی',{exact:true}).click();const text=await handoff.getByRole('textbox').inputValue()
+      42 |  expect(text).toContain('If the cause can be established');expect(text).toContain('regression test');expect(text).toContain('not approval to deploy')
+        at /home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/outcomes.spec.ts:39:97
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/outcomes-only-a-supported--01a65-w-follows-human-explanation/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/outcomes-only-a-supported--01a65-w-follows-human-explanation/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/outcomes-only-a-supported--01a65-w-follows-human-explanation/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/outcomes-only-a-supported--01a65-w-follows-human-explanation/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) e2e/outcomes.spec.ts:52:1 › phone history selects older actual records and target changes and logout clear the private result
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByTestId('recovery-outcome')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByTestId('recovery-outcome') with timeout 5000ms
+      - waiting for getByTestId('recovery-outcome')
+
+
+      54 |  await expect(page.locator('.recent>summary')).toBeVisible()
+      55 |  const old=await selectCase(page,'repair');await expect(page.locator(`[data-incident-id="${old.id}"]`)).toHaveAttribute('aria-pressed','true')
+    > 56 |  await selectCase(page,'recovered');await expect(page.getByTestId('recovery-outcome')).toBeVisible()
+         |                                                                                        ^
+      57 |  await page.screenshot({path:'../docs/qa-evidence/liara-r2a-history-mobile.png',fullPage:true})
+      58 |  await page.getByRole('button',{name:'باز کردن delivery'}).click();await expect(page.getByTestId('incident-panel')).toHaveCount(0)
+      59 |  await expect(page.getByRole('region',{name:'راهنمای آماده برای Codex'})).toHaveCount(0)
+        at /home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/outcomes.spec.ts:56:88
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/outcomes-phone-history-sel-0af04-ut-clear-the-private-result/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/outcomes-phone-history-sel-0af04-ut-clear-the-private-result/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/outcomes-phone-history-sel-0af04-ut-clear-the-private-result/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/outcomes-phone-history-sel-0af04-ut-clear-the-private-result/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    e2e/outcomes.spec.ts:21:1 › healthy and uncertain results preserve full diagnosis and offer only optional review without guessed next steps
+    e2e/outcomes.spec.ts:37:1 › only a supported current repair candidate is prominent and exact operation review follows human explanation
+    e2e/outcomes.spec.ts:52:1 › phone history selects older actual records and target changes and logout clear the private result
+  1 passed (54.7s)
