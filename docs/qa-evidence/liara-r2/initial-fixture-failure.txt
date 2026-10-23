@@ -1,0 +1,317 @@
+
+> liara-service-watch-ui@0.1.0 test:e2e
+> playwright test
+
+
+Running 10 tests using 1 worker
+
+(node:3378358) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   1 e2e/operator.spec.ts:6:1 › real service evidence separates liveness from failure and watch can stop (6.2s)
+(node:3378777) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   2 e2e/operator.spec.ts:20:1 › mobile owner login and evidence dialog are keyboard usable (30.2s)
+(node:3379297) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 e2e/operator.spec.ts:31:1 › fresh signed-out view does not claim an expired session (507ms)
+  ✘   4 e2e/operator.spec.ts:36:1 › reselecting a service during its real detail read does not strand refresh (6.2s)
+(node:3379520) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   5 e2e/operator.spec.ts:49:1 › failed observation read does not erase configured-check knowledge (6.5s)
+(node:3379705) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   6 e2e/operator.spec.ts:63:1 › real expired session with open evidence cannot restore prior-owner dialog (6.2s)
+(node:3379948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   7 e2e/operator.spec.ts:83:1 › Persian shell uses RTL and shaped UI numbers while original evidence stays Latin LTR (6.4s)
+(node:3380101) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 e2e/operator.spec.ts:111:1 › same owner can recover watch history in a fresh session and revoked session stays signed out (2.7s)
+  ✘   9 e2e/operator.spec.ts:140:1 › mobile service navigation gives direct keyboard access to the assistant question (30.2s)
+(node:3380386) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  10 e2e/operator.spec.ts:152:1 › mobile evidence timestamps have absolute date timezone and readable metadata (6.0s)
+
+
+  1) e2e/operator.spec.ts:6:1 › real service evidence separates liveness from failure and watch can stop 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('http-store-preview')
+    Expected substring: "HTTP 502"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" getByTestId('http-store-preview') with timeout 5000ms
+      - waiting for getByTestId('http-store-preview')
+
+
+       8 |  await expect(page.getByTestId('fixture-banner')).toContainText('شبیه‌سازی')
+       9 |  await page.getByRole('button',{name:'باز کردن storefront'}).click()
+    > 10 |  await expect(page.getByTestId('http-store-preview')).toContainText('HTTP 502')
+         |                                                       ^
+      11 |  await expect(page.getByTestId('http-store-health')).toContainText('HTTP 200')
+      12 |  await page.getByRole('button',{name:'شروع پایش ۱۵ دقیقه‌ای'}).click()
+      13 |  await expect(page.getByTestId('watch-panel')).toContainText('پایش این سرویس فعال است')
+        at /home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/operator.spec.ts:10:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/operator-real-service-evid-0a5a9--failure-and-watch-can-stop/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/operator-real-service-evid-0a5a9--failure-and-watch-can-stop/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/operator-real-service-evid-0a5a9--failure-and-watch-can-stop/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/operator-real-service-evid-0a5a9--failure-and-watch-can-stop/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) e2e/operator.spec.ts:20:1 › mobile owner login and evidence dialog are keyboard usable ────────
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'مشاهدهٔ شواهد بررسی نشانی' }).first()
+
+
+      21 |  await page.setViewportSize({width:390,height:844});await login(page)
+      22 |  await page.getByRole('button',{name:'باز کردن storefront'}).click()
+    > 23 |  await page.getByRole('button',{name:'مشاهدهٔ شواهد بررسی نشانی'}).first().click()
+         |                                                                            ^
+      24 |  const dialog=page.getByRole('dialog',{name:'جزئیات شواهد'});await expect(dialog).toBeVisible()
+      25 |  await page.keyboard.press('Escape');await expect(dialog).toBeHidden()
+      26 |  expect(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)).toBe(false)
+        at /home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/operator.spec.ts:23:76
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/operator-mobile-owner-logi-e09d7--dialog-are-keyboard-usable/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/operator-mobile-owner-logi-e09d7--dialog-are-keyboard-usable/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/operator-mobile-owner-logi-e09d7--dialog-are-keyboard-usable/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/operator-mobile-owner-logi-e09d7--dialog-are-keyboard-usable/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) e2e/operator.spec.ts:36:1 › reselecting a service during its real detail read does not strand refresh 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('http-store-preview')
+    Expected substring: "HTTP 502"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" getByTestId('http-store-preview') with timeout 5000ms
+      - waiting for getByTestId('http-store-preview')
+
+
+      44 |  await page.getByRole('button',{name:'باز کردن storefront'}).click();release()
+      45 |  await expect(page.getByRole('button',{name:'تازه‌سازی وضعیت'})).toBeEnabled()
+    > 46 |  await expect(page.getByTestId('http-store-preview')).toContainText('HTTP 502')
+         |                                                       ^
+      47 | })
+      48 |
+      49 | test('failed observation read does not erase configured-check knowledge',async({page})=>{
+        at /home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/operator.spec.ts:46:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/operator-reselecting-a-ser-80692-ead-does-not-strand-refresh/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/operator-reselecting-a-ser-80692-ead-does-not-strand-refresh/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/operator-reselecting-a-ser-80692-ead-does-not-strand-refresh/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/operator-reselecting-a-ser-80692-ead-does-not-strand-refresh/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) e2e/operator.spec.ts:49:1 › failed observation read does not erase configured-check knowledge ─
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('http-store-preview')
+    Expected substring: "HTTP 502"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" getByTestId('http-store-preview') with timeout 5000ms
+      - waiting for getByTestId('http-store-preview')
+
+
+      58 |  await page.unroute('**/api/services/local-store')
+      59 |  await page.getByRole('button',{name:'تازه‌سازی وضعیت'}).click()
+    > 60 |  await expect(page.getByTestId('http-store-preview')).toContainText('HTTP 502')
+         |                                                       ^
+      61 | })
+      62 |
+      63 | test('real expired session with open evidence cannot restore prior-owner dialog',async({page})=>{
+        at /home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/operator.spec.ts:60:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/operator-failed-observatio-6e7f9--configured-check-knowledge/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/operator-failed-observatio-6e7f9--configured-check-knowledge/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/operator-failed-observatio-6e7f9--configured-check-knowledge/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/operator-failed-observatio-6e7f9--configured-check-knowledge/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) e2e/operator.spec.ts:63:1 › real expired session with open evidence cannot restore prior-owner dialog 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByTestId('http-store-preview')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByTestId('http-store-preview') with timeout 5000ms
+      - waiting for getByTestId('http-store-preview')
+
+
+      64 |  await login(page)
+      65 |  await page.getByRole('button',{name:'باز کردن storefront'}).click()
+    > 66 |  await expect(page.getByTestId('http-store-preview')).toBeVisible()
+         |                                                       ^
+      67 |  await page.getByRole('button',{name:'شروع پایش ۱۵ دقیقه‌ای'}).click()
+      68 |  await expect(page.getByTestId('watch-panel')).toContainText('پایش این سرویس فعال است')
+      69 |  await page.getByRole('button',{name:'مشاهدهٔ شواهد بررسی نشانی'}).first().click()
+        at /home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/operator.spec.ts:66:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/operator-real-expired-sess-b25d1--restore-prior-owner-dialog/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/operator-real-expired-sess-b25d1--restore-prior-owner-dialog/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/operator-real-expired-sess-b25d1--restore-prior-owner-dialog/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/operator-real-expired-sess-b25d1--restore-prior-owner-dialog/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) e2e/operator.spec.ts:83:1 › Persian shell uses RTL and shaped UI numbers while original evidence stays Latin LTR 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('http-store-preview')
+    Expected substring: "HTTP 502"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" getByTestId('http-store-preview') with timeout 5000ms
+      - waiting for getByTestId('http-store-preview')
+
+
+      90 |  expect(await page.evaluate(()=>getComputedStyle(document.documentElement).fontFeatureSettings)).toContain('ss01')
+      91 |  await page.getByRole('button',{name:'باز کردن storefront'}).click()
+    > 92 |  await expect(page.getByTestId('http-store-preview')).toContainText('HTTP 502')
+         |                                                       ^
+      93 |  const path=page.getByTestId('http-store-preview').locator('.check-path')
+      94 |  await expect(path).toHaveText('/preview')
+      95 |  await expect(path).toHaveCSS('direction','ltr')
+        at /home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/operator.spec.ts:92:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/operator-Persian-shell-use-0353d-al-evidence-stays-Latin-LTR/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/operator-Persian-shell-use-0353d-al-evidence-stays-Latin-LTR/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/operator-Persian-shell-use-0353d-al-evidence-stays-Latin-LTR/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/operator-Persian-shell-use-0353d-al-evidence-stays-Latin-LTR/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) e2e/operator.spec.ts:140:1 › mobile service navigation gives direct keyboard access to the assistant question 
+
+    Test timeout of 30000ms exceeded.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/operator-mobile-service-na-bf1d8-s-to-the-assistant-question/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/operator-mobile-service-na-bf1d8-s-to-the-assistant-question/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/operator-mobile-service-na-bf1d8-s-to-the-assistant-question/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/operator-mobile-service-na-bf1d8-s-to-the-assistant-question/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) e2e/operator.spec.ts:152:1 › mobile evidence timestamps have absolute date timezone and readable metadata 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByTestId('http-store-preview').locator('small')
+    Expected substring: "تهران"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" getByTestId('http-store-preview').locator('small') with timeout 5000ms
+      - waiting for getByTestId('http-store-preview').locator('small')
+
+
+      155 |  await page.getByRole('button',{name:'باز کردن storefront'}).click()
+      156 |  const stamp=page.getByTestId('http-store-preview').locator('small')
+    > 157 |  await expect(stamp).toContainText('تهران')
+          |                      ^
+      158 |  await expect(stamp).toContainText(/[۰-۹]{4}\/[۰-۹]{2}\/[۰-۹]{2}/)
+      159 |  expect(await stamp.evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(11)
+      160 |  await page.getByTestId('http-store-preview').getByRole('button',{name:'مشاهدهٔ شواهد بررسی نشانی'}).click()
+        at /home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/operator.spec.ts:157:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/operator-mobile-evidence-t-cc6e3-ezone-and-readable-metadata/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/operator-mobile-evidence-t-cc6e3-ezone-and-readable-metadata/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/operator-mobile-evidence-t-cc6e3-ezone-and-readable-metadata/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/operator-mobile-evidence-t-cc6e3-ezone-and-readable-metadata/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8 failed
+    e2e/operator.spec.ts:6:1 › real service evidence separates liveness from failure and watch can stop 
+    e2e/operator.spec.ts:20:1 › mobile owner login and evidence dialog are keyboard usable ─────────
+    e2e/operator.spec.ts:36:1 › reselecting a service during its real detail read does not strand refresh 
+    e2e/operator.spec.ts:49:1 › failed observation read does not erase configured-check knowledge ──
+    e2e/operator.spec.ts:63:1 › real expired session with open evidence cannot restore prior-owner dialog 
+    e2e/operator.spec.ts:83:1 › Persian shell uses RTL and shaped UI numbers while original evidence stays Latin LTR 
+    e2e/operator.spec.ts:140:1 › mobile service navigation gives direct keyboard access to the assistant question 
+    e2e/operator.spec.ts:152:1 › mobile evidence timestamps have absolute date timezone and readable metadata 
+  2 passed (1.8m)

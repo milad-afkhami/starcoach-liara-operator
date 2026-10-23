@@ -1,0 +1,150 @@
+{
+  "revision": "Liara usability R2",
+  "source_base": "2990a0ac9b25315358eb5354f6b28c960945549b",
+  "branch": "usability/r2-liara",
+  "scope": "Presentation, versioned model writing guidance, fixed checklist/setup wording, deterministic fixture harness; no provider, approval, schema, evidence-storage, recovery or model-budget contract change.",
+  "model_prompt_version": "liara-investigation-v3-fa-plain",
+  "automated": {
+    "backend_full": {
+      "passed": 308,
+      "warnings": [
+        "Known upstream Starlette/httpx deprecation"
+      ],
+      "artifact": "liara-r2/backend.txt"
+    },
+    "affected_setup_api_after_final_wording": {
+      "passed": 2,
+      "deselected": 20,
+      "artifact": "liara-r2/setup-api.txt"
+    },
+    "frontend_behavior": {
+      "passed": 18,
+      "artifact": "liara-r2/frontend.txt"
+    },
+    "browser": {
+      "passed": 14,
+      "scope": "canonical10 plus4 deterministic fixture-specific usability rows",
+      "artifact": "liara-r2/browser.txt"
+    },
+    "typescript_vite_build": "pass",
+    "ruff": "pass",
+    "diff_check": "pass"
+  },
+  "seeded_operation_presentation": {
+    "scope": "Seeded UI states only; no deployment/recheck/approval executed. Existing executor/approval tests reused.",
+    "rows": [
+      {
+        "state": "proposed",
+        "pass": true,
+        "proof": "exact target/team/before release/source SHA256/policy hash visible; approve enabled"
+      },
+      {
+        "state": "expired",
+        "pass": true
+      },
+      {
+        "state": "stale",
+        "pass": true
+      },
+      {
+        "state": "approved",
+        "pass": true,
+        "proof": "execute visible; not clicked"
+      },
+      {
+        "state": "unknown",
+        "pass": true
+      },
+      {
+        "state": "recheck",
+        "pass": true,
+        "proof": "read-only recheck visible inside original deadline; previous attempts retained; not clicked"
+      },
+      {
+        "state": "recheck exhausted",
+        "pass": true
+      },
+      {
+        "state": "recovered",
+        "pass": true,
+        "proof": "recovery first; prior diagnosis collapsed; after release labelled verified; no action button"
+      }
+    ],
+    "errors": [],
+    "postRoutes": [
+      "/api/login"
+    ]
+  },
+  "authenticated_empty_inventory": {
+    "scope": "Actual authenticated empty inventory on isolated fixture",
+    "passed": true,
+    "emptyMessage": true,
+    "nextStep": true,
+    "noInvestigation": true,
+    "noOverflow": true,
+    "errors": []
+  },
+  "independent_review": {
+    "source": "clean scoped final source review reported by root",
+    "rendered": "Actual no-selected-service, provider/process/HTTP distinction, visual resource history, phone target/no-endpoint/overflow, copy-download/denied clipboard, closed JSON/Escape, setup and logout; no errors; no operations or new inference",
+    "artifacts": [
+      "liara-r2/independent-liara-first-look.json",
+      "liara-r2/independent-liara-flow-results.json"
+    ]
+  },
+  "screenshots": [
+    "liara-r2-diagnosis-desktop.png",
+    "liara-r2-overview-mobile.png",
+    "liara-r2-resources-mobile.png",
+    "liara-r2-seeded-recovery.png",
+    "liara-r2-empty-mobile.png"
+  ],
+  "failures_preserved": [
+    {
+      "kind": "temporary fixture bug",
+      "result": "8 browser failures / 2 pass",
+      "cause": "Custom history fixture passed coverage to the wrong FixtureProvider._evidence signature; corrected in fixture only.",
+      "artifact": "liara-r2/initial-fixture-failure.txt"
+    },
+    {
+      "kind": "product wiring regression caught",
+      "result": "12 browser pass / 1 fail",
+      "cause": "Logs view did not include logs collected by the completed investigation; linked evidence was added and covered.",
+      "artifact": "liara-r2/missing-log-link-failure.txt"
+    },
+    {
+      "kind": "QA assumption",
+      "result": "12 browser pass / 1 fail",
+      "cause": "Repeated test tried to fill a correctly collapsed question after a prior diagnosis; corrected to use the visible sidebar Ask control.",
+      "artifact": "liara-r2/stored-diagnosis-test-failure.txt"
+    },
+    {
+      "kind": "chart RED regression",
+      "cause": "Malformed raw series threw; parser now rejects malformed arrays and conflicting duplicate timestamps safely.",
+      "artifact": "liara-r2/malformed-chart-red.txt"
+    },
+    {
+      "kind": "export RED regression",
+      "cause": "New English handoff contract failed while export was Persian; fixed instructions now English with unchanged Persian source findings.",
+      "artifact": "liara-r2/english-export-red.txt"
+    },
+    {
+      "kind": "fixture bootstrap",
+      "cause": "First seeded operator refused unregistered target; fixture now refreshes registry before creating presentation state. No product authorization changed."
+    },
+    {
+      "kind": "safe startup refusal",
+      "cause": "8791/8792 were already in use; committed harness refused startup, no existing process was touched. Final reproducibility14/14 used8698/8817/8818."
+    },
+    {
+      "kind": "wrong focused test path",
+      "cause": "test_setup_advice.py does not exist; actual setup API tests in test_api.py were selected and passed2/2."
+    }
+  ],
+  "limits": [
+    "All new diagnosis/model/log/resource data is explicitly deterministic fixture evidence; HTTP probes are actual loopback requests. No genuine model call, quota reset, cloud mutation, approval execution or live service restart occurred.",
+    "Seeded operation rows verify presentation/guards only; unchanged authorization, executor and recovery behavior reuse full backend308 and previous live acceptance evidence.",
+    "The public video remains the earlier actual-cloud interface and exact source/video identity. R2 does not rerecord or replace that proof.",
+    "Root owns source publication and final safe operator refresh."
+  ]
+}

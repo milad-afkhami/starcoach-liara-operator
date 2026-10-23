@@ -1,0 +1,25 @@
+
+> liara-service-watch-ui@0.1.0 test:e2e
+> playwright test
+
+
+Running 14 tests using 1 worker
+
+(node:3397190) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 e2e/operator.spec.ts:6:1 › real service evidence separates liveness from failure and watch can stop (1.6s)
+  ✓   2 e2e/operator.spec.ts:20:1 › mobile owner login and evidence dialog are keyboard usable (1.1s)
+  ✓   3 e2e/operator.spec.ts:31:1 › fresh signed-out view does not claim an expired session (411ms)
+  ✓   4 e2e/operator.spec.ts:36:1 › reselecting a service during its real detail read does not strand refresh (1.0s)
+  ✓   5 e2e/operator.spec.ts:49:1 › failed observation read does not erase configured-check knowledge (1.2s)
+  ✓   6 e2e/operator.spec.ts:63:1 › real expired session with open evidence cannot restore prior-owner dialog (3.3s)
+  ✓   7 e2e/operator.spec.ts:83:1 › Persian shell uses RTL and shaped UI numbers while original evidence stays Latin LTR (1.8s)
+  ✓   8 e2e/operator.spec.ts:111:1 › same owner can recover watch history in a fresh session and revoked session stays signed out (2.8s)
+  ✓   9 e2e/operator.spec.ts:140:1 › mobile service navigation gives direct keyboard access to the assistant question (872ms)
+  ✓  10 e2e/operator.spec.ts:152:1 › mobile evidence timestamps have absolute date timezone and readable metadata (1.2s)
+  ✓  11 e2e/usability.spec.ts:7:1 › service contexts keep overview actionable and charts have real samples and visible gaps (1.3s)
+  ✓  12 e2e/usability.spec.ts:23:1 › deterministic app investigation offers readable grounded handoff and denied clipboard fallback with identical download (4.5s)
+  ✓  13 e2e/usability.spec.ts:50:1 › evidence is readable before optional JSON and mobile target switching stays clear (1.9s)
+  ✓  14 e2e/usability.spec.ts:65:2 › worker without HTTP checks and unknown resources stays unknown rather than unhealthy or zero (1.1s)
+
+  14 passed (25.7s)

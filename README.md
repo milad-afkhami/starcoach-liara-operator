@@ -1,6 +1,6 @@
 <div align="center">
 
-# دیده‌بان سرویس · Service Watch
+# Liara Service Assistant
 
 **Know what failed. Verify what recovered.**
 
@@ -19,9 +19,9 @@ Existing services are welcome: **read-only investigation requires no healthy bas
 > [!IMPORTANT]
 > **Real Liara integration and an approved cloud recovery are recorded.** The operator has read actual inventory/logs/resource data, diagnosed a deliberate cloud dependency regression with genuine Codex, and verified an exact approved redeployment with three fresh rounds. The final-build unused-approval expiry, exact replacement and normal three-round recovery also passed; the304.92-second narrated actual-evidence demo is public and anonymous playback/seek/mobile checks passed. [Actual acceptance and its limits](docs/insured-vibe-coding/test-plans/live-liara.md).
 
-<img src="docs/images/overview.png" alt="Actual local Service Watch notebook showing a failing preview endpoint beside passing process health and timestamped evidence" width="1100">
+<img src="docs/qa-evidence/liara-r2-diagnosis-desktop.png" alt="Current Persian service workspace showing failed preview, passing liveness and a Codex handoff" width="1100">
 
-*Actual Persian operator after recovery, reading the two disposable Liara services. The controlled cloud scenario and historical-resource qualifications are documented below.*
+*Current Persian interface with a deterministic local diagnosis and real local HTTP checks. This screenshot is a labelled UI fixture, not new cloud or model acceptance. The public video preserves the earlier interface and actual cloud evidence; the usability revision changes the operator presentation.*
 
 ## Choose your route
 
@@ -57,9 +57,11 @@ The corrective branch is enabled only for explicitly enrolled targets with indep
 
 | Capability | Customer outcome | Important boundary |
 |---|---|---|
-| Service inventory and notebook | Find a service and inspect its current evidence | A service needs no deployable artifact for diagnosis |
+| Service inventory and contextual views | Find a service and inspect its current evidence | A service needs no deployable artifact for diagnosis |
 | HTTP and provider observations | Separate endpoint failure, process state and telemetry access | Unknown metrics are not green zeros |
 | Active investigation | Ask a useful discriminating read and cite findings/contradictions | A recent release is not proof of causality |
+| Code-agent handoff | Copy or download the frozen diagnosis, cited facts, unknowns and a repository investigation/fix/test request | No source access or deploy authority is implied; raw logs/configuration are not exported |
+| Resource charts | Inspect native past CPU/RAM points separately per applet | Unknown/invalid points are omitted, gaps remain visible; capacity is not inferred |
 | Bounded watch | Observe selected services for 15 minutes | Not a continuous monitoring/SaaS availability claim |
 | Exact repair proposal | Review target, source hash, before-release, policy and expiry | Requires independently enrolled capability and a supported current diagnosis |
 | Recovery verification | Check the new serving identity and original failure | Provider READY alone is insufficient |

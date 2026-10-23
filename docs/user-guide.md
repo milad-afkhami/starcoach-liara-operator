@@ -10,9 +10,12 @@
 |---|---|---|
 | Owner login | Open the private local operator | **ورود** |
 | Service sidebar | Choose an existing service or reopen a record | **جست‌وجوی سرویس**; **بررسی‌های اخیر** |
-| What is observed | Compare endpoint, process/provider and coverage evidence | **تازه‌سازی مشاهدات**; **شواهد** |
+| Overview | Compare endpoint and process/provider status; read diagnosis, observed impact and next action | **خلاصه و بررسی**; **تازه‌سازی وضعیت** |
+| Resource charts | Inspect real past CPU/RAM samples by applet, times and verified units | **منابع** |
+| Logs/evidence | Inspect source observations collected for this service | **لاگ و شواهد** |
+| Code-agent handoff | Continue with the coding agent inside your own repository | **کپی متن برای Codex**; **دانلود فایل** |
 | Investigation panel | Ask a bounded question and inspect citations | **بررسی با دستیار**; **لغو بررسی** |
-| Evidence detail | Read sanitized payload, timestamps and coverage | Copy evidence; close or Escape |
+| Evidence detail | Read human-readable observations first, with optional sanitized JSON audit | Copy evidence; close or Escape |
 | Bounded watch | Observe configured checks for a limited period | **شروع پایش ۱۵ دقیقه‌ای**; **توقف پایش** |
 | Recent provider changes | Find chronological leads | Inspect release evidence; do not infer causality from timing alone |
 | Exact operation, when enrolled | Review a proposed source deployment and follow verification | Prepare → Approve → Deploy |
@@ -36,9 +39,9 @@ Select **storefront**. In the faulty rehearsal scenario, `/healthz` returns **20
 | Metrics unavailable or units unknown | Capacity cannot be established from those readings | CPU/memory is healthy or exhausted |
 | A recent release | A change merits investigation | The release caused the symptom |
 
-Open **Project**, **Applets**, **Releases** and **Metrics** to inspect their payloads/coverage. **تازه‌سازی مشاهدات** takes a new set. Collection time, evidence age and service health are separate facts.
+Use **لاگ و شواهد** to open the source facts. The evidence dialog starts with readable observations; **جزئیات فنی · JSON** is closed until requested. The **releaseها** view contains release history; recent timing alone does not establish causality. **تازه‌سازی وضعیت** takes a new set. Collection time, evidence age and service health are separate facts.
 
-Recognized CPU/RAM summary samples display per-process values with their sample times: CPU uses the percentage rendering of the inspected Liara console; memory is converted from bytes to MiB. Unknown or future-invalid samples do not display guessed values. A single snapshot does not establish sustained resource exhaustion or workload capacity; inspect original evidence and allocation before deciding on resources.
+The **منابع** view charts validated native historical CPU/RAM samples separately for each applet, with Tehran timestamps and sample counts. CPU uses the inspected Liara console units; RAM is converted from bytes to MiB. Invalid/future/out-of-window samples are omitted. A line breaks at an invalid observation or a gap longer than 60 seconds; no interpolation is claimed. A lone snapshot shows a single-sample notice rather than a decorative trend. Missing or unknown-unit data produces no invented zero or capacity claim. Invalid current summaries remain visibly invalid even when past history is usable.
 
 The mobile **پرسیدن از دستیار** action jumps directly to the investigation question after observations load. Evidence timestamps now include the Persian-calendar date and explicit Tehran time.
 
@@ -50,13 +53,9 @@ Use this question as a starting point:
 
 Click **بررسی با دستیار**. The UI reports actual collection/read names, completed reads, the model-call stage and response validation; it does not estimate a percentage. **لغو بررسی** stops further model work for that run; a stale or superseded result cannot become the current diagnosis.
 
-Read the resulting **نتیجهٔ بررسی** in this order:
+Read **نتیجهٔ بررسی** for the short diagnosis, observed impact and next step. Detailed original model text, citations, unknowns and contrary evidence are available under **جزئیات نتیجه و شواهد**; collection history is collapsed separately.
 
-1. Cause family and concise explanation—or explicit uncertainty.
-2. Supporting citations and their original payloads.
-3. **شواهد مخالف** that tests the hypothesis.
-4. Remaining unknowns and the permitted next step.
-5. **خط زمانی شواهد**, with the actual source observations.
+To continue in your codebase, copy **کپی متن برای Codex** or download the same plain-text file with **دانلود فایل**. The handoff uses English instructions with the original Persian diagnosis and unknowns preserved unchanged. It includes the frozen diagnosis, cited same-service observations available by its cutoff and explicit unknowns. It asks your coding agent to inspect the repository, establish the cause, make a minimal fix and run a regression plus relevant project tests. It does not invent repository file paths or provide deploy permission. Raw response bodies/logs/configuration are excluded from the export. **دیدن متن قبل از کپی** opens selectable text when clipboard access is denied. Recovered incidents mark their handoff as historical and ask the coding agent to establish whether a current problem exists.
 
 A genuine model call can take tens of seconds. Investigations have bounded reads/calls/time; repeated clicking does not make the evidence better. **AI configured** does not guarantee a successful call.
 
@@ -97,7 +96,7 @@ sequenceDiagram
     Probe-->>UI: Recovered, failed or inconclusive
 ```
 
-Inspect **سرویس هدف**, **تیم**, **انتشار فعلی**, **اثر انگشت سورس تأییدشده**, policy and expiry. Approval is single-use and expires after five minutes. After expiry or a material state change, prepare a fresh proposal. Never repeat an uncertain write blindly.
+Inspect **سرویس هدف**, **تیم**, the before/submitted release, **SHA-256 سورس تأییدشده**, the verification-policy hash and expiry. Approval is single-use and expires after five minutes. After expiry or a material state change, prepare a fresh proposal. Never repeat an uncertain write blindly.
 
 The correction is **a new deployment of registered source**, not an invented native rollback. Recovery requires the intended serving identity and three fresh original-symptom/build success rounds. READY alone is not success.
 
@@ -105,7 +104,7 @@ The correction is **a new deployment of registered source**, not an invented nat
 
 | You can rehearse locally now | Requires actual cloud acceptance |
 |---|---|
-| Login, inventory and notebook navigation | Authenticated Liara inventory/log/release/metric contracts |
+| Login, inventory and service context navigation | Authenticated Liara inventory/log/release/metric contracts |
 | Real local 200-versus-502 failure | Real enrolled target baselines and independent cloud fault |
 | Genuine Codex investigation and citations | Exact approved cloud redeployment |
 | Watch start/stop and history | Fresh provider/serving/build recovery proof |

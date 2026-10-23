@@ -103,9 +103,9 @@ test('recovered incidents present the preserved diagnosis as pre-action history'
  assert.equal(diagnosisPresentation('open').historical,false)
  assert.equal(diagnosisPresentation('open',true).historical,true)
  assert.equal(diagnosisPresentation('recovered').title,'تحلیل ثبت‌شدهٔ پیشین')
- assert.equal(releasePresentation('pending','inconclusive').afterLabel,'انتشار ارسال‌شده')
- assert.equal(releasePresentation('completed','recovered').afterLabel,'انتشار مستقرشده و تأییدشده')
- assert.equal(releasePresentation('completed','recovered').beforeLabel,'انتشار پیش از استقرار')
+ assert.equal(releasePresentation('pending','inconclusive').afterLabel,'release ارسال‌شده')
+ assert.equal(releasePresentation('completed','recovered').afterLabel,'release تأییدشده پس از deploy')
+ assert.equal(releasePresentation('completed','recovered').beforeLabel,'release پیش از deploy')
 })
 
 test('historical resource fallback keeps source and clock uncertainty distinct from summary',async()=>{
@@ -116,4 +116,44 @@ test('historical resource fallback keeps source and clock uncertainty distinct f
  assert.deepEqual(resourceSamples({...historical,coverage:{unit_verified:false}}),[])
  assert.deepEqual(resourceSamples({...historical,redacted_payload:{...historical.redacted_payload,historical_only:false}}),[])
  assert.deepEqual(resourceSamples({...historical,quality:'invalid'}),[])
+})
+
+test('resource history charts use native timestamps and verified units while excluding invalid/future points and breaking gaps',async()=>{
+ const {resourceSeries,chartSegments}=await import('./presentation.ts')
+ const history:any={kind:'metrics_history',quality:'fresh',available_at:1000,coverage:{unit_verified:true},redacted_payload:{historical_only:true,cutoff:1000,window_start:700,provider_data:{cpu:{result:[{applet:'a',values:[[710,'0.1'],[730,'0.2'],[740,'NaN'],[750,'0.3'],[900,'0.4'],[1001,'0.9'],[600,'0.2'],[920,-1]]}]},memory:{result:[{applet:'a',values:[[730,'1048576'],[750,'2097152']]}]}}}}
+ const series=resourceSeries(undefined,history)
+ assert.equal(series.length,2)
+ assert.deepEqual(series[0].points.filter((p:any)=>p.value!==null).map((p:any)=>[p.at,p.value]),[[710,10],[730,20],[750,30],[900,40]])
+ assert.equal(series[1].unit,'MiB');assert.equal(series[1].points[0].value,1)
+ assert.deepEqual(chartSegments(series[0].points).map((s:any)=>s.length),[2,1,1])
+ assert.deepEqual(resourceSeries(undefined,{...history,coverage:{unit_verified:false}}),[])
+ assert.deepEqual(resourceSeries(undefined,{...history,quality:'invalid'}),[])
+})
+
+test('resource snapshots reject corrupt values, preserve lone sample state and never invent CPU percent',async()=>{
+ const {resourceSeries}=await import('./presentation.ts')
+ const summary:any={kind:'metrics',quality:'fresh',available_at:1000,coverage:{unit_verified:true},redacted_payload:{measurements:[{metric:'cpu',applet:'a',value:20,unit:'percent',observed_at:990},{metric:'memory',applet:'a',value:1048576,unit:'bytes',observed_at:990},{metric:'cpu',applet:'b',value:2,unit:'cores',observed_at:990},{metric:'cpu',applet:'c',value:NaN,unit:'percent',observed_at:990}]}}
+ const series=resourceSeries(summary)
+ assert.equal(series.length,2);assert.equal(series[0].points.length,1);assert.equal(series[0].historical,false)
+ assert.deepEqual(resourceSeries({...summary,quality:'invalid'}),[])
+})
+
+test('Codex handoff is frozen and scoped to cited evidence with explicit uncertainty and no raw secrets or invented repo paths',async()=>{
+ const {codexHandoff,evidenceFacts}=await import('./presentation.ts')
+ const incident:any={id:'i',state:'open',target:{app_id:'a',app_name:'storefront'},question:'چرا خطا می‌دهد؟',diagnosis:{summary:'پاسخ وابستگی ناسازگار است.',cause_family:'dependency_schema',cutoff:1000,unknowns:['فایل مسئول مشخص نیست.'],evidence_ids:['cited','late','foreign'],contradiction_ids:['against']}}
+ const e=(id:string,extra:any={})=>({id,kind:'http_probe',quality:'fresh',target:incident.target,observed_at:990,available_at:995,redacted_payload:{check_id:'preview',http_status:502,check_pass:false,body:{secret:'DO_NOT_EXPORT'},token:'DO_NOT_EXPORT'},...extra})
+ const source=[e('cited'),e('late',{available_at:1001}),e('foreign',{target:{app_id:'other',app_name:'other'}}),e('against',{redacted_payload:{check_id:'health',http_status:200,check_pass:true}})]
+ const prompt=codexHandoff(incident,source)
+ for(const expected of ['storefront','cited','against','فایل مسئول مشخص نیست.','regression test','repository','approval'])assert.ok(prompt.includes(expected),expected)
+ for(const forbidden of ['DO_NOT_EXPORT','src/','late —','foreign —'])assert.ok(!prompt.includes(forbidden),forbidden)
+ assert.ok(codexHandoff({...incident,state:'recovered'},source).includes('Historical'))
+ assert.ok(evidenceFacts(source[0]).some((s:string)=>s.includes('502')))
+})
+
+test('chart evidence with malformed series and duplicate times cannot crash or imply conflicting observations',async()=>{
+ const {resourceSeries}=await import('./presentation.ts')
+ const history:any={kind:'metrics_history',quality:'fresh',available_at:1000,coverage:{unit_verified:true},redacted_payload:{historical_only:true,cutoff:1000,window_start:700,provider_data:{cpu:{result:{malformed:true}},memory:{result:[]}}}}
+ assert.deepEqual(resourceSeries(undefined,history),[])
+ history.redacted_payload.provider_data.cpu.result=[{applet:'a',values:[[900,.1],[900,.2],[920,.3]]}]
+ assert.deepEqual(resourceSeries(undefined,history)[0].points,[{at:900,value:null},{at:920,value:30}])
 })

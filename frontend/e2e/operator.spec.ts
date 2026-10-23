@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test'
 import {readFileSync} from 'node:fs'
 const access=JSON.parse(readFileSync(process.env.LIARA_TEST_ACCESS_FILE!,'utf8'))
-async function login(page:any){await page.goto('/');await page.getByLabel('رمز مالک').fill(access.password);await page.getByRole('button',{name:'ورود',exact:true}).click();await expect(page.getByRole('heading',{name:'سرویس‌های شما'})).toBeVisible()}
+async function login(page:any){await page.goto('/');await page.getByLabel('رمز مالک').fill(access.password);await page.getByRole('button',{name:'ورود',exact:true}).click();await expect(page.getByRole('heading',{name:'سرویس‌ها'})).toBeVisible()}
 
 test('real service evidence separates liveness from failure and watch can stop',async({page})=>{
  await login(page)
@@ -14,7 +14,7 @@ test('real service evidence separates liveness from failure and watch can stop',
  await page.getByRole('button',{name:'توقف پایش',exact:true}).click()
  await expect(page.getByTestId('watch-panel')).toContainText('متوقف‌شده')
  await page.reload()
- await expect(page.getByRole('heading',{name:'سرویس‌های شما'})).toBeVisible()
+ await expect(page.getByRole('heading',{name:'سرویس‌ها'})).toBeVisible()
 })
 
 test('mobile owner login and evidence dialog are keyboard usable',async({page})=>{
@@ -42,7 +42,7 @@ test('reselecting a service during its real detail read does not strand refresh'
  await page.route('**/api/services/local-store',async route=>{const response=await route.fetch();arrived();await held;await route.fulfill({response})})
  await page.getByRole('button',{name:'باز کردن storefront'}).click();await started
  await page.getByRole('button',{name:'باز کردن storefront'}).click();release()
- await expect(page.getByRole('button',{name:'تازه‌سازی مشاهدات'})).toBeEnabled()
+ await expect(page.getByRole('button',{name:'تازه‌سازی وضعیت'})).toBeEnabled()
  await expect(page.getByTestId('http-store-preview')).toContainText('HTTP 502')
 })
 
@@ -52,11 +52,11 @@ test('failed observation read does not erase configured-check knowledge',async({
  await expect(page.getByRole('heading',{name:'delivery',exact:true})).toBeVisible()
  await page.route('**/api/services/local-store',route=>route.abort('failed'))
  await page.getByRole('button',{name:'باز کردن storefront'}).click()
- await expect(page.getByRole('button',{name:'تازه‌سازی مشاهدات'})).toBeEnabled()
+ await expect(page.getByRole('button',{name:'تازه‌سازی وضعیت'})).toBeEnabled()
  await expect(page.getByText('برای بررسی‌های HTTP تنظیم‌شده، هنوز مشاهده‌ای در دسترس نیست. دوباره تازه‌سازی کنید.')).toBeVisible()
  await expect(page.getByText('برای این سرویس بررسی HTTP تنظیم نشده است؛ این به معنی خرابی نیست.')).toHaveCount(0)
  await page.unroute('**/api/services/local-store')
- await page.getByRole('button',{name:'تازه‌سازی مشاهدات'}).click()
+ await page.getByRole('button',{name:'تازه‌سازی وضعیت'}).click()
  await expect(page.getByTestId('http-store-preview')).toContainText('HTTP 502')
 })
 
@@ -76,7 +76,7 @@ test('real expired session with open evidence cannot restore prior-owner dialog'
  await expect(page.getByLabel('رمز مالک')).toBeVisible({timeout:10000})
  await page.getByLabel('رمز مالک').fill(access.password)
  await page.getByRole('button',{name:'ورود',exact:true}).click()
- await expect(page.getByRole('heading',{name:'سرویس‌های شما'})).toBeVisible()
+ await expect(page.getByRole('heading',{name:'سرویس‌ها'})).toBeVisible()
  await expect(page.getByRole('dialog',{name:'جزئیات شواهد'})).toHaveCount(0)
 })
 
@@ -84,7 +84,7 @@ test('Persian shell uses RTL and shaped UI numbers while original evidence stays
  await page.goto('/')
  await expect(page.locator('html')).toHaveAttribute('lang','fa')
  await expect(page.locator('html')).toHaveAttribute('dir','rtl')
- await expect(page.getByRole('heading',{name:'ورود به دیده‌بان'})).toBeVisible()
+ await expect(page.getByRole('heading',{name:'ورود به دستیار'})).toBeVisible()
  await login(page)
  await page.evaluate(()=>document.fonts.ready)
  expect(await page.evaluate(()=>getComputedStyle(document.documentElement).fontFeatureSettings)).toContain('ss01')
@@ -96,7 +96,8 @@ test('Persian shell uses RTL and shaped UI numbers while original evidence stays
  expect(await page.evaluate(()=>document.fonts.check('14px Vazirmatn'))).toBe(true)
  await page.screenshot({path:'/tmp/codex-scratchpad-01a15365-1037-78b2-a19e-e47bb7574a9c/liara-persian-desktop.png',fullPage:true})
  await page.getByTestId('http-store-preview').getByRole('button',{name:'مشاهدهٔ شواهد بررسی نشانی'}).click()
- const raw=page.getByRole('dialog').locator('pre')
+ await page.getByRole('dialog').getByText('جزئیات فنی · JSON',{exact:true}).click()
+ const raw=page.getByRole('dialog').locator('pre').first()
  await expect(raw).toHaveAttribute('dir','ltr')
  await expect(raw).toHaveCSS('font-feature-settings','"ss01" 0')
  await expect(raw).toContainText('"http_status": 502')

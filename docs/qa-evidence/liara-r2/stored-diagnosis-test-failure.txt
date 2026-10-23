@@ -1,0 +1,61 @@
+
+> liara-service-watch-ui@0.1.0 test:e2e
+> playwright test
+
+
+Running 13 tests using 1 worker
+
+(node:3383478) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 e2e/operator.spec.ts:6:1 › real service evidence separates liveness from failure and watch can stop (1.6s)
+  ✓   2 e2e/operator.spec.ts:20:1 › mobile owner login and evidence dialog are keyboard usable (1.0s)
+  ✓   3 e2e/operator.spec.ts:31:1 › fresh signed-out view does not claim an expired session (434ms)
+  ✓   4 e2e/operator.spec.ts:36:1 › reselecting a service during its real detail read does not strand refresh (1.3s)
+  ✓   5 e2e/operator.spec.ts:49:1 › failed observation read does not erase configured-check knowledge (1.2s)
+  ✓   6 e2e/operator.spec.ts:63:1 › real expired session with open evidence cannot restore prior-owner dialog (3.4s)
+  ✓   7 e2e/operator.spec.ts:83:1 › Persian shell uses RTL and shaped UI numbers while original evidence stays Latin LTR (1.8s)
+  ✓   8 e2e/operator.spec.ts:111:1 › same owner can recover watch history in a fresh session and revoked session stays signed out (3.1s)
+  ✓   9 e2e/operator.spec.ts:140:1 › mobile service navigation gives direct keyboard access to the assistant question (1.0s)
+  ✓  10 e2e/operator.spec.ts:152:1 › mobile evidence timestamps have absolute date timezone and readable metadata (1.2s)
+  ✓  11 e2e/usability.spec.ts:5:1 › service contexts keep overview actionable and charts have real samples and visible gaps (1.4s)
+  ✘  12 e2e/usability.spec.ts:21:1 › deterministic app investigation offers readable grounded handoff and denied clipboard fallback with identical download (30.2s)
+(node:3384945) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  13 e2e/usability.spec.ts:47:1 › evidence is readable before optional JSON and mobile target switching stays clear (1.9s)
+
+
+  1) e2e/usability.spec.ts:21:1 › deterministic app investigation offers readable grounded handoff and denied clipboard fallback with identical download 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.fill: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('textbox', { name: 'پرسش بررسی' })
+
+
+      21 | test('deterministic app investigation offers readable grounded handoff and denied clipboard fallback with identical download',async({page})=>{
+      22 |  await open(page)
+    > 23 |  await page.getByRole('textbox',{name:'پرسش بررسی'}).fill('درخواست پیش‌نمایش خطا می‌دهد؛ چه کار کنم؟')
+         |                                                      ^
+      24 |  await page.getByRole('button',{name:'بررسی با دستیار',exact:true}).click()
+      25 |  await expect(page.getByRole('region',{name:'راهنمای آماده برای Codex'})).toBeVisible()
+      26 |  const handoff=page.getByRole('region',{name:'راهنمای آماده برای Codex'})
+        at /home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/usability.spec.ts:23:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/usability-deterministic-ap-4bfea-ack-with-identical-download/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/usability-deterministic-ap-4bfea-ack-with-identical-download/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/usability-deterministic-ap-4bfea-ack-with-identical-download/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/usability-deterministic-ap-4bfea-ack-with-identical-download/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    e2e/usability.spec.ts:21:1 › deterministic app investigation offers readable grounded handoff and denied clipboard fallback with identical download 
+  12 passed (51.9s)

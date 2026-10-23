@@ -536,3 +536,23 @@ def test_exhausted_initial_read_budget_disallows_read_even_on_first_call(tmp_pat
                             observed_at=99,available_at=100,quality='fresh',redacted_payload={})}, initial_reads=['logs']*12)
     assert model.requests[0].payload['available_reads']==[]
     assert model.requests[0].payload['remaining_read_budget']==0
+
+
+def test_customer_answer_contract_is_versioned_plain_language_without_expanding_authority(tmp_path):
+    from liara_guard.investigator import PROMPT_VERSION
+    s, o, incident, model, investigator, now = setup(tmp_path)
+    investigator.investigate('owner', incident['id'], {})
+    request = model.requests[0]
+    assert request.prompt_version == 'liara-investigation-v3-fa-plain'
+    assert request.payload['answer_style'] == {
+        'audience': 'Persian-speaking beginner using a coding agent',
+        'summary_order': ['observed_problem', 'observed_impact_or_unknown', 'next_small_step'],
+        'maximum_summary_sentences': 3,
+        'preferred_terms': ['deploy', 'release', 'log', 'CPU', 'RAM'],
+        'repository_access': False,
+        'execute_permission': False,
+    }
+    assert request.payload['available_reads'] == []
+    assert request.payload['remaining_read_budget'] == 0
+    assert s.incident('owner', incident['id'])['action_allowed'] is False
+    assert PROMPT_VERSION == request.prompt_version

@@ -1,0 +1,66 @@
+
+> liara-service-watch-ui@0.1.0 test:e2e
+> playwright test
+
+
+Running 13 tests using 1 worker
+
+(node:3381814) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 e2e/operator.spec.ts:6:1 › real service evidence separates liveness from failure and watch can stop (1.5s)
+  ✓   2 e2e/operator.spec.ts:20:1 › mobile owner login and evidence dialog are keyboard usable (1.1s)
+  ✓   3 e2e/operator.spec.ts:31:1 › fresh signed-out view does not claim an expired session (434ms)
+  ✓   4 e2e/operator.spec.ts:36:1 › reselecting a service during its real detail read does not strand refresh (1.2s)
+  ✓   5 e2e/operator.spec.ts:49:1 › failed observation read does not erase configured-check knowledge (1.2s)
+  ✓   6 e2e/operator.spec.ts:63:1 › real expired session with open evidence cannot restore prior-owner dialog (3.2s)
+  ✓   7 e2e/operator.spec.ts:83:1 › Persian shell uses RTL and shaped UI numbers while original evidence stays Latin LTR (1.7s)
+  ✓   8 e2e/operator.spec.ts:111:1 › same owner can recover watch history in a fresh session and revoked session stays signed out (2.3s)
+  ✓   9 e2e/operator.spec.ts:140:1 › mobile service navigation gives direct keyboard access to the assistant question (916ms)
+  ✓  10 e2e/operator.spec.ts:152:1 › mobile evidence timestamps have absolute date timezone and readable metadata (1.2s)
+  ✓  11 e2e/usability.spec.ts:5:1 › service contexts keep overview actionable and charts have real samples and visible gaps (1.3s)
+  ✘  12 e2e/usability.spec.ts:21:1 › deterministic app investigation offers readable grounded handoff and denied clipboard fallback with identical download (9.6s)
+(node:3382866) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  13 e2e/usability.spec.ts:47:1 › evidence is readable before optional JSON and mobile target switching stays clear (1.7s)
+
+
+  1) e2e/usability.spec.ts:21:1 › deterministic app investigation offers readable grounded handoff and denied clipboard fallback with identical download 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('button', { name: 'مشاهدهٔ شواهد لاگ سرویس' }).first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('button', { name: 'مشاهدهٔ شواهد لاگ سرویس' }).first() with timeout 5000ms
+      - waiting for getByRole('button', { name: 'مشاهدهٔ شواهد لاگ سرویس' }).first()
+
+
+      43 |  await page.screenshot({path:'../docs/qa-evidence/liara-r2-diagnosis-desktop.png',fullPage:true})
+      44 |  await page.getByRole('button',{name:'لاگ و شواهد',exact:true}).click()
+    > 45 |  await expect(page.getByRole('button',{name:'مشاهدهٔ شواهد لاگ سرویس'}).first()).toBeVisible()
+         |                                                                                  ^
+      46 | })
+      47 | test('evidence is readable before optional JSON and mobile target switching stays clear',async({page})=>{
+      48 |  await page.setViewportSize({width:390,height:844});await open(page)
+        at /home/milad/Desktop/projects/starcoach-liara-operator/frontend/e2e/usability.spec.ts:45:82
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/usability-deterministic-ap-4bfea-ack-with-identical-download/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/usability-deterministic-ap-4bfea-ack-with-identical-download/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/usability-deterministic-ap-4bfea-ack-with-identical-download/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/usability-deterministic-ap-4bfea-ack-with-identical-download/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    e2e/usability.spec.ts:21:1 › deterministic app investigation offers readable grounded handoff and denied clipboard fallback with identical download 
+  12 passed (30.4s)
