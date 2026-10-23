@@ -21,7 +21,7 @@ Existing services are welcome: **read-only investigation requires no healthy bas
 
 <img src="docs/qa-evidence/liara-r2-diagnosis-desktop.png" alt="Current Persian service workspace showing failed preview, passing liveness and a Codex handoff" width="1100">
 
-*Current Persian interface with a deterministic local diagnosis and real local HTTP checks. This screenshot is a labelled UI fixture, not new cloud or model acceptance. The public video preserves the earlier interface and actual cloud evidence; the usability revision changes the operator presentation.*
+*Current Persian interface with a deterministic local diagnosis and real local HTTP checks. [A separate actual read-only live investigation and resource-chart check](docs/qa-evidence/usability-r2-live.json) exercises the revised wording with genuine Codex. This screenshot is a labelled UI fixture, not new cloud or model acceptance. The public video preserves the earlier interface and actual cloud evidence; the usability revision changes the operator presentation.*
 
 ## Choose your route
 

@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-23",
+  "source_commit": "916233c06ce72bf5ae4b1c17f2f826ce94b7024b",
+  "scope": "One original genuine current-health investigation through the revised private live UI; actual Liara reads and public endpoint probes. No cloud mutation, watch, proposal, approval or repair. Separate refreshed native resource charts.",
+  "diagnosis": {
+    "summary": "در بررسی‌های موجود، مسیر سلامت و پیش‌نمایش سرویس پاسخ موفق ۲۰۰ داده‌اند، اما دریافت وضعیت پردازش سرویس از ارائه‌دهنده با خطای ۵۰۰ روبه‌رو شده است. خرابی سرویس مشاهده نشده، ولی تجربه همه کاربران و کافی‌بودن CPU و RAM مشخص نیست. قدم بعدی، بررسی دوباره وضعیت پردازش سرویس در پنل ارائه‌دهنده است؛ هیچ تغییری انجام نشده است.",
+    "cause_family": "unknown",
+    "outcome": "no_app_change",
+    "unknowns": [
+      "وضعیت فعلی پردازش سرویس مشخص نیست؛ خطای دریافت اطلاعات به‌تنهایی نشانه توقف سرویس نیست.",
+      "اعداد CPU و RAM مربوط به نمونه‌های گذشته‌اند؛ مصرف فعلی و کافی‌بودن منابع مشخص نیست.",
+      "اثر روی همه کاربران مشخص نیست؛ موفقیت دو بررسی، سلامت همه قابلیت‌ها را ثابت نمی‌کند."
+    ],
+    "read_operations": 9,
+    "model_calls": [
+      {
+        "cli_version": "codex-cli 0.163.0",
+        "elapsed_ms": 29131,
+        "model": "gpt-6.1-sol",
+        "provider": "codex_cli"
+      },
+      {
+        "cli_version": "codex-cli 0.163.0",
+        "elapsed_ms": 26542,
+        "model": "gpt-6.1-sol",
+        "provider": "codex_cli"
+      }
+    ],
+    "prompt_version": "liara-investigation-v3-fa-plain"
+  },
+  "state": "done",
+  "errors": [],
+  "post_routes": [
+    "/api/login",
+    "/api/services/6adaa8e2aa8f2ba374e1617d/investigate"
+  ],
+  "resource_charts": 2,
+  "resource_scope": "Two actual source-verified historical CPU/RAM series. The invalid instantaneous summary and clock caveat remain. No capacity conclusion.",
+  "limits": [
+    "One case is not statistical reliability or a new simulated score.",
+    "Initial resource capture preceded detail-load completion and truthfully showed unavailable; the separately awaited loaded detail shows both historical charts.",
+    "Two pre-inference browser-driver selector failures were corrected by using verified controls; neither invoked the model.",
+    "Existing legacy network runtime read returned500; correct no_app_change outcome distinguishes an observation gap from service failure."
+  ],
+  "ui_source_commit": "abccb97bec8120b963b8c53247b3448ba5795da2",
+  "rendered_completed_diagnosis": true,
+  "resource_instance_aliases_visible": true,
+  "long_applet_id_hidden_by_default": true
+}
