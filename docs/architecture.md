@@ -73,3 +73,7 @@ Current reproducible local image is `public.ecr.aws/docker/library/python:3.12-s
 ## Existing-state upgrade qualification
 
 The owner identity is a domain-separated HMAC of the configured instance session secret. Keep that secret stable when restarting this single-owner instance. Pre-fix ephemeral-session owners are not silently merged or reassigned; their old QA records remain separate. Rotating the instance secret changes identity and requires deliberate migration planning. This is not a new multi-user authentication system.
+
+## Contention at the model boundary
+
+The investigator waits only on the isolated Codex adapter's pre-start `busy` refusal. It reuses the same typed request/schema and original absolute120-second deadline, checks cancellation/current generation, and never charges quota before the actual adapter claim. Completed calls and non-busy errors are not replayed. This handles an idle outbound worker reserving the shared gate while checking for work; it grants neither parallel inference nor a fresh deadline. [Actual bounded contention and diagnostic evidence](qa-evidence/local-diagnostic-breadth/REPORT.md).

@@ -1,0 +1,19 @@
+{
+  "original_busy_failure_retained": true,
+  "same_request_and_original_deadline": true,
+  "owned_contention_seconds": 3.001828,
+  "busy_refusals": 28,
+  "exactly_one_new_actual_model_start": true,
+  "no_read_tools_advertised": true,
+  "no_hidden_controller_config_in_model_payload": true,
+  "actual_model_provenance": [
+    {
+      "provider": "codex_cli",
+      "model": "gpt-6.1-sol",
+      "cli_version": "codex-cli 0.163.0",
+      "elapsed_ms": 23183
+    }
+  ],
+  "servers_stopped": true,
+  "scope": "Actual local HTTP only; provider fixtures/unavailable metrics explicitly labelled; no cloud capacity/slowdown claim."
+}

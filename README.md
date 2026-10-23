@@ -6,7 +6,7 @@
 
 Liara service monitoring · Cited evidence · Bounded investigation · Explicit approval
 
-[Run locally](docs/getting-started.md) · [User guide](docs/user-guide.md) · [Architecture](docs/architecture.md) · [Evaluation](docs/evaluation.md)
+[Watch the demo](https://milad-afkhami.github.io/starcoach-liara-operator/) · [Run locally](docs/getting-started.md) · [User guide](docs/user-guide.md) · [Architecture](docs/architecture.md) · [Evaluation](docs/evaluation.md)
 
 </div>
 
@@ -17,7 +17,7 @@ A running process does not mean its useful endpoint works. Service Watch helps a
 Existing services are welcome: **read-only investigation requires no healthy baseline, source archive or new deployment**. Workers without an HTTP endpoint are not automatically marked down.
 
 > [!IMPORTANT]
-> **Real Liara integration and an approved cloud recovery are recorded.** The operator has read actual inventory/logs/resource data, diagnosed a deliberate cloud dependency regression with genuine Codex, and verified an exact approved redeployment with three fresh rounds. The final-build unused-approval expiry, exact replacement and normal three-round recovery also passed; narrated presentation/public playback remain delivery gates. [Actual acceptance and its limits](docs/insured-vibe-coding/test-plans/live-liara.md).
+> **Real Liara integration and an approved cloud recovery are recorded.** The operator has read actual inventory/logs/resource data, diagnosed a deliberate cloud dependency regression with genuine Codex, and verified an exact approved redeployment with three fresh rounds. The final-build unused-approval expiry, exact replacement and normal three-round recovery also passed; the304.92-second narrated actual-evidence demo is public and anonymous playback/seek/mobile checks passed. [Actual acceptance and its limits](docs/insured-vibe-coding/test-plans/live-liara.md).
 
 <img src="docs/images/overview.png" alt="Actual local Service Watch notebook showing a failing preview endpoint beside passing process health and timestamped evidence" width="1100">
 
@@ -77,7 +77,7 @@ The fault is introduced by a separate owner-approved controller, not by the inve
 
 ## Evidence, not an unsupported success story
 
-Recorded checks include **302 backend tests**, **14 frontend behavior tests**, **10 browser regressions**, **29/29 independent rendered UI cases**, and **8/8 expected cause-family or abstention outcomes** on separately labelled synthetic cases using genuine Codex. Local packaged containers also exercised a real healthy → dependency failure → restored-build sequence.
+Recorded checks include **307 backend tests**, **14 frontend behavior tests**, **10 browser regressions**, **29/29 independent rendered UI cases**, and **8/8 expected cause-family or abstention outcomes** on separately labelled synthetic cases using genuine Codex. Local packaged containers also exercised a real healthy → dependency failure → restored-build sequence.
 
 The cloud result is a deliberately introduced sandbox incident, with exact approvals, positive and negative evidence. These checks do not establish comparative production accuracy or improved MTTR. [Evaluation and practical limits](docs/evaluation.md) link to the raw results and explain what each layer proves.
 

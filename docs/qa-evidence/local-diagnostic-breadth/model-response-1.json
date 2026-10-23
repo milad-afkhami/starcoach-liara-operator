@@ -1,0 +1,30 @@
+{
+  "request_id": "87023dda62c841faa8f4a29e9dda94f0",
+  "provider": "codex_cli",
+  "model": "gpt-6.1-sol",
+  "cli_version": "codex-cli 0.163.0",
+  "elapsed_ms": 32401,
+  "value": {
+    "action": "read",
+    "outcome": "need_evidence",
+    "cause_family": "dependency_timeout",
+    "summary": "مرز خرابیِ مستند، انتظار gateway برای بالادست در /preview است: پاسخ 504 با upstream_timeout پس از حدود ۸۴۳ میلی‌ثانیه و مهلت ۰٫۸ ثانیه ثبت شده و لاگ همان درخواست آن را تأیید می‌کند. پاسخ 200 از gateway-health در حدود ۳۲ میلی‌ثانیه نشان‌دهنده پاسخ‌گویی فرایند است، نه سلامت /preview. موفقیت قبلی وابستگی، سلامت فعلی آن را ثابت نمی‌کند؛ کندی وابستگی یا مسیر ارتباطی محتمل است. برای تفکیک بهتر، خواندن فعلی dependency-quote لازم است؛ هیچ اقدامی اجرا نمی‌شود.",
+    "evidence_ids": [
+      "9f14fc789ef2492494d2c05db03cb366",
+      "8edd8c9d4bfb4cc4a059aa6a39c3c659"
+    ],
+    "contradiction_ids": [
+      "a5709ae67dcb42bfbe026611046730b3",
+      "793d1d0e9ec5401d90bc2c54e410a833",
+      "d81031f4de5745b9a7afc2d078a0b7bc",
+      "467bc324d9ec4a6f86bc5ba4063dea16"
+    ],
+    "unknowns": [
+      "وضعیت و تأخیر فعلی dependency-quote و محل دقیق ایجاد تأخیر مشخص نیست.",
+      "تأخیر درخواست اندازه‌گیری شده، اما مصرف CPU/RAM و ظرفیت تحمل بار اندازه‌گیری نشده‌اند؛ کمبود منابع اثبات نشده است.",
+      "مناسب‌بودن مهلت ۰٫۸ ثانیه و نقش احتمالی ازدحام یا تنظیمات gateway مشخص نیست.",
+      "شواهد محلی‌اند؛ وضعیت زنده سرویس در لیارا و علت ریشه‌ای مشخص نیست."
+    ],
+    "next_check": "dependency:dependency-quote"
+  }
+}

@@ -1,0 +1,159 @@
+[
+  {
+    "collection": "before_intervention",
+    "id": "a34e2f3125854e16975e64a90ec488e3",
+    "target_id": "gateway",
+    "check_id": "gateway-health",
+    "request_id": "a248b1b579cc454ba7eced778f896421",
+    "observed_at": 1792727941.9927285,
+    "available_at": 1792727942.0184135,
+    "http_status": 200,
+    "elapsed_ms": 25.686134991701692,
+    "check_pass": true,
+    "contract_pass": null,
+    "reason": "pass",
+    "body_digest": "b66541c1bfc86e1bbea6c87d42b55b41674418e6a12e94fca0ce86ce5b34af34",
+    "payload": {
+      "status": "ok",
+      "request_id": "a248b1b579cc454ba7eced778f896421"
+    }
+  },
+  {
+    "collection": "before_intervention",
+    "id": "024989e47c034a72844bb86fbaf865ee",
+    "target_id": "gateway",
+    "check_id": "gateway-preview",
+    "request_id": "a607d38eb0034c5488580175979393ab",
+    "observed_at": 1792727942.0188296,
+    "available_at": 1792727942.0687876,
+    "http_status": 200,
+    "elapsed_ms": 49.95945701375604,
+    "check_pass": true,
+    "contract_pass": null,
+    "reason": "pass",
+    "body_digest": "3014eb5c106b2709ebb73d3c6382249b359e23a57335cb67129054d91049dec7",
+    "payload": {
+      "shipping_toman": 10000,
+      "request_id": "a607d38eb0034c5488580175979393ab",
+      "build_id": "local-gateway",
+      "status": "ready"
+    }
+  },
+  {
+    "collection": "before_intervention",
+    "id": "242ed1a073794ebdb6fcb320d26c4552",
+    "target_id": "dependency",
+    "check_id": "dependency-health",
+    "request_id": "bce5f60931f744a7a08649e9a7a7dc76",
+    "observed_at": 1792727942.0693028,
+    "available_at": 1792727942.0891654,
+    "http_status": 200,
+    "elapsed_ms": 19.864091998897493,
+    "check_pass": true,
+    "contract_pass": null,
+    "reason": "pass",
+    "body_digest": "4bcecfb04001d36e48ab5d2f43e06961bc5892a3aee0629b8363244621b9a988",
+    "payload": {
+      "status": "ok",
+      "request_id": "bce5f60931f744a7a08649e9a7a7dc76"
+    }
+  },
+  {
+    "collection": "before_intervention",
+    "id": "35b902a236b74f7bbabc82f017544ea8",
+    "target_id": "dependency",
+    "check_id": "dependency-quote",
+    "request_id": "fa77dc14d79e4341a8bd5c84f0b32721",
+    "observed_at": 1792727942.0895574,
+    "available_at": 1792727942.108423,
+    "http_status": 200,
+    "elapsed_ms": 18.865989986807108,
+    "check_pass": true,
+    "contract_pass": null,
+    "reason": "pass",
+    "body_digest": "a9d98a7b859db7c3f544f8499df528115c16c32f6146e48a060d994c138084c9",
+    "payload": {
+      "shipping_toman": 10000,
+      "request_id": "fa77dc14d79e4341a8bd5c84f0b32721",
+      "build_id": "local-dependency"
+    }
+  },
+  {
+    "collection": "independent_current_measurement",
+    "id": "c6fe552955924e148caee9544aaf3325",
+    "target_id": "gateway",
+    "check_id": "gateway-health",
+    "request_id": "8ed0e55bead741e5b3844d79dc0562af",
+    "observed_at": 1792727942.1087375,
+    "available_at": 1792727942.1282616,
+    "http_status": 200,
+    "elapsed_ms": 19.52434197301045,
+    "check_pass": true,
+    "contract_pass": null,
+    "reason": "pass",
+    "body_digest": "3cd9905e0824f7c7239ea4a94bc5a736c472ad3e652dec07433e73962112ce8a",
+    "payload": {
+      "status": "ok",
+      "request_id": "8ed0e55bead741e5b3844d79dc0562af"
+    }
+  },
+  {
+    "collection": "independent_current_measurement",
+    "id": "10c667539fe04951aa8da69b3c8632e9",
+    "target_id": "gateway",
+    "check_id": "gateway-preview",
+    "request_id": "84a79b967ce74b90afee117f0bdeb4f9",
+    "observed_at": 1792727942.128602,
+    "available_at": 1792727942.9719126,
+    "http_status": 504,
+    "elapsed_ms": 843.3112479979172,
+    "check_pass": false,
+    "contract_pass": null,
+    "reason": "unexpected_status",
+    "body_digest": "c38ba5597d90b9e1c3001dfd625b33282f50a4cec8e184c34febf52baf506139",
+    "payload": {
+      "error": "upstream_timeout",
+      "timeout_seconds": 0.8,
+      "request_id": "84a79b967ce74b90afee117f0bdeb4f9"
+    }
+  },
+  {
+    "collection": "independent_current_measurement",
+    "id": "b20078637b9443a9b29cc0b92274ae80",
+    "target_id": "dependency",
+    "check_id": "dependency-health",
+    "request_id": "4789b00673e8475db51d91fa67c30092",
+    "observed_at": 1792727942.9723568,
+    "available_at": 1792727942.9899907,
+    "http_status": 200,
+    "elapsed_ms": 17.6343530183658,
+    "check_pass": true,
+    "contract_pass": null,
+    "reason": "pass",
+    "body_digest": "bd6ba81fa4ac9af56edf904381ecfc3d69af962861f4b9845f9e9ca0ae194d49",
+    "payload": {
+      "status": "ok",
+      "request_id": "4789b00673e8475db51d91fa67c30092"
+    }
+  },
+  {
+    "collection": "independent_current_measurement",
+    "id": "d73627c41eaf446ca07bf49afee2f106",
+    "target_id": "dependency",
+    "check_id": "dependency-quote",
+    "request_id": "560fd19244024d74b0e365a9efa87aef",
+    "observed_at": 1792727942.9904363,
+    "available_at": 1792727944.8108065,
+    "http_status": 200,
+    "elapsed_ms": 1820.370772969909,
+    "check_pass": true,
+    "contract_pass": null,
+    "reason": "pass",
+    "body_digest": "48a7effdfd2bedb07d7a6d69116a11ed76323557b66f99b8008fb82f083151d0",
+    "payload": {
+      "shipping_toman": 10000,
+      "request_id": "560fd19244024d74b0e365a9efa87aef",
+      "build_id": "local-dependency"
+    }
+  }
+]

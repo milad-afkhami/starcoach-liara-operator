@@ -1,17 +1,18 @@
 # Build kanban — Liara service assistant
 
-_Last updated:23October2026. Final local code and actual cloud acceptance pass; narrated demo, public video and final team/submission identity remain delivery gates. The operator is local on8662; only the two exact scenario services are deployed to Liara. Source and raw proof are distinct from contest submission._
+_Last updated:23October2026. Final local code and actual cloud acceptance pass; reviewed narrated demo/public playback are complete; final team/submission identity remains open. The operator is local on8662; only the two exact scenario services are deployed to Liara. Source and raw proof are distinct from contest submission._
 
 ## Doing
-- Final delivery — actual LIVE1–LIVE5, unused-approval expiry/replacement and final-source recovery passed. Narrated approximately five-minute artifact/public playback and one-time contest submission remain pending; deployment.md and submission.md own final evidence.
+- Final delivery — scoped actual LIVE1–LIVE5 and public narrated demo/playback pass. Final shared-team identity and one-time contest submission remain open; submission.md owns confirmations.
 - Final documentation/publication — preserve raw failures, later repairs, historical-metric qualifications and scoped independent review. No unsupported production or ranking claim.
-- L5/L7 live integration/delivery — root has authenticated scoped API access and is executing owner-approved disposable-target setup. Network-runtime compatibility now reads real lifecycle events with explicit derived identity/coverage; baseline/fault/repair outcomes remain owned by the live ledger and root deployment record. Public source is published; current revision is uncommitted, and video/submission remain pending.
+- Final source publication —307backend source is reviewed and loaded on private8662; public CI/push for the latest contention checkpoint is in progress. No additional cloud setup is needed.
 
 ## Todo
 - Preserve the completed exact quote/setup/initial baselines and cloud fault/repair evidence; do not repeat writes solely for presentation.
-- Narrated approximately five-minute demo, approved public video and final submission evidence in submission.md. Confirm unresolved intended shared-team participation externally.
+- Confirm unresolved intended shared-team participation externally, then submit once; no organizer message or placeholder submission is authorized.
 
-## Done — verified local components
+## Done — verified components
+- Bounded contention fix —307backend/Ruff, independent five+three gate-seam checks and actual one-call timeout retest pass; original busy failure retained. Published narrated demo and anonymous play/seek/mobile checks pass. Source/API/fixture boundaries and exact evidence live in implementation-progress.md and submission.md.
 - Historical metrics/rejection diagnostics —302backend,14frontend behavior and10canonical browser checks, build/Ruff/diff pass; HM1–5rendered pass. Actual GET-only historical CPU/RAM acceptance is separate from invalid summaries; raw rejected values never enter the model projection. Bounded owner-only rejected-draft reasons and deterministic final-call budget consistency are verified. Log timing investigation found past-only rows, so no speculative collector change. See implementation-progress.md and the exact qa-evidence artifacts.
 - Recovery recheck/publication revision —282 backend,12 frontend behavior and10 canonical browser checks, build/Ruff/diff pass. Root observed successful read-only recovery under the unchanged original deadline; operation history retains both attempts. RR1–7 rendered checks pass; production entry/completion race regressions protect atomic publication and CAS transitions. Independent review/final live acceptance remain Doing.
 - Network-runtime compatibility source —265 backend tests/Ruff/diff checks pass. Actual read-only identity matched the initial delivery release from creation-anchored lifecycle events; no applet snapshot or current-release substitution. Derived coverage/limits are explicit, and full baseline/recovery acceptance remains above.

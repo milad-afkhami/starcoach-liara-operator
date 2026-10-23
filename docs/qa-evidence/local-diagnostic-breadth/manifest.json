@@ -1,0 +1,178 @@
+{
+  "scope": "Reviewed-copy candidates only; private-model-config.json, authentication paths/content and databases are excluded from this public artifact list.",
+  "initial_actual_starts": 3,
+  "initial_uncharged_busy_refusals": 1,
+  "final_actual_starts": 1,
+  "model": "gpt-6.1-sol via codex-cli 0.163.0 genuine production isolated adapter",
+  "shared_gate_limit": 100,
+  "rolling_window_seconds": 86400,
+  "ledger_reset": false,
+  "source_changes": "Only separately authorized Investigator busy boundary plus tests; no provider/Torob/runtime gate change.",
+  "files": [
+    {
+      "path": "initial-evaluation-results.json",
+      "sha256": "402fa04ebe8693f5fc653efef697294581f67c1a495760d778141d38fbf18059",
+      "bytes": 56479
+    },
+    {
+      "path": "evaluation-results.json",
+      "sha256": "402fa04ebe8693f5fc653efef697294581f67c1a495760d778141d38fbf18059",
+      "bytes": 56479
+    },
+    {
+      "path": "actual-probes.json",
+      "sha256": "ce1c6f4e7ebdba35c59e08dba5f722fe32dad575313ba99aaf55154fea973455",
+      "bytes": 11728
+    },
+    {
+      "path": "actual-application-events.jsonl",
+      "sha256": "1c3a4d2e71f4dbfc16c159f4e1e819e521d3b1ed0572a6c81726d8c468ebcc08",
+      "bytes": 3306
+    },
+    {
+      "path": "model-call-attempts.json",
+      "sha256": "bd3c498dbcbadcd900ca9e413c683becdb64c42609c4f7818da1c2a6af84e517",
+      "bytes": 1309
+    },
+    {
+      "path": "rolling-ledger-audit.json",
+      "sha256": "476be5f6dddb35a5008bd94d5e6580aa25659c042cd0a1034de770b356a4baab",
+      "bytes": 1378
+    },
+    {
+      "path": "evaluation-plan.json",
+      "sha256": "03afe17929dbf01cdadd3aad0470f4fad85abb090b2eefa158654c2f99452bad",
+      "bytes": 531
+    },
+    {
+      "path": "REPORT.md",
+      "sha256": "73bb0802773dd9df33975ec7bcd53df6a847fbd7ff63ad03cdc755ce43eb4bb9",
+      "bytes": 4475
+    },
+    {
+      "path": "final-slowdown-results.json",
+      "sha256": "016cb6bc250e6b26793d9c41092dac5fd70420f526cb3a5035a761e7067c94ec",
+      "bytes": 32058
+    },
+    {
+      "path": "final-probes.json",
+      "sha256": "fa19f007abf91483acb5926734b2b62729f1c4598337cf4ab93cd5e006f4a678",
+      "bytes": 5190
+    },
+    {
+      "path": "final-application-events.jsonl",
+      "sha256": "091abb84a109e52607c1959c12b4fec985e6199b53543644536a91d33bc071bb",
+      "bytes": 1304
+    },
+    {
+      "path": "final-model-request.json",
+      "sha256": "54a0e343b6bae10d13ee2ffc00a7f4271f0a0aaa1ffcb2ab904fefe4956b12ab",
+      "bytes": 19083
+    },
+    {
+      "path": "final-model-response.json",
+      "sha256": "cf3610b03186b17eb748e604e3aab69447133ad86a4a4b2b769a34e1c8739455",
+      "bytes": 2378
+    },
+    {
+      "path": "final-model-attempts.json",
+      "sha256": "7aaba86a82e31211e54f03b8c391a4e3c425805bb1a0d3d33b9d8d8805b3e688",
+      "bytes": 5166
+    },
+    {
+      "path": "model-request-1.json",
+      "sha256": "ec9235fdb52ac3694ca9617f3cdca1157aa2ea6d890efeedd2f6b8e2f132a79c",
+      "bytes": 16857
+    },
+    {
+      "path": "model-request-2.json",
+      "sha256": "73dbc49ccb93c1dc8584aab8fb7f67666c629e5f79b550c32f106c7f07fe8d75",
+      "bytes": 17960
+    },
+    {
+      "path": "model-request-3.json",
+      "sha256": "ab3a39292020c6de011c64b91399e6b059992f387d3210353af9ea7019a5b7e4",
+      "bytes": 17717
+    },
+    {
+      "path": "model-request-4.json",
+      "sha256": "e29cb5be88718fffa8a1422860f8cae08002ed2ef562d80a7f79c980ea195888",
+      "bytes": 18843
+    },
+    {
+      "path": "model-response-1.json",
+      "sha256": "215202ddc63de566ecd0b12de301c87a4c97275a6c52d7dab3e729cab12559b3",
+      "bytes": 2059
+    },
+    {
+      "path": "model-response-3.json",
+      "sha256": "b9f729e451fd121fb2a672d34ee29b7af74355c650dcf91447239e303a0e38f4",
+      "bytes": 2058
+    },
+    {
+      "path": "model-response-4.json",
+      "sha256": "6c8b8cac27511127069e4e1907184464ce72eadb62570a5cd6277f7b498406a0",
+      "bytes": 2561
+    },
+    {
+      "path": "ground-truth-1.json",
+      "sha256": "c6a4d3eebd79bd8b345c8930423e64d7fe247af4b5f63bbd7c4dc6cd9e3bbd17",
+      "bytes": 219
+    },
+    {
+      "path": "ground-truth-2.json",
+      "sha256": "0b053e69c87f0c6a3508407d8c8f8cbf3a67d398ed5d88cb98a1d6791cb0801a",
+      "bytes": 215
+    },
+    {
+      "path": "evaluation-checks.json",
+      "sha256": "6a52717b090c3d2b9006a4480b766d275bf082d5d6a39f0f638c2e086107e161",
+      "bytes": 626
+    },
+    {
+      "path": "model-runtime-provenance.json",
+      "sha256": "1030d537a725910278e90857c44ad9b515e0262e3398fdbc38fc8137774359cb",
+      "bytes": 802
+    }
+  ],
+  "verified_checks": {
+    "original_busy_failure_retained": true,
+    "same_request_and_original_deadline": true,
+    "owned_contention_seconds": 3.001828,
+    "busy_refusals": 28,
+    "exactly_one_new_actual_model_start": true,
+    "no_read_tools_advertised": true,
+    "no_hidden_controller_config_in_model_payload": true,
+    "actual_model_provenance": [
+      {
+        "provider": "codex_cli",
+        "model": "gpt-6.1-sol",
+        "cli_version": "codex-cli 0.163.0",
+        "elapsed_ms": 23183
+      }
+    ],
+    "servers_stopped": true,
+    "scope": "Actual local HTTP only; provider fixtures/unavailable metrics explicitly labelled; no cloud capacity/slowdown claim."
+  },
+  "independent_review": {
+    "production_source_hash": "b84104f9604b9952617ca09405fb108225d621e31ce2648530546f5491ad59bf",
+    "test_hash": "c39dab8e8e8d08cd67c6198f98c7c0edb367d5ab51cf0dc063a1dee8d7a6bd65",
+    "owner_tests": 5,
+    "additional_reviewer_tests": 3,
+    "status": "green at frozen source hashes; real retest evidence sent for scoped review",
+    "canonical_backend_tests": 307,
+    "ruff": "pass",
+    "diff_whitespace": "pass"
+  },
+  "freeze": {
+    "status": "Source and scratch evaluation frozen; no further inference. Parent owns documentation, QA copying, restart, publication and commits.",
+    "changed_production_paths": [
+      "backend/liara_guard/investigator.py",
+      "backend/tests/test_investigator_contention.py"
+    ],
+    "production_investigator_sha256": "b84104f9604b9952617ca09405fb108225d621e31ce2648530546f5491ad59bf",
+    "production_test_sha256": "c39dab8e8e8d08cd67c6198f98c7c0edb367d5ab51cf0dc063a1dee8d7a6bd65",
+    "private_config_cleanup": "Temporary model configuration allowlist removed after the final run; authentication contents were never copied.",
+    "canonical_checks": "307 backend tests/Ruff/diff pass; independent source review green with5owner+3reviewer gate-seam tests."
+  }
+}

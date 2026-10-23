@@ -1,0 +1,6 @@
+{"service": "dependency", "path": "/quote", "status": 200, "request_id": "a607d38eb0034c5488580175979393ab", "started_at": 1792727942.066255, "completed_at": 1792727942.0662613, "elapsed_ms": 0.004753004759550095}
+{"service": "gateway", "path": "/preview", "status": 200, "request_id": "a607d38eb0034c5488580175979393ab", "started_at": 1792727942.037303, "completed_at": 1792727942.0675745, "elapsed_ms": 30.268608999904245}
+{"service": "dependency", "path": "/quote", "status": 200, "request_id": "fa77dc14d79e4341a8bd5c84f0b32721", "started_at": 1792727942.1077816, "completed_at": 1792727942.1077878, "elapsed_ms": 0.004484958481043577}
+{"service": "gateway", "path": "/preview", "status": 504, "request_id": "84a79b967ce74b90afee117f0bdeb4f9", "started_at": 1792727942.145672, "completed_at": 1792727942.9698715, "elapsed_ms": 824.1973329568282, "detail": "upstream_timeout"}
+{"service": "dependency", "path": "/quote", "status": 200, "request_id": "84a79b967ce74b90afee117f0bdeb4f9", "started_at": 1792727942.1679392, "completed_at": 1792727943.9684587, "elapsed_ms": 1800.5167139926925}
+{"service": "dependency", "path": "/quote", "status": 200, "request_id": "560fd19244024d74b0e365a9efa87aef", "started_at": 1792727943.009117, "completed_at": 1792727944.8097756, "elapsed_ms": 1800.655719009228}

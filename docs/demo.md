@@ -2,7 +2,7 @@
 
 [← Documentation](README.md) · [User guide](user-guide.md) · [Getting started](getting-started.md)
 
-Use actual provider footage only after the live QA ledger passes. Until then, label footage local fixture mode visibly. Do not claim a simulated provider response is an actual Liara deployment.
+The reviewed actual-cloud demonstration is now public: **https://milad-afkhami.github.io/starcoach-liara-operator/**. It is304.92seconds with synthetic Persian narration, actual application footage and clearly labelled waiting cuts. [The transcript](demo-transcript-fa.md) is available for preparing your own spoken recording. The recorded diagnosis preceded the action clip; supplementary browsing after recovery is labelled. It is not a new live diagnosis during the film. The final negative-case editorial note cites its completed record while identifying the underlying earlier screenshot.
 
 - 0:00–0:35: Explain the user problem: process liveness can stay green while a deployed service’s useful endpoint fails. Open the customer’s real service inventory without requiring a new deployment or healthy baseline. Show source freshness and missing-resource coverage honestly.
 - 0:35–1:10: Select storefront. Contrast `/healthz200` with `/preview502`; show the current release and timestamped evidence. State that the fault was deliberately introduced by a separate owner-approved controller.
@@ -12,4 +12,4 @@ Use actual provider footage only after the live QA ledger passes. Until then, la
 - 4:15–4:45: Show the negative observer-access case: provider401cannot justify changing an app whose public HTTP still works. Show the15-minute watch scope and stop control.
 - 4:45–5:00: Open the repository’s architecture, reproducible commands, evaluation and honest limitations. Mention that the model process has no provider credentials or operation tools. Record public repository/video URLs and final submission receipt separately.
 
-Capture narration, readable code/result panels and ordinary interaction; elaborate editing is unnecessary. Eight synthetic diagnostic results, local browser QA and live provider proof are separate evidence categories. Do not publish owner password files, keys, terminal environment dumps, cookies or private state. No video has been recorded or uploaded yet.
+Capture narration, readable code/result panels and ordinary interaction; elaborate editing is unnecessary. Eight synthetic diagnostic results, local browser QA and live provider proof are separate evidence categories. Do not publish owner password files, keys, terminal environment dumps, cookies or private state. The published clip was captured on the actual cloud-accepted source checkpoint; the later bounded model-contention fix has separate source/runtime evidence. Public playback and exact final links are owned by [the submission record](../submission.md).

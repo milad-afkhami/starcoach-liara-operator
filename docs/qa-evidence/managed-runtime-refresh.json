@@ -1,0 +1,10 @@
+{
+  "scope": "Read-only idle audit before restarting the owned local operator to load reviewed contention fix",
+  "at": 1792728403.3890367,
+  "active_watches": 0,
+  "pending_write_operations": 0,
+  "active_investigations": 0,
+  "investigator_sha256": "b84104f9604b9952617ca09405fb108225d621e31ce2648530546f5491ad59bf",
+  "cloud_writes": 0,
+  "post_restart_health_status": 200
+}

@@ -1,0 +1,8 @@
+{
+  "case": "case-2",
+  "intervention": "error",
+  "changed_at": "2026-10-23T03:45:21.795336+00:00",
+  "dependency_response_delay_seconds": 0,
+  "dependency_status": 503,
+  "gateway_upstream_deadline_seconds": 0.8
+}

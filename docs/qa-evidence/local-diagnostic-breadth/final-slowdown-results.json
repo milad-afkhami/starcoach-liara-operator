@@ -1,0 +1,924 @@
+{
+  "scope": "Fresh actual local HTTP slowdown; separate single genuine inference with all current probes precollected. Earlier failed busy investigation remains retained. No cloud slowdown/capacity claim.",
+  "started_at": "2026-10-23T03:59:01.992537+00:00",
+  "application_writes": 0,
+  "provider_writes": 0,
+  "watch_sessions": 0,
+  "failures": [],
+  "diagnosis": {
+    "outcome": "no_app_change",
+    "cause_family": "dependency_timeout",
+    "summary": "مرز خرابیِ مستند، انتظار gateway برای وابستگی است: /preview با مهلت ۰٫۸ ثانیه، پس از حدود ۸۴۳ میلی‌ثانیه پاسخ 504 و upstream_timeout داد؛ لاگ همان درخواست این نتیجه را تأیید می‌کند. درخواست مستقل وابستگی با 200، اما پس از ۱۸۲۰ میلی‌ثانیه پاسخ گرفت؛ این با کندی وابستگی سازگار است، هرچند همان درخواست نیست. بررسی سلامت هر دو سرویس موفق بود؛ پس پاسخ‌گویی فرایندها به معنی سلامت /preview نیست. موفقیت قبلی /preview و پاسخ سریع قبلی وابستگی، علیه خرابی دائمی هستند. کندی داخلی وابستگی، تأخیر ارتباط یا صف و نامتناسب‌بودن مهلت، توضیح‌های محتمل‌اند. شواهد محلی‌اند و وضعیت زندهٔ لیارا را نشان نمی‌دهند. هیچ تغییری انجام نشده است.",
+    "evidence_ids": [
+      "10c667539fe04951aa8da69b3c8632e9",
+      "2777dc91039c482f9bd2a4c49e802a31",
+      "d73627c41eaf446ca07bf49afee2f106",
+      "7daea18371eb4bfe963a55b2e0398964",
+      "1120c1862eef418ba8987329943b6b1c"
+    ],
+    "contradiction_ids": [
+      "c6fe552955924e148caee9544aaf3325",
+      "b20078637b9443a9b29cc0b92274ae80",
+      "024989e47c034a72844bb86fbaf865ee",
+      "35b902a236b74f7bbabc82f017544ea8"
+    ],
+    "unknowns": [
+      "علت دقیق کندی و سهم شبکه، صف یا پردازش وابستگی مشخص نیست.",
+      "مصرف CPU/RAM و ظرفیت تحمل بار اندازه‌گیری نشده‌اند؛ تأخیر مشاهده‌شده اثبات کمبود منابع نیست.",
+      "تداوم و فراوانی خطا، مناسب‌بودن مهلت ۰٫۸ ثانیه و وضعیت زندهٔ لیارا نامعلوم‌اند؛ خواندن تکمیلی در دسترس نیست."
+    ],
+    "generation": 1,
+    "cutoff": 1792727945.0054393,
+    "observation_sequence": 1,
+    "read_operations": 0,
+    "model_calls": [
+      {
+        "provider": "codex_cli",
+        "model": "gpt-6.1-sol",
+        "cli_version": "codex-cli 0.163.0",
+        "elapsed_ms": 23183
+      }
+    ],
+    "prompt_version": "liara-investigation-v2-fa"
+  },
+  "elapsed_ms": 26203.28098599566,
+  "baseline": [
+    {
+      "id": "a34e2f3125854e16975e64a90ec488e3",
+      "target": {
+        "team_id": "local-evaluation",
+        "app_name": "local-gateway",
+        "app_id": "gateway",
+        "origin": "http://127.0.0.1:44191"
+      },
+      "kind": "http_probe",
+      "observed_at": 1792727941.9927285,
+      "available_at": 1792727942.0184135,
+      "quality": "fresh",
+      "redacted_payload": {
+        "id": "a34e2f3125854e16975e64a90ec488e3",
+        "target_id": "gateway",
+        "check_id": "gateway-health",
+        "request_id": "a248b1b579cc454ba7eced778f896421",
+        "observed_at": 1792727941.9927285,
+        "available_at": 1792727942.0184135,
+        "http_status": 200,
+        "elapsed_ms": 25.686134991701692,
+        "check_pass": true,
+        "contract_pass": null,
+        "reason": "pass",
+        "body_digest": "b66541c1bfc86e1bbea6c87d42b55b41674418e6a12e94fca0ce86ce5b34af34",
+        "payload": {
+          "status": "ok",
+          "request_id": "a248b1b579cc454ba7eced778f896421"
+        }
+      },
+      "coverage": {
+        "actual_local_http": true,
+        "liara_cloud_observation": false,
+        "collection": "before_intervention"
+      }
+    },
+    {
+      "id": "024989e47c034a72844bb86fbaf865ee",
+      "target": {
+        "team_id": "local-evaluation",
+        "app_name": "local-gateway",
+        "app_id": "gateway",
+        "origin": "http://127.0.0.1:44191"
+      },
+      "kind": "http_probe",
+      "observed_at": 1792727942.0188296,
+      "available_at": 1792727942.0687876,
+      "quality": "fresh",
+      "redacted_payload": {
+        "id": "024989e47c034a72844bb86fbaf865ee",
+        "target_id": "gateway",
+        "check_id": "gateway-preview",
+        "request_id": "a607d38eb0034c5488580175979393ab",
+        "observed_at": 1792727942.0188296,
+        "available_at": 1792727942.0687876,
+        "http_status": 200,
+        "elapsed_ms": 49.95945701375604,
+        "check_pass": true,
+        "contract_pass": null,
+        "reason": "pass",
+        "body_digest": "3014eb5c106b2709ebb73d3c6382249b359e23a57335cb67129054d91049dec7",
+        "payload": {
+          "shipping_toman": 10000,
+          "request_id": "a607d38eb0034c5488580175979393ab",
+          "build_id": "local-gateway",
+          "status": "ready"
+        }
+      },
+      "coverage": {
+        "actual_local_http": true,
+        "liara_cloud_observation": false,
+        "collection": "before_intervention"
+      }
+    },
+    {
+      "id": "242ed1a073794ebdb6fcb320d26c4552",
+      "target": {
+        "team_id": "local-evaluation",
+        "app_name": "local-dependency",
+        "app_id": "dependency",
+        "origin": "http://127.0.0.1:35815"
+      },
+      "kind": "http_probe",
+      "observed_at": 1792727942.0693028,
+      "available_at": 1792727942.0891654,
+      "quality": "fresh",
+      "redacted_payload": {
+        "id": "242ed1a073794ebdb6fcb320d26c4552",
+        "target_id": "dependency",
+        "check_id": "dependency-health",
+        "request_id": "bce5f60931f744a7a08649e9a7a7dc76",
+        "observed_at": 1792727942.0693028,
+        "available_at": 1792727942.0891654,
+        "http_status": 200,
+        "elapsed_ms": 19.864091998897493,
+        "check_pass": true,
+        "contract_pass": null,
+        "reason": "pass",
+        "body_digest": "4bcecfb04001d36e48ab5d2f43e06961bc5892a3aee0629b8363244621b9a988",
+        "payload": {
+          "status": "ok",
+          "request_id": "bce5f60931f744a7a08649e9a7a7dc76"
+        }
+      },
+      "coverage": {
+        "actual_local_http": true,
+        "liara_cloud_observation": false,
+        "collection": "before_intervention"
+      }
+    },
+    {
+      "id": "35b902a236b74f7bbabc82f017544ea8",
+      "target": {
+        "team_id": "local-evaluation",
+        "app_name": "local-dependency",
+        "app_id": "dependency",
+        "origin": "http://127.0.0.1:35815"
+      },
+      "kind": "http_probe",
+      "observed_at": 1792727942.0895574,
+      "available_at": 1792727942.108423,
+      "quality": "fresh",
+      "redacted_payload": {
+        "id": "35b902a236b74f7bbabc82f017544ea8",
+        "target_id": "dependency",
+        "check_id": "dependency-quote",
+        "request_id": "fa77dc14d79e4341a8bd5c84f0b32721",
+        "observed_at": 1792727942.0895574,
+        "available_at": 1792727942.108423,
+        "http_status": 200,
+        "elapsed_ms": 18.865989986807108,
+        "check_pass": true,
+        "contract_pass": null,
+        "reason": "pass",
+        "body_digest": "a9d98a7b859db7c3f544f8499df528115c16c32f6146e48a060d994c138084c9",
+        "payload": {
+          "shipping_toman": 10000,
+          "request_id": "fa77dc14d79e4341a8bd5c84f0b32721",
+          "build_id": "local-dependency"
+        }
+      },
+      "coverage": {
+        "actual_local_http": true,
+        "liara_cloud_observation": false,
+        "collection": "before_intervention"
+      }
+    }
+  ],
+  "current_probes": [
+    {
+      "id": "c6fe552955924e148caee9544aaf3325",
+      "target": {
+        "team_id": "local-evaluation",
+        "app_name": "local-gateway",
+        "app_id": "gateway",
+        "origin": "http://127.0.0.1:44191"
+      },
+      "kind": "http_probe",
+      "observed_at": 1792727942.1087375,
+      "available_at": 1792727942.1282616,
+      "quality": "fresh",
+      "redacted_payload": {
+        "id": "c6fe552955924e148caee9544aaf3325",
+        "target_id": "gateway",
+        "check_id": "gateway-health",
+        "request_id": "8ed0e55bead741e5b3844d79dc0562af",
+        "observed_at": 1792727942.1087375,
+        "available_at": 1792727942.1282616,
+        "http_status": 200,
+        "elapsed_ms": 19.52434197301045,
+        "check_pass": true,
+        "contract_pass": null,
+        "reason": "pass",
+        "body_digest": "3cd9905e0824f7c7239ea4a94bc5a736c472ad3e652dec07433e73962112ce8a",
+        "payload": {
+          "status": "ok",
+          "request_id": "8ed0e55bead741e5b3844d79dc0562af"
+        }
+      },
+      "coverage": {
+        "actual_local_http": true,
+        "liara_cloud_observation": false,
+        "collection": "independent_current_measurement"
+      }
+    },
+    {
+      "id": "10c667539fe04951aa8da69b3c8632e9",
+      "target": {
+        "team_id": "local-evaluation",
+        "app_name": "local-gateway",
+        "app_id": "gateway",
+        "origin": "http://127.0.0.1:44191"
+      },
+      "kind": "http_probe",
+      "observed_at": 1792727942.128602,
+      "available_at": 1792727942.9719126,
+      "quality": "fresh",
+      "redacted_payload": {
+        "id": "10c667539fe04951aa8da69b3c8632e9",
+        "target_id": "gateway",
+        "check_id": "gateway-preview",
+        "request_id": "84a79b967ce74b90afee117f0bdeb4f9",
+        "observed_at": 1792727942.128602,
+        "available_at": 1792727942.9719126,
+        "http_status": 504,
+        "elapsed_ms": 843.3112479979172,
+        "check_pass": false,
+        "contract_pass": null,
+        "reason": "unexpected_status",
+        "body_digest": "c38ba5597d90b9e1c3001dfd625b33282f50a4cec8e184c34febf52baf506139",
+        "payload": {
+          "error": "upstream_timeout",
+          "timeout_seconds": 0.8,
+          "request_id": "84a79b967ce74b90afee117f0bdeb4f9"
+        }
+      },
+      "coverage": {
+        "actual_local_http": true,
+        "liara_cloud_observation": false,
+        "collection": "independent_current_measurement"
+      }
+    },
+    {
+      "id": "b20078637b9443a9b29cc0b92274ae80",
+      "target": {
+        "team_id": "local-evaluation",
+        "app_name": "local-dependency",
+        "app_id": "dependency",
+        "origin": "http://127.0.0.1:35815"
+      },
+      "kind": "http_probe",
+      "observed_at": 1792727942.9723568,
+      "available_at": 1792727942.9899907,
+      "quality": "fresh",
+      "redacted_payload": {
+        "id": "b20078637b9443a9b29cc0b92274ae80",
+        "target_id": "dependency",
+        "check_id": "dependency-health",
+        "request_id": "4789b00673e8475db51d91fa67c30092",
+        "observed_at": 1792727942.9723568,
+        "available_at": 1792727942.9899907,
+        "http_status": 200,
+        "elapsed_ms": 17.6343530183658,
+        "check_pass": true,
+        "contract_pass": null,
+        "reason": "pass",
+        "body_digest": "bd6ba81fa4ac9af56edf904381ecfc3d69af962861f4b9845f9e9ca0ae194d49",
+        "payload": {
+          "status": "ok",
+          "request_id": "4789b00673e8475db51d91fa67c30092"
+        }
+      },
+      "coverage": {
+        "actual_local_http": true,
+        "liara_cloud_observation": false,
+        "collection": "independent_current_measurement"
+      }
+    },
+    {
+      "id": "d73627c41eaf446ca07bf49afee2f106",
+      "target": {
+        "team_id": "local-evaluation",
+        "app_name": "local-dependency",
+        "app_id": "dependency",
+        "origin": "http://127.0.0.1:35815"
+      },
+      "kind": "http_probe",
+      "observed_at": 1792727942.9904363,
+      "available_at": 1792727944.8108065,
+      "quality": "fresh",
+      "redacted_payload": {
+        "id": "d73627c41eaf446ca07bf49afee2f106",
+        "target_id": "dependency",
+        "check_id": "dependency-quote",
+        "request_id": "560fd19244024d74b0e365a9efa87aef",
+        "observed_at": 1792727942.9904363,
+        "available_at": 1792727944.8108065,
+        "http_status": 200,
+        "elapsed_ms": 1820.370772969909,
+        "check_pass": true,
+        "contract_pass": null,
+        "reason": "pass",
+        "body_digest": "48a7effdfd2bedb07d7a6d69116a11ed76323557b66f99b8008fb82f083151d0",
+        "payload": {
+          "shipping_toman": 10000,
+          "request_id": "560fd19244024d74b0e365a9efa87aef",
+          "build_id": "local-dependency"
+        }
+      },
+      "coverage": {
+        "actual_local_http": true,
+        "liara_cloud_observation": false,
+        "collection": "independent_current_measurement"
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "available_at": 1792727942.0184135,
+      "coverage": {
+        "actual_local_http": true,
+        "collection": "before_intervention",
+        "liara_cloud_observation": false
+      },
+      "id": "a34e2f3125854e16975e64a90ec488e3",
+      "kind": "http_probe",
+      "observed_at": 1792727941.9927285,
+      "quality": "fresh",
+      "redacted_payload": {
+        "available_at": 1792727942.0184135,
+        "body_digest": "b66541c1bfc86e1bbea6c87d42b55b41674418e6a12e94fca0ce86ce5b34af34",
+        "check_id": "gateway-health",
+        "check_pass": true,
+        "contract_pass": null,
+        "elapsed_ms": 25.686134991701692,
+        "http_status": 200,
+        "id": "a34e2f3125854e16975e64a90ec488e3",
+        "observed_at": 1792727941.9927285,
+        "payload": {
+          "request_id": "a248b1b579cc454ba7eced778f896421",
+          "status": "ok"
+        },
+        "reason": "pass",
+        "request_id": "a248b1b579cc454ba7eced778f896421",
+        "target_id": "gateway"
+      },
+      "target": {
+        "app_id": "gateway",
+        "app_name": "local-gateway",
+        "origin": "http://127.0.0.1:44191",
+        "team_id": "local-evaluation"
+      }
+    },
+    {
+      "available_at": 1792727942.0687876,
+      "coverage": {
+        "actual_local_http": true,
+        "collection": "before_intervention",
+        "liara_cloud_observation": false
+      },
+      "id": "024989e47c034a72844bb86fbaf865ee",
+      "kind": "http_probe",
+      "observed_at": 1792727942.0188296,
+      "quality": "fresh",
+      "redacted_payload": {
+        "available_at": 1792727942.0687876,
+        "body_digest": "3014eb5c106b2709ebb73d3c6382249b359e23a57335cb67129054d91049dec7",
+        "check_id": "gateway-preview",
+        "check_pass": true,
+        "contract_pass": null,
+        "elapsed_ms": 49.95945701375604,
+        "http_status": 200,
+        "id": "024989e47c034a72844bb86fbaf865ee",
+        "observed_at": 1792727942.0188296,
+        "payload": {
+          "build_id": "local-gateway",
+          "request_id": "a607d38eb0034c5488580175979393ab",
+          "shipping_toman": 10000,
+          "status": "ready"
+        },
+        "reason": "pass",
+        "request_id": "a607d38eb0034c5488580175979393ab",
+        "target_id": "gateway"
+      },
+      "target": {
+        "app_id": "gateway",
+        "app_name": "local-gateway",
+        "origin": "http://127.0.0.1:44191",
+        "team_id": "local-evaluation"
+      }
+    },
+    {
+      "available_at": 1792727942.0891654,
+      "coverage": {
+        "actual_local_http": true,
+        "collection": "before_intervention",
+        "liara_cloud_observation": false
+      },
+      "id": "242ed1a073794ebdb6fcb320d26c4552",
+      "kind": "http_probe",
+      "observed_at": 1792727942.0693028,
+      "quality": "fresh",
+      "redacted_payload": {
+        "available_at": 1792727942.0891654,
+        "body_digest": "4bcecfb04001d36e48ab5d2f43e06961bc5892a3aee0629b8363244621b9a988",
+        "check_id": "dependency-health",
+        "check_pass": true,
+        "contract_pass": null,
+        "elapsed_ms": 19.864091998897493,
+        "http_status": 200,
+        "id": "242ed1a073794ebdb6fcb320d26c4552",
+        "observed_at": 1792727942.0693028,
+        "payload": {
+          "request_id": "bce5f60931f744a7a08649e9a7a7dc76",
+          "status": "ok"
+        },
+        "reason": "pass",
+        "request_id": "bce5f60931f744a7a08649e9a7a7dc76",
+        "target_id": "dependency"
+      },
+      "target": {
+        "app_id": "dependency",
+        "app_name": "local-dependency",
+        "origin": "http://127.0.0.1:35815",
+        "team_id": "local-evaluation"
+      }
+    },
+    {
+      "available_at": 1792727942.108423,
+      "coverage": {
+        "actual_local_http": true,
+        "collection": "before_intervention",
+        "liara_cloud_observation": false
+      },
+      "id": "35b902a236b74f7bbabc82f017544ea8",
+      "kind": "http_probe",
+      "observed_at": 1792727942.0895574,
+      "quality": "fresh",
+      "redacted_payload": {
+        "available_at": 1792727942.108423,
+        "body_digest": "a9d98a7b859db7c3f544f8499df528115c16c32f6146e48a060d994c138084c9",
+        "check_id": "dependency-quote",
+        "check_pass": true,
+        "contract_pass": null,
+        "elapsed_ms": 18.865989986807108,
+        "http_status": 200,
+        "id": "35b902a236b74f7bbabc82f017544ea8",
+        "observed_at": 1792727942.0895574,
+        "payload": {
+          "build_id": "local-dependency",
+          "request_id": "fa77dc14d79e4341a8bd5c84f0b32721",
+          "shipping_toman": 10000
+        },
+        "reason": "pass",
+        "request_id": "fa77dc14d79e4341a8bd5c84f0b32721",
+        "target_id": "dependency"
+      },
+      "target": {
+        "app_id": "dependency",
+        "app_name": "local-dependency",
+        "origin": "http://127.0.0.1:35815",
+        "team_id": "local-evaluation"
+      }
+    },
+    {
+      "available_at": 1792727942.1282616,
+      "coverage": {
+        "actual_local_http": true,
+        "collection": "independent_current_measurement",
+        "liara_cloud_observation": false
+      },
+      "id": "c6fe552955924e148caee9544aaf3325",
+      "kind": "http_probe",
+      "observed_at": 1792727942.1087375,
+      "quality": "fresh",
+      "redacted_payload": {
+        "available_at": 1792727942.1282616,
+        "body_digest": "3cd9905e0824f7c7239ea4a94bc5a736c472ad3e652dec07433e73962112ce8a",
+        "check_id": "gateway-health",
+        "check_pass": true,
+        "contract_pass": null,
+        "elapsed_ms": 19.52434197301045,
+        "http_status": 200,
+        "id": "c6fe552955924e148caee9544aaf3325",
+        "observed_at": 1792727942.1087375,
+        "payload": {
+          "request_id": "8ed0e55bead741e5b3844d79dc0562af",
+          "status": "ok"
+        },
+        "reason": "pass",
+        "request_id": "8ed0e55bead741e5b3844d79dc0562af",
+        "target_id": "gateway"
+      },
+      "target": {
+        "app_id": "gateway",
+        "app_name": "local-gateway",
+        "origin": "http://127.0.0.1:44191",
+        "team_id": "local-evaluation"
+      }
+    },
+    {
+      "available_at": 1792727942.9719126,
+      "coverage": {
+        "actual_local_http": true,
+        "collection": "independent_current_measurement",
+        "liara_cloud_observation": false
+      },
+      "id": "10c667539fe04951aa8da69b3c8632e9",
+      "kind": "http_probe",
+      "observed_at": 1792727942.128602,
+      "quality": "fresh",
+      "redacted_payload": {
+        "available_at": 1792727942.9719126,
+        "body_digest": "c38ba5597d90b9e1c3001dfd625b33282f50a4cec8e184c34febf52baf506139",
+        "check_id": "gateway-preview",
+        "check_pass": false,
+        "contract_pass": null,
+        "elapsed_ms": 843.3112479979172,
+        "http_status": 504,
+        "id": "10c667539fe04951aa8da69b3c8632e9",
+        "observed_at": 1792727942.128602,
+        "payload": {
+          "error": "upstream_timeout",
+          "request_id": "84a79b967ce74b90afee117f0bdeb4f9",
+          "timeout_seconds": 0.8
+        },
+        "reason": "unexpected_status",
+        "request_id": "84a79b967ce74b90afee117f0bdeb4f9",
+        "target_id": "gateway"
+      },
+      "target": {
+        "app_id": "gateway",
+        "app_name": "local-gateway",
+        "origin": "http://127.0.0.1:44191",
+        "team_id": "local-evaluation"
+      }
+    },
+    {
+      "available_at": 1792727942.9899907,
+      "coverage": {
+        "actual_local_http": true,
+        "collection": "independent_current_measurement",
+        "liara_cloud_observation": false
+      },
+      "id": "b20078637b9443a9b29cc0b92274ae80",
+      "kind": "http_probe",
+      "observed_at": 1792727942.9723568,
+      "quality": "fresh",
+      "redacted_payload": {
+        "available_at": 1792727942.9899907,
+        "body_digest": "bd6ba81fa4ac9af56edf904381ecfc3d69af962861f4b9845f9e9ca0ae194d49",
+        "check_id": "dependency-health",
+        "check_pass": true,
+        "contract_pass": null,
+        "elapsed_ms": 17.6343530183658,
+        "http_status": 200,
+        "id": "b20078637b9443a9b29cc0b92274ae80",
+        "observed_at": 1792727942.9723568,
+        "payload": {
+          "request_id": "4789b00673e8475db51d91fa67c30092",
+          "status": "ok"
+        },
+        "reason": "pass",
+        "request_id": "4789b00673e8475db51d91fa67c30092",
+        "target_id": "dependency"
+      },
+      "target": {
+        "app_id": "dependency",
+        "app_name": "local-dependency",
+        "origin": "http://127.0.0.1:35815",
+        "team_id": "local-evaluation"
+      }
+    },
+    {
+      "available_at": 1792727944.8108065,
+      "coverage": {
+        "actual_local_http": true,
+        "collection": "independent_current_measurement",
+        "liara_cloud_observation": false
+      },
+      "id": "d73627c41eaf446ca07bf49afee2f106",
+      "kind": "http_probe",
+      "observed_at": 1792727942.9904363,
+      "quality": "fresh",
+      "redacted_payload": {
+        "available_at": 1792727944.8108065,
+        "body_digest": "48a7effdfd2bedb07d7a6d69116a11ed76323557b66f99b8008fb82f083151d0",
+        "check_id": "dependency-quote",
+        "check_pass": true,
+        "contract_pass": null,
+        "elapsed_ms": 1820.370772969909,
+        "http_status": 200,
+        "id": "d73627c41eaf446ca07bf49afee2f106",
+        "observed_at": 1792727942.9904363,
+        "payload": {
+          "build_id": "local-dependency",
+          "request_id": "560fd19244024d74b0e365a9efa87aef",
+          "shipping_toman": 10000
+        },
+        "reason": "pass",
+        "request_id": "560fd19244024d74b0e365a9efa87aef",
+        "target_id": "dependency"
+      },
+      "target": {
+        "app_id": "dependency",
+        "app_name": "local-dependency",
+        "origin": "http://127.0.0.1:35815",
+        "team_id": "local-evaluation"
+      }
+    },
+    {
+      "available_at": 1792727944.8890655,
+      "coverage": {
+        "actual_local_application_events": true,
+        "cloud_log_observation": false,
+        "liara_log_api_fixture": true
+      },
+      "id": "2777dc91039c482f9bd2a4c49e802a31",
+      "kind": "logs",
+      "observed_at": 1792727942.9698715,
+      "quality": "fresh",
+      "redacted_payload": {
+        "lines": [
+          {
+            "message": "{\"service\": \"gateway\", \"path\": \"/preview\", \"status\": 200, \"request_id\": \"a607d38eb0034c5488580175979393ab\", \"started_at\": 1792727942.037303, \"completed_at\": 1792727942.0675745, \"elapsed_ms\": 30.268608999904245}",
+            "timestamp": "2026-10-23T03:59:02.067575+00:00",
+            "type": "application"
+          },
+          {
+            "message": "{\"service\": \"gateway\", \"path\": \"/preview\", \"status\": 504, \"request_id\": \"84a79b967ce74b90afee117f0bdeb4f9\", \"started_at\": 1792727942.145672, \"completed_at\": 1792727942.9698715, \"elapsed_ms\": 824.1973329568282, \"detail\": \"upstream_timeout\"}",
+            "timestamp": "2026-10-23T03:59:02.969872+00:00",
+            "type": "application"
+          }
+        ],
+        "source": "actual local gateway request instrumentation; normalized log envelope is an evaluation adapter"
+      },
+      "target": {
+        "app_id": "gateway",
+        "app_name": "local-gateway",
+        "origin": "http://127.0.0.1:44191",
+        "team_id": "local-evaluation"
+      }
+    },
+    {
+      "available_at": 1792727944.9798627,
+      "coverage": {
+        "observed_service_health": false,
+        "provider_fixture": true
+      },
+      "id": "1120c1862eef418ba8987329943b6b1c",
+      "kind": "project",
+      "observed_at": 1792727944.9798627,
+      "quality": "fresh",
+      "redacted_payload": {
+        "platform": "local evaluation only; no live Liara provider snapshot",
+        "provider_fixture": true,
+        "status": "unknown"
+      },
+      "target": {
+        "app_id": "gateway",
+        "app_name": "local-gateway",
+        "origin": "http://127.0.0.1:44191",
+        "team_id": "local-evaluation"
+      }
+    },
+    {
+      "available_at": 1792727944.9798627,
+      "coverage": {
+        "provider_fixture": true,
+        "threshold_evaluated": false,
+        "unit_verified": false
+      },
+      "id": "7daea18371eb4bfe963a55b2e0398964",
+      "kind": "metrics",
+      "observed_at": 1792727944.9798627,
+      "quality": "unavailable",
+      "redacted_payload": {
+        "error": "evaluation_has_no_provider_metrics",
+        "unit": "unverified"
+      },
+      "target": {
+        "app_id": "gateway",
+        "app_name": "local-gateway",
+        "origin": "http://127.0.0.1:44191",
+        "team_id": "local-evaluation"
+      }
+    }
+  ],
+  "rejected_drafts": [],
+  "independent_intervention": {
+    "changed_at": 1792727942.1087022,
+    "dependency_response_delay_seconds": 1.8,
+    "gateway_upstream_deadline_seconds": 0.8,
+    "not_supplied_to_model": true
+  },
+  "completed_at": "2026-10-23T03:59:31.341077+00:00",
+  "model_attempts": [
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:05.015403+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:05.121850+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:05.226904+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:05.331572+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:05.436833+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:05.545396+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:05.650424+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:05.757400+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:05.863872+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:05.968601+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:06.073990+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:06.179769+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:06.284693+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:06.390303+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:06.495094+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:06.599821+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:06.706460+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:06.811217+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:06.917594+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:07.027444+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:07.137876+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:07.252251+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:07.361970+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:07.466833+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:07.572441+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:07.677694+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:07.782471+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:07.888313+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "error": "busy"
+    },
+    {
+      "request_id": "70181e89f94d43e9bfb420ad5fedf6fb",
+      "attempt_at": "2026-10-23T03:59:07.994340+00:00",
+      "deadline_utc": 1792728064.9965837,
+      "result": "completed",
+      "elapsed_ms": 23183
+    }
+  ],
+  "genuine_responses": 1,
+  "new_shared_ledger_starts": [
+    1792727947.9983056
+  ],
+  "busy_refusals": 28,
+  "owned_reservation_events": [
+    {
+      "event": "owned_contention_began",
+      "at": "2026-10-23T03:59:04.996307+00:00"
+    },
+    {
+      "event": "owned_contention_released",
+      "at": "2026-10-23T03:59:07.998135+00:00"
+    }
+  ],
+  "all_attempts_same_request": true,
+  "all_attempts_same_deadline": true,
+  "owned_servers_stopped": true,
+  "shared_ledger_count_before": 39,
+  "shared_ledger_count_after": 40,
+  "source_hashes": {
+    "backend/liara_guard/investigator.py": "b84104f9604b9952617ca09405fb108225d621e31ce2648530546f5491ad59bf",
+    "backend/liara_guard/contracts.py": "57cd30f4d88a31b02c9ebe2a6bf804ccf675c970d5cfcfef96d51d5f2b87358f",
+    "backend/liara_guard/codex_cli.py": "ade5457e89129584eeb1015ac57620e48d37a70c5a08bb070db643d8b4d4ea47"
+  }
+}

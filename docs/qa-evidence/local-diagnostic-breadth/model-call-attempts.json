@@ -1,0 +1,47 @@
+[
+  {
+    "call": 1,
+    "case": "case-1",
+    "started_at": "2026-10-23T03:44:47.514187+00:00",
+    "shared_ledger_count_before": 47,
+    "completed_at": "2026-10-23T03:45:19.919313+00:00",
+    "elapsed_ms": 32401,
+    "provider": "codex_cli",
+    "model": "gpt-6.1-sol",
+    "cli_version": "codex-cli 0.163.0",
+    "shared_ledger_count_after": 37
+  },
+  {
+    "call": 2,
+    "case": "case-1",
+    "started_at": "2026-10-23T03:45:21.782136+00:00",
+    "shared_ledger_count_before": 37,
+    "completed_at": "2026-10-23T03:45:21.785814+00:00",
+    "error": "busy",
+    "shared_ledger_count_after": 37
+  },
+  {
+    "call": 3,
+    "case": "case-2",
+    "started_at": "2026-10-23T03:45:22.183477+00:00",
+    "shared_ledger_count_before": 37,
+    "completed_at": "2026-10-23T03:45:52.819632+00:00",
+    "elapsed_ms": 30631,
+    "provider": "codex_cli",
+    "model": "gpt-6.1-sol",
+    "cli_version": "codex-cli 0.163.0",
+    "shared_ledger_count_after": 38
+  },
+  {
+    "call": 4,
+    "case": "case-2",
+    "started_at": "2026-10-23T03:45:52.881570+00:00",
+    "shared_ledger_count_before": 38,
+    "completed_at": "2026-10-23T03:46:31.182939+00:00",
+    "elapsed_ms": 38297,
+    "provider": "codex_cli",
+    "model": "gpt-6.1-sol",
+    "cli_version": "codex-cli 0.163.0",
+    "shared_ledger_count_after": 39
+  }
+]

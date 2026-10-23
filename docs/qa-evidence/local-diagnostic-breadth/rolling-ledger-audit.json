@@ -1,0 +1,34 @@
+{
+  "budget_policy": "Unchanged100starts in rolling24hours; no ledger reset. Only production ModelGate._charge writes the shared ledger.",
+  "adapter_attempts": 4,
+  "charged_actual_starts": 3,
+  "uncharged_busy_refusals": 1,
+  "calls": [
+    {
+      "call": 1,
+      "recorded_start": "2026-10-23T03:44:47.514187+00:00",
+      "matching_shared_ledger_entries": [
+        1792727087.5179622
+      ]
+    },
+    {
+      "call": 3,
+      "recorded_start": "2026-10-23T03:45:22.183477+00:00",
+      "matching_shared_ledger_entries": [
+        1792727122.1874125
+      ]
+    },
+    {
+      "call": 4,
+      "recorded_start": "2026-10-23T03:45:52.881570+00:00",
+      "matching_shared_ledger_entries": [
+        1792727152.8851678
+      ]
+    }
+  ],
+  "raw_count_before": 47,
+  "raw_count_after": 39,
+  "first_charge_after_count": 37,
+  "interpretation": "The first production charge purged expired entries, so raw prefix preservation and raw count difference are not valid reset/start-count checks.47raw entries became36still-eligible prior entries plus1new start; two further starts produced39. The original raw prefix comparison is retained as false rather than rewritten.",
+  "limitation": "The initial timestamp array was not saved separately; the original report retains its raw prefix-comparison result. Charged starts are independently matched to the current shared ledger."
+}

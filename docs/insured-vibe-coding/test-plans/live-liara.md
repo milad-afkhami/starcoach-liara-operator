@@ -10,7 +10,7 @@ Actual acceptance completed23October on the two exact disposable targets using a
 |LIVE4|UI diagnosis→precise approval→actual redeployment|Supported evidence, exact single-use approval and source/release identity; expired approval is disabled and a fresh exact replacement can be prepared on an enrolled target; ambiguous write not retried|✅ Final-source exact UI approval, real5-minute expiry/API409, fresh replacement and one deployment: live-expiry-repair.json.|
 |LIVE5|Fresh original-symptom/build verification and negative observer case|Three fresh successes/new serving identity; failed proof remains open; observer-only failure makes zero app writes|✅ Final fresh serving/build/original symptom3-round proof in live-expiry-repair.json; controlled actual401/no-change/zero-write-attempt case in live-observer-*.json.|
 
-The whole entry cannot be declared done while these gates remain open. Local implementation may be reviewed and packaged without claiming live integration.
+These scoped live rows are complete. Public demo and entry/team/submission evidence are separate gates owned by submission.md; no product check is a contest-submission receipt.
 
 ## Current actual observer-access acceptance
 

@@ -1,0 +1,20 @@
+{
+  "url": "https://milad-afkhami.github.io/starcoach-liara-operator/",
+  "scope": "Fresh anonymous browser; actual video decode/seek/playback and responsive public demo page",
+  "at": "2026-10-23T03:49:51.802Z",
+  "page_errors": [],
+  "initial": {
+    "duration": 304.92,
+    "width": 1440,
+    "height": 1080,
+    "readyState": 4,
+    "source": "https://milad-afkhami.github.io/starcoach-liara-operator/demo.mp4"
+  },
+  "play": {
+    "currentTime": 0.840098,
+    "paused": false,
+    "error": null
+  },
+  "status": "fail",
+  "failure": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 1\nReceived:   0.840098"
+}

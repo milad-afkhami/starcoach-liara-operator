@@ -1,0 +1,16 @@
+{
+  "cases": [
+    "delayed dependency with healthy processes",
+    "fast dependency HTTP503 with healthy processes"
+  ],
+  "expected_observations_only": {
+    "baseline": "gateway-preview200 and direct dependency200",
+    "delay": "gateway504 around800ms; direct dependency200 around1800ms; liveness200",
+    "error": "gateway502 and dependency503; liveness200"
+  },
+  "model_cap": 4,
+  "shared_gate_unchanged": true,
+  "no_enrolled_repairs": true,
+  "no_capacity_telemetry": true,
+  "no_expected_answers_in_model_request": true
+}

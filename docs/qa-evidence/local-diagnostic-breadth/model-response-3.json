@@ -1,0 +1,29 @@
+{
+  "request_id": "5920ac62b4414adba8213e69920da72c",
+  "provider": "codex_cli",
+  "model": "gpt-6.1-sol",
+  "cli_version": "codex-cli 0.163.0",
+  "elapsed_ms": 30631,
+  "value": {
+    "action": "read",
+    "outcome": "need_evidence",
+    "cause_family": "unknown",
+    "summary": "مرز خطای فعلی ارتباط gateway با بالادست است: /preview در حدود ۴۶ میلی‌ثانیه، 502 با upstream_status برابر 503 می‌دهد؛ gateway-health هم‌زمان 200 است، پس پاسخ‌گویی فرایند به معنای سلامت /preview نیست. لاگ‌ها پیش‌تر timeout حدود ۸۲۱ تا ۸۲۵ میلی‌ثانیه را نشان می‌دهند، اما خطای فعلی upstream_http است. اختلال وابستگی یا واسط ارتباطی محتمل است؛ علت دقیق روشن نیست. موفقیت قبلی وابستگی سلامت فعلی آن را ثابت نمی‌کند. این زمان‌ها اندازه‌گیری تأخیرند و نشانه اندازه‌گیری‌شده کمبود CPU/RAM یا ظرفیت بار نیستند. برای تفکیک علت، خواندن فعلی dependency-quote لازم است؛ هیچ تغییری اجرا نمی‌شود.",
+    "evidence_ids": [
+      "e9adebe829d64c75bec99c69f9136503",
+      "3b78d424628c4a46abb6eaabd3968d48",
+      "eb242fec73944072b494dea0b83af5ca"
+    ],
+    "contradiction_ids": [
+      "a05048bdba504a558d17eb3758d7d704",
+      "793d1d0e9ec5401d90bc2c54e410a833",
+      "467bc324d9ec4a6f86bc5ba4063dea16"
+    ],
+    "unknowns": [
+      "پاسخ فعلی dependency-quote و منشأ دقیق 503 مشخص نیست.",
+      "علت timeoutهای قبلی و ارتباط آن‌ها با خطای فعلی مشخص نیست؛ تغییر قرارداد پاسخ نیز اثبات نشده است.",
+      "مصرف CPU/RAM، ظرفیت تحمل بار و وضعیت واقعی سرویس در لیارا مشاهده نشده‌اند."
+    ],
+    "next_check": "dependency:dependency-quote"
+  }
+}

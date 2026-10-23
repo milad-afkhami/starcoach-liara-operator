@@ -251,19 +251,27 @@ class Investigator:
                 }
                 contract = schema(ids, allowed_reads)
                 progress("analyzing", model_call=index + 1)
-                response = self.model.generate(
-                    ModelRequest(
-                        id=uuid.uuid4().hex,
-                        schema_id="liara-diagnosis",
-                        schema_version="1",
-                        prompt_version=PROMPT_VERSION,
-                        evidence_ids=ids,
-                        payload=payload,
-                        deadline_utc=deadline,
-                    ),
-                    contract,
-                    cancel,
+                request = ModelRequest(
+                    id=uuid.uuid4().hex,
+                    schema_id="liara-diagnosis",
+                    schema_version="1",
+                    prompt_version=PROMPT_VERSION,
+                    evidence_ids=ids,
+                    payload=payload,
+                    deadline_utc=deadline,
                 )
+                while True:
+                    current()
+                    try:
+                        response = self.model.generate(request, contract, cancel)
+                        break
+                    except ModelError as exc:
+                        if exc.code != "busy":
+                            raise
+                        # The shared gate refuses busy before charging or starting a CLI.
+                        # Reuse the request; its original absolute deadline never moves.
+                        current()
+                        cancel.wait(min(0.1, max(0, deadline - self.clock())))
                 current()
                 progress("validating", model_call=index + 1)
                 value = response.value
