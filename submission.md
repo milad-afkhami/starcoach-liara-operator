@@ -17,3 +17,5 @@ Reviewed cloud/demo implementation commit:d8248e0a9f8c6cbbb9d3e4893602958721aa9e
 Submission confirmation: none.
 
 The subsequent usability R2 revision changes the local Persian operator layout, charts, readable evidence and code-agent handoff, plus versioned plain-language response guidance. The video/source identity above remains the original recorded cloud demonstration and shows the earlier interface. R2 deterministic UI QA is separate from actual cloud/model acceptance; it does not replace that recording or imply a new cloud repair.
+
+English presentation publication: gh-pages commit `0f1548f583739188c80b6426dd0bc3ace29c8bf2`. The landing page, English transcript and chapter labels are English/LTR; the application and original synthetic narration remain Persian. A single English chapter track, icons, keyboard/mobile layouts and anonymous HTTP206 range/seek behavior were verified. Original MP4 bytes/hashes remain unchanged; no new complete remote hash or decoded-seek claim is added by this presentation-only revision. The page explicitly labels the recording as the earlier interface.
