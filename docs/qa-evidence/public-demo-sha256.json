@@ -1,0 +1,10 @@
+{
+  "scope": "Full anonymous HTTPS video download; exact reviewed final asset hash/length",
+  "at": "2026-10-23T05:19:39.714309+00:00",
+  "url": "https://milad-afkhami.github.io/starcoach-liara-operator/demo.mp4",
+  "http_status": 200,
+  "bytes": 16584672,
+  "sha256": "7064631b095f9ce280669132369a523a017355ec14c2ce400ee0023f64d9b5e3",
+  "expected_sha256": "7064631b095f9ce280669132369a523a017355ec14c2ce400ee0023f64d9b5e3",
+  "status": "pass"
+}
